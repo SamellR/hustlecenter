@@ -7,7 +7,7 @@
     "description": "We're dedicated reseller woth loves their job please contact us We're dedicated reseller woth loves their job please contact us We're dedicated reseller woth loves their job please contact us We're dedicated reseller woth loves their job please contact us We're dedicated reseller woth loves their job please contact us – R120 - R500",
     "sellerName": "Nakedi Reselled",
     "sellerPhone": "0821234567",
-    "images": ["maphala.jpg", "marumo.jpg"],
+    "image": "nakedi.jpg",
     "status": "approved",
     "submittedAt": "2026-07-17",
     "plan": "4months",
@@ -143,6 +143,25 @@
     "paid": true,
     "expiresAt": "2026-08-17"
   },
+  
+  {
+  "id": "thabo123",
+  "title": "Thabo's Plumbing",
+  "category": "Home & Garden",
+  "description": "Reliable plumbing repairs, installations, and maintenance in Seshego and surrounding areas. 5 years of experience. Available for emergency call‑outs.",
+  "price": "150",
+  "sellerName": "Thabo Mokoena",
+  "sellerPhone": "0821234567",
+  "location": "Seshego",
+  "status": "approved",
+  "paid": true,
+  "expiresAt": "2026-12-31",
+  "images": [
+    "thabo-plumbing-1.jpg",
+    "thabo-plumbing-2.jpg"
+  ]
+},
+  
   {
     "id": "UNIQUE-ID",
     "title": "SERVICE TITLE",
