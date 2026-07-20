@@ -1,304 +1,1698 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HustleCenter – Join the Waitlist</title>
+    <title>HustleCenter – Polokwane's Vetted Local Services Marketplace</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-    <!-- Favicon and Apple touch icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-    <!-- Open Graph / WhatsApp & social preview -->
-    <meta property="og:title" content="HustleCenter – Polokwane's Vetted Local Services Marketplace">
-    <meta property="og:description" content="Find trusted, vetted local services in Polokwane. Plumbers, electricians, cleaners, beauty, and more. Join the waitlist for early access.">
+    <!-- PWA Manifest (inline) -->
+    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22HustleCenter%22%2C%22short_name%22%3A%22HustleCenter%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FFFFFF%22%2C%22theme_color%22%3A%22%23D4A373%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22android-chrome-192x192.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22apple-touch-icon.png%22%2C%22sizes%22%3A%22180x180%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
+    <!-- WhatsApp / Facebook link preview -->
+    <meta property="og:title" content="HustleCenter – Polokwane's Local Services Marketplace">
+    <meta property="og:description"
+        content="Find trusted, vetted local services in Polokwane. Plumbers, electricians, cleaners, beauty, and more.">
     <meta property="og:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
     <meta property="og:url" content="https://hustlecenter.co.za">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="HustleCenter – Polokwane's Local Services Marketplace">
-    <meta name="twitter:description" content="Vetted local services in Polokwane. Join the waitlist.">
+    <meta name="twitter:description" content="Vetted local services in Polokwane.">
     <meta name="twitter:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
     <style>
         :root {
             --primary: #0F172A;
             --accent: #D4A373;
+            --accent-hover: #C8925A;
             --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
             --text-dark: #0F172A;
             --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+            --shadow-hover: 0 16px 48px rgba(15, 23, 42, 0.15);
             --font-heading: 'Playfair Display', Georgia, serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --radius-sm: 8px;
             --radius-md: 12px;
+            --radius-lg: 24px;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-body);
-            background: var(--primary);
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            padding: 48px 24px;
-            position: relative;
-            overflow-x: hidden;
-            overflow-y: auto;
+            background: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        .particles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
-        .particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            border-radius: 50%;
-            animation: floatUp 6s infinite ease-in-out;
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
         }
-        .particle:nth-child(1) { background: var(--accent); left: 5%; animation-delay: 0s; }
-        .particle:nth-child(2) { background: #fff; left: 18%; animation-delay: 0.8s; opacity: 0.6; width: 3px; height: 3px; }
-        .particle:nth-child(3) { background: var(--accent); left: 30%; animation-delay: 1.6s; width: 5px; height: 5px; }
-        .particle:nth-child(4) { background: #fff; left: 45%; animation-delay: 2.4s; opacity: 0.4; width: 3px; height: 3px; }
-        .particle:nth-child(5) { background: var(--accent); left: 60%; animation-delay: 3.2s; }
-        .particle:nth-child(6) { background: #fff; left: 75%; animation-delay: 4s; opacity: 0.7; width: 3px; height: 3px; }
-        .particle:nth-child(7) { background: var(--accent); left: 88%; animation-delay: 4.8s; width: 5px; height: 5px; }
-        .particle:nth-child(8) { background: #fff; left: 95%; animation-delay: 5.4s; opacity: 0.5; width: 3px; height: 3px; }
-        @keyframes floatUp {
-            0% { bottom: -10px; opacity: 0; transform: translateX(0); }
-            20% { opacity: 0.8; }
-            50% { opacity: 1; transform: translateX(15px); }
-            80% { opacity: 0.4; }
-            100% { bottom: 105%; opacity: 0; transform: translateX(-10px); }
+
+        ul {
+            list-style: none;
         }
-        .content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 600px;
-            text-align: center;
+
+        .container {
+            max-width: 1240px;
             margin: 0 auto;
+            padding: 0 24px;
         }
-        .logo-mark {
+
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: var(--font-heading);
-            font-size: 2.5rem;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 8px;
+            line-height: 1.2;
+            color: var(--primary);
         }
-        .logo-mark .gold { color: var(--accent); }
-        .tagline {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-bottom: 40px;
-            letter-spacing: 0.5px;
+
+        h1 {
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
         }
-        .spinner {
-            width: 48px; height: 48px;
-            border: 4px solid rgba(212, 163, 115, 0.15);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 32px;
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .hero-headline {
-            font-family: var(--font-heading);
-            font-size: clamp(2rem, 5vw, 2.6rem);
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #fff;
-            line-height: 1.3;
-            position: relative;
-            display: inline-block;
+
+        h3 {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
         }
-        .hero-headline::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--accent);
-            margin: 12px auto 0;
-        }
-        .hero-sub {
-            font-size: 1.05rem;
-            opacity: 0.85;
-            max-width: 520px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.8);
-        }
-        .hero-sub strong {
-            color: var(--accent);
-            font-weight: 600;
-        }
-        .how-strip {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            margin: 48px 0 40px;
-            flex-wrap: wrap;
-        }
-        .how-step {
+
+        .section-title {
             text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .gold {
             color: var(--accent);
-            font-size: 0.95rem;
         }
-        .how-step .step-num {
-            display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--accent);
-            font-family: var(--font-heading);
-        }
-        .pricing-mini {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin: 40px 0 48px;
-            flex-wrap: wrap;
-        }
-        .price-pill {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(212,163,115,0.2);
-            border-radius: 40px;
-            padding: 12px 24px;
-            color: #fff;
-        }
-        .price-pill strong {
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-        .pricing-note {
-            font-size: 0.9rem;
-            opacity: 0.6;
-            margin: 0 0 40px 0;
-        }
+
         .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            display: inline-block;
             background: var(--accent);
             color: var(--primary);
             font-weight: 600;
             padding: 14px 32px;
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             border: none;
             font-size: 1rem;
             cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s;
+            transition: all 0.25s ease;
+            text-align: center;
+            font-family: var(--font-body);
         }
-        .btn-primary:hover { background: #C8925A; }
-        .btn-primary svg {
-            width: 22px;
-            height: 22px;
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 163, 115, 0.35);
         }
-        .social-row {
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border-light);
+            transition: all 0.25s ease;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: rgba(212, 163, 115, 0.08);
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 14px 8px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .btn-ghost:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .site-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
             display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 48px 0 40px;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .logo-mark {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .logo-mark .gold {
+            color: var(--accent);
+        }
+
+        .logo-tagline {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            background: var(--bg);
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 24px;
             align-items: center;
         }
-        .social-link {
-            transition: opacity 0.2s;
+
+        .main-nav a {
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .main-nav a:hover {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .hero {
+            padding: 48px 0 64px;
+            background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 16px;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin-bottom: 32px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-placeholder {
+            background: var(--primary);
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 360px;
+            color: #fff;
+            text-align: center;
+            padding: 24px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .hero-placeholder p {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-placeholder small {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 16px;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-banner-text {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary);
+            background: var(--accent);
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 30px;
+            margin-top: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: floatUp 6s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            background: var(--accent);
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            background: #fff;
+            left: 18%;
+            animation-delay: 0.8s;
+            opacity: 0.6;
+            width: 3px;
+            height: 3px;
+        }
+
+        .particle:nth-child(3) {
+            background: var(--accent);
+            left: 30%;
+            animation-delay: 1.6s;
+            width: 5px;
+            height: 5px;
+        }
+
+        .particle:nth-child(4) {
+            background: #fff;
+            left: 45%;
+            animation-delay: 2.4s;
+            opacity: 0.4;
+            width: 3px;
+            height: 3px;
+        }
+
+        .particle:nth-child(5) {
+            background: var(--accent);
+            left: 60%;
+            animation-delay: 3.2s;
+        }
+
+        .particle:nth-child(6) {
+            background: #fff;
+            left: 75%;
+            animation-delay: 4s;
+            opacity: 0.7;
+            width: 3px;
+            height: 3px;
+        }
+
+        .particle:nth-child(7) {
+            background: var(--accent);
+            left: 88%;
+            animation-delay: 4.8s;
+            width: 5px;
+            height: 5px;
+        }
+
+        .particle:nth-child(8) {
+            background: #fff;
+            left: 95%;
+            animation-delay: 5.4s;
+            opacity: 0.5;
+            width: 3px;
+            height: 3px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -10px;
+                opacity: 0;
+                transform: translateX(0);
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateX(15px);
+            }
+
+            80% {
+                opacity: 0.4;
+            }
+
+            100% {
+                bottom: 105%;
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+        }
+
+        .pricing-section {
+            padding: 64px 0;
+            background: var(--card-bg);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .pricing-card {
+            text-align: center;
+            padding: 24px 12px;
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            background: var(--bg);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .pricing-duration {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .pricing-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 4px 0;
+        }
+
+        .pricing-cta {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .how-it-works {
+            padding: 64px 0;
+            background: var(--bg);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 32px;
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            transition: transform 0.2s;
+            box-shadow: var(--shadow);
+        }
+
+        .step:hover {
+            transform: translateY(-6px);
+        }
+
+        .step-number {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(212, 163, 115, 0.12);
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .listings-section {
+            padding: 64px 0;
+        }
+
+        .listings-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .search-wrapper {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            background: var(--card-bg);
+            transition: border 0.2s;
+        }
+
+        .search-wrapper input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .pill {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-        }
-        .social-link:hover { opacity: 0.7; }
-        .social-link svg {
-            width: 32px;
-            height: 32px;
-            fill: #fff;
-        }
-        .social-link.mail-icon svg {
-            fill: none;
-            stroke: #fff;
-            stroke-width: 2;
-        }
-        .footer-note {
-            font-size: 0.85rem;
-            opacity: 0.5;
-            margin: 48px auto 0;
-            color: #fff;
+            padding: 0.5em 1.2em;
+            border: 2px solid var(--border-light);
+            border-radius: 50px;
+            background: var(--card-bg);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
             white-space: nowrap;
+        }
+
+        .pill:hover {
+            border-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .pill.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: var(--text-muted);
+            padding: 48px 0;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-image {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            background: var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-image .coming-soon-badge {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .card-image .coming-soon-badge .spinner {
+            width: 36px;
+            height: 36px;
+            position: relative;
+            z-index: 2;
+            border-radius: 50%;
+            border: 4px solid rgba(212, 163, 115, 0.15);
+            border-top-color: var(--accent);
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 12px;
+            background: transparent;
+            forced-color-adjust: none;
+            color-scheme: only light;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .card-image .coming-soon-badge p {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: var(--accent);
+        }
+
+        .card-category {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .card-body h3 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 8px 0 16px;
+            line-height: 1.5;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-light);
+            padding-top: 16px;
+            margin-top: 8px;
+        }
+
+        .card-seller {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .btn-contact {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-contact:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .investors-section {
+            padding: 64px 0;
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .investors-section h2 {
+            color: #fff;
+        }
+
+        .investors-section .gold {
+            color: var(--accent);
+        }
+
+        .investors-card {
+            max-width: 700px;
+            margin: 0 auto;
             text-align: center;
         }
-        .footer-note a {
+
+        .investors-card p {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .investors-list {
+            display: inline-block;
+            text-align: left;
+            margin: 16px 0 24px;
+        }
+
+        .investors-list li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .investors-list li::before {
+            content: "•";
             color: var(--accent);
-            text-decoration: none;
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .legal-section {
+            padding: 48px 0;
+            background: var(--bg);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .legal-section h3 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+
+        .legal-section h3:first-child {
+            margin-top: 0;
+        }
+
+        .legal-section p {
+            margin-bottom: 8px;
+        }
+
+        .legal-divider {
+            border: none;
+            border-top: 1px solid var(--border-light);
+            margin: 24px 0;
+        }
+
+        /* ---------- MODALS ---------- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--card-bg);
+            max-width: 560px;
+            width: 100%;
+            padding: 32px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-hover);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            line-height: 1;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0 8px;
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        .modal-box h2 {
+            margin-bottom: 8px;
+        }
+
+        .modal-sub {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        .modal-footnote {
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            border-top: 1px solid var(--border-light);
+            padding-top: 16px;
+        }
+
+        .modal-warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
             font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            background: var(--bg);
+            transition: border 0.2s;
+            color: var(--text-dark);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* Detail modal specific */
+        .detail-modal-box {
+            max-width: 600px;
+            padding: 24px;
+        }
+
+        .detail-image-area {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .detail-image-area img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            background: var(--bg);
+        }
+
+        .detail-nav {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .detail-nav-btn {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .detail-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .detail-info {
+            text-align: left;
+        }
+
+        .detail-info h2 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+
+        .detail-info .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* ---------- FOOTER ---------- */
+        .site-footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 48px;
+            margin-top: 0;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-col .logo-mark {
+            color: #fff;
+        }
+
+        .footer-col .logo-mark .gold {
+            color: var(--accent);
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 6px;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-safe {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        .footer-bottom {
+            padding: 16px 0;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            text-align: center;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-sub {
+                margin: 0 auto 32px;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-placeholder {
+                height: 260px;
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            .main-nav {
+                display: none;
+                width: 100%;
+                padding-top: 16px;
+                border-top: 1px solid var(--border-light);
+                margin-top: 16px;
+            }
+
+            .main-nav.open {
+                display: block;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+
+            .main-nav ul li {
+                width: 100%;
+            }
+
+            .main-nav ul li a {
+                display: block;
+                padding: 8px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 24px;
+            }
+
+            .form-grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-box {
+                padding: 24px;
+                margin: 16px;
+            }
+
+            .hero {
+                padding: 32px 0 48px;
+            }
+
+            .hero-placeholder {
+                height: 200px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .logo-tagline {
+                display: none;
+            }
+
+            .btn-primary {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            .pill {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="particles">
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <span class="logo-mark">Hustle<span class="gold">Center</span></span>
+                <span class="logo-tagline">Vetted. Secure. Local.</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#listings">Browse</a></li>
+                    <li><a href="list.html" class="btn-outline">List your service</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger" aria-label="Menu" id="hamburgerBtn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero" id="hero">
+            <div class="container hero-inner">
+                <div class="hero-content">
+                    <h1>Find trusted <span class="gold">entrepreneurs</span> near you</h1>
+                    <p class="hero-sub">Every service is vetted by our team. No scams, no hassles – just quality work.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#listings" class="btn-primary">Browse services</a>
+                        <a href="#how-it-works" class="btn-ghost">Learn more →</a>
+                    </div>
+                </div>
+                <div class="hero-placeholder">
+                    <div class="particles-container">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                    <p>Real Polokwane businesses coming soon</p>
+                    <small>Want to be first? List your service today.</small>
+                    <div class="hero-banner">
+                        <span>🎉 Launch Special: First 20 listings FREE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing-section" id="pricing">
+            <div class="container">
+                <h2 class="section-title">List your service – <span class="gold">simple pricing</span></h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card"><span class="pricing-duration">1 Month</span><span
+                            class="pricing-price">R65</span></div>
+                    <div class="pricing-card"><span class="pricing-duration">2 Months</span><span
+                            class="pricing-price">R120</span></div>
+                    <div class="pricing-card"><span class="pricing-duration">3 Months</span><span
+                            class="pricing-price">R165</span></div>
+                    <div class="pricing-card"><span class="pricing-duration">4 Months</span><span
+                            class="pricing-price">R200</span></div>
+                </div>
+                <p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:0.9rem;">All listings are
+                    vetted before going live. Payment via email.</p>
+                <div class="pricing-cta">
+                    <a href="list.html" class="btn-primary">List your service</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How it <span class="gold">works</span></h2>
+                <div class="steps-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Entrepreneur lists</h3>
+                        <p>Skilled entrepreneurs submit their services with details &amp; pricing.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Our Team vets</h3>
+                        <p>We manually vet every listing to ensure quality &amp; relevance.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>You connect safely</h3>
+                        <p>Request contact via email – we connect you safely.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="listings-section" id="listings">
+            <div class="container">
+                <div class="listings-header">
+                    <h2 class="section-title">Available <span class="gold">services</span></h2>
+                    <div class="category-pills" id="categoryPills">
+                        <button class="pill active" data-cat="all">All</button>
+                        <button class="pill" data-cat="Automotive">Automotive</button>
+                        <button class="pill" data-cat="Barber">Barber</button>
+                        <button class="pill" data-cat="Beauty">Beauty</button>
+                        <button class="pill" data-cat="Braces">Braces</button>
+                        <button class="pill" data-cat="Cleaning">Cleaning</button>
+                        <button class="pill" data-cat="Eye Lash">Eye Lash</button>
+                        <button class="pill" data-cat="Fashion">Fashion</button>
+                        <button class="pill" data-cat="Food">Food</button>
+                        <button class="pill" data-cat="Hair Salon">Hair Salon</button>
+                        <button class="pill" data-cat="Supplies">Supplies</button>
+                        <button class="pill" data-cat="Home & Garden">Home & Garden</button>
+                        <button class="pill" data-cat="Logistics">Logistics</button>
+                        <button class="pill" data-cat="Makeup">Makeup</button>
+                        <button class="pill" data-cat="Nail">Nail</button>
+                        <button class="pill" data-cat="Reseller">Reseller</button>
+                        <button class="pill" data-cat="Shuttle & Transport">Shuttle & Transport</button>
+                        <button class="pill" data-cat="Other">Other</button>
+                    </div>
+                </div>
+                <div class="services-grid" id="servicesGrid">
+                    <div class="empty-state">
+                        <p>Loading services…</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="investors-section" id="investors">
+            <div class="container">
+                <div class="investors-card">
+                    <h2>Partner <span class="gold">with us</span></h2>
+                    <p>HustleCenter connects Polokwane with verified local professionals. Every service is manually vetted, so customers can find quality help without the guesswork.</p>
+                    <p>We're looking for:</p>
+                    <ul class="investors-list">
+                        <li><strong>Investors</strong> to help us scale across Limpopo</li>
+                        <li><strong>Mentors</strong> with experience in marketplaces, payments, or local business</li>
+                    </ul>
+                    <a href="mailto:entre@hustlecenter.co.za?subject=Partnering%20with%20HustleCenter" class="btn-primary" target="_blank">📩 Contact us via email</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="legal-section" id="legal">
+            <div class="container">
+                <h3>Disclaimer</h3>
+                <p>HustleCenter connects customers with independent service providers. We vet listings but are not liable
+                    for the quality of work, disputes, or any damages arising from services rendered. Use at your own
+                    discretion.</p>
+                <hr class="legal-divider">
+                <h3>Terms of Service</h3>
+                <p>By using HustleCenter, you agree to communicate respectfully and use the platform for lawful purposes
+                    only. We reserve the right to remove any listing or block any user at our sole discretion.</p>
+                <p><strong>For entrepreneurs:</strong> By listing your service, you agree that your business name,
+                    service details, and provided photo will be publicly displayed on HustleCenter. You are responsible
+                    for the accuracy of your listing. Listing fees are non-refundable once your service goes live.</p>
+                <p><strong>For customers:</strong> HustleCenter facilitates introductions only. We do not guarantee
+                    availability, pricing, or outcomes. Always confirm details directly with the service provider.</p>
+                <hr class="legal-divider">
+                <h3>Privacy Policy</h3>
+                <p>We collect only the information you provide via email (name, phone number, and message). This
+                    information is used solely to connect you with the relevant service provider or to process your
+                    listing. We do not share your personal contact details publicly on this site. We do not use cookies,
+                    analytics, or tracking tools.</p>
+                <p>For any privacy concerns, contact us directly via email.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Contact modal (customer request) -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeContactModal">&times;</button>
+            <h2>Request contact</h2>
+            <p class="modal-sub">Fill in your details. We'll send your request via email.</p>
+            <div class="modal-warning">⚠️ Your details are sent securely via email and are never shown on this site.</div>
+            <form id="contactForm" novalidate>
+                <div class="form-group"><label for="contactName">Full name *</label><input type="text" id="contactName"
+                        placeholder="e.g. Jane Mokoena" required minlength="3"></div>
+                <div class="form-group"><label for="contactPhone">Phone number *</label><input type="tel"
+                        id="contactPhone" placeholder="082 123 4567" required></div>
+                <div class="form-group"><label for="contactMessage">Your message (optional)</label><textarea
+                        id="contactMessage" rows="3" placeholder="Briefly describe what you need..."></textarea></div>
+                <input type="hidden" id="contactServiceId" value="">
+                <button type="submit" class="btn-primary btn-block">Send request via email</button>
+            </form>
+            <p class="modal-footnote">🔒 Your details are sent securely via email. We'll connect you with the professional.</p>
+        </div>
     </div>
-    <div class="content">
-        <div class="logo-mark">Hustle<span class="gold">Center</span></div>
-        <div class="tagline">Vetted. Secure. Local.</div>
-        <div class="spinner"></div>
 
-        <h1 class="hero-headline">Polokwane's trusted marketplace is almost here</h1>
-        <p class="hero-sub">
-            We're onboarding the first <strong>20 entrepreneurs for free</strong>.
-            Be one of them and get your service listed before the public launch.
-        </p>
+    <!-- DETAIL MODAL (Lightbox + full listing info) -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-box detail-modal-box">
+            <button class="modal-close" id="closeDetailModal">&times;</button>
+            
+            <!-- Image gallery -->
+            <div class="detail-image-area">
+                <img src="" alt="" id="detailImage">
+                <div class="detail-nav" id="detailNav" style="display:none;">
+                    <button id="prevDetail" class="detail-nav-btn">← Prev</button>
+                    <button id="nextDetail" class="detail-nav-btn">Next →</button>
+                </div>
+            </div>
 
-        <div class="how-strip">
-            <div class="how-step"><span class="step-num">①</span> List your service</div>
-            <div class="how-step"><span class="step-num">②</span> We vet</div>
-            <div class="how-step"><span class="step-num">③</span> Go live</div>
-        </div>
-
-        <div class="pricing-mini">
-            <div class="price-pill"><strong>R65</strong> / 1 mo</div>
-            <div class="price-pill"><strong>R120</strong> / 2 mo</div>
-            <div class="price-pill"><strong>R165</strong> / 3 mo</div>
-            <div class="price-pill"><strong>R200</strong> / 4 mo</div>
-        </div>
-        <p class="pricing-note">First 20 listings free – then these rates apply</p>
-
-        <a href="https://wa.me/27694766367?text=Hi%20HustleCenter%2C%20I%20want%20to%20join%20the%20waitlist%20for%20the%20first%2020%20free%20listings." class="btn-primary" target="_blank">
-            Join the free waitlist now
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-            </svg>
-        </a>
-
-        <div class="social-row">
-            <a href="https://www.instagram.com/HustleCentersa" class="social-link" target="_blank" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
-                </svg>
-            </a>
-            <a href="https://www.facebook.com/HustleCentersa" class="social-link" target="_blank" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-            </a>
-            <a href="mailto:entre@hustlecenter.co.za" class="social-link mail-icon" aria-label="Email">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                    <polyline points="22,6 12,13 2,6"/>
-                </svg>
-            </a>
-        </div>
-
-        <div class="footer-note">
-            &copy; 2026 HustleCenter. Built with care in South&nbsp;Africa.&nbsp;🇿🇦
+            <!-- Service info -->
+            <div id="detailInfo" class="detail-info">
+                <h2 id="detailTitle"></h2>
+                <span class="badge" id="detailCategory" style="background:var(--primary);color:#fff;font-size:0.7rem;padding:2px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;"></span>
+                <div class="card-meta"><span id="detailLocation"></span></div>
+                <p id="detailDescription" style="margin:12px 0;line-height:1.5;"></p>
+                <p><strong>Price: </strong><span id="detailPrice" style="color:var(--accent);"></span></p>
+                <p><strong>Seller: </strong><span id="detailSeller"></span></p>
+                <a href="#" id="detailWhatsapp" class="btn-primary" target="_blank" style="display:inline-block;margin-top:16px;">📞 WhatsApp</a>
+            </div>
         </div>
     </div>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col"><span class="logo-mark small">Hustle<span class="gold">Center</span></span>
+                <p class="footer-tagline">Vetted local services, safely connected.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick links</h4>
+                <ul>
+                    <li><a href="#listings">Browse</a></li>
+                    <li><a href="list.html" class="btn-outline">List your service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Safety</h4>
+                <p class="footer-safe">All contact goes through email. Your info is never shared publicly.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 HustleCenter. All rights reserved. Built with care. 🇿🇦</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        var DATA_URL = 'data.json';
+        var allServices = [];
+        var currentFilter = 'all';
+        var currentSearch = '';
+
+        function loadServices(callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', DATA_URL, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) { try { allServices = JSON.parse(xhr.responseText); } catch (e) { allServices = []; } }
+                else { allServices = []; }
+                callback();
+            };
+            xhr.onerror = function () { allServices = []; callback(); };
+            xhr.send();
+        }
+
+        var servicesGrid = document.getElementById('servicesGrid');
+        var categoryPillsContainer = document.getElementById('categoryPills');
+        var contactModal = document.getElementById('contactModal');
+        var closeContactBtn = document.getElementById('closeContactModal');
+        var contactForm = document.getElementById('contactForm');
+        var contactServiceId = document.getElementById('contactServiceId');
+
+        // Detail modal elements
+        var detailModal = document.getElementById('detailModal');
+        var detailImage = document.getElementById('detailImage');
+        var detailTitle = document.getElementById('detailTitle');
+        var detailCategory = document.getElementById('detailCategory');
+        var detailLocation = document.getElementById('detailLocation');
+        var detailDescription = document.getElementById('detailDescription');
+        var detailPrice = document.getElementById('detailPrice');
+        var detailSeller = document.getElementById('detailSeller');
+        var detailWhatsapp = document.getElementById('detailWhatsapp');
+        var detailNav = document.getElementById('detailNav');
+        var prevDetailBtn = document.getElementById('prevDetail');
+        var nextDetailBtn = document.getElementById('nextDetail');
+        var closeDetailBtn = document.getElementById('closeDetailModal');
+        var currentDetailImages = [];
+        var currentDetailIndex = 0;
+
+        function isValidPhone(phone) {
+            var cleaned = phone.replace(/[\s\-\(\)\+]/g, '');
+            if (cleaned.slice(0, 1) === '0' && cleaned.length === 10 && /^\d+$/.test(cleaned)) return true;
+            if (cleaned.slice(0, 3) === '+27' && cleaned.length === 12 && /^\+\d+$/.test(cleaned)) return true;
+            return false;
+        }
+        function containsLetter(str) { return /[a-zA-Z]/.test(str); }
+
+        function validateContactForm(data) {
+            var errors = [];
+            if (!data.name || !containsLetter(data.name.trim())) errors.push('Name must contain letters.');
+            if (!data.phone || !isValidPhone(data.phone)) errors.push('Enter a valid SA phone number.');
+            return errors;
+        }
+
+        // Detail modal functions
+        function openDetailModal(serviceId) {
+            var service = allServices.find(function(s) { return s.id === serviceId; });
+            if (!service) return;
+            
+            currentDetailImages = service.images || (service.image ? [service.image] : []);
+            currentDetailIndex = 0;
+            
+            if (currentDetailImages.length > 0) {
+                detailImage.src = currentDetailImages[0];
+                detailImage.style.display = 'block';
+                detailNav.style.display = currentDetailImages.length > 1 ? 'flex' : 'none';
+            } else {
+                detailImage.style.display = 'none';
+                detailNav.style.display = 'none';
+            }
+            
+            detailTitle.textContent = service.title;
+            detailCategory.textContent = Array.isArray(service.category) ? service.category[0] : service.category;
+            detailLocation.innerHTML = '📍 ' + (service.location || 'Polokwane');
+            detailDescription.textContent = service.description;
+            detailPrice.textContent = 'R' + (service.price || '0');
+            detailSeller.textContent = service.sellerName;
+            detailWhatsapp.href = 'https://wa.me/' + (service.sellerPhone || '').replace(/\D/g, '');
+            
+            updateDetailNavButtons();
+            
+            detailModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateDetailNavButtons() {
+            if (currentDetailImages.length === 0) return;
+            prevDetailBtn.disabled = currentDetailIndex === 0;
+            nextDetailBtn.disabled = currentDetailIndex === currentDetailImages.length - 1;
+        }
+
+        function showCurrentDetailImage() {
+            detailImage.src = currentDetailImages[currentDetailIndex];
+            updateDetailNavButtons();
+        }
+
+        prevDetailBtn.addEventListener('click', function() {
+            if (currentDetailIndex > 0) {
+                currentDetailIndex--;
+                showCurrentDetailImage();
+            }
+        });
+        nextDetailBtn.addEventListener('click', function() {
+            if (currentDetailIndex < currentDetailImages.length - 1) {
+                currentDetailIndex++;
+                showCurrentDetailImage();
+            }
+        });
+
+        function closeDetailModalFn() {
+            detailModal.classList.remove('active');
+            document.body.style.overflow = '';
+            detailImage.src = '';
+        }
+        closeDetailBtn.addEventListener('click', closeDetailModalFn);
+        detailModal.addEventListener('click', function(e) {
+            if (e.target === detailModal) closeDetailModalFn();
+        });
+
+        function renderServices(services) {
+            var filtered = services;
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(function (s) {
+                    if (Array.isArray(s.category)) {
+                        return s.category.indexOf(currentFilter) !== -1;
+                    }
+                    return s.category === currentFilter;
+                });
+            }
+            if (currentSearch.trim() !== '') {
+                var q = currentSearch.trim().toLowerCase();
+                filtered = filtered.filter(function (s) {
+                    return s.title.toLowerCase().indexOf(q) !== -1 || s.description.toLowerCase().indexOf(q) !== -1 || s.sellerName.toLowerCase().indexOf(q) !== -1;
+                });
+            }
+            filtered = filtered.filter(function (s) {
+                if (s.status !== 'approved') return false;
+                if (!s.paid) return false;
+                if (s.expiresAt && new Date(s.expiresAt) < new Date()) return false;
+                return true;
+            });
+            if (filtered.length === 0) {
+                servicesGrid.innerHTML = '<div class="empty-state"><p>No services yet. Be the first to list!</p><a href="list.html" class="btn-primary" style="margin-top:16px;">List your service</a></div>';
+                return;
+            }
+            var html = '';
+            filtered.forEach(function (service) {
+                var desc = service.description.length > 120 ? service.description.substring(0, 120) + '…' : service.description;
+                var imagesArray = service.images || (service.image ? [service.image] : []);
+                var thumbUrl = imagesArray.length > 0 ? imagesArray[0] : '';
+                var hasMultiple = imagesArray.length > 1;
+                html += '<div class="service-card" data-id="' + service.id + '">' +
+                    '<div class="card-image" onclick="openDetailModal(\'' + service.id + '\')">' +
+                    (hasMultiple ? '<div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:10px; z-index:1;">' + imagesArray.length + ' photos</div>' : '') +
+                    (thumbUrl ? '<img src="' + thumbUrl + '" alt="' + service.title + '" loading="lazy">' : '') +
+                    '<span class="card-category">' + (Array.isArray(service.category) ? service.category[0] : service.category) + '</span>' +
+                    '</div>' +
+                    '<div class="card-body"><h3>' + service.title + '</h3>' +
+                    '<div class="card-meta"><span class="card-location">📍 ' + service.location + '</span></div>' +
+                    '<p class="card-description">' + desc + '</p>' +
+                    '<div class="card-footer"><span class="card-seller">' + service.sellerName + '</span>' +
+                    '<a href="https://wa.me/' + service.sellerPhone.replace(/\D/g, '') + '" class="btn-contact" target="_blank" onclick="var p=this.href.replace(\'https://wa.me/\',\'\'); location.href=\'whatsapp://send?phone=\'+p; setTimeout(function(){ location.href=\'https://wa.me/\'+p; }, 800); return false;">📞 WhatsApp</a></div></div></div>';
+            });
+            servicesGrid.innerHTML = html;
+        }
+
+        function initCategoryPills() {
+            var pills = categoryPillsContainer.querySelectorAll('.pill');
+            for (var i = 0; i < pills.length; i++) {
+                pills[i].addEventListener('click', function () {
+                    for (var j = 0; j < pills.length; j++) pills[j].classList.remove('active');
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-cat');
+                    renderServices(allServices);
+                });
+            }
+        }
+
+        function addSearchBar() {
+            var header = document.querySelector('.listings-header');
+            if (!header) return;
+            var searchWrapper = document.createElement('div');
+            searchWrapper.className = 'search-wrapper';
+            searchWrapper.innerHTML = '<input type="text" id="searchInput" placeholder="Search services…" aria-label="Search">';
+            header.appendChild(searchWrapper);
+            document.getElementById('searchInput').addEventListener('input', function () {
+                currentSearch = this.value;
+                renderServices(allServices);
+            });
+        }
+
+        function openContactModal(serviceId) {
+            contactServiceId.value = serviceId;
+            contactModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeContactModalFn() {
+            contactModal.classList.remove('active');
+            document.body.style.overflow = '';
+            contactForm.reset();
+        }
+
+        closeContactBtn.addEventListener('click', closeContactModalFn);
+        contactModal.addEventListener('click', function (e) { if (e.target === contactModal) closeContactModalFn(); });
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var name = document.getElementById('contactName').value.trim();
+            var phone = document.getElementById('contactPhone').value.trim();
+            var message = document.getElementById('contactMessage').value.trim();
+            var errors = validateContactForm({ name: name, phone: phone });
+            if (errors.length > 0) { alert('Please fix:\n- ' + errors.join('\n- ')); return; }
+            var serviceId = contactServiceId.value;
+            var service = allServices.find(function (s) { return s.id === serviceId; });
+            var subject = 'Service request: ' + (service ? service.title : 'HustleCenter');
+            var body = 'I am interested in: ' + (service ? service.title : 'Unknown') + '%0A' +
+                       'Seller: ' + (service ? service.sellerName : 'Unknown') + '%0A%0A' +
+                       'My details:%0A' +
+                       'Name: ' + name + '%0A' +
+                       'Phone: ' + phone + '%0A%0A' +
+                       'Message: ' + (message || 'No message');
+            window.location.href = 'mailto:entre@hustlecenter.co.za?subject=' + encodeURIComponent(subject) + '&body=' + body;
+            closeContactModalFn();
+        });
+
+        document.getElementById('hamburgerBtn').addEventListener('click', function () {
+            document.querySelector('.main-nav').classList.toggle('open');
+        });
+        var navLinks = document.querySelectorAll('.main-nav a');
+        for (var k = 0; k < navLinks.length; k++) {
+            navLinks[k].addEventListener('click', function () { document.querySelector('.main-nav').classList.remove('open'); });
+        }
+
+        // PWA service worker registration (using real sw.js)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+
+        function init() {
+            loadServices(function () { addSearchBar(); initCategoryPills(); renderServices(allServices); });
+        }
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
-    </html>
+
+</html>
