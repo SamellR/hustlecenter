@@ -1,7 +1,6 @@
-const CACHE_NAME = 'hustlecenter-v1';
+const CACHE_NAME = 'hustlecenter-v2';
 const ASSETS = [
   './',
-  'index.html',
   'playground.html',
   'list.html',
   'data.json',
@@ -9,6 +8,8 @@ const ASSETS = [
   'favicon-32x32.png',
   'apple-touch-icon.png',
   'android-chrome-192x192.png',
+  'whatsapp-preview.png',
+  'hustlecenter-logo-800.png',
   'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap'
 ];
 
