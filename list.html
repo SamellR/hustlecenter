@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List your service – HustleCenter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-dark);
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-container {
+            background: var(--card-bg);
+            max-width: 580px;
+            width: 100%;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+        }
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        h1 .gold { color: var(--accent); }
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            background: var(--bg);
+            transition: border 0.2s;
+            color: var(--text-dark);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 14px 32px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: var(--font-body);
+        }
+        .btn-submit:hover { background: var(--accent-hover); }
+        .footnote {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .back-link a {
+            color: var(--accent);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Hustle<span class="gold">Center</span></h1>
+        <p class="subtitle">List your service – it's free for the first 20 entrepreneurs. We'll review and publish within 24 hours.</p>
+
+        <form action="https://formspree.io/f/mnjevqkg" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="businessName">Business name *</label>
+                <input type="text" id="businessName" name="businessName" placeholder="e.g. Thabo's Plumbing" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First name *</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Surname *</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="082 123 4567" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option>Automotive</option>
+                    <option>Barber</option>
+                    <option>Beauty</option>
+                    <option>Braces</option>
+                    <option>Cleaning</option>
+                    <option>Eye Lash</option>
+                    <option>Fashion</option>
+                    <option>Food</option>
+                    <option>Hair Salon</option>
+                    <option>Supplies</option>
+                    <option>Home & Garden</option>
+                    <option>Logistics</option>
+                    <option>Makeup</option>
+                    <option>Nail</option>
+                    <option>Reseller</option>
+                    <option>Shuttle & Transport</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Description *</label>
+                <textarea id="description" name="description" rows="4" placeholder="Describe your service, experience, and what makes you unique..." required></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+    <label for="pricingPlan">Pricing plan *</label>
+    <select id="pricingPlan" name="pricingPlan" required>
+        <option value="">Select a plan</option>
+        <option value="1 month - R65">1 Month – R65</option>
+        <option value="2 months - R120">2 Months – R120</option>
+        <option value="3 months - R165">3 Months – R165</option>
+        <option value="4 months - R200">4 Months – R200</option>
+    </select>
+</div>
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <input type="text" id="location" name="location" placeholder="e.g. Seshego" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="photos">Upload up to 3 photos *</label>
+                <input type="file" id="photos" name="photos" accept="image/*" multiple required>
+                <small style="color: var(--text-muted);">Clear images of your work help attract customers.</small>
+            </div>
+            <button type="submit" class="btn-submit">Submit listing</button>
+        </form>
+        <p class="footnote">🔒 Your details are sent securely and will never be shared publicly.</p>
+        <div class="back-link">
+            <a href="index.html">← Back to marketplace</a>
+        </div>
+    </div>
+</body>
+</html>
