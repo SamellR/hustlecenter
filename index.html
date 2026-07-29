@@ -198,10 +198,6 @@
             transition: background 0.2s;
         }
         .btn-primary:hover { background: #C8925A; }
-        .btn-primary svg {
-            width: 22px;
-            height: 22px;
-        }
         .social-row {
             display: flex;
             justify-content: center;
@@ -240,6 +236,41 @@
             text-decoration: none;
             font-weight: 500;
         }
+
+        /* ---------- MODAL STYLES (same as marketplace) ---------- */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(6px); z-index: 999; justify-content: center; align-items: center; padding: 24px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: #fff; max-width: 560px; width: 100%; padding: 32px;
+            border-radius: var(--radius-md); box-shadow: 0 16px 48px rgba(15,23,42,0.15);
+            position: relative; max-height: 90vh; overflow-y: auto; color: #0F172A;
+        }
+        .modal-close {
+            position: absolute; top: 12px; right: 12px; background: none; border: none;
+            font-size: 2rem; line-height: 1; color: #475569; cursor: pointer; z-index: 10;
+        }
+        .modal-close:hover { color: #0F172A; }
+        .modal-box h2 { margin-bottom: 8px; margin-right: 40px; font-family: var(--font-heading); }
+        .modal-sub { color: #475569; margin-bottom: 24px; font-size: 0.95rem; }
+        .modal-footnote { margin-top: 24px; font-size: 0.85rem; color: #475569; text-align: center; border-top: 1px solid #E2E8F0; padding-top: 16px; }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; color: #0F172A; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 16px; border: 2px solid #E2E8F0; border-radius: var(--radius-sm);
+            font-family: var(--font-body); font-size: 1rem; background: #F8FAFC; transition: border 0.2s; color: #0F172A;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.15);
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .btn-block { display: block; width: 100%; }
+        .consent-group label { font-weight: 400; font-size: 0.85rem; display: flex; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
+        .consent-group input[type="checkbox"] { width: auto; margin-top: 3px; }
+        .success-msg { color: var(--accent); }
     </style>
 </head>
 <body>
@@ -271,33 +302,261 @@
         </div>
         <p class="pricing-note">Free Basic: name, category & phone (no image). Paid plans include photos & Verified badge.</p>
 
-        <a href="https://wa.me/27694766367?text=Hi%20HustleCenter%2C%20I%20want%20to%20join%20the%20waitlist%20for%20the%20first%2020%20free%20listings." class="btn-primary" target="_blank">
-            Join the free waitlist now
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-            </svg>
+        <button class="btn-primary" onclick="openEntrepreneurModal()">List your service</button>
+        
+        <div style="text-align:center; margin-top:48px; margin-bottom:40px;">
+    <h3 style="font-family:var(--font-heading); font-size:1.3rem; color:#fff; margin-bottom:16px;">Connect with us</h3>
+    <div class="social-row" style="margin:0; justify-content:center; gap:24px;">
+        <a href="https://www.instagram.com/HustleCentersa" class="social-link" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
         </a>
-
-        <div class="social-row">
-            <a href="https://www.instagram.com/HustleCentersa" class="social-link" target="_blank" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
-            </a>
-            <a href="https://www.facebook.com/HustleCentersa" class="social-link" target="_blank" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <a href="mailto:help@hustlecenter.co.za" class="social-link mail-icon" aria-label="Email">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </a>
-        </div>
+        <a href="https://www.facebook.com/HustleCentersa" class="social-link" target="_blank" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="mailto:help@hustlecenter.co.za" class="social-link mail-icon" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+    </div>
+</div>
 
         <div class="footer-note">
-            <p style="margin-top:12px; font-size:0.85rem; opacity:0.7;">
-                <i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
-                <i class="ph ph-envelope"></i> help@hustlecenter.co.za<br>
-                <span style="opacity:0.8;">Privacy Policy &nbsp;|&nbsp; PAIA Manual &nbsp;|&nbsp; Terms of Service</span>
-            </p>
-            <p>&copy; 2026 HustleCenter. Built with care in South&nbsp;Africa.&nbsp;🇿🇦 &nbsp;|&nbsp; v1.0.0</p>
+    <p style="margin-top:12px; font-size:0.85rem; opacity:0.7; margin-bottom:16px;">
+        <i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
+        <i class="ph ph-envelope"></i> help@hustlecenter.co.za
+    </p>
+    <p style="margin-top:8px; font-size:0.85rem; opacity:0.8;">
+        <a href="index.html" style="color:var(--accent);">Privacy Policy</a> &nbsp;|&nbsp;
+        <a href="index.html" style="color:var(--accent);">PAIA Manual</a> &nbsp;|&nbsp;
+        <a href="index.html" style="color:var(--accent);">Terms of Service</a>
+    </p>
+    <p style="margin-top:12px; font-size:0.85rem; opacity:0.7;">&copy; 2026 HustleCenter. Built with care in South&nbsp;Africa.&nbsp;🇿🇦 &nbsp;|&nbsp; v1.0.0</p>
+</div>
+    </div>
+
+    <!-- ENTREPRENEUR LISTING FLOW MODAL -->
+    <div class="modal-overlay" id="entrepreneurModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeEntrepreneurModal">&times;</button>
+
+            <div class="step-content" id="step-signup">
+                <h2>Create your account</h2>
+                <p class="modal-sub">First, create your entrepreneur account. All fields are required.</p>
+                <form id="signupForm" novalidate>
+                    <div class="form-group"><label for="signupName">Full name *</label><input type="text" id="signupName" maxlength="100" placeholder="e.g. Thabo Mokoena" required></div>
+                    <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail" maxlength="150" placeholder="thabo@email.com" required></div>
+                    <div class="form-group"><label for="signupPhone">Phone *</label><input type="tel" id="signupPhone" maxlength="20" placeholder="0821234567" required></div>
+                    <div class="form-group"><label for="signupPassword">Password *</label><input type="password" id="signupPassword" maxlength="100" required></div>
+                    <button type="submit" class="btn-primary btn-block">Sign Up</button>
+                </form>
+                <p class="modal-footnote" id="signupError" style="color:#dc2626;"></p>
+            </div>
+            <div class="step-content" id="step-otp" style="display:none;">
+                <h2>Verify your phone</h2>
+                <p class="modal-sub">Enter the 6‑digit OTP we sent to your phone (check the server terminal).</p>
+                <form id="otpForm" novalidate>
+                    <div class="form-group"><label for="otpCode">OTP Code *</label><input type="text" id="otpCode" placeholder="123456" maxlength="6" required></div>
+                    <button type="submit" class="btn-primary btn-block">Verify OTP</button>
+                </form>
+                <p class="modal-footnote" id="otpError" style="color:#dc2626;"></p>
+            </div>
+            <div class="step-content" id="step-id" style="display:none;">
+                <h2>Upload your ID</h2>
+                <p class="modal-sub">Please upload a clear photo of your ID or driver's license.</p>
+                <form id="idForm" novalidate>
+                    <div class="form-group"><label for="idFile">ID Document *</label><input type="file" id="idFile" accept="image/*" required></div>
+                    <button type="submit" class="btn-primary btn-block">Upload ID</button>
+                </form>
+                <p class="modal-footnote" id="idError" style="color:#dc2626;"></p>
+            </div>
+            <div class="step-content" id="step-selfie" style="display:none;">
+                <h2>Upload a selfie</h2>
+                <p class="modal-sub">Take a clear selfie so we can verify it's really you.</p>
+                <form id="selfieForm" novalidate>
+                    <div class="form-group"><label for="selfieFile">Selfie *</label><input type="file" id="selfieFile" accept="image/*" required></div>
+                    <button type="submit" class="btn-primary btn-block">Upload Selfie</button>
+                </form>
+                <p class="modal-footnote" id="selfieError" style="color:#dc2626;"></p>
+            </div>
+            <div class="step-content" id="step-listing" style="display:none;">
+                <h2>Create your listing</h2>
+                <p class="modal-sub">Now tell us about your service. We'll review and publish it.</p>
+                <form id="listingFormModal" novalidate>
+                    <div class="form-group"><label for="listBusinessName">Business name *</label><input type="text" id="listBusinessName" maxlength="100" placeholder="e.g. Thabo's Plumbing" required></div>
+                    <div class="form-group"><label for="listCategory">Category *</label>
+                        <select id="listCategory" required>
+                            <option value="">Select a category</option>
+                            <option>Automotive</option><option>Barber</option><option>Beauty</option><option>Braces</option><option>Cleaning</option><option>Eye Lash</option><option>Fashion</option><option>Food</option><option>Hair Salon</option><option>Supplies</option><option>Home & Garden</option><option>Logistics</option><option>Makeup</option><option>Nail</option><option>Reseller</option><option>Shuttle & Transport</option><option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label for="listDescription">Description *</label><textarea id="listDescription" maxlength="1000" rows="3" placeholder="Describe your service..." required></textarea></div>
+                    <div class="form-grid-2">
+                        <div class="form-group"><label for="listPrice">Price (R) *</label><input type="text" id="listPrice" maxlength="100" placeholder="e.g. 150" required></div>
+                        <div class="form-group"><label for="listLocation">Location *</label><input type="text" id="listLocation" maxlength="100" placeholder="e.g. Seshego" required></div>
+                    </div>
+                    <div class="form-group"><label for="listPhotos">Upload up to 3 photos *</label><input type="file" id="listPhotos" accept="image/*" multiple required></div>
+                    <div class="form-group consent-group">
+                        <label><input type="checkbox" name="consent_id" required> I consent to HustleCenter collecting and verifying my ID documents in terms of POPIA. I confirm all information is true.</label>
+                        <label><input type="checkbox" name="consent_tos" required> I agree to the HustleCenter <a href="privacy-policy.html" target="_blank">Privacy Policy</a> and <a href="#legal">Terms of Service</a>.</label>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Submit for Review</button>
+                </form>
+                <p class="modal-footnote" id="listingError" style="color:#dc2626;"></p>
+            </div>
+            <div class="step-content" id="step-done" style="display:none;">
+                <h2>Verification Submitted!</h2>
+                <p class="success-msg">Your profile and listing will be reviewed by our team. Once approved, you'll appear in the marketplace.</p>
+                <button class="btn-primary btn-block" onclick="closeEntrepreneurModalFn()">Close</button>
+            </div>
         </div>
     </div>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+        var currentToken = null;
+        var entrepreneurModal = document.getElementById('entrepreneurModal');
+        var closeEntrepreneurBtn = document.getElementById('closeEntrepreneurModal');
+
+        function showStep(stepId) {
+            document.querySelectorAll('#entrepreneurModal .step-content').forEach(el => el.style.display = 'none');
+            document.getElementById(stepId).style.display = 'block';
+        }
+
+        function openEntrepreneurModal() {
+            entrepreneurModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showStep('step-signup');
+            document.getElementById('otpForm').reset();
+            document.getElementById('idForm').reset();
+            document.getElementById('selfieForm').reset();
+            document.getElementById('listingFormModal').reset();
+            currentToken = null;
+        }
+
+        function closeEntrepreneurModalFn() {
+            entrepreneurModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeEntrepreneurBtn.addEventListener('click', closeEntrepreneurModalFn);
+        entrepreneurModal.addEventListener('click', function (e) {
+            if (e.target === entrepreneurModal) closeEntrepreneurModalFn();
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const phone = document.getElementById('signupPhone').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            try {
+                const res = await fetch(`${API_BASE}/api/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, password })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Signup failed');
+                document.getElementById('otpForm').dataset.userId = data.userId;
+                showStep('step-otp');
+            } catch (err) {
+                document.getElementById('signupError').textContent = err.message;
+            }
+        });
+
+        document.getElementById('otpForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const userId = this.dataset.userId;
+            const otp = document.getElementById('otpCode').value.trim();
+            try {
+                const res = await fetch(`${API_BASE}/api/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, otp })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Invalid OTP');
+                currentToken = data.token;
+                localStorage.setItem('entrepreneurToken', currentToken);
+                showStep('step-id');
+            } catch (err) {
+                document.getElementById('otpError').textContent = err.message;
+            }
+        });
+
+        document.getElementById('idForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const file = document.getElementById('idFile').files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('idDoc', file);
+            try {
+                const res = await fetch(`${API_BASE}/api/upload-id`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Upload failed');
+                showStep('step-selfie');
+            } catch (err) {
+                document.getElementById('idError').textContent = err.message;
+            }
+        });
+
+        document.getElementById('selfieForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const file = document.getElementById('selfieFile').files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('selfie', file);
+            try {
+                const res = await fetch(`${API_BASE}/api/upload-selfie`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Upload failed');
+                showStep('step-listing');
+            } catch (err) {
+                document.getElementById('selfieError').textContent = err.message;
+            }
+        });
+
+        document.getElementById('listingFormModal').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const businessName = document.getElementById('listBusinessName').value.trim();
+            const category = document.getElementById('listCategory').value;
+            const description = document.getElementById('listDescription').value.trim();
+            const price = document.getElementById('listPrice').value.trim();
+            const location = document.getElementById('listLocation').value.trim();
+            const photos = document.getElementById('listPhotos').files;
+            if (!businessName || !category || !description || !price || !location || photos.length === 0) {
+                document.getElementById('listingError').textContent = 'All fields required';
+                return;
+            }
+            const formData = new FormData();
+            formData.append('businessName', businessName);
+            formData.append('category', category);
+            formData.append('description', description);
+            formData.append('price', price);
+            formData.append('location', location);
+            for (let i = 0; i < photos.length; i++) {
+                formData.append('photos', photos[i]);
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/listings`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Listing submission failed');
+                showStep('step-done');
+            } catch (err) {
+                document.getElementById('listingError').textContent = err.message;
+            }
+        });
+    </script>
 </body>
 </html>
