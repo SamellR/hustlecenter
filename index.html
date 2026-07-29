@@ -82,7 +82,7 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             text-align: center;
             margin: 0 auto;
         }
@@ -135,10 +135,7 @@
             line-height: 1.7;
             color: rgba(255,255,255,0.8);
         }
-        .hero-sub strong {
-            color: var(--accent);
-            font-weight: 600;
-        }
+        .hero-sub strong { color: var(--accent); font-weight: 600; }
         .how-strip {
             display: flex;
             justify-content: center;
@@ -146,11 +143,7 @@
             margin: 48px 0 40px;
             flex-wrap: wrap;
         }
-        .how-step {
-            text-align: center;
-            color: var(--accent);
-            font-size: 0.95rem;
-        }
+        .how-step { text-align: center; color: var(--accent); font-size: 0.95rem; }
         .how-step .step-num {
             display: block;
             font-size: 2rem;
@@ -173,15 +166,8 @@
             padding: 12px 24px;
             color: #fff;
         }
-        .price-pill strong {
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-        .pricing-note {
-            font-size: 0.9rem;
-            opacity: 0.6;
-            margin: 0 0 40px 0;
-        }
+        .price-pill strong { color: var(--accent); font-size: 1.2rem; }
+        .pricing-note { font-size: 0.9rem; opacity: 0.6; margin: 0 0 40px 0; }
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -206,23 +192,10 @@
             flex-wrap: wrap;
             align-items: center;
         }
-        .social-link {
-            transition: opacity 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .social-link { transition: opacity 0.2s; display: inline-flex; align-items: center; justify-content: center; }
         .social-link:hover { opacity: 0.7; }
-        .social-link svg {
-            width: 32px;
-            height: 32px;
-            fill: #fff;
-        }
-        .social-link.mail-icon svg {
-            fill: none;
-            stroke: #fff;
-            stroke-width: 2;
-        }
+        .social-link svg { width: 32px; height: 32px; fill: #fff; }
+        .social-link.mail-icon svg { fill: none; stroke: #fff; stroke-width: 2; }
         .footer-note {
             font-size: 0.85rem;
             opacity: 0.7;
@@ -231,46 +204,34 @@
             text-align: center;
             line-height: 2;
         }
-        .footer-note a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
+        .footer-note a { color: var(--accent); text-decoration: none; font-weight: 500; }
 
-        /* ---------- MODAL STYLES (same as marketplace) ---------- */
-        .modal-overlay {
-            display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(6px); z-index: 999; justify-content: center; align-items: center; padding: 24px;
-        }
+        /* ---------- MODAL STYLES ---------- */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(6px); z-index: 999; justify-content: center; align-items: center; padding: 24px; }
         .modal-overlay.active { display: flex; }
-        .modal-box {
-            background: #fff; max-width: 560px; width: 100%; padding: 32px;
-            border-radius: var(--radius-md); box-shadow: 0 16px 48px rgba(15,23,42,0.15);
-            position: relative; max-height: 90vh; overflow-y: auto; color: #0F172A;
-        }
-        .modal-close {
-            position: absolute; top: 12px; right: 12px; background: none; border: none;
-            font-size: 2rem; line-height: 1; color: #475569; cursor: pointer; z-index: 10;
-        }
+        .modal-box { background: #fff; max-width: 560px; width: 100%; padding: 32px; border-radius: var(--radius-md); box-shadow: 0 16px 48px rgba(15,23,42,0.15); position: relative; max-height: 90vh; overflow-y: auto; color: #0F172A; }
+        .modal-close { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 2rem; line-height: 1; color: #475569; cursor: pointer; z-index: 10; }
         .modal-close:hover { color: #0F172A; }
         .modal-box h2 { margin-bottom: 8px; margin-right: 40px; font-family: var(--font-heading); }
         .modal-sub { color: #475569; margin-bottom: 24px; font-size: 0.95rem; }
         .modal-footnote { margin-top: 24px; font-size: 0.85rem; color: #475569; text-align: center; border-top: 1px solid #E2E8F0; padding-top: 16px; }
         .form-group { margin-bottom: 24px; }
         .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; color: #0F172A; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 12px 16px; border: 2px solid #E2E8F0; border-radius: var(--radius-sm);
-            font-family: var(--font-body); font-size: 1rem; background: #F8FAFC; transition: border 0.2s; color: #0F172A;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.15);
-        }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 2px solid #E2E8F0; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1rem; background: #F8FAFC; transition: border 0.2s; color: #0F172A; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.15); }
         .form-group textarea { resize: vertical; min-height: 80px; }
         .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .btn-block { display: block; width: 100%; }
         .consent-group label { font-weight: 400; font-size: 0.85rem; display: flex; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
         .consent-group input[type="checkbox"] { width: auto; margin-top: 3px; }
         .success-msg { color: var(--accent); }
+
+        /* Legal section styling */
+        .legal-section { text-align: left; max-width: 700px; margin: 0 auto; padding: 2rem 0; }
+        .legal-section h3 { font-family: var(--font-body); font-weight: 600; font-size: 1rem; color: var(--accent); margin-bottom: 12px; margin-top: 24px; }
+        .legal-section h3:first-child { margin-top: 0; }
+        .legal-section p { margin-bottom: 8px; font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.8); }
+        .legal-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 24px 0; }
     </style>
 </head>
 <body>
@@ -285,7 +246,7 @@
 
         <h1 class="hero-headline">Polokwane's trusted marketplace is almost here</h1>
         <p class="hero-sub">
-            We’ve moved our listings to the official marketplace. If you already sent your details via WhatsApp, please complete your listing below to go live. New entrepreneurs – grab one of the remaining free spots!
+            We've moved our listings to the official marketplace. If you already sent your details via WhatsApp, please complete your listing below to go live. New entrepreneurs – grab one of the remaining free spots!
         </p>
 
         <div class="how-strip">
@@ -303,34 +264,78 @@
         <p class="pricing-note">Free Basic: name, category & phone (no image). Paid plans include photos & Verified badge.</p>
 
         <button class="btn-primary" onclick="openEntrepreneurModal()">List your service</button>
-        
+
         <div style="text-align:center; margin-top:48px; margin-bottom:40px;">
-    <h3 style="font-family:var(--font-heading); font-size:1.3rem; color:#fff; margin-bottom:16px;">Connect with us</h3>
-    <div class="social-row" style="margin:0; justify-content:center; gap:24px;">
-        <a href="https://www.instagram.com/HustleCentersa" class="social-link" target="_blank" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
-        </a>
-        <a href="https://www.facebook.com/HustleCentersa" class="social-link" target="_blank" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        <a href="mailto:help@hustlecenter.co.za" class="social-link mail-icon" aria-label="Email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
-    </div>
-</div>
+            <h3 style="font-family:var(--font-heading); font-size:1.3rem; color:#fff; margin-bottom:16px;">Connect with us</h3>
+            <div class="social-row" style="margin:0; justify-content:center; gap:24px;">
+                <a href="https://www.instagram.com/HustleCentersa" class="social-link" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/HustleCentersa" class="social-link" target="_blank" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="mailto:help@hustlecenter.co.za" class="social-link mail-icon" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- LEGAL SECTIONS -->
+        <div class="legal-section" id="legal">
+            <h3>Disclaimer</h3>
+            <!-- 🔽 CHANGE 1: Updated to include customer ID + selfie verification -->
+            <p>HustleCenter is a marketplace connecting customers and independent service providers. We verify entrepreneur identities and customer identities (phone, ID, and selfie), but we are not a party to any transaction. HustleCenter is not liable for the quality of work, disputes, or any damages arising from services rendered. Use at your own discretion. In case of fraud or crime, we will cooperate with SAPS upon receipt of a valid CAS number or court order.</p>
+
+            <hr class="legal-divider">
+
+            <h3>Terms of Service</h3>
+            <p>By using HustleCenter, you agree to communicate respectfully and use the platform for lawful purposes only. We reserve the right to remove any listing or block any user at our sole discretion.</p>
+            <p><strong>For entrepreneurs:</strong> By listing your service, you agree that your business name, service details, and provided photo will be publicly displayed on HustleCenter. You are responsible for the accuracy of your listing. Listing fees are non‑refundable once your service goes live.</p>
+            <!-- 🔽 CHANGE 2: Added customer ID/selfie requirement -->
+            <p><strong>For customers:</strong> By requesting a service, you agree to provide accurate identification (ID and selfie) for verification. HustleCenter facilitates introductions only. We do not guarantee availability, pricing, or outcomes. Always confirm details directly with the service provider.</p>
+
+            <hr class="legal-divider">
+
+            <h3>Privacy Policy</h3>
+            <p><strong>1. Who we are</strong><br>HustleCenter operates www.hustlecenter.co.za. Our Information Officer can be reached at help@hustlecenter.co.za.</p>
+            <!-- 🔽 CHANGE 3: Added ID Photo and Selfie to customer data collection -->
+            <p><strong>2. What we collect</strong><br>
+            <strong>Entrepreneurs:</strong> Name, ID Number, ID Photo, Selfie, Proof of Address, Bank Details, Service Info.<br>
+            <strong>Customers:</strong> Name, Phone Number, Email, ID Photo, Selfie, Service Requested.<br>
+            <strong>Website:</strong> IP Address, Device Info (for security).</p>
+            <p><strong>3. Why we collect it</strong><br>To verify identities, prevent fraud, connect customers to entrepreneurs, and comply with POPIA.</p>
+            <p><strong>4. How we protect it</strong><br>ID documents are deleted after 90 days. Request logs are kept for 2 years for dispute resolution. We use OTP, ID, and selfie verification to ensure all users are real and accountable.</p>
+            <p><strong>5. Your rights</strong><br>You may request access to, correction, or deletion of your personal information. Email help@hustlecenter.co.za. We respond within 30 days.</p>
+            <p><strong>6. Dispute &amp; SAPS cooperation</strong><br>If a crime is reported, HustleCenter will cooperate with SAPS and provide logged information as required by law (with a valid CAS number or court order).</p>
+
+            <hr class="legal-divider">
+
+            <h3>PAIA Manual</h3>
+            <p><strong>1. Contact details</strong><br>
+            Information Officer: The HustleCenter Information Officer<br>
+            Email: help@hustlecenter.co.za<br>
+            Address: Polokwane, South Africa</p>
+            <p><strong>2. Purpose</strong><br>This manual explains how to request information in terms of PAIA Act 2 of 2000 and POPIA.</p>
+            <p><strong>3. Information we hold</strong><br>Customer Data, Entrepreneur Data, Business Records, Communications.</p>
+            <p><strong>4. How to request your information</strong><br>
+            1. Complete Form C from the SA Information Regulator website.<br>
+            2. Email to: help@hustlecenter.co.za<br>
+            3. We respond within 30 days.</p>
+            <p><strong>5. Fees</strong><br>No fee for your own personal information.</p>
+        </div>
 
         <div class="footer-note">
-    <p style="margin-top:12px; font-size:0.85rem; opacity:0.7; margin-bottom:16px;">
-        <i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
-        <i class="ph ph-envelope"></i> help@hustlecenter.co.za
-    </p>
-    <p style="margin-top:8px; font-size:0.85rem; opacity:0.8;">
-        <a href="index.html" style="color:var(--accent);">Privacy Policy</a> &nbsp;|&nbsp;
-        <a href="index.html" style="color:var(--accent);">PAIA Manual</a> &nbsp;|&nbsp;
-        <a href="index.html" style="color:var(--accent);">Terms of Service</a>
-    </p>
-    <p style="margin-top:12px; font-size:0.85rem; opacity:0.7;">&copy; 2026 HustleCenter. Built with care in South&nbsp;Africa.&nbsp;🇿🇦 &nbsp;|&nbsp; v1.0.0</p>
-</div>
+            <p style="margin-top:12px; font-size:0.85rem; opacity:0.7; margin-bottom:16px;">
+                <i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
+                <i class="ph ph-envelope"></i> help@hustlecenter.co.za
+            </p>
+            <p style="margin-top:8px; font-size:0.85rem; opacity:0.8;">
+                <a href="#legal" style="color:var(--accent);">Privacy Policy</a> &nbsp;|&nbsp;
+                <a href="#legal" style="color:var(--accent);">PAIA Manual</a> &nbsp;|&nbsp;
+                <a href="#legal" style="color:var(--accent);">Terms of Service</a>
+            </p>
+            <p style="margin-top:12px; font-size:0.85rem; opacity:0.7;">&copy; 2026 HustleCenter. Built with care in South&nbsp;Africa.&nbsp;🇿🇦 &nbsp;|&nbsp; v1.0.0</p>
+        </div>
     </div>
 
     <!-- ENTREPRENEUR LISTING FLOW MODAL -->
@@ -352,7 +357,7 @@
             </div>
             <div class="step-content" id="step-otp" style="display:none;">
                 <h2>Verify your phone</h2>
-                <p class="modal-sub">Enter the 6‑digit OTP we sent to your phone (check the server terminal).</p>
+                <p class="modal-sub">Enter the 6‑digit OTP we sent to your email.</p>
                 <form id="otpForm" novalidate>
                     <div class="form-group"><label for="otpCode">OTP Code *</label><input type="text" id="otpCode" placeholder="123456" maxlength="6" required></div>
                     <button type="submit" class="btn-primary btn-block">Verify OTP</button>
