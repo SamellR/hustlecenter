@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard – HustleCenter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #D4A373;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text-dark: #0F172A;
+      --text-muted: #475569;
+      --border-light: #E2E8F0;
+      --shadow: 0 8px 30px rgba(15,23,42,0.08);
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --radius-md: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-dark);
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container { max-width: 700px; width: 100%; margin: 0 auto; }
+    h1, h2 { font-family: var(--font-heading); color: var(--primary); }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .gold { color: var(--accent); }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .login-box { text-align: center; }
+    .login-box input {
+      display: block; width: 100%; padding: 12px; margin: 10px 0;
+      border: 2px solid var(--border-light); border-radius: 8px; font-size: 1rem;
+    }
+    .btn {
+      display: inline-block; background: var(--accent); color: var(--primary);
+      font-weight: 600; padding: 12px 28px; border: none; border-radius: var(--radius-md);
+      cursor: pointer; font-size: 1rem; text-decoration: none;
+    }
+    .status-badge {
+      display: inline-block; padding: 2px 12px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    }
+    .pending { background: #fef3c7; color: #92400e; }
+    .approved { background: #d1fae5; color: #065f46; }
+    .rejected { background: #fee2e2; color: #991b1b; }
+    .profile-table { width: 100%; font-size: 0.9rem; }
+    .profile-table td { padding: 4px 0; vertical-align: top; }
+    .listings-list { list-style: none; }
+    .listings-list li { padding: 10px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
+    .error { color: #dc2626; font-size: 0.9rem; }
+    .logout { float: right; background: transparent; border: 1px solid #dc2626; color: #dc2626; padding: 6px 16px; border-radius: 8px; cursor: pointer; }
+    .back-link { margin-top: 1.5rem; text-align: center; }
+    .back-link a { color: var(--accent); font-weight: 500; }
+    footer { text-align: center; margin-top: 2rem; font-size: 0.85rem; opacity: 0.8; line-height: 1.8; }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="container" id="app">
+  <div id="loginScreen" class="card login-box">
+    <h1>Hustle<span class="gold">Center</span></h1>
+    <h2>Entrepreneur Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email address">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button class="btn" onclick="login()">Log In</button>
+    <p class="error" id="loginError"></p>
+    <p class="back-link"><a href="playground.html">← Back to home</a></p>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <button class="logout" onclick="logout()">Logout</button>
+    <h1>My Dashboard</h1>
+
+    <div class="card" id="profileCard">
+      <h2>Profile</h2>
+      <table class="profile-table" id="profileTable"></table>
+    </div>
+
+    <div class="card">
+      <h2>My Listings</h2>
+      <ul class="listings-list" id="listingsList"></ul>
+    </div>
+
+    <footer>
+      <p><i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
+      <i class="ph ph-envelope"></i> help@hustlecenter.co.za<br>
+      Privacy Policy &nbsp;|&nbsp; PAIA Manual &nbsp;|&nbsp; Terms of Service</p>
+      <p>&copy; 2026 HustleCenter. v1.0.0</p>
+      <p><a href="playground.html">← Back to home</a></p>
+    </footer>
+  </div>
+</div>
+
+<script>
+  const API_BASE = 'https://hustlecenter-api.onrender.com';;
+  let token = localStorage.getItem('entrepreneurToken');
+  if (token) { showDashboard(); loadProfile(); loadListings(); }
+
+  async function login() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    if (!email || !password) return;
+    try {
+      const res = await fetch(`${API_BASE}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Login failed');
+      token = data.token;
+      localStorage.setItem('entrepreneurToken', token);
+      showDashboard();
+      loadProfile();
+      loadListings();
+    } catch (err) {
+      document.getElementById('loginError').textContent = err.message;
+    }
+  }
+
+  function showDashboard() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+  }
+
+  function logout() {
+    localStorage.removeItem('entrepreneurToken');
+    location.reload();
+  }
+
+  async function loadProfile() {
+    const res = await fetch(`${API_BASE}/api/entrepreneur/me`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const user = await res.json();
+    document.getElementById('profileTable').innerHTML = `
+      <tr><td><strong>Name:</strong></td><td>${user.name}</td></tr>
+      <tr><td><strong>Email:</strong></td><td>${user.email}</td></tr>
+      <tr><td><strong>Phone:</strong></td><td>${user.phone}</td></tr>
+      <tr><td><strong>Account Verified:</strong></td><td>${user.verified ? '✅ Yes' : '❌ No'}</td></tr>
+      <tr><td><strong>ID Uploaded:</strong></td><td>${user.idDocPath ? '✅ Yes' : '❌ No'}</td></tr>
+      <tr><td><strong>Selfie Uploaded:</strong></td><td>${user.selfiePath ? '✅ Yes' : '❌ No'}</td></tr>
+    `;
+  }
+
+  async function loadListings() {
+    const res = await fetch(`${API_BASE}/api/entrepreneur/listings`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const listings = await res.json();
+    const list = document.getElementById('listingsList');
+    if (listings.length === 0) {
+      list.innerHTML = '<li>No listings yet. <a href="playground.html">List your service</a></li>';
+      return;
+    }
+    list.innerHTML = listings.map(l => `
+      <li>
+        <span>${l.businessName}</span>
+        <span class="status-badge ${l.status === 'approved' ? 'approved' : l.status === 'rejected' ? 'rejected' : 'pending'}">${l.status}</span>
+      </li>
+    `).join('');
+  }
+</script>
+</body>
+</html>

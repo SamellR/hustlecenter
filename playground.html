@@ -16,7 +16,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
     <!-- PWA Manifest (inline) -->
-    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22HustleCenter%22%2C%22short_name%22%3A%22HustleCenter%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FFFFFF%22%2C%22theme_color%22%3A%22%23D4A373%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22android-chrome-192x192.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22apple-touch-icon.png%22%2C%22sizes%22%3A%22180x180%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
+    <link rel="manifest"
+        href="data:application/manifest+json,%7B%22name%22%3A%22HustleCenter%22%2C%22short_name%22%3A%22HustleCenter%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FFFFFF%22%2C%22theme_color%22%3A%22%23D4A373%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22android-chrome-192x192.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22apple-touch-icon.png%22%2C%22sizes%22%3A%22180x180%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
+        <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <!-- WhatsApp / Facebook link preview -->
     <meta property="og:title" content="HustleCenter – Polokwane's Local Services Marketplace">
     <meta property="og:description"
@@ -46,6 +48,8 @@
             --radius-md: 12px;
             --radius-lg: 24px;
         }
+        
+        #backToTop .ph { font-size: 1.5rem; }
 
         * {
             margin: 0;
@@ -149,7 +153,7 @@
             font-weight: 600;
             padding: 10px 24px;
             border-radius: var(--radius-md);
-            border: 2px solid var(--border-light);
+            border: 3px solid var(--border-light);
             transition: all 0.25s ease;
             font-size: 0.95rem;
             cursor: pointer;
@@ -645,38 +649,6 @@
             object-fit: cover;
         }
 
-        .card-image .coming-soon-badge {
-            text-align: center;
-            z-index: 1;
-        }
-
-        .card-image .coming-soon-badge .spinner {
-            width: 36px;
-            height: 36px;
-            position: relative;
-            z-index: 2;
-            border-radius: 50%;
-            border: 4px solid rgba(212, 163, 115, 0.15);
-            border-top-color: var(--accent);
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 12px;
-            background: transparent;
-            forced-color-adjust: none;
-            color-scheme: only light;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .card-image .coming-soon-badge p {
-            font-family: var(--font-heading);
-            font-size: 0.95rem;
-            color: var(--accent);
-        }
-
         .card-category {
             position: absolute;
             top: 12px;
@@ -734,21 +706,24 @@
             color: var(--text-dark);
         }
 
-        .btn-contact {
-            background: var(--primary);
+        /* WhatsApp button style */
+        .btn-whatsapp {
+            background: #25D366;
             color: #fff;
-            border: none;
-            padding: 6px 16px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            outline: none;
         }
 
-        .btn-contact:hover {
-            background: var(--accent);
-            color: var(--primary);
+        .btn-whatsapp:hover {
+            background: #1da851;
         }
 
         .investors-section {
@@ -860,16 +835,16 @@
         }
 
         .modal-close {
-            position: sticky;
-            top: 0;
-            float: right;
+            position: absolute;
+            top: 12px;
+            right: 12px;
             background: none;
             border: none;
             font-size: 2rem;
             line-height: 1;
             color: var(--text-muted);
             cursor: pointer;
-            padding: 0 8px;
+            z-index: 10;
         }
 
         .modal-close:hover {
@@ -878,6 +853,7 @@
 
         .modal-box h2 {
             margin-bottom: 8px;
+            margin-right: 40px;
         }
 
         .modal-sub {
@@ -1014,6 +990,51 @@
             color: #fff;
         }
 
+        /* Safety Promise section */
+        .safety-promise {
+            padding: 64px 0;
+            background: var(--bg);
+        }
+
+        .safety-promise h2 {
+            margin-bottom: 40px;
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .safety-grid>div {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+        }
+
+        .safety-grid h3 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .safety-grid p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .safety-note {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         /* ---------- FOOTER ---------- */
         .site-footer {
             background: var(--primary);
@@ -1079,7 +1100,6 @@
             text-align: center;
         }
 
-        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 1024px) {
             .hero-inner {
                 grid-template-columns: 1fr;
@@ -1108,6 +1128,10 @@
 
             .pricing-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .safety-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1158,10 +1182,6 @@
                 gap: 24px;
             }
 
-            .form-grid-2 {
-                grid-template-columns: 1fr;
-            }
-
             .services-grid {
                 grid-template-columns: 1fr;
             }
@@ -1199,37 +1219,18 @@
                 padding: 6px 14px;
                 font-size: 0.8rem;
             }
-            
-            #backToTop {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 99;
+        }
+        
+        .badge-verified {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
     background: var(--accent);
     color: var(--primary);
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 1.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    transition: opacity 0.3s, transform 0.3s;
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
+    margin-left: 6px;
 }
-#backToTop.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-#backToTop:hover {
-    background: var(--accent-hover);
-}
-            
-        }
     </style>
 </head>
 
@@ -1244,7 +1245,10 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#listings">Browse</a></li>
-                    <li><a href="list.html" class="btn-outline">List your service</a></li>
+                    <li id="dashboardLink" style="display:none;"><a href="entrepreneur-dashboard.html"
+                            style="color:var(--accent);">My Dashboard</a></li>
+                    <li><a href="#" class="btn-outline" onclick="openEntrepreneurModal(); return false;">List your
+                            service</a></li>
                 </ul>
             </nav>
             <button class="hamburger" aria-label="Menu" id="hamburgerBtn">
@@ -1280,7 +1284,7 @@
                     <p>Real Polokwane businesses coming soon</p>
                     <small>Want to be first? List your service today.</small>
                     <div class="hero-banner">
-                        <span>🎉 Launch Special: First 20 listings FREE</span>
+                        <span><i class="ph ph-confetti"></i> Launch Special: First 20 listings FREE</span>
                     </div>
                 </div>
             </div>
@@ -1302,11 +1306,10 @@
                 <p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:0.9rem;">All listings are
                     vetted before going live. Payment via email.</p>
                 <div class="pricing-cta">
-                    <a href="list.html" class="btn-primary">List your service</a>
+                    <button class="btn-primary" onclick="openEntrepreneurModal()">List your service</button>
                 </div>
             </div>
         </section>
-
         <section class="how-it-works" id="how-it-works">
             <div class="container">
                 <h2 class="section-title">How it <span class="gold">works</span></h2>
@@ -1323,13 +1326,36 @@
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <h3>You connect safely</h3>
-                        <p>Request contact via email – we connect you safely.</p>
+                        <h3>Connect Safely</h3>
+                        <p>Submit a request through HustleCenter. We verify your phone number with OTP. Your details are
+                            only sent to the entrepreneur you chose. All requests are logged to keep both sides safe.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- NEW: 2-Way Safety Promise -->
+        <section class="safety-promise">
+            <div class="container">
+                <h2 class="section-title">Our <span class="gold">2‑Way Safety Promise</span></h2>
+                <div class="safety-grid">
+                    <div>
+                        <h3>For Entrepreneurs</h3>
+                        <p>We verify your ID, selfie and proof of address before you go live. You get a "Verified" badge
+                            and your ID photos are deleted after 90 days. You only receive requests from phone‑verified
+                            customers.</p>
+                    </div>
+                    <div>
+                        <h3>For Customers</h3>
+                        <p>We verify your phone number with OTP when you request a service. Optional: Get a "Verified
+                            Customer" badge for high‑value jobs by submitting an ID selfie.</p>
+                    </div>
+                </div>
+                <p class="safety-note">Abuse the platform and we ban you. In case of fraud, we cooperate with SAPS and
+                    provide logs as required by law.</p>
+            </div>
+        </section>
         <section class="listings-section" id="listings">
             <div class="container">
                 <div class="listings-header">
@@ -1367,13 +1393,15 @@
             <div class="container">
                 <div class="investors-card">
                     <h2>Partner <span class="gold">with us</span></h2>
-                    <p>HustleCenter connects Polokwane with verified local professionals. Every service is manually vetted, so customers can find quality help without the guesswork.</p>
-                    <p>We're looking for:</p>
+                    <p>HustleCenter connects Polokwane with verified local professionals. Every service is manually
+                        vetted, so customers can find quality help without the guesswork.</p>
+                    <p><strong>We're looking for:</strong></p>
                     <ul class="investors-list">
-                        <li><strong>Investors</strong> to help us scale across Limpopo</li>
-                        <li><strong>Mentors</strong> with experience in marketplaces, payments, or local business</li>
+                        <li>Mentors with experience in marketplaces, local business, or payments</li>
+                        <li>Partners who believe in supporting Polokwane entrepreneurs</li>
+                        <li>Businesses that want to reach more customers</li>
                     </ul>
-                    <a href="mailto:entre@hustlecenter.co.za?subject=Partnering%20with%20HustleCenter" class="btn-primary" target="_blank">📩 Contact us via email</a>
+                    <a href="mailto:partners@hustlecenter.co.za?subject=Partnering%20with%20HustleCenter" class="btn-primary" target="_blank"><i class="ph ph-envelope"></i> Contact us via email</a>
                 </div>
             </div>
         </section>
@@ -1381,9 +1409,10 @@
         <section class="legal-section" id="legal">
             <div class="container">
                 <h3>Disclaimer</h3>
-                <p>HustleCenter connects customers with independent service providers. We vet listings but are not liable
-                    for the quality of work, disputes, or any damages arising from services rendered. Use at your own
-                    discretion.</p>
+                <p>HustleCenter is a marketplace connecting customers and service providers. We verify entrepreneur IDs
+                    and customer phone numbers, but we are not a party to transactions. HustleCenter is not liable for
+                    disputes between users. In case of fraud or crime, we will cooperate with SAPS upon receipt of a
+                    valid CAS number or court order.</p>
                 <hr class="legal-divider">
                 <h3>Terms of Service</h3>
                 <p>By using HustleCenter, you agree to communicate respectfully and use the platform for lawful purposes
@@ -1397,32 +1426,227 @@
                 <h3>Privacy Policy</h3>
                 <p>We collect only the information you provide via email (name, phone number, and message). This
                     information is used solely to connect you with the relevant service provider or to process your
-                    listing. We do not share your personal contact details publicly on this site. We do not use cookies,
-                    analytics, or tracking tools.</p>
+                    listing. We do not share your personal contact details publicly on this site. For full details, see
+                    our <a href="privacy-policy.html" style="color:#D4A373;">Privacy Policy</a>.</p>
                 <p>For any privacy concerns, contact us directly via email.</p>
             </div>
         </section>
 
     </main>
 
-    <!-- Contact modal (customer request) -->
+    <!-- CUSTOMER REQUEST MODAL (OTP + API) -->
     <div class="modal-overlay" id="contactModal">
         <div class="modal-box">
             <button class="modal-close" id="closeContactModal">&times;</button>
-            <h2>Request contact</h2>
-            <p class="modal-sub">Fill in your details. We'll send your request via email.</p>
-            <div class="modal-warning">⚠️ Your details are sent securely via email and are never shown on this site.</div>
-            <form id="contactForm" novalidate>
-                <div class="form-group"><label for="contactName">Full name *</label><input type="text" id="contactName"
-                        placeholder="e.g. Jane Mokoena" required minlength="3"></div>
-                <div class="form-group"><label for="contactPhone">Phone number *</label><input type="tel"
-                        id="contactPhone" placeholder="082 123 4567" required></div>
-                <div class="form-group"><label for="contactMessage">Your message (optional)</label><textarea
-                        id="contactMessage" rows="3" placeholder="Briefly describe what you need..."></textarea></div>
-                <input type="hidden" id="contactServiceId" value="">
-                <button type="submit" class="btn-primary btn-block">Send request via email</button>
-            </form>
-            <p class="modal-footnote">🔒 Your details are sent securely via email. We'll connect you with the professional.</p>
+
+            <!-- Step 1: Enter phone & send OTP -->
+            <div class="step-content" id="customer-step-phone" style="display:block;">
+                <h2>Verify your phone</h2>
+                <p class="modal-sub">Enter your phone number to verify your identity before sending a request.</p>
+                <form id="customerPhoneForm" novalidate>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone number *</label>
+                        <input type="tel" id="customerPhone" placeholder="082 123 4567" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Send OTP</button>
+                </form>
+                <p class="modal-footnote" id="customerPhoneError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Step 2: Enter OTP -->
+            <div class="step-content" id="customer-step-otp" style="display:none;">
+                <h2>Enter OTP</h2>
+                <p class="modal-sub">Check the server terminal for the 6‑digit code.</p>
+                <form id="customerOtpForm" novalidate>
+                    <div class="form-group">
+                        <label for="customerOtpCode">OTP Code *</label>
+                        <input type="text" id="customerOtpCode" placeholder="123456" maxlength="6" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Verify OTP</button>
+                </form>
+                <p class="modal-footnote" id="customerOtpError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Step 3: Request details -->
+            <div class="step-content" id="customer-step-request" style="display:none;">
+                <h2>Your request</h2>
+                <p class="modal-sub">Add a message for the entrepreneur (optional).</p>
+                <form id="customerRequestForm" novalidate>
+                    <div class="form-group">
+                        <label for="customerMessage">Your message (optional)</label>
+                        <textarea id="customerMessage" rows="3"
+                            placeholder="Briefly describe what you need..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="customer_consent" required>
+                            I confirm my request is genuine. I consent to HustleCenter verifying my phone number and
+                            logging my details for safety.
+                        </label>
+                    </div>
+                    <input type="hidden" id="customerServiceId" value="">
+                    <button type="submit" class="btn-primary btn-block">Send Request</button>
+                </form>
+                <p class="modal-footnote" id="customerRequestError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Optional: Verified Customer Badge -->
+            <div class="step-content" id="customer-step-badge" style="display:none;">
+                <h2>Get Verified Customer Badge</h2>
+                <p class="modal-sub">A Verified badge helps entrepreneurs trust your request and reply faster. It’s
+                    completely optional.</p>
+                <form id="customerBadgeForm" novalidate>
+                    <div class="form-group">
+                        <label for="badgeSelfie">Upload a clear selfie holding your ID or a piece of paper with today's
+                            date.</label>
+                        <input type="file" id="badgeSelfie" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Upload & Continue</button>
+                </form>
+                <p class="modal-sub" style="text-align:center; margin-top:8px;">
+                    <button class="btn-ghost" onclick="skipBadge()">Skip, I'll do it later</button>
+                </p>
+                <p class="modal-footnote" id="badgeError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Success -->
+            <div class="step-content" id="customer-step-done" style="display:none;">
+                <h2>Request Sent!</h2>
+                <p class="success-msg" style="color:#D4A373;">Your contact request has been submitted. The entrepreneur
+                    will receive your details and message.</p>
+                <button class="btn-primary btn-block" onclick="closeContactModalFn()">Close</button>
+                
+                <p class="modal-footnote"><i class="ph ph-lock-key"></i> Your details are sent securely via email. We'll connect you with the professional.</p>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ENTREPRENEUR LISTING FLOW MODAL -->
+    <div class="modal-overlay" id="entrepreneurModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeEntrepreneurModal">&times;</button>
+
+            <!-- Step 1: Sign Up -->
+            <div class="step-content" id="step-signup">
+                <h2>Create your account</h2>
+                <p class="modal-sub">First, create your entrepreneur account. All fields are required.</p>
+                <form id="signupForm" novalidate>
+                    <div class="form-group"><label for="signupName">Full name *</label><input type="text"
+                            id="signupName" maxlength="100" placeholder="e.g. Thabo Mokoena" required></div>
+                    <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail"
+                            maxlength="150" placeholder="thabo@email.com" required></div>
+                    <div class="form-group"><label for="signupPhone">Phone *</label><input type="tel" id="signupPhone"
+                            maxlength="20" placeholder="0821234567" required></div>
+                    <div class="form-group"><label for="signupPassword">Password *</label><input type="password"
+                            id="signupPassword" maxlength="100" required></div>
+                    <button type="submit" class="btn-primary btn-block">Sign Up</button>
+                </form>
+                <p class="modal-footnote" id="signupError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Step 2: Verify OTP -->
+            <div class="step-content" id="step-otp" style="display:none;">
+                <h2>Verify your phone</h2>
+                <p class="modal-sub">Enter the 6‑digit OTP we sent to your phone (check the server terminal).</p>
+                <form id="otpForm" novalidate>
+                    <div class="form-group"><label for="otpCode">OTP Code *</label><input type="text" id="otpCode"
+                            placeholder="123456" maxlength="6" required></div>
+                    <button type="submit" class="btn-primary btn-block">Verify OTP</button>
+                </form>
+                <p class="modal-footnote" id="otpError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Step 3: Upload ID -->
+            <div class="step-content" id="step-id" style="display:none;">
+                <h2>Upload your ID</h2>
+                <p class="modal-sub">Please upload a clear photo of your ID or driver's license.</p>
+                <form id="idForm" novalidate>
+                    <div class="form-group"><label for="idFile">ID Document *</label><input type="file" id="idFile"
+                            accept="image/*" required></div>
+                    <button type="submit" class="btn-primary btn-block">Upload ID</button>
+                </form>
+                <p class="modal-footnote" id="idError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Step 4: Upload Selfie -->
+            <div class="step-content" id="step-selfie" style="display:none;">
+                <h2>Upload a selfie</h2>
+                <p class="modal-sub">Take a clear selfie so we can verify it's really you.</p>
+                <form id="selfieForm" novalidate>
+                    <div class="form-group"><label for="selfieFile">Selfie *</label><input type="file" id="selfieFile"
+                            accept="image/*" required></div>
+                    <button type="submit" class="btn-primary btn-block">Upload Selfie</button>
+                </form>
+                <p class="modal-footnote" id="selfieError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Step 5: Create Listing -->
+            <div class="step-content" id="step-listing" style="display:none;">
+                <h2>Create your listing</h2>
+                <p class="modal-sub">Now tell us about your service. We'll review and publish it.</p>
+                <form id="listingFormModal" novalidate>
+                    <div class="form-group"><label for="listBusinessName">Business name *</label><input type="text"
+                            id="listBusinessName" maxlength="100" placeholder="e.g. Thabo's Plumbing" required></div>
+                    <div class="form-group"><label for="listCategory">Category *</label>
+                        <select id="listCategory" required>
+                            <option value="">Select a category</option>
+                            <option>Automotive</option>
+                            <option>Barber</option>
+                            <option>Beauty</option>
+                            <option>Braces</option>
+                            <option>Cleaning</option>
+                            <option>Eye Lash</option>
+                            <option>Fashion</option>
+                            <option>Food</option>
+                            <option>Hair Salon</option>
+                            <option>Supplies</option>
+                            <option>Home & Garden</option>
+                            <option>Logistics</option>
+                            <option>Makeup</option>
+                            <option>Nail</option>
+                            <option>Reseller</option>
+                            <option>Shuttle & Transport</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label for="listDescription">Description *</label><textarea
+                            id="listDescription" maxlength="1000" rows="3" placeholder="Describe your service..."
+                            required></textarea>
+                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group"><label for="listPrice">Price (R) *</label><input type="text"
+                                id="listPrice" maxlength="100" placeholder="e.g. 150" required></div>
+                        <div class="form-group"><label for="listLocation">Location *</label><input type="text"
+                                id="listLocation" maxlength="100" placeholder="e.g. Seshego" required></div>
+                    </div>
+                    <div class="form-group"><label for="listPhotos">Upload up to 3 photos *</label><input type="file"
+                            id="listPhotos" accept="image/*" multiple required></div>
+                    <div class="form-group consent-group">
+                        <label>
+                            <input type="checkbox" name="consent_id" required>
+                            I consent to HustleCenter collecting and verifying my ID documents in terms of POPIA. I
+                            confirm all
+                            information is true.
+                        </label>
+                        <label>
+                            <input type="checkbox" name="consent_tos" required>
+                            I agree to the HustleCenter <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+                            and <a href="#legal">Terms of Service</a>.
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Submit for Review</button>
+                </form>
+                <p class="modal-footnote" id="listingError" style="color:#dc2626;"></p>
+            </div>
+
+            <!-- Success message -->
+            <div class="step-content" id="step-done" style="display:none;">
+                <h2>Verification Submitted!</h2>
+                <p class="success-msg" style="color:#D4A373;">Your profile and listing will be reviewed by our team.
+                    Once approved, you'll appear in the marketplace.</p>
+                <button class="btn-primary btn-block" onclick="closeEntrepreneurModalFn()">Close</button>
+            </div>
         </div>
     </div>
 
@@ -1430,8 +1654,7 @@
     <div class="modal-overlay" id="detailModal">
         <div class="modal-box detail-modal-box">
             <button class="modal-close" id="closeDetailModal">&times;</button>
-            
-            <!-- Image gallery -->
+
             <div class="detail-image-area">
                 <img src="" alt="" id="detailImage">
                 <div class="detail-nav" id="detailNav" style="display:none;">
@@ -1440,15 +1663,15 @@
                 </div>
             </div>
 
-            <!-- Service info -->
             <div id="detailInfo" class="detail-info">
                 <h2 id="detailTitle"></h2>
-                <span class="badge" id="detailCategory" style="background:var(--primary);color:#fff;font-size:0.7rem;padding:2px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;"></span>
+                <span class="badge" id="detailCategory"
+                    style="background:var(--primary);color:#fff;font-size:0.7rem;padding:2px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;"></span>
                 <div class="card-meta"><span id="detailLocation"></span></div>
                 <p id="detailDescription" style="margin:12px 0;line-height:1.5;"></p>
                 <p><strong>Price: </strong><span id="detailPrice" style="color:var(--accent);"></span></p>
                 <p><strong>Seller: </strong><span id="detailSeller"></span></p>
-                <a href="#" id="detailWhatsapp" class="btn-primary" target="_blank" style="display:inline-block;margin-top:16px;">📞 WhatsApp</a>
+                <button id="copyListingLink" class="btn-outline" style="margin-top:8px; font-size:0.8rem;"><i class="ph ph-link-simple"></i> Copy link to this listing</button>
             </div>
         </div>
     </div>
@@ -1457,12 +1680,20 @@
         <div class="container footer-inner">
             <div class="footer-col"><span class="logo-mark small">Hustle<span class="gold">Center</span></span>
                 <p class="footer-tagline">Vetted local services, safely connected.</p>
+                <p style="margin-top:12px; font-size:0.85rem; opacity:0.7;">
+    <i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
+    <i class="ph ph-envelope"></i> help@hustlecenter.co.za<br>
+    <a href="privacy-policy.html" style="color:#D4A373;">Privacy Policy</a> |
+    <a href="paia-manual.html" style="color:#D4A373;">PAIA Manual</a> |
+    <a href="#legal" style="color:#D4A373;">Terms of Service</a>
+</p>
             </div>
             <div class="footer-col">
                 <h4>Quick links</h4>
                 <ul>
                     <li><a href="#listings">Browse</a></li>
-                    <li><a href="list.html" class="btn-outline">List your service</a></li>
+                    <li><button class="btn-outline" onclick="openEntrepreneurModal()"
+                            style="color:#fff; border-color:rgba(255,255,255,0.3);">List your service</button></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1472,13 +1703,17 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2026 HustleCenter. All rights reserved. Built with care. 🇿🇦</p>
+                <p>&copy; 2026 HustleCenter. All rights reserved. Built with care. 🇿🇦 &nbsp;|&nbsp; v1.0.0</p>
             </div>
         </div>
     </footer>
 
+    <button id="backToTop" title="Back to top" style="display:none;"><i class="ph ph-arrow-up" style="font-size:1.5rem;"></i></button>
+
     <script>
-        var DATA_URL = 'data.json';
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+
+        var DATA_URL = 'http://127.0.0.1:3000/api/listings/approved';
         var allServices = [];
         var currentFilter = 'all';
         var currentSearch = '';
@@ -1500,7 +1735,6 @@
         var contactModal = document.getElementById('contactModal');
         var closeContactBtn = document.getElementById('closeContactModal');
         var contactForm = document.getElementById('contactForm');
-        var contactServiceId = document.getElementById('contactServiceId');
 
         // Detail modal elements
         var detailModal = document.getElementById('detailModal');
@@ -1511,13 +1745,25 @@
         var detailDescription = document.getElementById('detailDescription');
         var detailPrice = document.getElementById('detailPrice');
         var detailSeller = document.getElementById('detailSeller');
-        var detailWhatsapp = document.getElementById('detailWhatsapp');
         var detailNav = document.getElementById('detailNav');
         var prevDetailBtn = document.getElementById('prevDetail');
         var nextDetailBtn = document.getElementById('nextDetail');
         var closeDetailBtn = document.getElementById('closeDetailModal');
         var currentDetailImages = [];
         var currentDetailIndex = 0;
+
+        // Back to top
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
         function isValidPhone(phone) {
             var cleaned = phone.replace(/[\s\-\(\)\+]/g, '');
@@ -1531,17 +1777,18 @@
             var errors = [];
             if (!data.name || !containsLetter(data.name.trim())) errors.push('Name must contain letters.');
             if (!data.phone || !isValidPhone(data.phone)) errors.push('Enter a valid SA phone number.');
+            if (!document.querySelector('input[name="customer_consent"]').checked) errors.push('You must confirm your request is genuine.');
             return errors;
         }
 
-        // Detail modal functions
         function openDetailModal(serviceId) {
-            var service = allServices.find(function(s) { return s.id === serviceId; });
+            var service = allServices.find(function (s) { return s.id === serviceId; });
             if (!service) return;
-            
+
             currentDetailImages = service.images || (service.image ? [service.image] : []);
+            currentDetailImages = currentDetailImages.map(img => img ? API_BASE + '/' + img : img);
             currentDetailIndex = 0;
-            
+
             if (currentDetailImages.length > 0) {
                 detailImage.src = currentDetailImages[0];
                 detailImage.style.display = 'block';
@@ -1550,19 +1797,26 @@
                 detailImage.style.display = 'none';
                 detailNav.style.display = 'none';
             }
-            
+
             detailTitle.textContent = service.title;
             detailCategory.textContent = Array.isArray(service.category) ? service.category[0] : service.category;
-            detailLocation.innerHTML = '📍 ' + (service.location || 'Polokwane');
+            detailLocation.innerHTML = '<i class="ph ph-map-pin"></i> ' + (service.location || 'Polokwane');
             detailDescription.textContent = service.description;
             detailPrice.textContent = 'R' + (service.price || '0');
             detailSeller.textContent = service.sellerName;
-            detailWhatsapp.href = 'https://wa.me/' + (service.sellerPhone || '').replace(/\D/g, '');
-            
+
             updateDetailNavButtons();
-            
+
             detailModal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            // Set up copy link button
+            const copyBtn = document.getElementById('copyListingLink');
+            copyBtn.onclick = function () {
+                const url = `${API_BASE}/listing/${serviceId}`;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Link copied! Share it on WhatsApp or social media.');
+                });
+            };
         }
 
         function updateDetailNavButtons() {
@@ -1576,13 +1830,13 @@
             updateDetailNavButtons();
         }
 
-        prevDetailBtn.addEventListener('click', function() {
+        prevDetailBtn.addEventListener('click', function () {
             if (currentDetailIndex > 0) {
                 currentDetailIndex--;
                 showCurrentDetailImage();
             }
         });
-        nextDetailBtn.addEventListener('click', function() {
+        nextDetailBtn.addEventListener('click', function () {
             if (currentDetailIndex < currentDetailImages.length - 1) {
                 currentDetailIndex++;
                 showCurrentDetailImage();
@@ -1595,7 +1849,7 @@
             detailImage.src = '';
         }
         closeDetailBtn.addEventListener('click', closeDetailModalFn);
-        detailModal.addEventListener('click', function(e) {
+        detailModal.addEventListener('click', function (e) {
             if (e.target === detailModal) closeDetailModalFn();
         });
 
@@ -1603,9 +1857,7 @@
             var filtered = services;
             if (currentFilter !== 'all') {
                 filtered = filtered.filter(function (s) {
-                    if (Array.isArray(s.category)) {
-                        return s.category.indexOf(currentFilter) !== -1;
-                    }
+                    if (Array.isArray(s.category)) return s.category.indexOf(currentFilter) !== -1;
                     return s.category === currentFilter;
                 });
             }
@@ -1615,14 +1867,8 @@
                     return s.title.toLowerCase().indexOf(q) !== -1 || s.description.toLowerCase().indexOf(q) !== -1 || s.sellerName.toLowerCase().indexOf(q) !== -1;
                 });
             }
-            filtered = filtered.filter(function (s) {
-                if (s.status !== 'approved') return false;
-                if (!s.paid) return false;
-                if (s.expiresAt && new Date(s.expiresAt) < new Date()) return false;
-                return true;
-            });
             if (filtered.length === 0) {
-                servicesGrid.innerHTML = '<div class="empty-state"><p>No services yet. Be the first to list!</p><a href="list.html" class="btn-primary" style="margin-top:16px;">List your service</a></div>';
+                servicesGrid.innerHTML = '<div class="empty-state"><p>No services yet. Be the first to list!</p><button class="btn-primary" style="margin-top:16px;" onclick="openEntrepreneurModal()">List your service</button></div>';
                 return;
             }
             var html = '';
@@ -1630,6 +1876,7 @@
                 var desc = service.description.length > 120 ? service.description.substring(0, 120) + '…' : service.description;
                 var imagesArray = service.images || (service.image ? [service.image] : []);
                 var thumbUrl = imagesArray.length > 0 ? imagesArray[0] : '';
+                if (thumbUrl) thumbUrl = API_BASE + '/' + thumbUrl;
                 var hasMultiple = imagesArray.length > 1;
                 html += '<div class="service-card" data-id="' + service.id + '">' +
                     '<div class="card-image" onclick="openDetailModal(\'' + service.id + '\')">' +
@@ -1638,10 +1885,12 @@
                     '<span class="card-category">' + (Array.isArray(service.category) ? service.category[0] : service.category) + '</span>' +
                     '</div>' +
                     '<div class="card-body"><h3>' + service.title + '</h3>' +
-                    '<div class="card-meta"><span class="card-location">📍 ' + service.location + '</span></div>' +
+                    '<div class="card-meta"><span class="card-location"><i class="ph ph-map-pin"></i> ' + service.location + '</span></div>' +
                     '<p class="card-description">' + desc + '</p>' +
-                    '<div class="card-footer"><span class="card-seller">' + service.sellerName + '</span>' +
-                    '<a href="https://wa.me/' + service.sellerPhone.replace(/\D/g, '') + '" class="btn-contact" target="_blank" onclick="var p=this.href.replace(\'https://wa.me/\',\'\'); location.href=\'whatsapp://send?phone=\'+p; setTimeout(function(){ location.href=\'https://wa.me/\'+p; }, 800); return false;">📞 WhatsApp</a></div></div></div>';
+                    '<div class="card-footer"><span class="card-seller">' + service.sellerName +
+                    (service.sellerVerified ? ' <span class="badge-verified"><i class="ph ph-check-circle"></i> Verified</span>' : '') +
+                    '<button class="btn-whatsapp" onclick="openContactModal(\'' + service.id + '\')">' +
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Chat</a></div></div></div>';
             });
             servicesGrid.innerHTML = html;
         }
@@ -1671,38 +1920,137 @@
             });
         }
 
+        // Customer request flow
+        var customerToken = null;
+        var customerId = null;
+
+        function showCustomerStep(stepId) {
+            document.querySelectorAll('#contactModal .step-content').forEach(el => el.style.display = 'none');
+            document.getElementById(stepId).style.display = 'block';
+        }
+
         function openContactModal(serviceId) {
-            contactServiceId.value = serviceId;
+            document.getElementById('customerServiceId').value = serviceId;
             contactModal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            showCustomerStep('customer-step-phone');
+            document.getElementById('customerPhoneForm').reset();
+            document.getElementById('customerOtpForm').reset();
+            document.getElementById('customerRequestForm').reset();
+
+            document.getElementById('customerBadgeForm').reset();
+            customerToken = null;
+            customerId = null;
         }
+
         function closeContactModalFn() {
             contactModal.classList.remove('active');
             document.body.style.overflow = '';
-            contactForm.reset();
         }
 
         closeContactBtn.addEventListener('click', closeContactModalFn);
         contactModal.addEventListener('click', function (e) { if (e.target === contactModal) closeContactModalFn(); });
 
-        contactForm.addEventListener('submit', function (e) {
+        // Send OTP
+        document.getElementById('customerPhoneForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            var name = document.getElementById('contactName').value.trim();
-            var phone = document.getElementById('contactPhone').value.trim();
-            var message = document.getElementById('contactMessage').value.trim();
-            var errors = validateContactForm({ name: name, phone: phone });
-            if (errors.length > 0) { alert('Please fix:\n- ' + errors.join('\n- ')); return; }
-            var serviceId = contactServiceId.value;
+            const phone = document.getElementById('customerPhone').value.trim();
+            if (!phone) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/customer/send-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
+                customerId = data.customerId;
+                showCustomerStep('customer-step-otp');
+            } catch (err) {
+                document.getElementById('customerPhoneError').textContent = err.message;
+            }
+        });
+
+        // Verify OTP
+        document.getElementById('customerOtpForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const otp = document.getElementById('customerOtpCode').value.trim();
+            if (!otp || !customerId) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/customer/verify-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ customerId, otp })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Invalid OTP');
+                customerToken = data.token;
+                showCustomerStep('customer-step-badge');
+            } catch (err) {
+                document.getElementById('customerOtpError').textContent = err.message;
+            }
+
+            // Badge upload or skip
+            function skipBadge() {
+                showCustomerStep('customer-step-request');
+            }
+            document.getElementById('customerBadgeForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const file = document.getElementById('badgeSelfie').files[0];
+                if (!file) return skipBadge(); // no file chosen = skip
+                const formData = new FormData();
+                formData.append('badgeSelfie', file);
+                try {
+                    const res = await fetch(`${API_BASE}/api/customer/verified-badge`, {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + customerToken },
+                        body: formData
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Upload failed');
+                    // Badge uploaded – proceed to request
+                    showCustomerStep('customer-step-request');
+                } catch (err) {
+                    document.getElementById('badgeError').textContent = err.message;
+                }
+            });
+
+        });
+
+        // Submit request
+        document.getElementById('customerRequestForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const message = document.getElementById('customerMessage').value.trim();
+            const serviceId = document.getElementById('customerServiceId').value;
+            const consent = document.querySelector('input[name="customer_consent"]').checked;
+            if (!consent) {
+                document.getElementById('customerRequestError').textContent = 'You must confirm your request is genuine.';
+                return;
+            }
             var service = allServices.find(function (s) { return s.id === serviceId; });
-            var subject = 'Service request: ' + (service ? service.title : 'HustleCenter');
-            var body = 'I am interested in: ' + (service ? service.title : 'Unknown') + '%0A' +
-                       'Seller: ' + (service ? service.sellerName : 'Unknown') + '%0A%0A' +
-                       'My details:%0A' +
-                       'Name: ' + name + '%0A' +
-                       'Phone: ' + phone + '%0A%0A' +
-                       'Message: ' + (message || 'No message');
-            window.location.href = 'mailto:entre@hustlecenter.co.za?subject=' + encodeURIComponent(subject) + '&body=' + body;
-            closeContactModalFn();
+            if (!service) {
+                document.getElementById('customerRequestError').textContent = 'Service not found.';
+                return;
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/request-contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + customerToken
+                    },
+                    body: JSON.stringify({
+                        entrepreneurId: service.entrepreneurId,
+                        serviceId: serviceId,
+                        message: message
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Request failed');
+                showCustomerStep('customer-step-done');
+            } catch (err) {
+                document.getElementById('customerRequestError').textContent = err.message;
+            }
         });
 
         document.getElementById('hamburgerBtn').addEventListener('click', function () {
@@ -1713,57 +2061,198 @@
             navLinks[k].addEventListener('click', function () { document.querySelector('.main-nav').classList.remove('open'); });
         }
 
-        // PWA service worker registration (using real sw.js)
+        // PWA service worker registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
 
+        // Show dashboard link if entrepreneur is logged in
+        (function () {
+            const token = localStorage.getItem('entrepreneurToken');
+            if (token) {
+                try {
+                    const payload = JSON.parse(atob(token.split('.')[1]));
+                    if (payload.type === 'entrepreneur') {
+                        document.getElementById('dashboardLink').style.display = 'inline';
+                    }
+                } catch (e) { }
+            }
+        })();
+
+        // Check if entrepreneur is logged in and show dashboard link
+        (function () {
+            const token = localStorage.getItem('entrepreneurToken');
+            if (token) {
+                // Simple decode to check type (optional)
+                try {
+                    const payload = JSON.parse(atob(token.split('.')[1]));
+                    if (payload.type === 'entrepreneur') {
+                        document.getElementById('dashboardLink').style.display = 'inline';
+                    }
+                } catch (e) { }
+            }
+        })();
+
         function init() {
-            loadServices(function () { addSearchBar(); initCategoryPills(); renderServices(allServices); 
-              
-              // Auto-open detail modal if URL contains ?listing=ID
-function openFromUrl() {
-    var params = new URLSearchParams(window.location.search);
-    var listingId = params.get('listing');
-    if (listingId) {
-        var service = allServices.find(function(s) { return s.id === listingId; });
-        if (service) {
-            setTimeout(function() {
-                openDetailModal(listingId);
-            }, 500); // small delay to ensure services are loaded
-        }
-    }
-}
-// Call it after services load
-var origInit = init;
-init = function() {
-    loadServices(function () {
-        addSearchBar();
-        initCategoryPills();
-        renderServices(allServices);
-        openFromUrl();
-    });
-};
-              
-            });
+            loadServices(function () { addSearchBar(); initCategoryPills(); renderServices(allServices); });
         }
         document.addEventListener('DOMContentLoaded', init);
-        
-        // Back-to-top button
-var backToTop = document.getElementById('backToTop');
-window.addEventListener('scroll', function() {
-    if (window.scrollY > 300) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
-    }
-});
-backToTop.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-        
+
+        // Entrepreneur flow
+        var currentToken = null;
+        var entrepreneurModal = document.getElementById('entrepreneurModal');
+        var closeEntrepreneurBtn = document.getElementById('closeEntrepreneurModal');
+
+        // Show/hide steps
+        function showStep(stepId) {
+            document.querySelectorAll('#entrepreneurModal .step-content').forEach(el => el.style.display = 'none');
+            document.getElementById(stepId).style.display = 'block';
+        }
+
+        // Open modal
+        function openEntrepreneurModal() {
+            entrepreneurModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showStep('step-signup');
+            document.getElementById('otpForm').reset();
+            document.getElementById('idForm').reset();
+            document.getElementById('selfieForm').reset();
+            document.getElementById('listingFormModal').reset();
+            currentToken = null;
+        }
+
+        function closeEntrepreneurModalFn() {
+            entrepreneurModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeEntrepreneurBtn.addEventListener('click', closeEntrepreneurModalFn);
+        entrepreneurModal.addEventListener('click', function (e) {
+            if (e.target === entrepreneurModal) closeEntrepreneurModalFn();
+        });
+
+        // Sign Up
+        document.getElementById('signupForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const phone = document.getElementById('signupPhone').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            try {
+                const res = await fetch(`${API_BASE}/api/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, password })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Signup failed');
+                document.getElementById('otpForm').dataset.userId = data.userId;
+                showStep('step-otp');
+            } catch (err) {
+                document.getElementById('signupError').textContent = err.message;
+            }
+        });
+
+        // OTP Verify
+        document.getElementById('otpForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const userId = this.dataset.userId;
+            const otp = document.getElementById('otpCode').value.trim();
+            try {
+                const res = await fetch(`${API_BASE}/api/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, otp })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Invalid OTP');
+                currentToken = data.token;
+                localStorage.setItem('entrepreneurToken', currentToken);
+                showStep('step-id');
+            } catch (err) {
+                document.getElementById('otpError').textContent = err.message;
+            }
+        });
+
+        // Upload ID
+        document.getElementById('idForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const file = document.getElementById('idFile').files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('idDoc', file);
+            try {
+                const res = await fetch(`${API_BASE}/api/upload-id`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Upload failed');
+                showStep('step-selfie');
+            } catch (err) {
+                document.getElementById('idError').textContent = err.message;
+            }
+        });
+
+        // Upload Selfie
+        document.getElementById('selfieForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const file = document.getElementById('selfieFile').files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('selfie', file);
+            try {
+                const res = await fetch(`${API_BASE}/api/upload-selfie`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Upload failed');
+                showStep('step-listing');
+            } catch (err) {
+                document.getElementById('selfieError').textContent = err.message;
+            }
+        });
+
+        // Create Listing (real API call)
+        document.getElementById('listingFormModal').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const businessName = document.getElementById('listBusinessName').value.trim();
+            const category = document.getElementById('listCategory').value;
+            const description = document.getElementById('listDescription').value.trim();
+            const price = document.getElementById('listPrice').value.trim();
+            const location = document.getElementById('listLocation').value.trim();
+            const photos = document.getElementById('listPhotos').files;
+            if (!businessName || !category || !description || !price || !location || photos.length === 0) {
+                document.getElementById('listingError').textContent = 'All fields required';
+                return;
+            }
+            const formData = new FormData();
+            formData.append('businessName', businessName);
+            formData.append('category', category);
+            formData.append('description', description);
+            formData.append('price', price);
+            formData.append('location', location);
+            for (let i = 0; i < photos.length; i++) {
+                formData.append('photos', photos[i]);
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/listings`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Listing submission failed');
+                showStep('step-done');
+            } catch (err) {
+                document.getElementById('listingError').textContent = err.message;
+            }
+        });
+
     </script>
-    <button id="backToTop" title="Back to top">↑</button>
 </body>
 
 </html>
