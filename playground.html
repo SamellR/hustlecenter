@@ -1595,7 +1595,7 @@
             <div class="step-content" id="step-listing" style="display:none;">
                 <h2>Create your listing</h2>
                 <p class="modal-sub">Now tell us about your service. We'll review and publish it.</p>
-                <form id="listingFormModal" novalidate>
+                <form id="listingFormModal" novalidate onsubmit="event.preventDefault(); submitListing();">
                     <div class="form-group"><label for="listBusinessName">Business name *</label><input type="text"
                             id="listBusinessName" maxlength="100" placeholder="e.g. Thabo's Plumbing" required></div>
                     <div class="form-group"><label for="listCategory">Category *</label>
@@ -1645,7 +1645,7 @@
                             and <a href="#legal">Terms of Service</a>.
                         </label>
                     </div>
-                    <button type="submit" class="btn-primary btn-block">Submit for Review</button>
+                    <button type="button" onclick="submitListing()" class="btn-primary btn-block">Submit for Review</button>
                 </form>
                 <p class="modal-footnote" id="listingError" style="color:#dc2626;"></p>
             </div>
@@ -2226,43 +2226,49 @@
             }
         });
 
-        // Create Listing (real API call)
-        document.getElementById('listingFormModal').addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const businessName = document.getElementById('listBusinessName').value.trim();
-            const category = document.getElementById('listCategory').value;
-            const description = document.getElementById('listDescription').value.trim();
-            const price = document.getElementById('listPrice').value.trim();
-            const location = document.getElementById('listLocation').value.trim();
-            const photos = document.getElementById('listPhotos').files;
-            if (!businessName || !category || !description || !price || !location || photos.length === 0) {
-                document.getElementById('listingError').textContent = 'All fields required';
-                return;
-            }
-            const formData = new FormData();
-            formData.append('businessName', businessName);
-            formData.append('category', category);
-            formData.append('description', description);
-            formData.append('price', price);
-            formData.append('location', location);
-            for (let i = 0; i < photos.length; i++) {
-                formData.append('photos', photos[i]);
-            }
-            try {
-                const res = await fetch(`${API_BASE}/api/listings`, {
-                    method: 'POST',
-                    headers: { 'Authorization': 'Bearer ' + currentToken },
-                    body: formData
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Listing submission failed');
-                showStep('step-done');
-            } catch (err) {
-                document.getElementById('listingError').textContent = err.message;
-            }
-        });
+        // Submit Listing (new version)
+function submitListing() {
+    const businessName = document.getElementById('listBusinessName').value.trim();
+    const category = document.getElementById('listCategory').value;
+    const description = document.getElementById('listDescription').value.trim();
+    const price = document.getElementById('listPrice').value.trim();
+    const location = document.getElementById('listLocation').value.trim();
+    const photos = document.getElementById('listPhotos').files;
+
+    if (!businessName || !category || !description || !price || !location || photos.length === 0) {
+        document.getElementById('listingError').textContent = 'All fields required';
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('businessName', businessName);
+    formData.append('category', category);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('location', location);
+    for (let i = 0; i < photos.length; i++) {
+        formData.append('photos', photos[i]);
+    }
+
+    fetch(`${API_BASE}/api/listings`, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + currentToken },
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            document.getElementById('listingError').textContent = data.error;
+        } else {
+            showStep('step-done');
+        }
+    })
+    .catch(err => {
+        document.getElementById('listingError').textContent = err.message;
+    });
+}
 
     </script>
 </body>
 
-    </html>
+</html>
