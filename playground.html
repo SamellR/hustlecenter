@@ -10,16 +10,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
         rel="stylesheet">
-    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-    <!-- PWA Manifest (inline) -->
     <link rel="manifest"
         href="data:application/manifest+json,%7B%22name%22%3A%22HustleCenter%22%2C%22short_name%22%3A%22HustleCenter%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FFFFFF%22%2C%22theme_color%22%3A%22%23D4A373%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22android-chrome-192x192.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22apple-touch-icon.png%22%2C%22sizes%22%3A%22180x180%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
-        <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-    <!-- WhatsApp / Facebook link preview -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
     <meta property="og:title" content="HustleCenter – Polokwane's Local Services Marketplace">
     <meta property="og:description"
         content="Find trusted, vetted local services in Polokwane. Plumbers, electricians, cleaners, beauty, and more.">
@@ -31,6 +28,7 @@
     <meta name="twitter:description" content="Vetted local services in Polokwane.">
     <meta name="twitter:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
     <style>
+        /* ===== YOUR EXISTING STYLES GO HERE (unchanged) ===== */
         :root {
             --primary: #0F172A;
             --accent: #D4A373;
@@ -48,1199 +46,157 @@
             --radius-md: 12px;
             --radius-lg: 24px;
         }
-        
         #backToTop .ph { font-size: 1.5rem; }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background: var(--bg);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--primary);
-        }
-
-        h1 {
-            font-size: clamp(2.2rem, 6vw, 3.8rem);
-        }
-
-        h2 {
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-        }
-
-        h3 {
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .gold {
-            color: var(--accent);
-        }
-
-        .btn-primary {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--primary);
-            font-weight: 600;
-            padding: 14px 32px;
-            border-radius: var(--radius-md);
-            border: none;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-align: center;
-            font-family: var(--font-body);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(212, 163, 115, 0.35);
-        }
-
-        .btn-block {
-            display: block;
-            width: 100%;
-        }
-
-        .btn-outline {
-            display: inline-block;
-            background: transparent;
-            color: var(--primary);
-            font-weight: 600;
-            padding: 10px 24px;
-            border-radius: var(--radius-md);
-            border: 3px solid var(--border-light);
-            transition: all 0.25s ease;
-            font-size: 0.95rem;
-            cursor: pointer;
-            font-family: var(--font-body);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent);
-            background: rgba(212, 163, 115, 0.08);
-        }
-
-        .btn-ghost {
-            display: inline-block;
-            color: var(--text-muted);
-            font-weight: 500;
-            padding: 14px 8px;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .btn-ghost:hover {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
-        .site-header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-light);
-            padding: 16px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .logo-mark {
-            font-family: var(--font-heading);
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1;
-        }
-
-        .logo-mark .gold {
-            color: var(--accent);
-        }
-
-        .logo-tagline {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            background: var(--bg);
-            padding: 2px 10px;
-            border-radius: 20px;
-        }
-
-        .main-nav ul {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-        }
-
-        .main-nav a {
-            font-weight: 500;
-            color: var(--text-dark);
-            transition: color 0.2s;
-            font-size: 0.95rem;
-        }
-
-        .main-nav a:hover {
-            color: var(--accent);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 28px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        .hero {
-            padding: 48px 0 64px;
-            background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
-        }
-
-        .hero-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: center;
-        }
-
-        .hero-content h1 {
-            margin-bottom: 16px;
-        }
-
-        .hero-sub {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 480px;
-            margin-bottom: 32px;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .hero-placeholder {
-            background: var(--primary);
-            border-radius: var(--radius-lg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 360px;
-            color: #fff;
-            text-align: center;
-            padding: 24px;
-            position: relative;
-            overflow: visible;
-        }
-
-        .hero-placeholder p {
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            color: var(--accent);
-            margin-bottom: 14px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-placeholder small {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-bottom: 16px;
-            display: block;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-banner-text {
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--primary);
-            background: var(--accent);
-            display: inline-block;
-            padding: 8px 24px;
-            border-radius: 30px;
-            margin-top: 0;
-            position: relative;
-            z-index: 2;
-        }
-
-        .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            animation: floatUp 6s infinite ease-in-out;
-        }
-
-        .particle:nth-child(1) {
-            background: var(--accent);
-            left: 5%;
-            animation-delay: 0s;
-        }
-
-        .particle:nth-child(2) {
-            background: #fff;
-            left: 18%;
-            animation-delay: 0.8s;
-            opacity: 0.6;
-            width: 3px;
-            height: 3px;
-        }
-
-        .particle:nth-child(3) {
-            background: var(--accent);
-            left: 30%;
-            animation-delay: 1.6s;
-            width: 5px;
-            height: 5px;
-        }
-
-        .particle:nth-child(4) {
-            background: #fff;
-            left: 45%;
-            animation-delay: 2.4s;
-            opacity: 0.4;
-            width: 3px;
-            height: 3px;
-        }
-
-        .particle:nth-child(5) {
-            background: var(--accent);
-            left: 60%;
-            animation-delay: 3.2s;
-        }
-
-        .particle:nth-child(6) {
-            background: #fff;
-            left: 75%;
-            animation-delay: 4s;
-            opacity: 0.7;
-            width: 3px;
-            height: 3px;
-        }
-
-        .particle:nth-child(7) {
-            background: var(--accent);
-            left: 88%;
-            animation-delay: 4.8s;
-            width: 5px;
-            height: 5px;
-        }
-
-        .particle:nth-child(8) {
-            background: #fff;
-            left: 95%;
-            animation-delay: 5.4s;
-            opacity: 0.5;
-            width: 3px;
-            height: 3px;
-        }
-
-        @keyframes floatUp {
-            0% {
-                bottom: -10px;
-                opacity: 0;
-                transform: translateX(0);
-            }
-
-            20% {
-                opacity: 0.8;
-            }
-
-            50% {
-                opacity: 1;
-                transform: translateX(15px);
-            }
-
-            80% {
-                opacity: 0.4;
-            }
-
-            100% {
-                bottom: 105%;
-                opacity: 0;
-                transform: translateX(-10px);
-            }
-        }
-
-        .pricing-section {
-            padding: 64px 0;
-            background: var(--card-bg);
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .pricing-card {
-            text-align: center;
-            padding: 24px 12px;
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-md);
-            background: var(--bg);
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-        }
-
-        .pricing-duration {
-            font-family: var(--font-heading);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .pricing-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin: 4px 0;
-        }
-
-        .pricing-cta {
-            text-align: center;
-            margin-top: 32px;
-        }
-
-        .how-it-works {
-            padding: 64px 0;
-            background: var(--bg);
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-top: 24px;
-        }
-
-        .step {
-            text-align: center;
-            padding: 32px;
-            background: var(--card-bg);
-            border-radius: var(--radius-md);
-            transition: transform 0.2s;
-            box-shadow: var(--shadow);
-        }
-
-        .step:hover {
-            transform: translateY(-6px);
-        }
-
-        .step-number {
-            font-family: var(--font-heading);
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--accent);
-            background: rgba(212, 163, 115, 0.12);
-            width: 70px;
-            height: 70px;
-            line-height: 70px;
-            border-radius: 50%;
-            margin: 0 auto 16px;
-        }
-
-        .step h3 {
-            margin-bottom: 8px;
-        }
-
-        .step p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .listings-section {
-            padding: 64px 0;
-        }
-
-        .listings-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
-            margin-bottom: 48px;
-        }
-
-        .search-wrapper {
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .search-wrapper input {
-            width: 100%;
-            padding: 12px 20px;
-            border: 2px solid var(--border-light);
-            border-radius: 50px;
-            font-size: 1rem;
-            font-family: var(--font-body);
-            background: var(--card-bg);
-            transition: border 0.2s;
-        }
-
-        .search-wrapper input:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .category-pills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.5em 1.2em;
-            border: 2px solid var(--border-light);
-            border-radius: 50px;
-            background: var(--card-bg);
-            font-family: var(--font-body);
-            font-weight: 500;
-            font-size: clamp(0.75rem, 2vw, 0.9rem);
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .pill:hover {
-            border-color: var(--accent);
-            color: var(--primary);
-        }
-
-        .pill.active {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 32px;
-        }
-
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            color: var(--text-muted);
-            padding: 48px 0;
-        }
-
-        .service-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            transition: transform 0.25s, box-shadow 0.25s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .card-image {
-            position: relative;
-            height: 180px;
-            overflow: hidden;
-            background: var(--primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-category {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--primary);
-            color: #fff;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.9;
-        }
-
-        .card-body {
-            padding: 24px;
-        }
-
-        .card-body h3 {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-
-        .card-description {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin: 8px 0 16px;
-            line-height: 1.5;
-        }
-
-        .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    border-top: 1px solid var(--border-light);
-    padding-top: 16px;
-    margin-top: 8px;
-}
-
-.card-seller {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-dark);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    flex-wrap: wrap;
-}
-
-.btn-whatsapp {
-    flex-shrink: 0;
-}
-
-        /* WhatsApp button style */
-        .btn-whatsapp {
-            background: #25D366;
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border: none;
-            outline: none;
-        }
-
-        .btn-whatsapp:hover {
-            background: #1da851;
-        }
-
-        .investors-section {
-            padding: 64px 0;
-            background: var(--primary);
-            color: #fff;
-        }
-
-        .investors-section h2 {
-            color: #fff;
-        }
-
-        .investors-section .gold {
-            color: var(--accent);
-        }
-
-        .investors-card {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .investors-card p {
-            font-size: 1.05rem;
-            opacity: 0.9;
-            margin-bottom: 16px;
-            line-height: 1.7;
-        }
-
-        .investors-list {
-            display: inline-block;
-            text-align: left;
-            margin: 16px 0 24px;
-        }
-
-        .investors-list li {
-            margin-bottom: 8px;
-            font-size: 1rem;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .investors-list li::before {
-            content: "•";
-            color: var(--accent);
-            position: absolute;
-            left: 0;
-            font-weight: 700;
-        }
-
-        .legal-section {
-            padding: 48px 0;
-            background: var(--bg);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        .legal-section h3 {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--primary);
-            margin-bottom: 12px;
-            margin-top: 24px;
-        }
-
-        .legal-section h3:first-child {
-            margin-top: 0;
-        }
-
-        .legal-section p {
-            margin-bottom: 8px;
-        }
-
-        .legal-divider {
-            border: none;
-            border-top: 1px solid var(--border-light);
-            margin: 24px 0;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text-dark); line-height: 1.6; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: var(--primary); text-decoration: none; }
+        ul { list-style: none; }
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; color: var(--primary); }
+        h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+        h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+        .section-title { text-align: center; margin-bottom: 32px; }
+        .gold { color: var(--accent); }
+        .btn-primary { display: inline-block; background: var(--accent); color: var(--primary); font-weight: 600; padding: 14px 32px; border-radius: var(--radius-md); border: none; font-size: 1rem; cursor: pointer; transition: all 0.25s ease; text-align: center; font-family: var(--font-body); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212, 163, 115, 0.35); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-block { display: block; width: 100%; }
+        .btn-outline { display: inline-block; background: transparent; color: var(--primary); font-weight: 600; padding: 10px 24px; border-radius: var(--radius-md); border: 3px solid var(--border-light); transition: all 0.25s ease; font-size: 0.95rem; cursor: pointer; font-family: var(--font-body); }
+        .btn-outline:hover { border-color: var(--accent); background: rgba(212, 163, 115, 0.08); }
+        .btn-ghost { display: inline-block; color: var(--text-muted); font-weight: 500; padding: 14px 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
+        .btn-ghost:hover { color: var(--accent); border-bottom-color: var(--accent); }
+        .site-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-light); padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+        .logo-mark { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--primary); line-height: 1; }
+        .logo-mark .gold { color: var(--accent); }
+        .logo-tagline { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; background: var(--bg); padding: 2px 10px; border-radius: 20px; }
+        .main-nav ul { display: flex; gap: 24px; align-items: center; }
+        .main-nav a { font-weight: 500; color: var(--text-dark); transition: color 0.2s; font-size: 0.95rem; }
+        .main-nav a:hover { color: var(--accent); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: transparent; border: none; cursor: pointer; padding: 4px; }
+        .hamburger span { display: block; width: 28px; height: 3px; background: var(--primary); border-radius: 2px; }
+        .hero { padding: 48px 0 64px; background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%); }
+        .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .hero-content h1 { margin-bottom: 16px; }
+        .hero-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 480px; margin-bottom: 32px; }
+        .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-placeholder { background: var(--primary); border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 360px; color: #fff; text-align: center; padding: 24px; position: relative; overflow: visible; }
+        .hero-placeholder p { font-family: var(--font-heading); font-size: 1.3rem; color: var(--accent); margin-bottom: 14px; position: relative; z-index: 2; }
+        .hero-placeholder small { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; display: block; position: relative; z-index: 2; }
+        .hero-banner-text { font-family: var(--font-body); font-weight: 700; font-size: 1rem; color: var(--primary); background: var(--accent); display: inline-block; padding: 8px 24px; border-radius: 30px; margin-top: 0; position: relative; z-index: 2; }
+        .particles-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .particle { position: absolute; width: 4px; height: 4px; border-radius: 50%; animation: floatUp 6s infinite ease-in-out; }
+        .particle:nth-child(1) { background: var(--accent); left: 5%; animation-delay: 0s; }
+        .particle:nth-child(2) { background: #fff; left: 18%; animation-delay: 0.8s; opacity: 0.6; width: 3px; height: 3px; }
+        .particle:nth-child(3) { background: var(--accent); left: 30%; animation-delay: 1.6s; width: 5px; height: 5px; }
+        .particle:nth-child(4) { background: #fff; left: 45%; animation-delay: 2.4s; opacity: 0.4; width: 3px; height: 3px; }
+        .particle:nth-child(5) { background: var(--accent); left: 60%; animation-delay: 3.2s; }
+        .particle:nth-child(6) { background: #fff; left: 75%; animation-delay: 4s; opacity: 0.7; width: 3px; height: 3px; }
+        .particle:nth-child(7) { background: var(--accent); left: 88%; animation-delay: 4.8s; width: 5px; height: 5px; }
+        .particle:nth-child(8) { background: #fff; left: 95%; animation-delay: 5.4s; opacity: 0.5; width: 3px; height: 3px; }
+        @keyframes floatUp { 0% { bottom: -10px; opacity: 0; transform: translateX(0); } 20% { opacity: 0.8; } 50% { opacity: 1; transform: translateX(15px); } 80% { opacity: 0.4; } 100% { bottom: 105%; opacity: 0; transform: translateX(-10px); } }
+        .pricing-section { padding: 64px 0; background: var(--card-bg); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+        .pricing-card { text-align: center; padding: 24px 12px; border: 2px solid var(--border-light); border-radius: var(--radius-md); background: var(--bg); transition: transform 0.2s, border-color 0.2s; }
+        .pricing-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .pricing-duration { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+        .pricing-price { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin: 4px 0; }
+        .pricing-cta { text-align: center; margin-top: 32px; }
+        .how-it-works { padding: 64px 0; background: var(--bg); }
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 24px; }
+        .step { text-align: center; padding: 32px; background: var(--card-bg); border-radius: var(--radius-md); transition: transform 0.2s; box-shadow: var(--shadow); }
+        .step:hover { transform: translateY(-6px); }
+        .step-number { font-family: var(--font-heading); font-size: 2.8rem; font-weight: 700; color: var(--accent); background: rgba(212, 163, 115, 0.12); width: 70px; height: 70px; line-height: 70px; border-radius: 50%; margin: 0 auto 16px; }
+        .step h3 { margin-bottom: 8px; }
+        .step p { color: var(--text-muted); font-size: 0.95rem; }
+        .listings-section { padding: 64px 0; }
+        .listings-header { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-bottom: 48px; }
+        .search-wrapper { width: 100%; max-width: 500px; }
+        .search-wrapper input { width: 100%; padding: 12px 20px; border: 2px solid var(--border-light); border-radius: 50px; font-size: 1rem; font-family: var(--font-body); background: var(--card-bg); transition: border 0.2s; }
+        .search-wrapper input:focus { outline: none; border-color: var(--accent); }
+        .category-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+        .pill { display: inline-flex; align-items: center; padding: 0.5em 1.2em; border: 2px solid var(--border-light); border-radius: 50px; background: var(--card-bg); font-family: var(--font-body); font-weight: 500; font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-muted); cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
+        .pill:hover { border-color: var(--accent); color: var(--primary); }
+        .pill.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 32px; }
+        .empty-state { grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 48px 0; }
+        .service-card { background: var(--card-bg); border-radius: var(--radius-md); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+        .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .card-image { position: relative; height: 180px; overflow: hidden; background: var(--primary); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; cursor: pointer; }
+        .card-image img { width: 100%; height: 100%; object-fit: cover; }
+        .card-category { position: absolute; top: 12px; right: 12px; background: var(--primary); color: #fff; font-size: 0.7rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9; }
+        .card-body { padding: 24px; }
+        .card-body h3 { font-family: var(--font-body); font-weight: 600; font-size: 1.1rem; margin-bottom: 8px; }
+        .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; }
+        .card-description { font-size: 0.9rem; color: var(--text-muted); margin: 8px 0 16px; line-height: 1.5; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border-light); padding-top: 16px; margin-top: 8px; }
+        .card-seller { font-size: 0.85rem; font-weight: 500; color: var(--text-dark); display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+        .btn-whatsapp { flex-shrink: 0; background: #25D366; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border: none; outline: none; }
+        .btn-whatsapp:hover { background: #1da851; }
+        .investors-section { padding: 64px 0; background: var(--primary); color: #fff; }
+        .investors-section h2 { color: #fff; }
+        .investors-section .gold { color: var(--accent); }
+        .investors-card { max-width: 700px; margin: 0 auto; text-align: center; }
+        .investors-card p { font-size: 1.05rem; opacity: 0.9; margin-bottom: 16px; line-height: 1.7; }
+        .investors-list { display: inline-block; text-align: left; margin: 16px 0 24px; }
+        .investors-list li { margin-bottom: 8px; font-size: 1rem; padding-left: 20px; position: relative; }
+        .investors-list li::before { content: "•"; color: var(--accent); position: absolute; left: 0; font-weight: 700; }
+        .legal-section { padding: 48px 0; background: var(--bg); font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+        .legal-section h3 { font-family: var(--font-body); font-weight: 600; font-size: 1rem; color: var(--primary); margin-bottom: 12px; margin-top: 24px; }
+        .legal-section h3:first-child { margin-top: 0; }
+        .legal-section p { margin-bottom: 8px; }
+        .legal-divider { border: none; border-top: 1px solid var(--border-light); margin: 24px 0; }
         /* ---------- MODALS ---------- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(6px);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: var(--card-bg);
-            max-width: 560px;
-            width: 100%;
-            padding: 32px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-hover);
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            line-height: 1;
-            color: var(--text-muted);
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .modal-close:hover {
-            color: var(--primary);
-        }
-
-        .modal-box h2 {
-            margin-bottom: 8px;
-            margin-right: 40px;
-        }
-
-        .modal-sub {
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            font-size: 0.95rem;
-        }
-
-        .modal-footnote {
-            margin-top: 24px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-align: center;
-            border-top: 1px solid var(--border-light);
-            padding-top: 16px;
-        }
-
-        .modal-warning {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            color: #92400e;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 4px;
-            color: var(--primary);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            background: var(--bg);
-            transition: border 0.2s;
-            color: var(--text-dark);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.15);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .form-grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        /* Detail modal specific */
-        .detail-modal-box {
-            max-width: 600px;
-            padding: 24px;
-        }
-
-        .detail-image-area {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .detail-image-area img {
-            width: 100%;
-            max-height: 350px;
-            object-fit: contain;
-            border-radius: var(--radius-sm);
-            background: var(--bg);
-        }
-
-        .detail-nav {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 10px;
-        }
-
-        .detail-nav-btn {
-            background: var(--accent);
-            color: var(--primary);
-            border: none;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .detail-nav-btn:disabled {
-            opacity: 0.5;
-            cursor: default;
-        }
-
-        .detail-info {
-            text-align: left;
-        }
-
-        .detail-info h2 {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1.3rem;
-            margin-bottom: 4px;
-        }
-
-        .detail-info .badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            background: var(--primary);
-            color: #fff;
-        }
-
-        /* Safety Promise section */
-        .safety-promise {
-            padding: 64px 0;
-            background: var(--bg);
-        }
-
-        .safety-promise h2 {
-            margin-bottom: 40px;
-        }
-
-        .safety-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .safety-grid>div {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow);
-        }
-
-        .safety-grid h3 {
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-
-        .safety-grid p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        .safety-note {
-            text-align: center;
-            margin-top: 32px;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* ---------- FOOTER ---------- */
-        .site-footer {
-            background: var(--primary);
-            color: rgba(255, 255, 255, 0.8);
-            padding-top: 48px;
-            margin-top: 0;
-        }
-
-        .footer-inner {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1.5fr;
-            gap: 32px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .footer-col .logo-mark {
-            color: #fff;
-        }
-
-        .footer-col .logo-mark .gold {
-            color: var(--accent);
-        }
-
-        .footer-tagline {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 4px;
-        }
-
-        .footer-col h4 {
-            color: #fff;
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 16px;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 6px;
-        }
-
-        .footer-col a {
-            color: rgba(255, 255, 255, 0.7);
-            transition: color 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .footer-col a:hover {
-            color: var(--accent);
-        }
-
-        .footer-safe {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            line-height: 1.5;
-        }
-
-        .footer-bottom {
-            padding: 16px 0;
-            font-size: 0.8rem;
-            opacity: 0.5;
-            text-align: center;
-        }
-
-        @media (max-width: 1024px) {
-            .hero-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-sub {
-                margin: 0 auto 32px;
-            }
-
-            .hero-cta {
-                justify-content: center;
-            }
-
-            .hero-placeholder {
-                height: 260px;
-            }
-
-            .steps-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-inner {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .safety-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-inner {
-                flex-wrap: wrap;
-            }
-
-            .main-nav {
-                display: none;
-                width: 100%;
-                padding-top: 16px;
-                border-top: 1px solid var(--border-light);
-                margin-top: 16px;
-            }
-
-            .main-nav.open {
-                display: block;
-            }
-
-            .main-nav ul {
-                flex-direction: column;
-                gap: 16px;
-                align-items: stretch;
-            }
-
-            .main-nav ul li {
-                width: 100%;
-            }
-
-            .main-nav ul li a {
-                display: block;
-                padding: 8px 0;
-                text-align: center;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .steps-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 24px;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-box {
-                padding: 24px;
-                margin: 16px;
-            }
-
-            .hero {
-                padding: 32px 0 48px;
-            }
-
-            .hero-placeholder {
-                height: 200px;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .logo-tagline {
-                display: none;
-            }
-
-            .btn-primary {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-
-            .pill {
-                padding: 6px 14px;
-                font-size: 0.8rem;
-            }
-        }
-        
-        .badge-verified {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    background: var(--accent);
-    color: var(--primary);
-    margin-left: 6px;
-}
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(6px); z-index: 999; justify-content: center; align-items: center; padding: 24px; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: var(--card-bg); max-width: 560px; width: 100%; padding: 32px; border-radius: var(--radius-md); box-shadow: var(--shadow-hover); position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 2rem; line-height: 1; color: var(--text-muted); cursor: pointer; z-index: 10; }
+        .modal-close:hover { color: var(--primary); }
+        .modal-box h2 { margin-bottom: 8px; margin-right: 40px; }
+        .modal-sub { color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; }
+        .modal-footnote { margin-top: 24px; font-size: 0.85rem; color: var(--text-muted); text-align: center; border-top: 1px solid var(--border-light); padding-top: 16px; }
+        .modal-warning { background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.9rem; margin-bottom: 20px; font-weight: 500; }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; color: var(--primary); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 2px solid var(--border-light); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1rem; background: var(--bg); transition: border 0.2s; color: var(--text-dark); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.15); }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .detail-modal-box { max-width: 600px; padding: 24px; }
+        .detail-image-area { position: relative; margin-bottom: 20px; }
+        .detail-image-area img { width: 100%; max-height: 350px; object-fit: contain; border-radius: var(--radius-sm); background: var(--bg); }
+        .detail-nav { display: flex; justify-content: center; gap: 16px; margin-top: 10px; }
+        .detail-nav-btn { background: var(--accent); color: var(--primary); border: none; padding: 8px 18px; border-radius: 20px; font-weight: 600; cursor: pointer; font-size: 0.9rem; }
+        .detail-nav-btn:disabled { opacity: 0.5; cursor: default; }
+        .detail-info { text-align: left; }
+        .detail-info h2 { font-family: var(--font-body); font-weight: 600; font-size: 1.3rem; margin-bottom: 4px; }
+        .detail-info .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; background: var(--primary); color: #fff; }
+        .safety-promise { padding: 64px 0; background: var(--bg); }
+        .safety-promise h2 { margin-bottom: 40px; }
+        .safety-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 900px; margin: 0 auto; }
+        .safety-grid>div { background: var(--card-bg); padding: 24px; border-radius: var(--radius-md); box-shadow: var(--shadow); }
+        .safety-grid h3 { color: var(--accent); margin-bottom: 8px; }
+        .safety-grid p { font-size: 0.95rem; color: var(--text-muted); }
+        .safety-note { text-align: center; margin-top: 32px; font-size: 0.95rem; color: var(--text-muted); max-width: 700px; margin-left: auto; margin-right: auto; }
+        .site-footer { background: var(--primary); color: rgba(255, 255, 255, 0.8); padding-top: 48px; margin-top: 0; }
+        .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+        .footer-col .logo-mark { color: #fff; }
+        .footer-col .logo-mark .gold { color: var(--accent); }
+        .footer-tagline { font-size: 0.9rem; opacity: 0.7; margin-top: 4px; }
+        .footer-col h4 { color: #fff; font-family: var(--font-body); font-weight: 600; font-size: 1rem; margin-bottom: 16px; }
+        .footer-col ul li { margin-bottom: 6px; }
+        .footer-col a { color: rgba(255, 255, 255, 0.7); transition: color 0.2s; font-size: 0.9rem; }
+        .footer-col a:hover { color: var(--accent); }
+        .footer-safe { font-size: 0.85rem; opacity: 0.7; line-height: 1.5; }
+        .footer-bottom { padding: 16px 0; font-size: 0.8rem; opacity: 0.5; text-align: center; }
+        @media (max-width: 1024px) { .hero-inner { grid-template-columns: 1fr; text-align: center; } .hero-sub { margin: 0 auto 32px; } .hero-cta { justify-content: center; } .hero-placeholder { height: 260px; } .steps-grid { grid-template-columns: repeat(2, 1fr); } .footer-inner { grid-template-columns: 1fr 1fr; } .pricing-grid { grid-template-columns: repeat(2, 1fr); } .safety-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .header-inner { flex-wrap: wrap; } .main-nav { display: none; width: 100%; padding-top: 16px; border-top: 1px solid var(--border-light); margin-top: 16px; } .main-nav.open { display: block; } .main-nav ul { flex-direction: column; gap: 16px; align-items: stretch; } .main-nav ul li { width: 100%; } .main-nav ul li a { display: block; padding: 8px 0; text-align: center; } .hamburger { display: flex; } .steps-grid { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: 1fr; text-align: center; gap: 24px; } .services-grid { grid-template-columns: 1fr; } .modal-box { padding: 24px; margin: 16px; } .hero { padding: 32px 0 48px; } .hero-placeholder { height: 200px; } .pricing-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+        @media (max-width: 400px) { .logo-tagline { display: none; } .btn-primary { padding: 12px 20px; font-size: 0.9rem; } .pill { padding: 6px 14px; font-size: 0.8rem; } }
+        .badge-verified { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.65rem; font-weight: 600; background: var(--accent); color: var(--primary); margin-left: 6px; }
     </style>
 </head>
 
@@ -1255,10 +211,8 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#listings">Browse</a></li>
-                    <li id="dashboardLink" style="display:none;"><a href="entrepreneur-dashboard.html"
-                            style="color:var(--accent);">My Dashboard</a></li>
-                    <li><a href="#" class="btn-outline" onclick="openEntrepreneurModal(); return false;">List your
-                            service</a></li>
+                    <li id="dashboardLink" style="display:none;"><a href="entrepreneur-dashboard.html" style="color:var(--accent);">My Dashboard</a></li>
+                    <li><a href="#" class="btn-outline" onclick="openEntrepreneurModal(); return false;">List your service</a></li>
                 </ul>
             </nav>
             <button class="hamburger" aria-label="Menu" id="hamburgerBtn">
@@ -1273,8 +227,7 @@
             <div class="container hero-inner">
                 <div class="hero-content">
                     <h1>Find trusted <span class="gold">entrepreneurs</span> near you</h1>
-                    <p class="hero-sub">Every service is vetted by our team. No scams, no hassles – just quality work.
-                    </p>
+                    <p class="hero-sub">Every service is vetted by our team. No scams, no hassles – just quality work.</p>
                     <div class="hero-cta">
                         <a href="#listings" class="btn-primary">Browse services</a>
                         <a href="#how-it-works" class="btn-ghost">Learn more →</a>
@@ -1282,14 +235,8 @@
                 </div>
                 <div class="hero-placeholder">
                     <div class="particles-container">
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
+                        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+                        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
                     </div>
                     <p>Real Polokwane businesses coming soon</p>
                     <small>Want to be first? List your service today.</small>
@@ -1304,17 +251,12 @@
             <div class="container">
                 <h2 class="section-title">List your service – <span class="gold">simple pricing</span></h2>
                 <div class="pricing-grid">
-                    <div class="pricing-card"><span class="pricing-duration">1 Month</span><span
-                            class="pricing-price">R65</span></div>
-                    <div class="pricing-card"><span class="pricing-duration">2 Months</span><span
-                            class="pricing-price">R120</span></div>
-                    <div class="pricing-card"><span class="pricing-duration">3 Months</span><span
-                            class="pricing-price">R165</span></div>
-                    <div class="pricing-card"><span class="pricing-duration">4 Months</span><span
-                            class="pricing-price">R200</span></div>
+                    <div class="pricing-card"><span class="pricing-duration">1 Month</span><span class="pricing-price">R65</span></div>
+                    <div class="pricing-card"><span class="pricing-duration">2 Months</span><span class="pricing-price">R120</span></div>
+                    <div class="pricing-card"><span class="pricing-duration">3 Months</span><span class="pricing-price">R165</span></div>
+                    <div class="pricing-card"><span class="pricing-duration">4 Months</span><span class="pricing-price">R200</span></div>
                 </div>
-                <p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:0.9rem;">All listings are
-                    vetted before going live. Payment via email.</p>
+                <p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:0.9rem;">All listings are vetted before going live. Payment via email.</p>
                 <div class="pricing-cta">
                     <button class="btn-primary" onclick="openEntrepreneurModal()">List your service</button>
                 </div>
@@ -1324,46 +266,21 @@
             <div class="container">
                 <h2 class="section-title">How it <span class="gold">works</span></h2>
                 <div class="steps-grid">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h3>Entrepreneur lists</h3>
-                        <p>Skilled entrepreneurs submit their services with details &amp; pricing.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h3>Our Team vets</h3>
-                        <p>We manually vet every listing to ensure quality &amp; relevance.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h3>Connect Safely</h3>
-                        <p>Submit a request through HustleCenter. We verify your phone number with OTP. Your details are
-                            only sent to the entrepreneur you chose. All requests are logged to keep both sides safe.
-                        </p>
-                    </div>
+                    <div class="step"><div class="step-number">1</div><h3>Entrepreneur lists</h3><p>Skilled entrepreneurs submit their services with details &amp; pricing.</p></div>
+                    <div class="step"><div class="step-number">2</div><h3>Our Team vets</h3><p>We manually vet every listing to ensure quality &amp; relevance.</p></div>
+                    <div class="step"><div class="step-number">3</div><h3>Connect Safely</h3><p>Submit a request through HustleCenter. We verify your phone number with OTP. Your details are only sent to the entrepreneur you chose. All requests are logged to keep both sides safe.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- NEW: 2-Way Safety Promise -->
         <section class="safety-promise">
             <div class="container">
                 <h2 class="section-title">Our <span class="gold">2‑Way Safety Promise</span></h2>
                 <div class="safety-grid">
-                    <div>
-                        <h3>For Entrepreneurs</h3>
-                        <p>We verify your ID, selfie and proof of address before you go live. You get a "Verified" badge
-                            and your ID photos are deleted after 90 days. You only receive requests from phone‑verified
-                            customers.</p>
-                    </div>
-                    <div>
-                        <h3>For Customers</h3>
-                        <p>We verify your phone number with OTP when you request a service. Optional: Get a "Verified
-                            Customer" badge for high‑value jobs by submitting an ID selfie.</p>
-                    </div>
+                    <div><h3>For Entrepreneurs</h3><p>We verify your ID, selfie and proof of address before you go live. You get a "Verified" badge and your ID photos are deleted after 90 days. You only receive requests from phone‑verified customers.</p></div>
+                    <div><h3>For Customers</h3><p>We verify your phone number with OTP when you request a service. Optional: Get a "Verified Customer" badge for high‑value jobs by submitting an ID selfie.</p></div>
                 </div>
-                <p class="safety-note">Abuse the platform and we ban you. In case of fraud, we cooperate with SAPS and
-                    provide logs as required by law.</p>
+                <p class="safety-note">Abuse the platform and we ban you. In case of fraud, we cooperate with SAPS and provide logs as required by law.</p>
             </div>
         </section>
         <section class="listings-section" id="listings">
@@ -1392,9 +309,7 @@
                     </div>
                 </div>
                 <div class="services-grid" id="servicesGrid">
-                    <div class="empty-state">
-                        <p>Loading services…</p>
-                    </div>
+                    <div class="empty-state"><p>Loading services…</p></div>
                 </div>
             </div>
         </section>
@@ -1403,8 +318,7 @@
             <div class="container">
                 <div class="investors-card">
                     <h2>Partner <span class="gold">with us</span></h2>
-                    <p>HustleCenter connects Polokwane with verified local professionals. Every service is manually
-                        vetted, so customers can find quality help without the guesswork.</p>
+                    <p>HustleCenter connects Polokwane with verified local professionals. Every service is manually vetted, so customers can find quality help without the guesswork.</p>
                     <p><strong>We're looking for:</strong></p>
                     <ul class="investors-list">
                         <li>Mentors with experience in marketplaces, local business, or payments</li>
@@ -1419,115 +333,69 @@
         <section class="legal-section" id="legal">
             <div class="container">
                 <h3>Disclaimer</h3>
-                <p>HustleCenter is a marketplace connecting customers and service providers. We verify entrepreneur IDs
-                    and customer phone numbers, but we are not a party to transactions. HustleCenter is not liable for
-                    disputes between users. In case of fraud or crime, we will cooperate with SAPS upon receipt of a
-                    valid CAS number or court order.</p>
+                <p>HustleCenter is a marketplace connecting customers and service providers. We verify entrepreneur IDs and customer phone numbers, but we are not a party to transactions. HustleCenter is not liable for disputes between users. In case of fraud or crime, we will cooperate with SAPS upon receipt of a valid CAS number or court order.</p>
                 <hr class="legal-divider">
                 <h3>Terms of Service</h3>
-                <p>By using HustleCenter, you agree to communicate respectfully and use the platform for lawful purposes
-                    only. We reserve the right to remove any listing or block any user at our sole discretion.</p>
-                <p><strong>For entrepreneurs:</strong> By listing your service, you agree that your business name,
-                    service details, and provided photo will be publicly displayed on HustleCenter. You are responsible
-                    for the accuracy of your listing. Listing fees are non-refundable once your service goes live.</p>
-                <p><strong>For customers:</strong> HustleCenter facilitates introductions only. We do not guarantee
-                    availability, pricing, or outcomes. Always confirm details directly with the service provider.</p>
+                <p>By using HustleCenter, you agree to communicate respectfully and use the platform for lawful purposes only. We reserve the right to remove any listing or block any user at our sole discretion.</p>
+                <p><strong>For entrepreneurs:</strong> By listing your service, you agree that your business name, service details, and provided photo will be publicly displayed on HustleCenter. You are responsible for the accuracy of your listing. Listing fees are non-refundable once your service goes live.</p>
+                <p><strong>For customers:</strong> HustleCenter facilitates introductions only. We do not guarantee availability, pricing, or outcomes. Always confirm details directly with the service provider.</p>
                 <hr class="legal-divider">
                 <h3>Privacy Policy</h3>
-                <p>We collect only the information you provide via email (name, phone number, and message). This
-                    information is used solely to connect you with the relevant service provider or to process your
-                    listing. We do not share your personal contact details publicly on this site. For full details, see
-                    our <a href="privacy-policy.html" style="color:#D4A373;">Privacy Policy</a>.</p>
+                <p>We collect only the information you provide via email (name, phone number, and message). This information is used solely to connect you with the relevant service provider or to process your listing. We do not share your personal contact details publicly on this site. For full details, see our <a href="privacy-policy.html" style="color:#D4A373;">Privacy Policy</a>.</p>
                 <p>For any privacy concerns, contact us directly via email.</p>
             </div>
         </section>
 
     </main>
 
-    <!-- CUSTOMER REQUEST MODAL (OTP + API) -->
+    <!-- CUSTOMER REQUEST MODAL -->
     <div class="modal-overlay" id="contactModal">
         <div class="modal-box">
             <button class="modal-close" id="closeContactModal">&times;</button>
-
-            <!-- Step 1: Enter phone & send OTP -->
             <div class="step-content" id="customer-step-phone" style="display:block;">
                 <h2>Verify your phone</h2>
                 <p class="modal-sub">Enter your phone number to verify your identity before sending a request.</p>
                 <form id="customerPhoneForm" novalidate>
-                    <div class="form-group">
-                        <label for="customerPhone">Phone number *</label>
-                        <input type="tel" id="customerPhone" placeholder="082 123 4567" required>
-                    </div>
+                    <div class="form-group"><label for="customerPhone">Phone number *</label><input type="tel" id="customerPhone" placeholder="082 123 4567" required></div>
                     <button type="submit" class="btn-primary btn-block">Send OTP</button>
                 </form>
                 <p class="modal-footnote" id="customerPhoneError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Step 2: Enter OTP -->
             <div class="step-content" id="customer-step-otp" style="display:none;">
                 <h2>Enter OTP</h2>
                 <p class="modal-sub">Check the server terminal for the 6‑digit code.</p>
                 <form id="customerOtpForm" novalidate>
-                    <div class="form-group">
-                        <label for="customerOtpCode">OTP Code *</label>
-                        <input type="text" id="customerOtpCode" placeholder="123456" maxlength="6" required>
-                    </div>
+                    <div class="form-group"><label for="customerOtpCode">OTP Code *</label><input type="text" id="customerOtpCode" placeholder="123456" maxlength="6" required></div>
                     <button type="submit" class="btn-primary btn-block">Verify OTP</button>
                 </form>
                 <p class="modal-footnote" id="customerOtpError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Step 3: Request details -->
             <div class="step-content" id="customer-step-request" style="display:none;">
                 <h2>Your request</h2>
                 <p class="modal-sub">Add a message for the entrepreneur (optional).</p>
                 <form id="customerRequestForm" novalidate>
-                    <div class="form-group">
-                        <label for="customerMessage">Your message (optional)</label>
-                        <textarea id="customerMessage" rows="3"
-                            placeholder="Briefly describe what you need..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="customer_consent" required>
-                            I confirm my request is genuine. I consent to HustleCenter verifying my phone number and
-                            logging my details for safety.
-                        </label>
-                    </div>
+                    <div class="form-group"><label for="customerMessage">Your message (optional)</label><textarea id="customerMessage" rows="3" placeholder="Briefly describe what you need..."></textarea></div>
+                    <div class="form-group"><label><input type="checkbox" name="customer_consent" required> I confirm my request is genuine. I consent to HustleCenter verifying my phone number and logging my details for safety.</label></div>
                     <input type="hidden" id="customerServiceId" value="">
                     <button type="submit" class="btn-primary btn-block">Send Request</button>
                 </form>
                 <p class="modal-footnote" id="customerRequestError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Optional: Verified Customer Badge -->
             <div class="step-content" id="customer-step-badge" style="display:none;">
                 <h2>Get Verified Customer Badge</h2>
-                <p class="modal-sub">A Verified badge helps entrepreneurs trust your request and reply faster. It’s
-                    completely optional.</p>
+                <p class="modal-sub">A Verified badge helps entrepreneurs trust your request and reply faster. It’s completely optional.</p>
                 <form id="customerBadgeForm" novalidate>
-                    <div class="form-group">
-                        <label for="badgeSelfie">Upload a clear selfie holding your ID or a piece of paper with today's
-                            date.</label>
-                        <input type="file" id="badgeSelfie" accept="image/*">
-                    </div>
+                    <div class="form-group"><label for="badgeSelfie">Upload a clear selfie holding your ID or a piece of paper with today's date.</label><input type="file" id="badgeSelfie" accept="image/*"></div>
                     <button type="submit" class="btn-primary btn-block">Upload & Continue</button>
                 </form>
-                <p class="modal-sub" style="text-align:center; margin-top:8px;">
-                    <button class="btn-ghost" onclick="skipBadge()">Skip, I'll do it later</button>
-                </p>
+                <p class="modal-sub" style="text-align:center; margin-top:8px;"><button class="btn-ghost" onclick="skipBadge()">Skip, I'll do it later</button></p>
                 <p class="modal-footnote" id="badgeError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Success -->
             <div class="step-content" id="customer-step-done" style="display:none;">
                 <h2>Request Sent!</h2>
-                <p class="success-msg" style="color:#D4A373;">Your contact request has been submitted. The entrepreneur
-                    will receive your details and message.</p>
+                <p class="success-msg" style="color:#D4A373;">Your contact request has been submitted. The entrepreneur will receive your details and message.</p>
                 <button class="btn-primary btn-block" onclick="closeContactModalFn()">Close</button>
-                
                 <p class="modal-footnote"><i class="ph ph-lock-key"></i> Your details are sent securely via email. We'll connect you with the professional.</p>
-                
             </div>
         </div>
     </div>
@@ -1536,135 +404,81 @@
     <div class="modal-overlay" id="entrepreneurModal">
         <div class="modal-box">
             <button class="modal-close" id="closeEntrepreneurModal">&times;</button>
-
-            <!-- Step 1: Sign Up -->
             <div class="step-content" id="step-signup">
                 <h2>Create your account</h2>
                 <p class="modal-sub">First, create your entrepreneur account. All fields are required.</p>
                 <form id="signupForm" novalidate>
-                    <div class="form-group"><label for="signupName">Full name *</label><input type="text"
-                            id="signupName" maxlength="100" placeholder="e.g. Thabo Mokoena" required></div>
-                    <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail"
-                            maxlength="150" placeholder="thabo@email.com" required></div>
-                    <div class="form-group"><label for="signupPhone">Phone *</label><input type="tel" id="signupPhone"
-                            maxlength="20" placeholder="0821234567" required></div>
-                    <div class="form-group"><label for="signupPassword">Password *</label><input type="password"
-                            id="signupPassword" maxlength="100" required></div>
+                    <div class="form-group"><label for="signupName">Full name *</label><input type="text" id="signupName" maxlength="100" placeholder="e.g. Thabo Mokoena" required></div>
+                    <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail" maxlength="150" placeholder="thabo@email.com" required></div>
+                    <div class="form-group"><label for="signupPhone">Phone *</label><input type="tel" id="signupPhone" maxlength="20" placeholder="0821234567" required></div>
+                    <div class="form-group"><label for="signupPassword">Password *</label><input type="password" id="signupPassword" maxlength="100" required></div>
                     <button type="submit" class="btn-primary btn-block">Sign Up</button>
                 </form>
                 <p class="modal-footnote" id="signupError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Step 2: Verify OTP -->
             <div class="step-content" id="step-otp" style="display:none;">
                 <h2>Verify your phone</h2>
                 <p class="modal-sub">Enter the 6‑digit OTP we sent to your phone (check the server terminal).</p>
                 <form id="otpForm" novalidate>
-                    <div class="form-group"><label for="otpCode">OTP Code *</label><input type="text" id="otpCode"
-                            placeholder="123456" maxlength="6" required></div>
+                    <div class="form-group"><label for="otpCode">OTP Code *</label><input type="text" id="otpCode" placeholder="123456" maxlength="6" required></div>
                     <button type="submit" class="btn-primary btn-block">Verify OTP</button>
                 </form>
                 <p class="modal-footnote" id="otpError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Step 3: Upload ID -->
             <div class="step-content" id="step-id" style="display:none;">
                 <h2>Upload your ID</h2>
                 <p class="modal-sub">Please upload a clear photo of your ID or driver's license.</p>
                 <form id="idForm" novalidate>
-                    <div class="form-group"><label for="idFile">ID Document *</label><input type="file" id="idFile"
-                            accept="image/*" required></div>
+                    <div class="form-group"><label for="idFile">ID Document *</label><input type="file" id="idFile" accept="image/*" required></div>
                     <button type="submit" class="btn-primary btn-block">Upload ID</button>
                 </form>
                 <p class="modal-footnote" id="idError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Step 4: Upload Selfie -->
             <div class="step-content" id="step-selfie" style="display:none;">
                 <h2>Upload a selfie</h2>
                 <p class="modal-sub">Take a clear selfie so we can verify it's really you.</p>
                 <form id="selfieForm" novalidate>
-                    <div class="form-group"><label for="selfieFile">Selfie *</label><input type="file" id="selfieFile"
-                            accept="image/*" required></div>
+                    <div class="form-group"><label for="selfieFile">Selfie *</label><input type="file" id="selfieFile" accept="image/*" required></div>
                     <button type="submit" class="btn-primary btn-block">Upload Selfie</button>
                 </form>
                 <p class="modal-footnote" id="selfieError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Step 5: Create Listing -->
             <div class="step-content" id="step-listing" style="display:none;">
                 <h2>Create your listing</h2>
                 <p class="modal-sub">Now tell us about your service. We'll review and publish it.</p>
                 <form id="listingFormModal" novalidate onsubmit="event.preventDefault(); submitListing();">
-                    <div class="form-group"><label for="listBusinessName">Business name *</label><input type="text"
-                            id="listBusinessName" maxlength="100" placeholder="e.g. Thabo's Plumbing" required></div>
+                    <div class="form-group"><label for="listBusinessName">Business name *</label><input type="text" id="listBusinessName" maxlength="100" placeholder="e.g. Thabo's Plumbing" required></div>
                     <div class="form-group"><label for="listCategory">Category *</label>
                         <select id="listCategory" required>
                             <option value="">Select a category</option>
-                            <option>Automotive</option>
-                            <option>Barber</option>
-                            <option>Beauty</option>
-                            <option>Braces</option>
-                            <option>Cleaning</option>
-                            <option>Eye Lash</option>
-                            <option>Fashion</option>
-                            <option>Food</option>
-                            <option>Hair Salon</option>
-                            <option>Supplies</option>
-                            <option>Home & Garden</option>
-                            <option>Logistics</option>
-                            <option>Makeup</option>
-                            <option>Nail</option>
-                            <option>Reseller</option>
-                            <option>Shuttle & Transport</option>
-                            <option>Other</option>
+                            <option>Automotive</option><option>Barber</option><option>Beauty</option><option>Braces</option><option>Cleaning</option><option>Eye Lash</option><option>Fashion</option><option>Food</option><option>Hair Salon</option><option>Supplies</option><option>Home & Garden</option><option>Logistics</option><option>Makeup</option><option>Nail</option><option>Reseller</option><option>Shuttle & Transport</option><option>Other</option>
                         </select>
                     </div>
-                    <div class="form-group"><label for="listDescription">Description *</label><textarea
-                            id="listDescription" maxlength="1000" rows="3" placeholder="Describe your service..."
-                            required></textarea>
-                    </div>
+                    <div class="form-group"><label for="listDescription">Description *</label><textarea id="listDescription" maxlength="1000" rows="3" placeholder="Describe your service..." required></textarea></div>
                     <div class="form-grid-2">
-                        <div class="form-group"><label for="listPrice">Price (R) *</label><input type="text"
-                                id="listPrice" maxlength="100" placeholder="e.g. 150" required></div>
-                        <div class="form-group"><label for="listLocation">Location *</label><input type="text"
-                                id="listLocation" maxlength="100" placeholder="e.g. Seshego" required></div>
+                        <div class="form-group"><label for="listPrice">Price (R) *</label><input type="text" id="listPrice" maxlength="100" placeholder="e.g. 150" required></div>
+                        <div class="form-group"><label for="listLocation">Location *</label><input type="text" id="listLocation" maxlength="100" placeholder="e.g. Seshego" required></div>
                     </div>
-                    <div class="form-group"><label for="listPhotos">Upload up to 3 photos *</label><input type="file"
-                            id="listPhotos" accept="image/*" multiple required></div>
+                    <div class="form-group"><label for="listPhotos">Upload up to 3 photos *</label><input type="file" id="listPhotos" accept="image/*" multiple required></div>
                     <div class="form-group consent-group">
-                        <label>
-                            <input type="checkbox" name="consent_id" required>
-                            I consent to HustleCenter collecting and verifying my ID documents in terms of POPIA. I
-                            confirm all
-                            information is true.
-                        </label>
-                        <label>
-                            <input type="checkbox" name="consent_tos" required>
-                            I agree to the HustleCenter <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
-                            and <a href="#legal">Terms of Service</a>.
-                        </label>
+                        <label><input type="checkbox" name="consent_id" required> I consent to HustleCenter collecting and verifying my ID documents in terms of POPIA. I confirm all information is true.</label>
+                        <label><input type="checkbox" name="consent_tos" required> I agree to the HustleCenter <a href="privacy-policy.html" target="_blank">Privacy Policy</a> and <a href="#legal">Terms of Service</a>.</label>
                     </div>
                     <button type="button" onclick="submitListing()" class="btn-primary btn-block">Submit for Review</button>
                 </form>
                 <p class="modal-footnote" id="listingError" style="color:#dc2626;"></p>
             </div>
-
-            <!-- Success message -->
             <div class="step-content" id="step-done" style="display:none;">
                 <h2>Verification Submitted!</h2>
-                <p class="success-msg" style="color:#D4A373;">Your profile and listing will be reviewed by our team.
-                    Once approved, you'll appear in the marketplace.</p>
+                <p class="success-msg" style="color:#D4A373;">Your profile and listing will be reviewed by our team. Once approved, you'll appear in the marketplace.</p>
                 <button class="btn-primary btn-block" onclick="closeEntrepreneurModalFn()">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- DETAIL MODAL (Lightbox + full listing info) -->
     <div class="modal-overlay" id="detailModal">
         <div class="modal-box detail-modal-box">
             <button class="modal-close" id="closeDetailModal">&times;</button>
-
             <div class="detail-image-area">
                 <img src="" alt="" id="detailImage">
                 <div class="detail-nav" id="detailNav" style="display:none;">
@@ -1672,11 +486,9 @@
                     <button id="nextDetail" class="detail-nav-btn">Next →</button>
                 </div>
             </div>
-
             <div id="detailInfo" class="detail-info">
                 <h2 id="detailTitle"></h2>
-                <span class="badge" id="detailCategory"
-                    style="background:var(--primary);color:#fff;font-size:0.7rem;padding:2px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;"></span>
+                <span class="badge" id="detailCategory" style="background:var(--primary);color:#fff;font-size:0.7rem;padding:2px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;"></span>
                 <div class="card-meta"><span id="detailLocation"></span></div>
                 <p id="detailDescription" style="margin:12px 0;line-height:1.5;"></p>
                 <p><strong>Price: </strong><span id="detailPrice" style="color:var(--accent);"></span></p>
@@ -1691,19 +503,18 @@
             <div class="footer-col"><span class="logo-mark small">Hustle<span class="gold">Center</span></span>
                 <p class="footer-tagline">Vetted local services, safely connected.</p>
                 <p style="margin-top:12px; font-size:0.85rem; opacity:0.7;">
-    <i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
-    <i class="ph ph-envelope"></i> help@hustlecenter.co.za<br>
-    <a href="privacy-policy.html" style="color:#D4A373;">Privacy Policy</a> |
-    <a href="paia-manual.html" style="color:#D4A373;">PAIA Manual</a> |
-    <a href="#legal" style="color:#D4A373;">Terms of Service</a>
-</p>
+                    <i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
+                    <i class="ph ph-envelope"></i> help@hustlecenter.co.za<br>
+                    <a href="privacy-policy.html" style="color:#D4A373;">Privacy Policy</a> |
+                    <a href="paia-manual.html" style="color:#D4A373;">PAIA Manual</a> |
+                    <a href="#legal" style="color:#D4A373;">Terms of Service</a>
+                </p>
             </div>
             <div class="footer-col">
                 <h4>Quick links</h4>
                 <ul>
                     <li><a href="#listings">Browse</a></li>
-                    <li><button class="btn-outline" onclick="openEntrepreneurModal()"
-                            style="color:#fff; border-color:rgba(255,255,255,0.3);">List your service</button></li>
+                    <li><button class="btn-outline" onclick="openEntrepreneurModal()" style="color:#fff; border-color:rgba(255,255,255,0.3);">List your service</button></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1746,7 +557,6 @@
         var closeContactBtn = document.getElementById('closeContactModal');
         var contactForm = document.getElementById('contactForm');
 
-        // Detail modal elements
         var detailModal = document.getElementById('detailModal');
         var detailImage = document.getElementById('detailImage');
         var detailTitle = document.getElementById('detailTitle');
@@ -1762,7 +572,6 @@
         var currentDetailImages = [];
         var currentDetailIndex = 0;
 
-        // Back to top
         var backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', function () {
             if (window.scrollY > 300) {
@@ -1783,22 +592,12 @@
         }
         function containsLetter(str) { return /[a-zA-Z]/.test(str); }
 
-        function validateContactForm(data) {
-            var errors = [];
-            if (!data.name || !containsLetter(data.name.trim())) errors.push('Name must contain letters.');
-            if (!data.phone || !isValidPhone(data.phone)) errors.push('Enter a valid SA phone number.');
-            if (!document.querySelector('input[name="customer_consent"]').checked) errors.push('You must confirm your request is genuine.');
-            return errors;
-        }
-
         function openDetailModal(serviceId) {
             var service = allServices.find(function (s) { return s.id === serviceId; });
             if (!service) return;
-
             currentDetailImages = service.images || (service.image ? [service.image] : []);
             currentDetailImages = currentDetailImages.map(img => img ? API_BASE + '/' + img : img);
             currentDetailIndex = 0;
-
             if (currentDetailImages.length > 0) {
                 detailImage.src = currentDetailImages[0];
                 detailImage.style.display = 'block';
@@ -1807,25 +606,19 @@
                 detailImage.style.display = 'none';
                 detailNav.style.display = 'none';
             }
-
             detailTitle.textContent = service.title;
             detailCategory.textContent = Array.isArray(service.category) ? service.category[0] : service.category;
             detailLocation.innerHTML = '<i class="ph ph-map-pin"></i> ' + (service.location || 'Polokwane');
             detailDescription.textContent = service.description;
             detailPrice.textContent = 'R' + (service.price || '0');
             detailSeller.textContent = service.sellerName;
-
             updateDetailNavButtons();
-
             detailModal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            // Set up copy link button
             const copyBtn = document.getElementById('copyListingLink');
             copyBtn.onclick = function () {
                 const url = `${API_BASE}/listing/${serviceId}`;
-                navigator.clipboard.writeText(url).then(() => {
-                    alert('Link copied! Share it on WhatsApp or social media.');
-                });
+                navigator.clipboard.writeText(url).then(() => { alert('Link copied! Share it on WhatsApp or social media.'); });
             };
         }
 
@@ -1841,16 +634,10 @@
         }
 
         prevDetailBtn.addEventListener('click', function () {
-            if (currentDetailIndex > 0) {
-                currentDetailIndex--;
-                showCurrentDetailImage();
-            }
+            if (currentDetailIndex > 0) { currentDetailIndex--; showCurrentDetailImage(); }
         });
         nextDetailBtn.addEventListener('click', function () {
-            if (currentDetailIndex < currentDetailImages.length - 1) {
-                currentDetailIndex++;
-                showCurrentDetailImage();
-            }
+            if (currentDetailIndex < currentDetailImages.length - 1) { currentDetailIndex++; showCurrentDetailImage(); }
         });
 
         function closeDetailModalFn() {
@@ -1947,7 +734,6 @@
             document.getElementById('customerPhoneForm').reset();
             document.getElementById('customerOtpForm').reset();
             document.getElementById('customerRequestForm').reset();
-
             document.getElementById('customerBadgeForm').reset();
             customerToken = null;
             customerId = null;
@@ -1961,7 +747,6 @@
         closeContactBtn.addEventListener('click', closeContactModalFn);
         contactModal.addEventListener('click', function (e) { if (e.target === contactModal) closeContactModalFn(); });
 
-        // Send OTP
         document.getElementById('customerPhoneForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const phone = document.getElementById('customerPhone').value.trim();
@@ -1981,7 +766,6 @@
             }
         });
 
-        // Verify OTP
         document.getElementById('customerOtpForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const otp = document.getElementById('customerOtpCode').value.trim();
@@ -1999,15 +783,11 @@
             } catch (err) {
                 document.getElementById('customerOtpError').textContent = err.message;
             }
-
-            // Badge upload or skip
-            function skipBadge() {
-                showCustomerStep('customer-step-request');
-            }
+            function skipBadge() { showCustomerStep('customer-step-request'); }
             document.getElementById('customerBadgeForm').addEventListener('submit', async function (e) {
                 e.preventDefault();
                 const file = document.getElementById('badgeSelfie').files[0];
-                if (!file) return skipBadge(); // no file chosen = skip
+                if (!file) return skipBadge();
                 const formData = new FormData();
                 formData.append('badgeSelfie', file);
                 try {
@@ -2018,16 +798,13 @@
                     });
                     const data = await res.json();
                     if (!res.ok) throw new Error(data.error || 'Upload failed');
-                    // Badge uploaded – proceed to request
                     showCustomerStep('customer-step-request');
                 } catch (err) {
                     document.getElementById('badgeError').textContent = err.message;
                 }
             });
-
         });
 
-        // Submit request
         document.getElementById('customerRequestForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const message = document.getElementById('customerMessage').value.trim();
@@ -2045,15 +822,8 @@
             try {
                 const res = await fetch(`${API_BASE}/api/request-contact`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + customerToken
-                    },
-                    body: JSON.stringify({
-                        entrepreneurId: service.entrepreneurId,
-                        serviceId: serviceId,
-                        message: message
-                    })
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + customerToken },
+                    body: JSON.stringify({ entrepreneurId: service.entrepreneurId, serviceId: serviceId, message: message })
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || 'Request failed');
@@ -2071,12 +841,10 @@
             navLinks[k].addEventListener('click', function () { document.querySelector('.main-nav').classList.remove('open'); });
         }
 
-        // PWA service worker registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
 
-        // Show dashboard link if entrepreneur is logged in
         (function () {
             const token = localStorage.getItem('entrepreneurToken');
             if (token) {
@@ -2089,11 +857,9 @@
             }
         })();
 
-        // Check if entrepreneur is logged in and show dashboard link
         (function () {
             const token = localStorage.getItem('entrepreneurToken');
             if (token) {
-                // Simple decode to check type (optional)
                 try {
                     const payload = JSON.parse(atob(token.split('.')[1]));
                     if (payload.type === 'entrepreneur') {
@@ -2108,19 +874,64 @@
         }
         document.addEventListener('DOMContentLoaded', init);
 
-        // Entrepreneur flow
+        // ---------- ENTREPRENEUR FLOW WITH SESSION STATE ----------
         var currentToken = null;
         var entrepreneurModal = document.getElementById('entrepreneurModal');
         var closeEntrepreneurBtn = document.getElementById('closeEntrepreneurModal');
 
-        // Show/hide steps
-        function showStep(stepId) {
-            document.querySelectorAll('#entrepreneurModal .step-content').forEach(el => el.style.display = 'none');
-            document.getElementById(stepId).style.display = 'block';
+        // ---- SESSION STATE HELPERS ----
+        function saveSignupState(step, userId, token) {
+            const state = { step: step, userId: userId || '', token: token || '' };
+            sessionStorage.setItem('signupState', JSON.stringify(state));
+            if (token) { currentToken = token; }
+            if (userId) { document.getElementById('otpForm').dataset.userId = userId; }
         }
 
-        // Open modal
+        function clearSignupState() {
+            sessionStorage.removeItem('signupState');
+        }
+
+        function loadSignupState() {
+            const saved = sessionStorage.getItem('signupState');
+            if (saved) {
+                try {
+                    const state = JSON.parse(saved);
+                    if (state.token) currentToken = state.token;
+                    if (state.userId) document.getElementById('otpForm').dataset.userId = state.userId;
+                    return state;
+                } catch (e) { return null; }
+            }
+            return null;
+        }
+
+        // ---- SHOW STEP (with persistence) ----
+        function showStep(stepId) {
+            document.querySelectorAll('#entrepreneurModal .step-content').forEach(el => el.style.display = 'none');
+            const target = document.getElementById(stepId);
+            if (target) target.style.display = 'block';
+
+            // Update saved state when step changes (preserve existing state)
+            const saved = sessionStorage.getItem('signupState');
+            if (saved) {
+                try {
+                    const state = JSON.parse(saved);
+                    state.step = stepId;
+                    sessionStorage.setItem('signupState', JSON.stringify(state));
+                } catch (e) { /* ignore */ }
+            }
+        }
+
+        // ---- OPEN MODAL (with state restore) ----
         function openEntrepreneurModal() {
+            const saved = loadSignupState();
+            if (saved && saved.step) {
+                entrepreneurModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                showStep(saved.step);
+                return;
+            }
+
+            // Normal open (fresh)
             entrepreneurModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             showStep('step-signup');
@@ -2129,11 +940,13 @@
             document.getElementById('selfieForm').reset();
             document.getElementById('listingFormModal').reset();
             currentToken = null;
+            clearSignupState();
         }
 
         function closeEntrepreneurModalFn() {
             entrepreneurModal.classList.remove('active');
             document.body.style.overflow = '';
+            // Do NOT clear state here – we want to keep it on close
         }
 
         closeEntrepreneurBtn.addEventListener('click', closeEntrepreneurModalFn);
@@ -2141,7 +954,7 @@
             if (e.target === entrepreneurModal) closeEntrepreneurModalFn();
         });
 
-        // Sign Up
+        // ---- SIGNUP ----
         document.getElementById('signupForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const name = document.getElementById('signupName').value.trim();
@@ -2157,13 +970,14 @@
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || 'Signup failed');
                 document.getElementById('otpForm').dataset.userId = data.userId;
+                saveSignupState('step-otp', data.userId, null);
                 showStep('step-otp');
             } catch (err) {
                 document.getElementById('signupError').textContent = err.message;
             }
         });
 
-        // OTP Verify
+        // ---- OTP VERIFY ----
         document.getElementById('otpForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const userId = this.dataset.userId;
@@ -2178,13 +992,14 @@
                 if (!res.ok) throw new Error(data.error || 'Invalid OTP');
                 currentToken = data.token;
                 localStorage.setItem('entrepreneurToken', currentToken);
+                saveSignupState('step-id', userId, currentToken);
                 showStep('step-id');
             } catch (err) {
                 document.getElementById('otpError').textContent = err.message;
             }
         });
 
-        // Upload ID
+        // ---- UPLOAD ID ----
         document.getElementById('idForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const file = document.getElementById('idFile').files[0];
@@ -2199,13 +1014,14 @@
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || 'Upload failed');
+                saveSignupState('step-selfie', null, currentToken);
                 showStep('step-selfie');
             } catch (err) {
                 document.getElementById('idError').textContent = err.message;
             }
         });
 
-        // Upload Selfie
+        // ---- UPLOAD SELFIE ----
         document.getElementById('selfieForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const file = document.getElementById('selfieFile').files[0];
@@ -2220,53 +1036,65 @@
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || 'Upload failed');
+                saveSignupState('step-listing', null, currentToken);
                 showStep('step-listing');
             } catch (err) {
                 document.getElementById('selfieError').textContent = err.message;
             }
         });
 
-        // Submit Listing (new version)
-function submitListing() {
-    const businessName = document.getElementById('listBusinessName').value.trim();
-    const category = document.getElementById('listCategory').value;
-    const description = document.getElementById('listDescription').value.trim();
-    const price = document.getElementById('listPrice').value.trim();
-    const location = document.getElementById('listLocation').value.trim();
-    const photos = document.getElementById('listPhotos').files;
+        // ---- SUBMIT LISTING (with button disabling & state clear) ----
+        function submitListing() {
+            const btn = document.querySelector('#step-listing .btn-primary');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
 
-    if (!businessName || !category || !description || !price || !location || photos.length === 0) {
-        document.getElementById('listingError').textContent = 'All fields required';
-        return;
-    }
+            const businessName = document.getElementById('listBusinessName').value.trim();
+            const category = document.getElementById('listCategory').value;
+            const description = document.getElementById('listDescription').value.trim();
+            const price = document.getElementById('listPrice').value.trim();
+            const location = document.getElementById('listLocation').value.trim();
+            const photos = document.getElementById('listPhotos').files;
 
-    const formData = new FormData();
-    formData.append('businessName', businessName);
-    formData.append('category', category);
-    formData.append('description', description);
-    formData.append('price', price);
-    formData.append('location', location);
-    for (let i = 0; i < photos.length; i++) {
-        formData.append('photos', photos[i]);
-    }
+            if (!businessName || !category || !description || !price || !location || photos.length === 0) {
+                document.getElementById('listingError').textContent = 'All fields required';
+                btn.disabled = false;
+                btn.textContent = 'Submit for Review';
+                return;
+            }
 
-    fetch(`${API_BASE}/api/listings`, {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + currentToken },
-        body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.error) {
-            document.getElementById('listingError').textContent = data.error;
-        } else {
-            showStep('step-done');
+            const formData = new FormData();
+            formData.append('businessName', businessName);
+            formData.append('category', category);
+            formData.append('description', description);
+            formData.append('price', price);
+            formData.append('location', location);
+            for (let i = 0; i < photos.length; i++) {
+                formData.append('photos', photos[i]);
+            }
+
+            fetch(`${API_BASE}/api/listings`, {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + currentToken },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('listingError').textContent = data.error;
+                } else {
+                    showStep('step-done');
+                    clearSignupState(); // Listing complete – clear session state
+                }
+            })
+            .catch(err => {
+                document.getElementById('listingError').textContent = err.message;
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = 'Submit for Review';
+            });
         }
-    })
-    .catch(err => {
-        document.getElementById('listingError').textContent = err.message;
-    });
-}
 
     </script>
 </body>
