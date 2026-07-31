@@ -797,24 +797,25 @@
             }
         });
 
-        document.getElementById('customerOtpForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const otp = document.getElementById('customerOtpCode').value.trim();
-            if (!otp || !customerId) return;
-            try {
-                const res = await fetch(`${API_BASE}/api/customer/verify-otp`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ customerId, otp })
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Invalid OTP');
-                customerToken = data.token;
-                showCustomerStep('customer-step-badge');
-            } catch (err) {
-                document.getElementById('customerOtpError').textContent = err.message;
-            }
-            
+document.getElementById('customerOtpForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const otp = document.getElementById('customerOtpCode').value.trim();
+    if (!otp || !customerId) return;
+    try {
+        const res = await fetch(`${API_BASE}/api/customer/verify-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customerId, otp })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Invalid OTP');
+        customerToken = data.token;
+        showCustomerStep('customer-step-badge');
+    } catch (err) {
+        document.getElementById('customerOtpError').textContent = err.message;
+    }
+});
+
 // Badge form (separate listener, attached once)
 document.getElementById('customerBadgeForm').addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -838,7 +839,6 @@ document.getElementById('customerBadgeForm').addEventListener('submit', async fu
         document.getElementById('badgeError').textContent = err.message;
     }
 });
-        });
 
         document.getElementById('customerRequestForm').addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -1066,4 +1066,4 @@ document.getElementById('customerBadgeForm').addEventListener('submit', async fu
         }
     </script>
 </body>
-                             </html>
+        </html>
