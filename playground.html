@@ -354,18 +354,25 @@
     <div class="modal-overlay" id="contactModal">
         <div class="modal-box">
             <button class="modal-close" id="closeContactModal">&times;</button>
-            <div class="step-content" id="customer-step-phone" style="display:block;">
-                <h2>Verify your phone</h2>
-                <p class="modal-sub">Enter your phone number to verify your identity before sending a request.</p>
-                <form id="customerPhoneForm" novalidate>
-                    <div class="form-group"><label for="customerPhone">Phone number *</label><input type="tel" id="customerPhone" placeholder="082 123 4567" required></div>
-                    <button type="submit" class="btn-primary btn-block">Send OTP</button>
-                </form>
-                <p class="modal-footnote" id="customerPhoneError" style="color:#dc2626;"></p>
-            </div>
+<div class="step-content" id="customer-step-phone" style="display:block;">
+    <h2>Verify your phone</h2>
+    <p class="modal-sub">Enter your phone number and email to verify your identity before sending a request.</p>
+    <form id="customerPhoneForm" novalidate>
+        <div class="form-group">
+            <label for="customerPhone">Phone number *</label>
+            <input type="tel" id="customerPhone" placeholder="082 123 4567" required>
+        </div>
+        <div class="form-group">
+            <label for="customerEmail">Email *</label>
+            <input type="email" id="customerEmail" placeholder="your@email.com" required>
+        </div>
+        <button type="submit" class="btn-primary btn-block">Send OTP</button>
+    </form>
+    <p class="modal-footnote" id="customerPhoneError" style="color:#dc2626;"></p>
+</div>
             <div class="step-content" id="customer-step-otp" style="display:none;">
                 <h2>Enter OTP</h2>
-                <p class="modal-sub">Check the server terminal for the 6‑digit code.</p>
+                <p class="modal-sub">Enter the 6‑digit OTP we sent to your email.</p>
                 <form id="customerOtpForm" novalidate>
                     <div class="form-group"><label for="customerOtpCode">OTP Code *</label><input type="text" id="customerOtpCode" placeholder="123456" maxlength="6" required></div>
                     <button type="submit" class="btn-primary btn-block">Verify OTP</button>
@@ -387,7 +394,7 @@
                 <h2>Get Verified Customer Badge</h2>
                 <p class="modal-sub">A Verified badge helps entrepreneurs trust your request and reply faster. It’s completely optional.</p>
                 <form id="customerBadgeForm" novalidate>
-                    <div class="form-group"><label for="badgeSelfie">Upload a clear selfie holding your ID or a piece of paper with today's date.</label><input type="file" id="badgeSelfie" accept="image/*"></div>
+                    <div class="form-group"><label for="badgeSelfie">Upload a clear selfie holding your ID or a piece of paper with today's date.</label><input type="file" name="badgeSelfie" id="badgeSelfie" accept="image/*"></div>
                     <button type="submit" class="btn-primary btn-block">Upload & Continue</button>
                 </form>
                 <p class="modal-sub" style="text-align:center; margin-top:8px;"><button class="btn-ghost" onclick="skipBadge()">Skip, I'll do it later</button></p>
@@ -420,7 +427,7 @@
             </div>
             <div class="step-content" id="step-otp" style="display:none;">
                 <h2>Verify your phone</h2>
-                <p class="modal-sub">Enter the 6‑digit OTP we sent to your phone (check the server terminal).</p>
+                <p class="modal-sub">Enter the 6‑digit OTP we sent to your email.</p>
                 <form id="otpForm" novalidate>
                     <div class="form-group"><label for="otpCode">OTP Code *</label><input type="text" id="otpCode" placeholder="123456" maxlength="6" required></div>
                     <button type="submit" class="btn-primary btn-block">Verify OTP</button>
@@ -729,6 +736,7 @@
         }
 
         function openContactModal(serviceId) {
+         document.getElementById('customerEmail').value = ''; 
             document.getElementById('customerServiceId').value = serviceId;
             contactModal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -750,23 +758,24 @@
         contactModal.addEventListener('click', function (e) { if (e.target === contactModal) closeContactModalFn(); });
 
         document.getElementById('customerPhoneForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const phone = document.getElementById('customerPhone').value.trim();
-            if (!phone) return;
-            try {
-                const res = await fetch(`${API_BASE}/api/customer/send-otp`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ phone })
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
-                customerId = data.customerId;
-                showCustomerStep('customer-step-otp');
-            } catch (err) {
-                document.getElementById('customerPhoneError').textContent = err.message;
-            }
+    e.preventDefault();
+    const phone = document.getElementById('customerPhone').value.trim();
+    const email = document.getElementById('customerEmail').value.trim();
+    if (!phone || !email) return;
+    try {
+        const res = await fetch(`${API_BASE}/api/customer/send-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone, email })
         });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
+        customerId = data.customerId;
+        showCustomerStep('customer-step-otp');
+    } catch (err) {
+        document.getElementById('customerPhoneError').textContent = err.message;
+    }
+});
 
         document.getElementById('customerOtpForm').addEventListener('submit', async function (e) {
             e.preventDefault();
