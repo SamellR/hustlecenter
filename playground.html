@@ -30,7 +30,6 @@
     <meta name="twitter:description" content="Vetted local services in Polokwane.">
     <meta name="twitter:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
     <style>
-        /* ===== YOUR EXISTING STYLES GO HERE (unchanged) ===== */
         :root {
             --primary: #0F172A;
             --accent: #D4A373;
@@ -359,10 +358,10 @@
     <p class="modal-sub">Enter your phone number and email to verify your identity before sending a request.</p>
     <form id="customerPhoneForm" novalidate>
         <div class="form-group">
-    <label for="customerPhone">Phone number *</label>
-    <input type="tel" id="customerPhone" placeholder="+27 82 123 4567" required>
-    <small style="color:var(--text-muted);">International format, e.g. +27 82 123 4567</small>
-</div>
+            <label for="customerPhone">Phone number *</label>
+            <input type="tel" id="customerPhone" placeholder="+27 82 123 4567" required>
+            <small style="color:var(--text-muted);">International format, e.g. +27 82 123 4567</small>
+        </div>
         <div class="form-group">
             <label for="customerEmail">Email *</label>
             <input type="email" id="customerEmail" placeholder="your@email.com" required>
@@ -384,7 +383,7 @@
                 <h2>Your request</h2>
                 <p class="modal-sub">Add a message for the entrepreneur (optional).</p>
                 <form id="customerRequestForm" novalidate>
-                    <div class="form-group"><label for="customerMessage">Your message (optional)</label><textarea id="customerMessage" rows="3" placeholder="Briefly describe what you need..."></textarea></div>
+                    <div class="form-group"><label for="customerMessage">Your message (optional)</label><textarea id="customerMessage" rows="3" placeholder="Briefly describe what you need..." style="word-break:break-word;"></textarea></div>
                     <div class="form-group"><label><input type="checkbox" name="customer_consent" required> I confirm my request is genuine. I consent to HustleCenter verifying my phone number and logging my details for safety.</label></div>
                     <input type="hidden" id="customerServiceId" value="">
                     <button type="submit" class="btn-primary btn-block">Send Request</button>
@@ -421,10 +420,10 @@
                     <div class="form-group"><label for="signupName">Full name *</label><input type="text" id="signupName" maxlength="100" placeholder="e.g. Thabo Mokoena" required></div>
                     <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail" maxlength="150" placeholder="thabo@email.com" required></div>
                     <div class="form-group">
-  <label for="signupPhone">Phone *</label>
-  <input type="tel" id="signupPhone" maxlength="20" placeholder="+27 82 123 4567" required>
-  <small style="color:var(--text-muted);">International format, e.g. +27 82 123 4567</small>
-</div>
+                        <label for="signupPhone">Phone *</label>
+                        <input type="tel" id="signupPhone" maxlength="20" placeholder="+27 82 123 4567" required>
+                        <small style="color:var(--text-muted);">International format, e.g. +27 82 123 4567</small>
+                    </div>
                     <div class="form-group"><label for="signupPassword">Password *</label><input type="password" id="signupPassword" maxlength="100" required></div>
                     <button type="submit" class="btn-primary btn-block">Sign Up</button>
                 </form>
@@ -546,6 +545,12 @@
     <button id="backToTop" title="Back to top" style="display:none;"><i class="ph ph-arrow-up" style="font-size:1.5rem;"></i></button>
 
     <script>
+        // XSS protection
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
         const API_BASE = 'https://hustlecenter-api.onrender.com';
 
         var DATA_URL = 'https://hustlecenter-api.onrender.com/api/listings/approved';
@@ -599,23 +604,19 @@
         });
 
         function isValidInternationalPhone(phone) {
-    // Remove spaces, dashes, brackets
-    var cleaned = phone.replace(/[\s\-\(\)]/g, '');
-    // Must start with '+' and have at least 11 characters total (+27 + 9 digits)
-    if (cleaned.charAt(0) !== '+') return false;
-    var digits = cleaned.substring(1).replace(/\D/g, '');
-    if (digits.length < 9) return false;
-    return true;
-}
+            var cleaned = phone.replace(/[\s\-\(\)]/g, '');
+            if (cleaned.charAt(0) !== '+') return false;
+            var digits = cleaned.substring(1).replace(/\D/g, '');
+            if (digits.length < 9) return false;
+            return true;
+        }
 
-function isValidPhone(phone) {
-    // keep for backwards compatibility (unused)
-    var cleaned = phone.replace(/[\s\-\(\)\+]/g, '');
-    if (cleaned.slice(0, 1) === '0' && cleaned.length === 10 && /^\d+$/.test(cleaned)) return true;
-    if (cleaned.slice(0, 3) === '+27' && cleaned.length === 12 && /^\+\d+$/.test(cleaned)) return true;
-    return false;
-}
-function containsLetter(str) { return /[a-zA-Z]/.test(str); }
+        function isValidPhone(phone) {
+            var cleaned = phone.replace(/[\s\-\(\)\+]/g, '');
+            if (cleaned.slice(0, 1) === '0' && cleaned.length === 10 && /^\d+$/.test(cleaned)) return true;
+            if (cleaned.slice(0, 3) === '+27' && cleaned.length === 12 && /^\+\d+$/.test(cleaned)) return true;
+            return false;
+        }
         function containsLetter(str) { return /[a-zA-Z]/.test(str); }
 
         function openDetailModal(serviceId) {
@@ -634,7 +635,7 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
             }
             detailTitle.textContent = service.title;
             detailCategory.textContent = Array.isArray(service.category) ? service.category[0] : service.category;
-            detailLocation.innerHTML = '<i class="ph ph-map-pin"></i> ' + (service.location || 'Polokwane');
+            detailLocation.innerHTML = '<i class="ph ph-map-pin"></i> ' + escapeHtml(service.location || 'Polokwane');
             detailDescription.textContent = service.description;
             detailPrice.textContent = 'R' + (service.price || '0');
             detailSeller.textContent = service.sellerName;
@@ -704,13 +705,13 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
                 html += '<div class="service-card" data-id="' + service.id + '">' +
                     '<div class="card-image" onclick="openDetailModal(\'' + service.id + '\')">' +
                     (hasMultiple ? '<div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:10px; z-index:1;">' + imagesArray.length + ' photos</div>' : '') +
-                    (thumbUrl ? '<img src="' + thumbUrl + '" alt="' + service.title + '" loading="lazy">' : '') +
-                    '<span class="card-category">' + (Array.isArray(service.category) ? service.category[0] : service.category) + '</span>' +
+                    (thumbUrl ? '<img src="' + thumbUrl + '" alt="' + escapeHtml(service.title) + '" loading="lazy">' : '') +
+                    '<span class="card-category">' + (Array.isArray(service.category) ? escapeHtml(service.category[0]) : escapeHtml(service.category)) + '</span>' +
                     '</div>' +
-                    '<div class="card-body"><h3>' + service.title + '</h3>' +
-                    '<div class="card-meta"><span class="card-location"><i class="ph ph-map-pin"></i> ' + service.location + '</span></div>' +
-                    '<p class="card-description">' + desc + '</p>' +
-                    '<div class="card-footer"><span class="card-seller">' + service.sellerName +
+                    '<div class="card-body"><h3>' + escapeHtml(service.title) + '</h3>' +
+                    '<div class="card-meta"><span class="card-location"><i class="ph ph-map-pin"></i> ' + escapeHtml(service.location) + '</span></div>' +
+                    '<p class="card-description">' + escapeHtml(desc) + '</p>' +
+                    '<div class="card-footer"><span class="card-seller">' + escapeHtml(service.sellerName) +
                     (service.sellerVerified ? ' <span class="badge-verified"><i class="ph ph-check-circle"></i> Verified</span>' : '') +
                     '<button class="btn-whatsapp" onclick="openContactModal(\'' + service.id + '\')">' +
                     '<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Chat</a></div></div></div>';
@@ -751,12 +752,10 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
             document.querySelectorAll('#contactModal .step-content').forEach(el => el.style.display = 'none');
             document.getElementById(stepId).style.display = 'block';
         }
-        
+
         function skipBadge() { showCustomerStep('customer-step-request'); }
-        
 
         function openContactModal(serviceId) {
-         document.getElementById('customerEmail').value = ''; 
             document.getElementById('customerServiceId').value = serviceId;
             contactModal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -765,6 +764,7 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
             document.getElementById('customerOtpForm').reset();
             document.getElementById('customerRequestForm').reset();
             document.getElementById('customerBadgeForm').reset();
+            document.getElementById('customerEmail').value = '';
             customerToken = null;
             customerId = null;
         }
@@ -778,24 +778,24 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
         contactModal.addEventListener('click', function (e) { if (e.target === contactModal) closeContactModalFn(); });
 
         document.getElementById('customerPhoneForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    const phone = document.getElementById('customerPhone').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-    if (!phone || !email) return;
-    try {
-        const res = await fetch(`${API_BASE}/api/customer/send-otp`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone, email })
+            e.preventDefault();
+            const phone = document.getElementById('customerPhone').value.trim();
+            const email = document.getElementById('customerEmail').value.trim();
+            if (!phone || !email) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/customer/send-otp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, email })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
+                customerId = data.customerId;
+                showCustomerStep('customer-step-otp');
+            } catch (err) {
+                document.getElementById('customerPhoneError').textContent = err.message;
+            }
         });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
-        customerId = data.customerId;
-        showCustomerStep('customer-step-otp');
-    } catch (err) {
-        document.getElementById('customerPhoneError').textContent = err.message;
-    }
-});
 
         document.getElementById('customerOtpForm').addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -814,6 +814,7 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
             } catch (err) {
                 document.getElementById('customerOtpError').textContent = err.message;
             }
+            // Badge form submit handler
             document.getElementById('customerBadgeForm').addEventListener('submit', async function (e) {
                 e.preventDefault();
                 const file = document.getElementById('badgeSelfie').files[0];
@@ -887,18 +888,6 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
             }
         })();
 
-        (function () {
-            const token = localStorage.getItem('entrepreneurToken');
-            if (token) {
-                try {
-                    const payload = JSON.parse(atob(token.split('.')[1]));
-                    if (payload.type === 'entrepreneur') {
-                        document.getElementById('dashboardLink').style.display = 'inline';
-                    }
-                } catch (e) { }
-            }
-        })();
-
         function init() {
             loadServices(function () { addSearchBar(); initCategoryPills(); renderServices(allServices); });
         }
@@ -909,59 +898,13 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
         var entrepreneurModal = document.getElementById('entrepreneurModal');
         var closeEntrepreneurBtn = document.getElementById('closeEntrepreneurModal');
 
-        // ---- SESSION STATE HELPERS ----
-        function saveSignupState(step, userId, token) {
-            const state = { step: step, userId: userId || '', token: token || '' };
-            sessionStorage.setItem('signupState', JSON.stringify(state));
-            if (token) { currentToken = token; }
-            if (userId) { document.getElementById('otpForm').dataset.userId = userId; }
-        }
-
-        function clearSignupState() {
-            sessionStorage.removeItem('signupState');
-        }
-
-        function loadSignupState() {
-            const saved = sessionStorage.getItem('signupState');
-            if (saved) {
-                try {
-                    const state = JSON.parse(saved);
-                    if (state.token) currentToken = state.token;
-                    if (state.userId) document.getElementById('otpForm').dataset.userId = state.userId;
-                    return state;
-                } catch (e) { return null; }
-            }
-            return null;
-        }
-
-        // ---- SHOW STEP (with persistence) ----
         function showStep(stepId) {
             document.querySelectorAll('#entrepreneurModal .step-content').forEach(el => el.style.display = 'none');
             const target = document.getElementById(stepId);
             if (target) target.style.display = 'block';
-
-            // Update saved state when step changes (preserve existing state)
-            const saved = sessionStorage.getItem('signupState');
-            if (saved) {
-                try {
-                    const state = JSON.parse(saved);
-                    state.step = stepId;
-                    sessionStorage.setItem('signupState', JSON.stringify(state));
-                } catch (e) { /* ignore */ }
-            }
         }
 
-        // ---- OPEN MODAL (with state restore) ----
         function openEntrepreneurModal() {
-            const saved = loadSignupState();
-            if (saved && saved.step) {
-                entrepreneurModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                showStep(saved.step);
-                return;
-            }
-
-            // Normal open (fresh)
             entrepreneurModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             showStep('step-signup');
@@ -970,13 +913,11 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
             document.getElementById('selfieForm').reset();
             document.getElementById('listingFormModal').reset();
             currentToken = null;
-            clearSignupState();
         }
 
         function closeEntrepreneurModalFn() {
             entrepreneurModal.classList.remove('active');
             document.body.style.overflow = '';
-            // Do NOT clear state here – we want to keep it on close
         }
 
         closeEntrepreneurBtn.addEventListener('click', closeEntrepreneurModalFn);
@@ -984,16 +925,15 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
             if (e.target === entrepreneurModal) closeEntrepreneurModalFn();
         });
 
-        // ---- SIGNUP ----
         document.getElementById('signupForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const name = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim();
             const phone = document.getElementById('signupPhone').value.trim();
             if (!isValidInternationalPhone(phone)) {
-    document.getElementById('signupError').textContent = 'Enter phone in international format (+27…)';
-    return;
-}
+                document.getElementById('signupError').textContent = 'Enter phone in international format (+27…)';
+                return;
+            }
             const password = document.getElementById('signupPassword').value;
             try {
                 const res = await fetch(`${API_BASE}/api/signup`, {
@@ -1004,14 +944,12 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || 'Signup failed');
                 document.getElementById('otpForm').dataset.userId = data.userId;
-                saveSignupState('step-otp', data.userId, null);
                 showStep('step-otp');
             } catch (err) {
                 document.getElementById('signupError').textContent = err.message;
             }
         });
 
-        // ---- OTP VERIFY ----
         document.getElementById('otpForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const userId = this.dataset.userId;
@@ -1026,14 +964,12 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
                 if (!res.ok) throw new Error(data.error || 'Invalid OTP');
                 currentToken = data.token;
                 localStorage.setItem('entrepreneurToken', currentToken);
-                saveSignupState('step-id', userId, currentToken);
                 showStep('step-id');
             } catch (err) {
                 document.getElementById('otpError').textContent = err.message;
             }
         });
 
-        // ---- UPLOAD ID ----
         document.getElementById('idForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const file = document.getElementById('idFile').files[0];
@@ -1048,14 +984,12 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || 'Upload failed');
-                saveSignupState('step-selfie', null, currentToken);
                 showStep('step-selfie');
             } catch (err) {
                 document.getElementById('idError').textContent = err.message;
             }
         });
 
-        // ---- UPLOAD SELFIE ----
         document.getElementById('selfieForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const file = document.getElementById('selfieFile').files[0];
@@ -1070,14 +1004,12 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || 'Upload failed');
-                saveSignupState('step-listing', null, currentToken);
                 showStep('step-listing');
             } catch (err) {
                 document.getElementById('selfieError').textContent = err.message;
             }
         });
 
-        // ---- SUBMIT LISTING (with button disabling & state clear) ----
         function submitListing() {
             const btn = document.querySelector('#step-listing .btn-primary');
             btn.disabled = true;
@@ -1118,7 +1050,6 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
                     document.getElementById('listingError').textContent = data.error;
                 } else {
                     showStep('step-done');
-                    clearSignupState(); // Listing complete – clear session state
                 }
             })
             .catch(err => {
@@ -1129,8 +1060,6 @@ function containsLetter(str) { return /[a-zA-Z]/.test(str); }
                 btn.textContent = 'Submit for Review';
             });
         }
-
     </script>
 </body>
-
-                        </html>
+                                                                             </html>
