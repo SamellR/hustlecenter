@@ -359,9 +359,10 @@
     <p class="modal-sub">Enter your phone number and email to verify your identity before sending a request.</p>
     <form id="customerPhoneForm" novalidate>
         <div class="form-group">
-            <label for="customerPhone">Phone number *</label>
-            <input type="tel" id="customerPhone" placeholder="082 123 4567" required>
-        </div>
+    <label for="customerPhone">Phone number *</label>
+    <input type="tel" id="customerPhone" placeholder="+27 82 123 4567" required>
+    <small style="color:var(--text-muted);">International format, e.g. +27 82 123 4567</small>
+</div>
         <div class="form-group">
             <label for="customerEmail">Email *</label>
             <input type="email" id="customerEmail" placeholder="your@email.com" required>
@@ -419,7 +420,11 @@
                 <form id="signupForm" novalidate>
                     <div class="form-group"><label for="signupName">Full name *</label><input type="text" id="signupName" maxlength="100" placeholder="e.g. Thabo Mokoena" required></div>
                     <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail" maxlength="150" placeholder="thabo@email.com" required></div>
-                    <div class="form-group"><label for="signupPhone">Phone *</label><input type="tel" id="signupPhone" maxlength="20" placeholder="0821234567" required></div>
+                    <div class="form-group">
+  <label for="signupPhone">Phone *</label>
+  <input type="tel" id="signupPhone" maxlength="20" placeholder="+27 82 123 4567" required>
+  <small style="color:var(--text-muted);">International format, e.g. +27 82 123 4567</small>
+</div>
                     <div class="form-group"><label for="signupPassword">Password *</label><input type="password" id="signupPassword" maxlength="100" required></div>
                     <button type="submit" class="btn-primary btn-block">Sign Up</button>
                 </form>
@@ -593,12 +598,24 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        function isValidPhone(phone) {
-            var cleaned = phone.replace(/[\s\-\(\)\+]/g, '');
-            if (cleaned.slice(0, 1) === '0' && cleaned.length === 10 && /^\d+$/.test(cleaned)) return true;
-            if (cleaned.slice(0, 3) === '+27' && cleaned.length === 12 && /^\+\d+$/.test(cleaned)) return true;
-            return false;
-        }
+        function isValidInternationalPhone(phone) {
+    // Remove spaces, dashes, brackets
+    var cleaned = phone.replace(/[\s\-\(\)]/g, '');
+    // Must start with '+' and have at least 11 characters total (+27 + 9 digits)
+    if (cleaned.charAt(0) !== '+') return false;
+    var digits = cleaned.substring(1).replace(/\D/g, '');
+    if (digits.length < 9) return false;
+    return true;
+}
+
+function isValidPhone(phone) {
+    // keep for backwards compatibility (unused)
+    var cleaned = phone.replace(/[\s\-\(\)\+]/g, '');
+    if (cleaned.slice(0, 1) === '0' && cleaned.length === 10 && /^\d+$/.test(cleaned)) return true;
+    if (cleaned.slice(0, 3) === '+27' && cleaned.length === 12 && /^\+\d+$/.test(cleaned)) return true;
+    return false;
+}
+function containsLetter(str) { return /[a-zA-Z]/.test(str); }
         function containsLetter(str) { return /[a-zA-Z]/.test(str); }
 
         function openDetailModal(serviceId) {
@@ -734,6 +751,9 @@
             document.querySelectorAll('#contactModal .step-content').forEach(el => el.style.display = 'none');
             document.getElementById(stepId).style.display = 'block';
         }
+        
+        function skipBadge() { showCustomerStep('customer-step-request'); }
+        
 
         function openContactModal(serviceId) {
          document.getElementById('customerEmail').value = ''; 
@@ -794,7 +814,6 @@
             } catch (err) {
                 document.getElementById('customerOtpError').textContent = err.message;
             }
-            function skipBadge() { showCustomerStep('customer-step-request'); }
             document.getElementById('customerBadgeForm').addEventListener('submit', async function (e) {
                 e.preventDefault();
                 const file = document.getElementById('badgeSelfie').files[0];
@@ -971,6 +990,10 @@
             const name = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim();
             const phone = document.getElementById('signupPhone').value.trim();
+            if (!isValidInternationalPhone(phone)) {
+    document.getElementById('signupError').textContent = 'Enter phone in international format (+27…)';
+    return;
+}
             const password = document.getElementById('signupPassword').value;
             try {
                 const res = await fetch(`${API_BASE}/api/signup`, {
