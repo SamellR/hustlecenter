@@ -940,16 +940,16 @@ document.getElementById('customerBadgeForm').addEventListener('submit', async fu
             }
             const password = document.getElementById('signupPassword').value;
             try {
-                const res = await fetch(`${API_BASE}/api/signup`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, phone, password })
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Signup failed');
-                document.getElementById('otpForm').dataset.userId = data.userId;
-                showStep('step-otp');
-            catch (err) {
+    const res = await fetch(`${API_BASE}/api/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, password })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Signup failed');
+    document.getElementById('otpForm').dataset.userId = data.userId;
+    showStep('step-otp');
+} catch (err) {
     if (err.message === 'Email already registered') {
         document.getElementById('signupError').innerHTML = 'Email already registered. <a href="entrepreneur-dashboard.html" style="color:#D4A373;">Log in here</a> to continue your listing.';
     } else {
@@ -1070,4 +1070,4 @@ document.getElementById('customerBadgeForm').addEventListener('submit', async fu
         }
     </script>
 </body>
-    </html>
+                                                                    </html>
