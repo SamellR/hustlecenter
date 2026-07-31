@@ -364,7 +364,7 @@
         </div>
         <div class="form-group">
             <label for="customerEmail">Email *</label>
-            <input type="email" id="customerEmail" placeholder="your@email.com" required>
+            <input type="email" id="customerEmail" placeholder="yourname@gmail.com" required>
         </div>
         <button type="submit" class="btn-primary btn-block">Send OTP</button>
     </form>
@@ -418,7 +418,7 @@
                 <p class="modal-sub">First, create your entrepreneur account. All fields are required.</p>
                 <form id="signupForm" novalidate>
                     <div class="form-group"><label for="signupName">Full name *</label><input type="text" id="signupName" maxlength="100" placeholder="e.g. Thabo Mokoena" required></div>
-                    <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail" maxlength="150" placeholder="thabo@email.com" required></div>
+                    <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail" maxlength="150" placeholder="yourname@gmail.com" required></div>
                     <div class="form-group">
                         <label for="signupPhone">Phone *</label>
                         <input type="tel" id="signupPhone" maxlength="20" placeholder="+27 82 123 4567" required>
@@ -949,9 +949,13 @@ document.getElementById('customerBadgeForm').addEventListener('submit', async fu
                 if (!res.ok) throw new Error(data.error || 'Signup failed');
                 document.getElementById('otpForm').dataset.userId = data.userId;
                 showStep('step-otp');
-            } catch (err) {
-                document.getElementById('signupError').textContent = err.message;
-            }
+            catch (err) {
+    if (err.message === 'Email already registered') {
+        document.getElementById('signupError').innerHTML = 'Email already registered. <a href="entrepreneur-dashboard.html" style="color:#D4A373;">Log in here</a> to continue your listing.';
+    } else {
+        document.getElementById('signupError').textContent = err.message;
+    }
+}
         });
 
         document.getElementById('otpForm').addEventListener('submit', async function (e) {
@@ -1066,4 +1070,4 @@ document.getElementById('customerBadgeForm').addEventListener('submit', async fu
         }
     </script>
 </body>
-        </html>
+    </html>
