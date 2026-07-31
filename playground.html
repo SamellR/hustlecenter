@@ -814,26 +814,30 @@
             } catch (err) {
                 document.getElementById('customerOtpError').textContent = err.message;
             }
-            // Badge form submit handler
-            document.getElementById('customerBadgeForm').addEventListener('submit', async function (e) {
-                e.preventDefault();
-                const file = document.getElementById('badgeSelfie').files[0];
-                if (!file) return skipBadge();
-                const formData = new FormData();
-                formData.append('badgeSelfie', file);
-                try {
-                    const res = await fetch(`${API_BASE}/api/customer/verified-badge`, {
-                        method: 'POST',
-                        headers: { 'Authorization': 'Bearer ' + customerToken },
-                        body: formData
-                    });
-                    const data = await res.json();
-                    if (!res.ok) throw new Error(data.error || 'Upload failed');
-                    showCustomerStep('customer-step-request');
-                } catch (err) {
-                    document.getElementById('badgeError').textContent = err.message;
-                }
-            });
+            
+// Badge form (separate listener, attached once)
+document.getElementById('customerBadgeForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const file = document.getElementById('badgeSelfie').files[0];
+    if (!file) {
+        skipBadge();
+        return;
+    }
+    const formData = new FormData();
+    formData.append('badgeSelfie', file);
+    try {
+        const res = await fetch(`${API_BASE}/api/customer/verified-badge`, {
+            method: 'POST',
+            headers: { 'Authorization': 'Bearer ' + customerToken },
+            body: formData
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Upload failed');
+        showCustomerStep('customer-step-request');
+    } catch (err) {
+        document.getElementById('badgeError').textContent = err.message;
+    }
+});
         });
 
         document.getElementById('customerRequestForm').addEventListener('submit', async function (e) {
@@ -1062,4 +1066,4 @@
         }
     </script>
 </body>
-                                                                             </html>
+                             </html>
