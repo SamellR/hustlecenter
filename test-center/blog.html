@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HustleCenter Blog – Learn. Build. Grow.</title>
+    <meta name="description" content="Practical knowledge, local stories and lessons from the people building businesses and communities around Polokwane.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --shadow-hover: 0 16px 48px rgba(15,23,42,0.15);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:inherit; text-decoration:none; }
+        .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
+        h1 { font-size:clamp(2rem, 5vw, 3.2rem); margin-bottom:8px; }
+        h2 { font-size:2rem; margin-bottom:16px; }
+        h3 { font-size:1.5rem; margin-bottom:12px; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:inline-block; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:12px 28px; border-radius:50px; border:none; font-size:1rem;
+            cursor:pointer; transition:all 0.25s; text-align:center; font-family:var(--font-body);
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary); font-weight:600;
+            padding:10px 24px; border-radius:50px; border:2px solid var(--border-light);
+            transition:all 0.25s; font-size:0.95rem; cursor:pointer; font-family:var(--font-body); text-align:center;
+        }
+        .btn-outline:hover { border-color:var(--accent); background:rgba(212,163,115,0.08); }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .main-nav a.active { color:var(--accent); font-weight:600; }
+        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Hero */
+        .blog-hero { padding:80px 0 40px; text-align:center; background:linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%); }
+        .mission-line { font-style:italic; color:var(--text-muted); margin-top:8px; font-size:1.1rem; }
+
+        /* Featured Article */
+        .featured-section { padding:60px 0; }
+        .featured-card { background:var(--card-bg); border-radius:var(--radius-md); padding:40px; box-shadow:var(--shadow); display:flex; gap:32px; align-items:center; flex-wrap:wrap; }
+        .featured-content { flex:1; min-width:250px; }
+        .featured-img { flex:1; min-width:200px; height:200px; background:var(--primary); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; color:#fff; font-size:2rem; }
+        .meta { font-size:0.9rem; color:var(--text-muted); margin-bottom:8px; }
+        .meta span { margin-right:12px; }
+        .description { color:var(--text-muted); margin-bottom:20px; }
+
+        /* Local Stories */
+        .local-section { padding:60px 0; background:var(--card-bg); }
+        .local-card { background:var(--bg); border-radius:var(--radius-md); padding:32px; box-shadow:var(--shadow); display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+        .local-content { flex:1; min-width:250px; }
+        .local-img { width:150px; height:150px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.5rem; flex-shrink:0; margin:0 auto; }
+
+        /* Categories */
+        .categories-section { padding:40px 0; }
+        .category-list { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+        .cat-link { background:var(--card-bg); border:2px solid var(--border-light); border-radius:30px; padding:8px 20px; font-size:0.9rem; font-weight:500; transition:all 0.2s; cursor:pointer; }
+        .cat-link:hover { border-color:var(--accent); color:var(--accent); }
+
+        /* Submit CTA */
+        .submit-cta { padding:60px 0; background:var(--bg); text-align:center; }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .featured-card, .local-card { flex-direction:column; text-align:center; }
+            .featured-img { height:160px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="list-your-service.html">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="blog.html" class="active">Blog</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="blog-hero">
+            <div class="container">
+                <h1>Learn. Build. <span class="gold">Grow</span>.</h1>
+                <p style="max-width:600px; margin:0 auto; color:var(--text-muted); font-size:1.1rem;">Practical knowledge, local stories and lessons from the people building businesses and communities around us.</p>
+                <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+            </div>
+        </section>
+
+        <!-- Featured Article -->
+        <section class="featured-section">
+            <div class="container">
+                <div class="featured-card">
+                    <div class="featured-content">
+                        <div class="meta">
+                            <span>HustleCenter Article</span> · <span>8 min read</span>
+                        </div>
+                        <h2>How to Start Small and Build a Business Customers Can Trust</h2>
+                        <p class="description">You don't need a big business to start building something valuable. You need something you can do well, people who need it, and a reason for them to trust you.</p>
+                        <a href="article.html?slug=starting-small-business" class="btn-primary">Read Article →</a>
+                    </div>
+                    <div class="featured-img">📖</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Local Stories -->
+        <section class="local-section">
+            <div class="container">
+                <h2 style="text-align:center;">Local <span class="gold">Stories</span></h2>
+                <p style="text-align:center; color:var(--text-muted); max-width:600px; margin:0 auto 40px;">Behind every business is a person, a journey and a reason they started.</p>
+                <div class="local-card">
+                    <div class="local-img">👤</div>
+                    <div class="local-content">
+                        <div class="meta">
+                            <span>Local Story</span> · <span>6 min read</span>
+                        </div>
+                        <h3>From One Customer to a Growing Business: A Local Entrepreneur's Journey</h3>
+                        <p class="description">A local entrepreneur shares how a skill, a few customers and a willingness to learn became the foundation for a growing business.</p>
+                        <a href="article.html?slug=local-entrepreneur-journey" class="btn-outline">Read Story →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories-section">
+            <div class="container">
+                <h2 style="text-align:center; margin-bottom:24px;">Explore <span class="gold">Topics</span></h2>
+                <div class="category-list">
+                    <a href="#" class="cat-link">HustleCenter Articles</a>
+                    <a href="#" class="cat-link">Local Stories</a>
+                    <a href="#" class="cat-link">Business & Entrepreneurship</a>
+                    <a href="#" class="cat-link">Customer & Community</a>
+                    <a href="#" class="cat-link">Learning & Growth</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit Your Story -->
+        <section class="submit-cta">
+            <div class="container">
+                <h2>Have a story worth <span class="gold">sharing</span>?</h2>
+                <p style="color:var(--text-muted); max-width:500px; margin:0 auto 24px;">Tell us about your experience, your business, your journey or something you've learned that could help someone else.</p>
+                <a href="submit-story.html" class="btn-primary">Submit Your Story →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust</h4>
+                <ul>
+                    <li><a href="trust.html">Trust & Safety</a></li>
+                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    <li><a href="report.html">Report a Problem</a></li>
+                    <li><a href="appeals.html">Appeals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                    <li><a href="popia.html">POPIA Notice</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

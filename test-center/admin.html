@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard – HustleCenter</title>
+    <meta name="description" content="HustleCenter admin dashboard. Manage listings, requests, and categories.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; }
+        a { color:var(--accent); text-decoration:none; }
+        .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+        h1, h2 { font-family:var(--font-heading); font-weight:700; }
+        h1 { font-size:2rem; margin-bottom:24px; }
+        h2 { font-size:1.4rem; margin:24px 0 16px; }
+        .gold { color:var(--accent); }
+
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; }
+        .logo-mark .gold { color:var(--accent); }
+
+        .login-box { background:var(--card-bg); padding:40px; border-radius:var(--radius-md); max-width:400px; margin:80px auto; text-align:center; box-shadow:0 8px 30px rgba(15,23,42,0.08); }
+        .login-box input { width:100%; padding:14px 16px; border:2px solid var(--border-light); border-radius:var(--radius-sm); font-size:1rem; margin:16px 0; }
+        .login-box button { width:100%; padding:14px; background:var(--accent); border:none; border-radius:50px; font-weight:600; cursor:pointer; font-size:1rem; }
+        .login-box button:hover { background:var(--accent-hover); }
+
+        .dashboard { display:none; padding:40px 0; }
+        .tabs { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+        .tab { padding:8px 18px; border:2px solid var(--border-light); border-radius:20px; background:#fff; cursor:pointer; font-size:0.9rem; transition:0.2s; }
+        .tab.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+        .tab:hover:not(.active) { border-color:var(--accent); }
+
+        .table-wrapper { overflow-x:auto; background:var(--card-bg); border-radius:var(--radius-md); box-shadow:0 8px 30px rgba(15,23,42,0.08); padding:20px; }
+        table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+        th, td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border-light); }
+        th { background:var(--bg); font-weight:600; }
+
+        .btn-sm { padding:5px 12px; border-radius:16px; font-size:0.75rem; font-weight:600; border:none; cursor:pointer; }
+        .btn-approve { background:#D4A373; color:#0F172A; }
+        .btn-reject { background:#dc2626; color:#fff; margin-left:4px; }
+        .btn-delete { background:#dc2626; color:#fff; margin-left:4px; }
+
+        .stats-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:16px; margin-bottom:32px; }
+        .stat-card { background:var(--card-bg); padding:20px; border-radius:var(--radius-md); box-shadow:0 8px 30px rgba(15,23,42,0.05); text-align:center; }
+        .stat-card .stat-num { font-family:var(--font-heading); font-size:2rem; color:var(--accent); }
+        .stat-card .stat-label { font-size:0.85rem; color:var(--text-muted); }
+
+        .status-msg { padding:10px; margin:10px 0; border-radius:8px; }
+        .status-success { background:#dcfce7; color:#166534; }
+        .status-error { background:#fee2e2; color:#991b1b; }
+
+        @media (max-width: 768px) {
+            .login-box { margin:40px auto; }
+            .stats-row { grid-template-columns:1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span> Admin</a>
+            <button id="logoutBtn" class="btn-sm" style="background:transparent; border:1px solid #dc2626; color:#dc2626; display:none;" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Login Screen -->
+            <div id="loginScreen" class="login-box">
+                <h2>Admin <span class="gold">Login</span></h2>
+                <input type="password" id="adminKeyInput" placeholder="Admin key" value="">
+                <button id="loginBtn">Login</button>
+                <p id="loginError" style="color:#dc2626; margin-top:8px; font-size:0.9rem;"></p>
+            </div>
+
+            <!-- Dashboard -->
+            <div id="dashboard" class="dashboard">
+                <h1>Admin <span class="gold">Dashboard</span></h1>
+
+                <!-- Stats -->
+                <div class="stats-row" id="statsRow"></div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active" data-tab="listings">Pending Listings</button>
+                    <button class="tab" data-tab="requests">Requests</button>
+                </div>
+                <div id="statusMsg"></div>
+                <div class="table-wrapper" id="tabContent">Loading...</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+        let adminKey = sessionStorage.getItem('adminKey') || '';
+
+        // Show dashboard if already logged in
+        if (adminKey) {
+            showDashboard();
+            switchTab('listings');
+        }
+
+        document.getElementById('loginBtn').addEventListener('click', async function() {
+            const keyInput = document.getElementById('adminKeyInput');
+            const errorEl = document.getElementById('loginError');
+            adminKey = keyInput.value.trim();
+            if (!adminKey) return;
+            this.disabled = true;
+            this.textContent = 'Checking...';
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/listings/pending`, {
+                    headers: { 'x-admin-key': adminKey }
+                });
+                if (!res.ok) throw new Error('Invalid key');
+                sessionStorage.setItem('adminKey', adminKey);
+                showDashboard();
+                switchTab('listings');
+            } catch (err) {
+                errorEl.textContent = 'Invalid admin key.';
+                adminKey = '';
+            } finally {
+                this.disabled = false;
+                this.textContent = 'Login';
+            }
+        });
+
+        function showDashboard() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('logoutBtn').style.display = 'block';
+            loadStats();
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminKey');
+            location.reload();
+        }
+
+        function authHeaders() {
+            return { 'x-admin-key': adminKey, 'Content-Type': 'application/json' };
+        }
+
+        function showStatus(msg, type) {
+            const el = document.getElementById('statusMsg');
+            el.innerHTML = `<div class="status-msg status-${type}">${msg}</div>`;
+            setTimeout(() => el.innerHTML = '', 4000);
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+            document.getElementById('statusMsg').innerHTML = '';
+            const content = document.getElementById('tabContent');
+            switch(tab) {
+                case 'listings': loadPendingListings(content); break;
+                case 'requests': loadRequests(content); break;
+            }
+        }
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+        });
+
+        async function loadStats() {
+            try {
+                const [pendingRes, approvedRes, requestsRes] = await Promise.all([
+                    fetch(`${API_BASE}/api/admin/listings/pending`, { headers: authHeaders() }),
+                    fetch(`${API_BASE}/api/admin/listings`, { headers: authHeaders() }),
+                    fetch(`${API_BASE}/api/admin/requests`, { headers: authHeaders() })
+                ]);
+                const pending = await pendingRes.json();
+                const allListings = await approvedRes.json();
+                const requests = await requestsRes.json();
+                const approved = allListings.filter(l => l.status === 'approved');
+                document.getElementById('statsRow').innerHTML = `
+                    <div class="stat-card"><div class="stat-num">${pending.length}</div><div class="stat-label">Pending</div></div>
+                    <div class="stat-card"><div class="stat-num">${approved.length}</div><div class="stat-label">Approved</div></div>
+                    <div class="stat-card"><div class="stat-num">${requests.length}</div><div class="stat-label">Requests</div></div>
+                `;
+            } catch (err) {
+                document.getElementById('statsRow').innerHTML = '<p style="color:var(--text-muted);">Unable to load stats.</p>';
+            }
+        }
+
+        async function loadPendingListings(container) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/listings/pending`, { headers: authHeaders() });
+                const data = await res.json();
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No pending listings.</p>';
+                    return;
+                }
+                let html = '<table><tr><th>Business</th><th>Category</th><th>Location</th><th>Date</th><th>Action</th></tr>';
+                data.forEach(l => {
+                    html += `<tr>
+                        <td>${l.businessName}</td><td>${l.category}</td><td>${l.location}</td>
+                        <td>${new Date(l.createdAt).toLocaleDateString()}</td>
+                        <td>
+                            <button class="btn-sm btn-approve" data-id="${l.id}">Approve</button>
+                            <button class="btn-sm btn-reject" data-id="${l.id}">Reject</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</table>';
+                container.innerHTML = html;
+                container.querySelectorAll('.btn-approve').forEach(b => b.addEventListener('click', () => approveListing(b.dataset.id)));
+                container.querySelectorAll('.btn-reject').forEach(b => b.addEventListener('click', () => rejectListing(b.dataset.id)));
+            } catch (err) {
+                container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading listings.</p>';
+            }
+        }
+
+        async function approveListing(id) {
+            if (!confirm('Approve this listing?')) return;
+            await fetch(`${API_BASE}/api/admin/listings/${id}/approve`, { method: 'PUT', headers: authHeaders() });
+            showStatus('✅ Listing approved!', 'success');
+            loadPendingListings(document.getElementById('tabContent'));
+            loadStats();
+        }
+
+        async function rejectListing(id) {
+            if (!confirm('Reject this listing?')) return;
+            await fetch(`${API_BASE}/api/admin/listings/${id}/reject`, { method: 'PUT', headers: authHeaders() });
+            showStatus('Listing rejected.', 'success');
+            loadPendingListings(document.getElementById('tabContent'));
+            loadStats();
+        }
+
+        async function loadRequests(container) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/requests`, { headers: authHeaders() });
+                const data = await res.json();
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No requests yet.</p>';
+                    return;
+                }
+                let html = '<table><tr><th>Customer</th><th>Provider</th><th>Service</th><th>Message</th><th>Date</th></tr>';
+                data.forEach(r => {
+                    html += `<tr>
+                        <td>${r.customerPhone}</td><td>${r.entrepreneurName}</td><td>${r.serviceId}</td>
+                        <td>${r.message || '—'}</td><td>${new Date(r.createdAt).toLocaleString()}</td>
+                    </tr>`;
+                });
+                html += '</table>';
+                container.innerHTML = html;
+            } catch (err) {
+                container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading requests.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

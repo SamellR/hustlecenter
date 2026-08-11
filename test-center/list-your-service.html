@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Service – HustleCenter</title>
+    <meta name="description" content="Submit your service listing to HustleCenter for review. Free during launch.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .container { max-width:700px; margin:0 auto; padding:0 24px; width:100%; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
+        h1 { font-size:2.2rem; margin-bottom:8px; text-align:center; }
+        h2 { font-size:1.5rem; margin:32px 0 16px; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:block; width:100%; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:16px; border-radius:50px; border:none; font-size:1rem; cursor:pointer;
+            transition:all 0.25s; text-align:center; font-family:var(--font-body);
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-primary:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary); font-weight:600;
+            padding:10px 24px; border-radius:50px; border:2px solid var(--border-light);
+            transition:all 0.25s; font-size:0.95rem; cursor:pointer; font-family:var(--font-body); text-align:center;
+        }
+        .btn-outline:hover { border-color:var(--accent); background:rgba(212,163,115,0.08); }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .main-nav a.active { color:var(--accent); font-weight:600; }
+        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Page content */
+        .section { padding:60px 0; flex:1; }
+        .form-card { background:var(--card-bg); padding:40px 32px; border-radius:var(--radius-md); box-shadow:var(--shadow); }
+        .form-group { margin-bottom:24px; }
+        .form-group label { display:block; font-weight:600; margin-bottom:6px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width:100%; padding:14px 16px; border:2px solid var(--border-light); border-radius:var(--radius-sm);
+            font-family:var(--font-body); font-size:1rem; background:var(--bg); transition:border 0.2s; color:var(--text-dark);
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(212,163,115,0.15); }
+        .form-group textarea { resize:vertical; min-height:100px; }
+        .form-group small { color:var(--text-muted); font-size:0.85rem; display:block; margin-top:4px; }
+        .field-error { color:#dc2626; font-size:0.85rem; margin-top:4px; display:none; }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+        .check-group { display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; }
+        .check-group input[type="checkbox"] { width:auto; margin-top:3px; }
+        .check-group label { font-weight:400; font-size:0.9rem; color:var(--text-muted); }
+
+        .account-prompt { text-align:center; padding:60px 0; }
+        .mission-line { text-align:center; font-style:italic; color:var(--text-muted); margin:8px 0 16px; font-size:1.1rem; }
+
+        .success-msg { background:#dcfce7; color:#166534; padding:20px; border-radius:var(--radius-sm); text-align:center; font-weight:500; margin-top:20px; }
+        .error-msg { background:#fee2e2; color:#991b1b; padding:20px; border-radius:var(--radius-sm); text-align:center; font-weight:500; margin-top:20px; }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .form-card { padding:24px; }
+            .section { padding:40px 0; }
+            .form-row { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="list-your-service.html" class="active">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container" id="pageContent">
+            <!-- Content rendered by JS -->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust</h4>
+                <ul>
+                    <li><a href="trust.html">Trust & Safety</a></li>
+                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    <li><a href="report.html">Report a Problem</a></li>
+                    <li><a href="appeals.html">Appeals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                    <li><a href="popia.html">POPIA Notice</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+
+        // Auth helpers
+        function isLoggedIn() {
+            const token = localStorage.getItem('hustlecenter_token');
+            return !!token;
+        }
+
+        function getAccountType() {
+            const type = localStorage.getItem('hustlecenter_account_type');
+            return type; // 'customer' or 'entrepreneur'
+        }
+
+        function getAuthHeaders() {
+            const token = localStorage.getItem('hustlecenter_token');
+            if (!token) return { 'Content-Type': 'application/json' };
+            return { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' };
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        function renderPage() {
+            const container = document.getElementById('pageContent');
+
+            // Not logged in
+            if (!isLoggedIn()) {
+                container.innerHTML = `
+                    <h1>List your service — <span class="gold">FREE during launch</span></h1>
+                    <p style="text-align:center; color:var(--text-muted); margin-bottom:8px;">Tell us about your service and we'll review your listing before it goes live on the marketplace.</p>
+                    <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+                    <p style="text-align:center; color:var(--text-muted); margin-bottom:32px;">HustleCenter helps local entrepreneurs get discovered and connect with customers looking for their services.</p>
+                    <div class="account-prompt">
+                        <h3>Create an entrepreneur account to list your service.</h3>
+                        <a href="signup.html?redirect=list-your-service.html" class="btn-primary" style="margin-bottom:12px;">Create Account</a>
+                        <p>Already have an account? <a href="login.html?redirect=list-your-service.html">Log In</a></p>
+                    </div>`;
+                return;
+            }
+
+            // Logged in as customer
+            if (getAccountType() === 'customer') {
+                container.innerHTML = `
+                    <h1>List your service — <span class="gold">FREE during launch</span></h1>
+                    <p style="text-align:center; color:var(--text-muted); margin-bottom:32px;">Tell us about your service and we'll review your listing before it goes live on the marketplace.</p>
+                    <div class="account-prompt">
+                        <h3>This feature is for entrepreneur accounts.</h3>
+                        <p>You're currently logged in with a customer account. To list a service, you'll need an entrepreneur account.</p>
+                        <a href="browse.html" class="btn-outline">← Browse Services</a>
+                    </div>`;
+                return;
+            }
+
+            // Entrepreneur – show form
+            container.innerHTML = `
+                <h1>List your service — <span class="gold">FREE during launch</span></h1>
+                <p style="text-align:center; color:var(--text-muted); margin-bottom:8px;">Tell us about your service and we'll review your listing before it goes live on the marketplace.</p>
+                <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+                <p style="text-align:center; color:var(--text-muted); margin-bottom:32px;">HustleCenter helps local entrepreneurs get discovered and connect with customers looking for their services.</p>
+
+                <div class="form-card">
+                    <form id="listingForm" novalidate enctype="multipart/form-data">
+                        <!-- Basic Information -->
+                        <h2>Basic <span class="gold">Information</span></h2>
+                        <div class="form-group">
+                            <label for="businessName">Business / provider name *</label>
+                            <input type="text" id="businessName" placeholder="e.g. Thabo's Plumbing" maxlength="100" required>
+                            <div class="field-error" id="businessNameError">Please enter your business or provider name.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactName">Contact person's full name *</label>
+                            <input type="text" id="contactName" placeholder="e.g. Thabo Mokoena" maxlength="100" required>
+                            <div class="field-error" id="contactNameError">Please enter your full name.</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone number *</label>
+                                <input type="tel" id="phone" placeholder="+27 82 123 4567" required>
+                                <div class="field-error" id="phoneError">Please enter a valid phone number.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address *</label>
+                                <input type="email" id="email" placeholder="thabo@email.com" required>
+                                <div class="field-error" id="emailError">Please enter a valid email address.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredContact">Preferred contact method *</label>
+                            <select id="preferredContact" required>
+                                <option value="">Select a method</option>
+                                <option value="Phone">Phone</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                                <option value="Email">Email</option>
+                            </select>
+                            <div class="field-error" id="preferredContactError">Please select a preferred contact method.</div>
+                        </div>
+
+                        <!-- Service Information -->
+                        <h2>Service <span class="gold">Information</span></h2>
+                        <div class="form-group">
+                            <label for="category">Main category *</label>
+                            <select id="category" required>
+                                <option value="">Select a category</option>
+                                <option>Automotive</option>
+                                <option>Barber</option>
+                                <option>Beauty</option>
+                                <option>Braces</option>
+                                <option>Cleaning</option>
+                                <option>Eye Lash</option>
+                                <option>Fashion</option>
+                                <option>Food</option>
+                                <option>Hair Salon</option>
+                                <option>Supplies</option>
+                                <option>Home & Garden</option>
+                                <option>Logistics</option>
+                                <option>Makeup</option>
+                                <option>Nail</option>
+                                <option>Reseller</option>
+                                <option>Shuttle & Transport</option>
+                                <option>Other Services</option>
+                            </select>
+                            <div class="field-error" id="categoryError">Please select a category.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="services">Services offered *</label>
+                            <textarea id="services" placeholder="List the main services you provide, separated by commas. e.g. Residential plumbing, leak repairs, geyser installation" required></textarea>
+                            <div class="field-error" id="servicesError">Please list the services you offer.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description *</label>
+                            <textarea id="description" placeholder="Tell potential customers about your business and what makes you different" maxlength="2000" required></textarea>
+                            <div class="field-error" id="descriptionError">Please provide a description of your business.</div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pricing">Pricing or pricing approach *</label>
+                                <input type="text" id="pricing" placeholder="e.g. From R150, or call for a quote" required>
+                                <div class="field-error" id="pricingError">Please describe your pricing.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="serviceArea">Service area *</label>
+                                <input type="text" id="serviceArea" placeholder="e.g. Polokwane, Seshego" required>
+                                <div class="field-error" id="serviceAreaError">Please enter your service area.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="operatingHours">Operating hours (optional)</label>
+                            <input type="text" id="operatingHours" placeholder="e.g. Mon–Fri 8am–5pm, Sat 9am–1pm">
+                        </div>
+
+                        <!-- Public Profile -->
+                        <h2>Public <span class="gold">Profile</span></h2>
+                        <div class="form-group">
+                            <label for="profileImage">Profile photo or logo (optional)</label>
+                            <input type="file" id="profileImage" accept="image/jpeg,image/png,image/webp">
+                            <small>This will appear on your public listing. JPG, PNG, or WebP.</small>
+                            <div class="field-error" id="profileImageError">Please upload a valid image file (JPG, PNG, WebP).</div>
+                        </div>
+
+                        <!-- Agreement -->
+                        <h2><span class="gold">Agreement</span></h2>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreeAccuracy" required>
+                            <label for="agreeAccuracy">I confirm that all the information I have provided is true and accurate to the best of my knowledge.</label>
+                        </div>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreeContent" required>
+                            <label for="agreeContent">I confirm that I have permission to use any photos or content I am submitting.</label>
+                        </div>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the HustleCenter <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</label>
+                        </div>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreeReview" required>
+                            <label for="agreeReview">I understand that my listing will be reviewed by HustleCenter before it is published and that submission does not guarantee approval.</label>
+                        </div>
+                        <div class="field-error" id="agreementError" style="margin-top:8px;">Please accept all the agreements before submitting.</div>
+
+                        <button type="submit" class="btn-primary" id="submitBtn">Submit for Review</button>
+                        <div id="submitSuccess" class="success-msg" style="display:none;"></div>
+                        <div id="submitError" class="error-msg" style="display:none;"></div>
+                    </form>
+                </div>`;
+
+            // Form submission
+            const form = document.getElementById('listingForm');
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                let valid = true;
+
+                // Reset errors
+                document.querySelectorAll('.field-error').forEach(el => el.style.display = 'none');
+                document.getElementById('submitError').style.display = 'none';
+                document.getElementById('submitSuccess').style.display = 'none';
+
+                // Basic info
+                const businessName = document.getElementById('businessName').value.trim();
+                const contactName = document.getElementById('contactName').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const preferredContact = document.getElementById('preferredContact').value;
+
+                // Service info
+                const category = document.getElementById('category').value;
+                const services = document.getElementById('services').value.trim();
+                const description = document.getElementById('description').value.trim();
+                const pricing = document.getElementById('pricing').value.trim();
+                const serviceArea = document.getElementById('serviceArea').value.trim();
+                const operatingHours = document.getElementById('operatingHours').value.trim();
+
+                // Profile
+                const profileImage = document.getElementById('profileImage').files[0];
+
+                // Agreements
+                const agreeAccuracy = document.getElementById('agreeAccuracy').checked;
+                const agreeContent = document.getElementById('agreeContent').checked;
+                const agreeTerms = document.getElementById('agreeTerms').checked;
+                const agreeReview = document.getElementById('agreeReview').checked;
+
+                // Validate
+                if (!businessName) { document.getElementById('businessNameError').style.display = 'block'; valid = false; }
+                if (!contactName) { document.getElementById('contactNameError').style.display = 'block'; valid = false; }
+                if (!phone || phone.length < 10) { document.getElementById('phoneError').style.display = 'block'; valid = false; }
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('emailError').style.display = 'block'; valid = false; }
+                if (!preferredContact) { document.getElementById('preferredContactError').style.display = 'block'; valid = false; }
+                if (!category) { document.getElementById('categoryError').style.display = 'block'; valid = false; }
+                if (!services) { document.getElementById('servicesError').style.display = 'block'; valid = false; }
+                if (!description) { document.getElementById('descriptionError').style.display = 'block'; valid = false; }
+                if (!pricing) { document.getElementById('pricingError').style.display = 'block'; valid = false; }
+                if (!serviceArea) { document.getElementById('serviceAreaError').style.display = 'block'; valid = false; }
+
+                // Validate image if provided
+                if (profileImage) {
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+                    if (!allowedTypes.includes(profileImage.type) || profileImage.size > 5 * 1024 * 1024) {
+                        document.getElementById('profileImageError').style.display = 'block';
+                        valid = false;
+                    }
+                }
+
+                // Validate agreements
+                if (!agreeAccuracy || !agreeContent || !agreeTerms || !agreeReview) {
+                    document.getElementById('agreementError').style.display = 'block';
+                    valid = false;
+                }
+
+                if (!valid) return;
+
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = true;
+                btn.textContent = 'Submitting…';
+
+                try {
+                    const formData = new FormData();
+                    formData.append('businessName', businessName);
+                    formData.append('contactName', contactName);
+                    formData.append('phone', phone);
+                    formData.append('email', email);
+                    formData.append('preferredContactMethod', preferredContact);
+                    formData.append('category', category);
+                    formData.append('services', services);
+                    formData.append('description', description);
+                    formData.append('pricing', pricing);
+                    formData.append('serviceArea', serviceArea);
+                    formData.append('operatingHours', operatingHours);
+                    if (profileImage) {
+                        formData.append('photos', profileImage);
+                    }
+
+                    const res = await fetch(`${API_BASE}/api/listings`, {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + localStorage.getItem('hustlecenter_token') },
+                        body: formData
+                    });
+
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+                    // Success
+                    document.getElementById('submitSuccess').innerHTML = `
+                        <p><strong>Listing submitted for review</strong></p>
+                        <p>Your service listing has been submitted to HustleCenter for review. We'll review the information before it appears on the marketplace.</p>
+                        <p><a href="dashboard.html">View My Listing Status</a></p>
+                    `;
+                    document.getElementById('submitSuccess').style.display = 'block';
+                    form.reset();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } catch (err) {
+                    document.getElementById('submitError').textContent = err.message || 'We couldn\'t submit your listing right now. Please try again.';
+                    document.getElementById('submitError').style.display = 'block';
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Submit for Review';
+                }
+            });
+        }
+
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Mobile menu
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+
+        renderPage();
+    </script>
+</body>
+</html>

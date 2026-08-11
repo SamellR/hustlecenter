@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article – HustleCenter</title>
+    <meta name="description" content="Read the full article on HustleCenter.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .container { max-width:800px; margin:0 auto; padding:0 24px; width:100%; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
+        h1 { font-size:2.2rem; margin-bottom:8px; }
+        h2 { font-size:1.8rem; margin:24px 0 12px; }
+        h3 { font-size:1.4rem; margin:20px 0 10px; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:inline-block; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:12px 28px; border-radius:50px; border:none; font-size:1rem;
+            cursor:pointer; transition:all 0.25s; text-align:center; font-family:var(--font-body);
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary); font-weight:600;
+            padding:10px 24px; border-radius:50px; border:2px solid var(--border-light);
+            transition:all 0.25s; font-size:0.95rem; cursor:pointer; font-family:var(--font-body); text-align:center;
+        }
+        .btn-outline:hover { border-color:var(--accent); background:rgba(212,163,115,0.08); }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .main-nav a.active { color:var(--accent); font-weight:600; }
+        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Page content */
+        .section { padding:40px 0 60px; flex:1; }
+        .article-header { text-align:center; margin-bottom:32px; }
+        .article-meta { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; color:var(--text-muted); font-size:0.9rem; margin-bottom:16px; }
+        .article-meta span { display:inline-block; }
+        .featured-img { max-width:100%; height:auto; border-radius:var(--radius-sm); margin:24px 0; }
+        .article-body { max-width:700px; margin:0 auto; line-height:1.8; font-size:1.05rem; }
+        .article-body p { margin-bottom:20px; }
+        .article-body ul, .article-body ol { margin-bottom:20px; padding-left:24px; }
+        .article-body blockquote { border-left:4px solid var(--accent); padding:12px 20px; margin:20px 0; background:var(--bg); border-radius:4px; font-style:italic; color:var(--text-muted); }
+        .article-body img { max-width:100%; height:auto; border-radius:var(--radius-sm); margin:16px 0; }
+        .article-body figcaption { font-size:0.85rem; color:var(--text-muted); text-align:center; margin-top:4px; }
+        .article-body a { color:var(--accent); text-decoration:underline; }
+        .article-footer { margin-top:48px; border-top:1px solid var(--border-light); padding-top:24px; text-align:center; }
+        .article-footer p { color:var(--text-muted); margin-bottom:16px; }
+        .loading, .error-state, .not-found { text-align:center; padding:80px 0; color:var(--text-muted); }
+        .spinner { width:40px; height:40px; border:4px solid rgba(212,163,115,0.2); border-top-color:var(--accent); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 20px; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .article-body { font-size:1rem; }
+            .article-header h1 { font-size:1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="list-your-service.html">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="blog.html" class="active">Blog</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container" id="articleContent">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading article…</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust</h4>
+                <ul>
+                    <li><a href="trust.html">Trust & Safety</a></li>
+                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    <li><a href="report.html">Report a Problem</a></li>
+                    <li><a href="appeals.html">Appeals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                    <li><a href="popia.html">POPIA Notice</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+
+        // Get slug from URL
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('slug');
+
+        const container = document.getElementById('articleContent');
+
+        // Safe HTML sanitizer (allowlist approach)
+        function sanitizeHTML(html) {
+            // Simple approach: create a DOM element and strip dangerous tags/attributes
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+            // Remove script tags
+            temp.querySelectorAll('script, style, iframe, object, embed, link, meta').forEach(el => el.remove());
+            // Remove event handlers and dangerous attributes
+            temp.querySelectorAll('*').forEach(el => {
+                for (let attr of el.attributes) {
+                    if (attr.name.startsWith('on') || 
+                        (attr.name === 'href' && (attr.value.startsWith('javascript:') || attr.value.startsWith('data:'))) ||
+                        (attr.name === 'src' && attr.value.startsWith('javascript:')) ) {
+                        el.removeAttribute(attr.name);
+                    }
+                }
+                // Sanitize links – ensure no javascript: protocol
+                if (el.tagName === 'A' && el.href && el.href.startsWith('javascript:')) {
+                    el.removeAttribute('href');
+                }
+            });
+            return temp.innerHTML;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        async function loadArticle() {
+            if (!slug) {
+                container.innerHTML = `<div class="not-found">
+                    <h2>Article unavailable</h2>
+                    <p>No article specified.</p>
+                    <a href="blog.html" class="btn-outline" style="margin-top:16px;">← Back to Blog</a>
+                </div>`;
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/articles/${slug}`);
+                if (!res.ok) throw new Error(res.status === 404 ? 'Not Found' : 'Server Error');
+                const article = await res.json();
+
+                // Ensure article is published
+                if (!article || article.status !== 'published') {
+                    throw new Error('Not Found');
+                }
+
+                // Update page title
+                document.title = `${article.title} | HustleCenter`;
+                // Update meta description
+                const metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) metaDesc.setAttribute('content', article.excerpt || '');
+
+                // Build article HTML
+                const imageHTML = article.featuredImage 
+                    ? `<img src="${article.featuredImage}" alt="${escapeHtml(article.featuredImageAlt || '')}" class="featured-img">`
+                    : '';
+
+                const readingTime = article.readingTime ? `${article.readingTime} min read` : '';
+                const category = article.category ? `<span>${escapeHtml(article.category)}</span>` : '';
+                const author = article.author ? `<span>By ${escapeHtml(article.author)}</span>` : '';
+                const date = article.publishedAt ? `<span>${new Date(article.publishedAt).toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</span>` : '';
+
+                container.innerHTML = `
+                    <article>
+                        <header class="article-header">
+                            <div class="article-meta">
+                                ${category} ${category && readingTime ? '·' : ''} <span>${readingTime}</span>
+                            </div>
+                            <h1>${escapeHtml(article.title)}</h1>
+                            ${article.excerpt ? `<p style="color:var(--text-muted); max-width:600px; margin:0 auto;">${escapeHtml(article.excerpt)}</p>` : ''}
+                            <div class="article-meta" style="margin-top:16px;">
+                                ${author} ${date ? '·' : ''} ${date}
+                            </div>
+                            ${imageHTML}
+                        </header>
+                        <div class="article-body">${sanitizeHTML(article.content || '')}</div>
+                        <div class="article-footer">
+                            <p>Every connection starts with trust.</p>
+                            <a href="report.html?type=article&slug=${encodeURIComponent(slug)}" class="btn-outline" style="margin-right:12px;">Report an Issue</a>
+                            <a href="blog.html" class="btn-outline">← Back to Blog</a>
+                        </div>
+                    </article>`;
+            } catch (err) {
+                if (err.message === 'Not Found') {
+                    container.innerHTML = `<div class="not-found">
+                        <h2>Article unavailable</h2>
+                        <p>We couldn't find the article you're looking for. It may have been moved or is no longer available.</p>
+                        <a href="blog.html" class="btn-outline" style="margin-top:16px;">← Back to Blog</a>
+                    </div>`;
+                } else {
+                    container.innerHTML = `<div class="error-state">
+                        <h2>Something went wrong</h2>
+                        <p>We couldn't load this article right now. Please try again later.</p>
+                        <a href="blog.html" class="btn-outline" style="margin-top:16px;">← Back to Blog</a>
+                    </div>`;
+                }
+            }
+        }
+
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+
+        loadArticle();
+    </script>
+</body>
+</html>

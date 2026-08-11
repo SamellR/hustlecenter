@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Local Services in Polokwane – HustleCenter</title>
+    <meta name="description" content="Discover local service providers in Polokwane. Search, filter by category, and browse reviewed professionals.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --shadow-hover: 0 16px 48px rgba(15,23,42,0.15);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; }
+        a { color:inherit; text-decoration:none; }
+        .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
+        h1 { font-size:2.2rem; margin-bottom:8px; }
+        h2 { font-size:1.5rem; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:inline-block; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:12px 28px; border-radius:50px; border:none; font-size:0.95rem; cursor:pointer;
+            transition:all 0.25s; text-align:center; font-family:var(--font-body);
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary); font-weight:600;
+            padding:10px 24px; border-radius:50px; border:2px solid var(--border-light);
+            transition:all 0.25s; font-size:0.95rem; cursor:pointer; font-family:var(--font-body);
+        }
+        .btn-outline:hover { border-color:var(--accent); background:rgba(212,163,115,0.08); }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .main-nav a.active { color:var(--accent); font-weight:600; }
+        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Search Section */
+        .search-section { padding:32px 0; background:var(--card-bg); border-bottom:1px solid var(--border-light); }
+        .search-bar { display:flex; gap:12px; flex-wrap:wrap; }
+        .search-bar input { flex:1; min-width:200px; padding:14px 24px; border:2px solid var(--border-light); border-radius:50px; font-size:1rem; font-family:var(--font-body); }
+        .search-bar input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(212,163,115,0.15); }
+        .category-area { 
+          margin-top: 20px;
+          text-align: center;
+        }
+        .category-pills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+        }
+        .pill {
+            padding: 8px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            background: transparent;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .pill.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+        .pill:hover:not(.active) { border-color:var(--accent); }
+        .pill.hidden-pill { display: none; }
+        .toggle-cats-btn { background:none; border:none; color:var(--accent); font-weight:600; cursor:pointer; font-size:0.9rem; margin-top:12px; padding:4px 0; }
+        .toggle-cats-btn:hover { text-decoration:underline; }
+
+        /* Results */
+        .results-section { padding:32px 0; flex:1; }
+        .services-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:24px; }
+        .service-card { background:var(--card-bg); border-radius:var(--radius-md); box-shadow:var(--shadow); overflow:hidden; transition:transform 0.2s, box-shadow 0.2s; cursor:pointer; }
+        .service-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+        .card-img { height:160px; background:var(--primary); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.5rem; }
+        .card-body { padding:20px; }
+        .card-body h3 { font-family:var(--font-body); font-weight:600; margin-bottom:8px; }
+        .card-meta { font-size:0.85rem; color:var(--text-muted); margin-bottom:8px; }
+        .card-body p { font-size:0.9rem; color:var(--text-muted); }
+        .trust-note { background:#fff9f0; border-left:4px solid var(--accent); padding:12px 16px; margin-top:24px; border-radius:4px; font-size:0.85rem; color:var(--text-muted); }
+        .loading, .empty-state, .error-state { text-align:center; padding:80px 0; color:var(--text-muted); }
+        .spinner { width:40px; height:40px; border:4px solid rgba(212,163,115,0.2); border-top-color:var(--accent); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 20px; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .search-bar { flex-direction:column; }
+            .services-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html" class="active">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="list-your-service.html">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="search-section">
+        <div class="container">
+            <h1>Find local services in <span class="gold">Polokwane</span></h1>
+            <p style="color:var(--text-muted); margin-bottom:16px;">Discover local providers and explore services available in Polokwane.</p>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="What service are you looking for?" aria-label="Search services">
+            </div>
+            <div class="category-area">
+                <div class="category-pills" id="categoryPills"></div>
+                <button class="toggle-cats-btn" id="toggleCatsBtn">Show all categories</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="results-section">
+        <div class="container">
+            <div id="resultsContainer">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading services…</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Marketplace</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="list-your-service.html">List Your Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog — Coming Soon</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust</h4>
+                <ul>
+                    <li><a href="trust.html">Trust & Safety</a></li>
+                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    <li><a href="report.html">Report a Problem</a></li>
+                    <li><a href="appeals.html">Appeals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                    <li><a href="popia.html">POPIA Notice</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+        const resultsContainer = document.getElementById('resultsContainer');
+        let allServices = [];
+        let currentCategory = '';
+        let currentSearch = '';
+        let categoriesExpanded = false;
+
+        const categoryList = [
+            'All', 'Automotive', 'Barber', 'Beauty', 'Braces', 'Cleaning',
+            'Eye Lash', 'Fashion', 'Food', 'Hair Salon', 'Supplies',
+            'Home & Garden', 'Logistics', 'Makeup', 'Nail', 'Reseller',
+            'Shuttle & Transport', 'Other Services'
+        ];
+
+        function renderPills() {
+            const container = document.getElementById('categoryPills');
+            container.innerHTML = categoryList.map((cat, idx) => {
+                const isHidden = !categoriesExpanded && idx > 9 && cat !== 'All';
+                const activeClass = (cat === 'All' && !currentCategory) || cat === currentCategory ? ' active' : '';
+                const hiddenClass = isHidden ? ' hidden-pill' : '';
+                return `<button class="pill${activeClass}${hiddenClass}" data-category="${cat}">${cat}</button>`;
+            }).join('');
+            document.getElementById('toggleCatsBtn').textContent = categoriesExpanded ? 'Show fewer' : 'Show all categories';
+            document.querySelectorAll('#categoryPills .pill').forEach(pill => {
+                pill.addEventListener('click', function() {
+                    const cat = this.dataset.category;
+                    currentCategory = cat === 'All' ? '' : cat;
+                    updateActivePill();
+                    render();
+                });
+            });
+        }
+
+        function updateActivePill() {
+            document.querySelectorAll('#categoryPills .pill').forEach(p => {
+                const cat = p.dataset.category;
+                p.classList.toggle('active', (cat === 'All' && !currentCategory) || cat === currentCategory);
+            });
+        }
+
+        document.getElementById('toggleCatsBtn').addEventListener('click', () => {
+            categoriesExpanded = !categoriesExpanded;
+            renderPills();
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('category')) {
+            currentCategory = decodeURIComponent(params.get('category'));
+        }
+
+        async function loadServices() {
+            try {
+                const res = await fetch(`${API_BASE}/api/listings/approved`);
+                if (!res.ok) throw new Error('API failed');
+                const data = await res.json();
+                allServices = data;
+                render();
+            } catch (err) {
+                showErrorState();
+            }
+        }
+
+        function render() {
+            let filtered = allServices;
+            if (currentCategory) {
+                filtered = filtered.filter(s => s.category && s.category.toLowerCase() === currentCategory.toLowerCase());
+            }
+            if (currentSearch.trim()) {
+                const q = currentSearch.toLowerCase();
+                filtered = filtered.filter(s => 
+                    (s.businessName && s.businessName.toLowerCase().includes(q)) ||
+                    (s.description && s.description.toLowerCase().includes(q)) ||
+                    (s.category && s.category.toLowerCase().includes(q)) ||
+                    (s.services && s.services.toLowerCase().includes(q))
+                );
+            }
+
+            if (filtered.length === 0) {
+                showEmptyState();
+                return;
+            }
+
+            let html = '<div class="services-grid">';
+            filtered.forEach(service => {
+                const slug = service.slug || service._id;
+                html += `
+                    <a href="provider.html?slug=${slug}" class="service-card">
+                        <div class="card-img">${escapeHtml(service.businessName || '?').charAt(0).toUpperCase()}</div>
+                        <div class="card-body">
+                            <h3>${escapeHtml(service.businessName)}</h3>
+                            <div class="card-meta">📍 ${escapeHtml(service.serviceArea || 'Polokwane')}</div>
+                            <p>${escapeHtml( (service.description || '').substring(0, 100) )}…</p>
+                        </div>
+                    </a>`;
+            });
+            html += '</div>';
+            html += '<div class="trust-note">Listings are reviewed before publication. HustleCenter provides information to help you make an informed choice. Always confirm service details directly with the provider.</div>';
+            resultsContainer.innerHTML = html;
+        }
+
+        function showEmptyState() {
+            resultsContainer.innerHTML = `
+                <div class="empty-state">
+                    <h3>No services found</h3>
+                    <p>Try another category or search term.</p>
+                    <button class="btn-outline" onclick="resetFilters()" style="margin-top:16px;">View All Services</button>
+                </div>`;
+        }
+
+        function showErrorState() {
+            resultsContainer.innerHTML = `
+                <div class="error-state">
+                    <h3>We couldn't load services</h3>
+                    <p>Something went wrong while loading the marketplace. Please try again.</p>
+                    <button class="btn-outline" onclick="retryLoad()" style="margin-top:16px;">Try Again</button>
+                </div>`;
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            currentSearch = '';
+            currentCategory = '';
+            updateActivePill();
+            render();
+        }
+
+        function retryLoad() {
+            resultsContainer.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading services…</p></div>';
+            loadServices();
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        document.getElementById('searchInput').addEventListener('input', e => {
+            currentSearch = e.target.value;
+            render();
+        });
+
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+
+        renderPills();
+        if (currentCategory) updateActivePill();
+        loadServices();
+    </script>
+</body>
+</html>
