@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works – HustleCenter</title>
+    <meta name="description" content="Discover how HustleCenter connects customers with trusted local professionals in Polokwane. Browse services, list your business, and connect with confidence.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .container { max-width:900px; margin:0 auto; padding:0 24px; width:100%; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.3; }
+        h1 { font-size:2.2rem; margin-bottom:8px; text-align:center; }
+        h2 { font-size:1.6rem; margin:40px 0 16px; }
+        h3 { font-size:1.3rem; margin:24px 0 12px; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:inline-block; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:12px 28px; border-radius:50px; border:none; font-size:1rem;
+            cursor:pointer; transition:all 0.25s; text-align:center; font-family:var(--font-body);
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary); font-weight:600;
+            padding:10px 24px; border-radius:50px; border:2px solid var(--border-light);
+            transition:all 0.25s; font-size:0.95rem; cursor:pointer; font-family:var(--font-body); text-align:center;
+        }
+        .btn-outline:hover { border-color:var(--accent); background:rgba(212,163,115,0.08); }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .main-nav a.active { color:var(--accent); font-weight:600; }
+        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Page content */
+        .section { padding:60px 0; flex:1; }
+        .hero { text-align:center; margin-bottom:40px; }
+        .hero p { color:var(--text-muted); max-width:600px; margin:0 auto 16px; }
+        .hero-cta { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:24px; }
+        .content-block { max-width:750px; margin:0 auto; }
+        .content-block p { margin-bottom:16px; color:var(--text-muted); font-size:1.05rem; line-height:1.7; }
+        .content-block ul { margin-bottom:16px; padding-left:24px; color:var(--text-muted); }
+        .content-block ul li { margin-bottom:8px; }
+        .step-list { list-style-type:none; padding-left:0; }
+        .step-list li { padding:12px 0; border-bottom:1px solid var(--border-light); margin-bottom:0; display:flex; gap:16px; align-items:flex-start; }
+        .step-list li:last-child { border-bottom:none; }
+        .step-number { font-family:var(--font-heading); font-size:2rem; color:var(--accent); font-weight:700; min-width:50px; line-height:1; }
+        .step-text h3 { margin:0 0 4px; }
+        .important-note { background:#fff9f0; border-left:4px solid var(--accent); padding:20px; margin:32px 0; border-radius:4px; color:var(--text-muted); font-size:0.95rem; }
+        .cta-row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:32px 0; }
+        .mission-line { font-style:italic; color:var(--text-muted); margin-top:8px; font-size:1rem; text-align:center; }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:64px; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .section { padding:40px 0; }
+            h1 { font-size:1.8rem; }
+            .content-block p { font-size:1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="how-it-works.html" class="active">How It Works</a>
+                <a href="list-your-service.html">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="blog.html">Blog</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <div class="hero">
+                <h1>How HustleCenter <span class="gold">Works</span></h1>
+                <p>Find a service. Discover a professional. Connect with confidence.</p>
+                <p>HustleCenter makes it easier for customers to discover local entrepreneurs and skilled professionals, while giving entrepreneurs a place to be seen and found.</p>
+                <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+                <div class="hero-cta">
+                    <a href="browse.html" class="btn-primary">Browse Services</a>
+                    <a href="list-your-service.html" class="btn-outline">List Your Service</a>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <!-- For Customers -->
+                <h2>For <span class="gold">Customers</span></h2>
+                <ul class="step-list">
+                    <li>
+                        <div class="step-number">1</div>
+                        <div class="step-text">
+                            <h3>Tell us what you need</h3>
+                            <p>Start by browsing HustleCenter or searching for a service you need. You can explore categories and available service providers.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">2</div>
+                        <div class="step-text">
+                            <h3>Discover a provider</h3>
+                            <p>Open a provider's listing to learn more about the services they offer and the information they've provided.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">3</div>
+                        <div class="step-text">
+                            <h3>Review the details</h3>
+                            <p>Consider the provider's description, service area, pricing information, contact preferences and other available details. If something is important to you, ask the provider directly before agreeing to the work.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">4</div>
+                        <div class="step-text">
+                            <h3>Send a request</h3>
+                            <p>If the provider is suitable, use HustleCenter's request process to send your service request.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">5</div>
+                        <div class="step-text">
+                            <h3>Connect directly</h3>
+                            <p>HustleCenter facilitates the connection between the customer and provider. You and the provider can then discuss the service, price, timing, location and other expectations.</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="important-note">
+                    <strong>Important:</strong> HustleCenter does not automatically guarantee service quality, availability, pricing, completion of work, customer satisfaction, or the outcome of a private transaction. Always make informed decisions and use reasonable safety precautions.
+                </div>
+                <div class="cta-row">
+                    <a href="browse.html" class="btn-primary">Browse Services</a>
+                </div>
+
+                <!-- For Entrepreneurs -->
+                <h2>For <span class="gold">Entrepreneurs</span></h2>
+                <ul class="step-list">
+                    <li>
+                        <div class="step-number">1</div>
+                        <div class="step-text">
+                            <h3>Decide what you offer</h3>
+                            <p>If you have a skill, service or business that you want people to discover, HustleCenter gives you a place to present your work.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">2</div>
+                        <div class="step-text">
+                            <h3>Submit your listing</h3>
+                            <p>Provide the required information about your service, including your business/service details and contact information.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">3</div>
+                        <div class="step-text">
+                            <h3>HustleCenter reviews the listing</h3>
+                            <p>Submitted listings are reviewed before publication. The V1 model is a Reviewed Listing model. This review does NOT automatically mean that HustleCenter has identity-verified you, checked your criminal background, confirmed your qualifications, confirmed your business registration, or guaranteed your services. A reviewed listing means it has passed the applicable HustleCenter listing review process.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">4</div>
+                        <div class="step-text">
+                            <h3>Your listing can become discoverable</h3>
+                            <p>If approved, your listing can appear on the HustleCenter marketplace. Customers can then discover the services you offer.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">5</div>
+                        <div class="step-text">
+                            <h3>Connect with potential customers</h3>
+                            <p>When customers find your service, HustleCenter can facilitate the connection according to the platform's current process. You remain responsible for communicating honestly and professionally with customers.</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="important-note">
+                    <strong>Important:</strong> Entrepreneurs should describe services accurately, provide truthful information, communicate professionally, avoid misleading claims, honour commitments made to customers, and follow HustleCenter's Terms and Community Guidelines.
+                </div>
+                <div class="cta-row">
+                    <a href="list-your-service.html" class="btn-primary">List Your Service</a>
+                </div>
+
+                <!-- What HustleCenter Does -->
+                <h2>What HustleCenter <span class="gold">Does</span></h2>
+                <p>We create the place to connect.</p>
+                <ul>
+                    <li>Provide a dedicated marketplace for local services.</li>
+                    <li>Review submitted listings before publication.</li>
+                    <li>Help customers discover providers.</li>
+                    <li>Help entrepreneurs become easier to discover.</li>
+                    <li>Provide categories and search tools.</li>
+                    <li>Facilitate customer/provider connections.</li>
+                    <li>Provide Trust & Safety information.</li>
+                    <li>Provide reporting and appeal processes.</li>
+                    <li>Improve the platform based on real-world learning.</li>
+                </ul>
+
+                <h2>What HustleCenter <span class="gold">Does Not Do</span></h2>
+                <ul>
+                    <li>Guarantee a provider's identity.</li>
+                    <li>Guarantee professional qualifications.</li>
+                    <li>Guarantee business registration.</li>
+                    <li>Guarantee service quality.</li>
+                    <li>Set prices.</li>
+                    <li>Guarantee availability.</li>
+                    <li>Manage private agreements.</li>
+                    <li>Guarantee payment.</li>
+                    <li>Guarantee customer satisfaction.</li>
+                    <li>Guarantee that a transaction will succeed.</li>
+                </ul>
+                <div class="cta-row">
+                    <a href="trust.html" class="btn-outline">Trust & Safety</a>
+                    <a href="terms.html" class="btn-outline">Terms of Service</a>
+                    <a href="disclaimer.html" class="btn-outline">Disclaimer</a>
+                </div>
+
+                <!-- Trust & Safety -->
+                <h2>Trust &amp; <span class="gold">Safety</span></h2>
+                <p>Every connection starts with trust.</p>
+                <p>HustleCenter reviews marketplace listings before publication and maintains Trust & Safety processes designed to reduce risk and respond to problems. However, a reviewed listing is not the same as identity verification.</p>
+                <p>Users should still: confirm important details, ask questions, discuss pricing and expectations, avoid unnecessary sharing of sensitive information, and use reasonable safety precautions.</p>
+                <div class="cta-row">
+                    <a href="trust.html" class="btn-outline">Learn About Trust & Safety</a>
+                </div>
+
+                <!-- If Something Goes Wrong -->
+                <h2>If Something Goes <span class="gold">Wrong</span></h2>
+                <p>Users can report problems involving listings, providers, customers, website functionality, or other relevant platform concerns. HustleCenter may review reports and take appropriate platform action where necessary.</p>
+                <div class="cta-row">
+                    <a href="report.html" class="btn-outline">Report a Problem</a>
+                    <a href="appeals.html" class="btn-outline">Appeal a Decision</a>
+                </div>
+
+                <!-- More Than a Marketplace -->
+                <h2>More Than a <span class="gold">Marketplace</span></h2>
+                <p>HustleCenter is starting as a marketplace, but the bigger vision is to create a place where people can:</p>
+                <ul>
+                    <li><strong>Learn</strong> – from experiences, mistakes, questions and practical knowledge.</li>
+                    <li><strong>Build</strong> – skills, businesses, relationships, reputation and opportunities.</li>
+                    <li><strong>Grow</strong> – alongside other entrepreneurs, customers and communities.</li>
+                </ul>
+                <p>The marketplace is one part of the bigger HustleCenter vision.</p>
+
+                <!-- Launch Philosophy -->
+                <h2>Launch <span class="gold">Philosophy</span></h2>
+                <p>Launch → Learn → Improve.</p>
+                <p>HustleCenter is starting in Polokwane. We are building while learning from real people and real experiences. The platform does not need to pretend that everything is perfect from day one. The goal is to start with something useful, learn from the community, fix what doesn't work and continue improving.</p>
+
+                <!-- Final CTA -->
+                <div style="text-align:center; margin-top:48px;">
+                    <h2>Ready to get <span class="gold">started</span>?</h2>
+                    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:24px;">
+                        <div style="flex:1; min-width:250px; background:var(--card-bg); padding:24px; border-radius:var(--radius-md); box-shadow:var(--shadow);">
+                            <h3>Looking for a service?</h3>
+                            <p style="color:var(--text-muted);">Discover entrepreneurs and skilled professionals on HustleCenter.</p>
+                            <a href="browse.html" class="btn-primary" style="margin-top:12px;">Browse Services</a>
+                        </div>
+                        <div style="flex:1; min-width:250px; background:var(--card-bg); padding:24px; border-radius:var(--radius-md); box-shadow:var(--shadow);">
+                            <h3>Offering a service?</h3>
+                            <p style="color:var(--text-muted);">Give people an opportunity to discover your work.</p>
+                            <a href="list-your-service.html" class="btn-primary" style="margin-top:12px;">List Your Service</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust</h4>
+                <ul>
+                    <li><a href="trust.html">Trust & Safety</a></li>
+                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    <li><a href="report.html">Report a Problem</a></li>
+                    <li><a href="appeals.html">Appeals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                    <li><a href="popia.html">POPIA Notice</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

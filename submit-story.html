@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Story – HustleCenter</title>
+    <meta name="description" content="Share your business story, lesson or idea with HustleCenter.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .container { max-width:700px; margin:0 auto; padding:0 24px; width:100%; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
+        h1 { font-size:2.2rem; margin-bottom:8px; text-align:center; }
+        h2 { font-size:1.8rem; margin:24px 0 16px; }
+        h3 { font-size:1.3rem; margin-bottom:8px; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:block; width:100%; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:16px; border-radius:50px; border:none; font-size:1rem; cursor:pointer;
+            transition:all 0.25s; text-align:center; font-family:var(--font-body);
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-primary:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .main-nav a.active { color:var(--accent); font-weight:600; }
+        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Hero */
+        .page-hero { padding:60px 0 30px; text-align:center; }
+        .mission-line { font-style:italic; color:var(--text-muted); margin-top:8px; font-size:1rem; }
+
+        /* Form */
+        .form-card { background:var(--card-bg); padding:40px 32px; border-radius:var(--radius-md); box-shadow:var(--shadow); }
+        .form-group { margin-bottom:24px; }
+        .form-group label { display:block; font-weight:600; margin-bottom:6px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width:100%; padding:14px 16px; border:2px solid var(--border-light); border-radius:var(--radius-sm);
+            font-family:var(--font-body); font-size:1rem; background:var(--bg); transition:border 0.2s; color:var(--text-dark);
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(212,163,115,0.15); }
+        .form-group textarea { resize:vertical; min-height:120px; }
+        .form-group small { color:var(--text-muted); font-size:0.85rem; margin-top:4px; display:block; }
+        .field-error { color:#dc2626; font-size:0.85rem; margin-top:4px; display:none; }
+        .radio-group { margin-bottom:16px; }
+        .radio-option { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+        .radio-option input[type="radio"] { width:auto; }
+        .radio-option label { font-weight:400; cursor:pointer; }
+        .check-group { display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; }
+        .check-group input[type="checkbox"] { width:auto; margin-top:3px; }
+        .check-group label { font-weight:400; font-size:0.9rem; color:var(--text-muted); }
+        .info-box { background:#F0F7FF; border:1px solid #B8D4F0; border-radius:var(--radius-sm); padding:16px; margin:16px 0; font-size:0.95rem; color:var(--text-muted); }
+        .success-msg { background:#dcfce7; color:#166534; padding:20px; border-radius:var(--radius-sm); text-align:center; font-weight:500; margin-top:20px; }
+        .error-msg { background:#fee2e2; color:#991b1b; padding:20px; border-radius:var(--radius-sm); text-align:center; font-weight:500; margin-top:20px; }
+        .hidden { display:none; }
+        .honeypot { position:absolute; left:-9999px; top:-9999px; }
+        .selected-files { font-size:0.85rem; color:var(--text-muted); margin-top:4px; }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .form-card { padding:24px; }
+            .page-hero { padding:40px 0 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="list-your-service.html">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="blog.html" class="active">Blog</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1>Submit Your <span class="gold">Story</span></h1>
+                <p style="color:var(--text-muted); max-width:600px; margin:0 auto;">Have an experience, lesson, business story or idea that could help someone else? Share it with HustleCenter.</p>
+                <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:4px;">HustleCenter's Blog exists to help people Learn. Build. Grow.</p>
+            </div>
+        </section>
+
+        <section style="padding-bottom:60px;">
+            <div class="container">
+                <div class="form-card">
+                    <div class="info-box">
+                        <strong>Not sure how to write it? That's okay.</strong><br>
+                        You don't need to be a professional writer. Tell us what happened, what you learned, or what you want people to know. We can help shape your submission into a clear HustleCenter article while keeping your story and meaning intact.
+                    </div>
+
+                    <form id="storyForm" novalidate enctype="multipart/form-data">
+                        <!-- Honeypot anti-spam -->
+                        <div class="honeypot">
+                            <input type="text" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- Submission type -->
+                        <div class="form-group">
+                            <label>How would you like to submit?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="typeFinished" name="submissionType" value="finished" checked>
+                                    <label for="typeFinished">I have a finished article</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="typeGuided" name="submissionType" value="guided">
+                                    <label for="typeGuided">I have a story or idea but need help turning it into an article</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shared fields -->
+                        <div class="form-group" id="titleGroup">
+                            <label for="title">Title or Working Title *</label>
+                            <input type="text" id="title" placeholder="e.g. How I Started My Small Business" maxlength="200" required>
+                            <div class="field-error" id="titleError">Please enter a title.</div>
+                        </div>
+
+                        <div class="form-group" id="categoryGroup">
+                            <label for="category">Topic / Category *</label>
+                            <select id="category" required>
+                                <option value="">Select a category</option>
+                                <option>Business & Entrepreneurship</option>
+                                <option>Customer & Community</option>
+                                <option>Learning & Growth</option>
+                                <option>Local Stories</option>
+                                <option>Other</option>
+                            </select>
+                            <div class="field-error" id="categoryError">Please select a category.</div>
+                        </div>
+
+                        <!-- Finished article fields -->
+                        <div id="finishedFields">
+                            <div class="form-group">
+                                <label for="content">Your Article *</label>
+                                <textarea id="content" placeholder="Share your article in your own words." maxlength="10000" required></textarea>
+                                <div class="field-error" id="contentError">Please enter your article.</div>
+                            </div>
+                        </div>
+
+                        <!-- Guided story fields -->
+                        <div id="guidedFields" class="hidden">
+                            <div class="info-box">
+                                That's completely okay. Tell us what happened in your own words. You don't need to make it perfect. Our team can help organise the information into a clear article while keeping your story and meaning intact.
+                            </div>
+                            <div class="form-group">
+                                <label for="whatHappened">What happened?</label>
+                                <textarea id="whatHappened" placeholder="Tell us what happened. Write it naturally — you don't need to worry about grammar or structure." maxlength="10000"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="whatLearned">What did you learn?</label>
+                                <textarea id="whatLearned" placeholder="Share what you learned from the experience." maxlength="5000"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="whatOthersKnow">What would you want someone else to know?</label>
+                                <textarea id="whatOthersKnow" placeholder="What message or lesson should others take away?" maxlength="5000"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="whoInvolved">Who or what was involved?</label>
+                                <textarea id="whoInvolved" placeholder="Describe who or what this story involves." maxlength="2000"></textarea>
+                                <small>Share only the details that are relevant to your story. Avoid unnecessary personal information about other people.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="dontPublish">Is there anything you don't want us to publish?</label>
+                                <textarea id="dontPublish" placeholder="Tell us if there are names, photos, details or other information you want us to leave out." maxlength="2000"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Contributor Information -->
+                        <h2>Your <span class="gold">Information</span></h2>
+                        <div class="form-group">
+                            <label for="contributorName">Your name *</label>
+                            <input type="text" id="contributorName" placeholder="Your full name" maxlength="100" required>
+                            <div class="field-error" id="contributorNameError">Please enter your name.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="publicName">Preferred name for publication (optional)</label>
+                            <input type="text" id="publicName" placeholder="e.g. Thabo M." maxlength="100">
+                            <small>If you'd prefer a different name on the published article.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address *</label>
+                            <input type="email" id="email" placeholder="your@email.com" required>
+                            <small>We'll use this to contact you about your submission. It will not be published.</small>
+                            <div class="field-error" id="emailError">Please enter a valid email address.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone number (optional)</label>
+                            <input type="tel" id="phone" placeholder="+27 82 123 4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="storyType">What type of story is this? *</label>
+                            <select id="storyType" required>
+                                <option value="">Select a type</option>
+                                <option>Business story</option>
+                                <option>Entrepreneur experience</option>
+                                <option>Customer experience</option>
+                                <option>Community story</option>
+                                <option>Lesson learned</option>
+                                <option>Educational article</option>
+                                <option>Other</option>
+                            </select>
+                            <div class="field-error" id="storyTypeError">Please select a story type.</div>
+                        </div>
+
+                        <!-- Images -->
+                        <h2>Photos <span class="gold">(Optional)</span></h2>
+                        <div class="form-group">
+                            <label for="images">Add photos</label>
+                            <input type="file" id="images" accept="image/jpeg,image/png,image/webp" multiple>
+                            <small>You may submit photos that help tell your story. Only submit images you have permission to use or that you are authorised to provide to HustleCenter.</small>
+                            <div id="selectedFiles" class="selected-files"></div>
+                            <div class="field-error" id="imagesError">Please upload only JPG, PNG or WebP images under 5MB each.</div>
+                        </div>
+
+                        <!-- Image permission (shown only when files are selected) -->
+                        <div id="imagePermissionGroup" class="hidden">
+                            <div class="check-group">
+                                <input type="checkbox" id="imagePermission">
+                                <label for="imagePermission">I confirm that I have permission to submit these images to HustleCenter and understand that approved images may be published with my story.</label>
+                            </div>
+                        </div>
+
+                        <!-- Content warning -->
+                        <div class="info-box">
+                            If your story includes another identifiable person, please make sure you have appropriate permission before submitting their personal information or photographs.
+                        </div>
+
+                        <!-- Agreements -->
+                        <h2><span class="gold">Agreement</span></h2>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreeAccuracy" required>
+                            <label for="agreeAccuracy">I confirm that, to the best of my knowledge, the information I have submitted is truthful and accurate.</label>
+                        </div>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreeEditing" required>
+                            <label for="agreeEditing">I understand that HustleCenter may edit my submission for spelling, clarity, structure and readability before publication.</label>
+                        </div>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the HustleCenter <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</label>
+                        </div>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreePublication" required>
+                            <label for="agreePublication">I understand that if my submission is approved and published, the article/story and approved images may be publicly displayed on the HustleCenter website.</label>
+                        </div>
+                        <div class="check-group">
+                            <input type="checkbox" id="agreeNoGuarantee" required>
+                            <label for="agreeNoGuarantee">I understand that submitting a story does not guarantee publication.</label>
+                        </div>
+                        <div class="field-error" id="agreementError" style="margin-top:8px;">Please accept all the agreements before submitting.</div>
+
+                        <button type="submit" class="btn-primary" id="submitBtn">Submit Your Story</button>
+                        <div id="submitSuccess" class="success-msg hidden">
+                            <strong>Thank you for sharing your story.</strong>
+                            <p>We've received your submission. HustleCenter will review it before anything is published. We may contact you if we need clarification or additional information.</p>
+                        </div>
+                        <div id="submitError" class="error-msg hidden"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust</h4>
+                <ul>
+                    <li><a href="trust.html">Trust & Safety</a></li>
+                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    <li><a href="report.html">Report a Problem</a></li>
+                    <li><a href="appeals.html">Appeals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                    <li><a href="popia.html">POPIA Notice</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+
+        // Toggle between finished article and guided story fields
+        const typeFinished = document.getElementById('typeFinished');
+        const typeGuided = document.getElementById('typeGuided');
+        const finishedFields = document.getElementById('finishedFields');
+        const guidedFields = document.getElementById('guidedFields');
+        const titleGroup = document.getElementById('titleGroup');
+        const contentField = document.getElementById('content');
+        const guidedTextareas = document.querySelectorAll('#guidedFields textarea');
+
+        function toggleSubmissionType() {
+            if (typeGuided.checked) {
+                finishedFields.classList.add('hidden');
+                guidedFields.classList.remove('hidden');
+                // Make guided fields required, finished optional
+                contentField.required = false;
+                guidedTextareas.forEach(t => t.required = true);
+                // Title remains required
+            } else {
+                finishedFields.classList.remove('hidden');
+                guidedFields.classList.add('hidden');
+                contentField.required = true;
+                guidedTextareas.forEach(t => t.required = false);
+            }
+        }
+
+        typeFinished.addEventListener('change', toggleSubmissionType);
+        typeGuided.addEventListener('change', toggleSubmissionType);
+        toggleSubmissionType(); // initial state
+
+        // Photo upload – show selected files and permission checkbox
+        const imagesInput = document.getElementById('images');
+        const selectedFilesDiv = document.getElementById('selectedFiles');
+        const imagePermissionGroup = document.getElementById('imagePermissionGroup');
+        const imagePermissionCheckbox = document.getElementById('imagePermission');
+
+        imagesInput.addEventListener('change', function() {
+            const files = this.files;
+            if (files.length > 0) {
+                const names = Array.from(files).map(f => f.name).join(', ');
+                selectedFilesDiv.textContent = `Selected: ${names}`;
+                imagePermissionGroup.classList.remove('hidden');
+            } else {
+                selectedFilesDiv.textContent = '';
+                imagePermissionGroup.classList.add('hidden');
+                imagePermissionCheckbox.checked = false;
+            }
+        });
+
+        // Form submission
+        document.getElementById('storyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            let valid = true;
+
+            // Reset errors
+            document.querySelectorAll('.field-error').forEach(el => el.style.display = 'none');
+            document.getElementById('submitError').style.display = 'none';
+            document.getElementById('submitSuccess').classList.add('hidden');
+
+            // Honeypot check
+            const honeypot = document.querySelector('.honeypot input');
+            if (honeypot.value) return; // likely bot
+
+            const submissionType = typeGuided.checked ? 'guided' : 'finished';
+            const title = document.getElementById('title').value.trim();
+            const category = document.getElementById('category').value;
+            const contributorName = document.getElementById('contributorName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const storyType = document.getElementById('storyType').value;
+
+            // Agreements
+            const agreeAccuracy = document.getElementById('agreeAccuracy').checked;
+            const agreeEditing = document.getElementById('agreeEditing').checked;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            const agreePublication = document.getElementById('agreePublication').checked;
+            const agreeNoGuarantee = document.getElementById('agreeNoGuarantee').checked;
+
+            // Images
+            const imageFiles = imagesInput.files;
+            const imagePermission = imagePermissionCheckbox.checked;
+
+            // Validate shared fields
+            if (!title) { document.getElementById('titleError').style.display = 'block'; valid = false; }
+            if (!category) { document.getElementById('categoryError').style.display = 'block'; valid = false; }
+            if (!contributorName) { document.getElementById('contributorNameError').style.display = 'block'; valid = false; }
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('emailError').style.display = 'block'; valid = false; }
+            if (!storyType) { document.getElementById('storyTypeError').style.display = 'block'; valid = false; }
+
+            // Validate submission-specific fields
+            if (submissionType === 'finished') {
+                if (!contentField.value.trim()) {
+                    document.getElementById('contentError').style.display = 'block';
+                    valid = false;
+                }
+            } else {
+                const what = document.getElementById('whatHappened').value.trim();
+                if (!what) {
+                    alert('Please fill in "What happened?" — it helps us understand your story.');
+                    valid = false;
+                }
+            }
+
+            // Validate image permission if files selected
+            if (imageFiles.length > 0 && !imagePermission) {
+                alert('Please confirm you have permission to submit these images.');
+                valid = false;
+            }
+
+            // Validate agreements
+            if (!agreeAccuracy || !agreeEditing || !agreeTerms || !agreePublication || !agreeNoGuarantee) {
+                document.getElementById('agreementError').style.display = 'block';
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Submitting…';
+
+            try {
+                const formData = new FormData();
+                formData.append('submissionType', submissionType);
+                formData.append('title', title);
+                formData.append('category', category);
+                formData.append('contributorName', contributorName);
+                formData.append('email', email);
+                formData.append('storyType', storyType);
+
+                // Optional fields
+                const publicName = document.getElementById('publicName').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                if (publicName) formData.append('publicName', publicName);
+                if (phone) formData.append('phone', phone);
+
+                if (submissionType === 'finished') {
+                    formData.append('content', contentField.value.trim());
+                } else {
+                    formData.append('whatHappened', document.getElementById('whatHappened').value.trim());
+                    formData.append('whatLearned', document.getElementById('whatLearned').value.trim());
+                    formData.append('whatOthersKnow', document.getElementById('whatOthersKnow').value.trim());
+                    formData.append('whoInvolved', document.getElementById('whoInvolved').value.trim());
+                    formData.append('dontPublish', document.getElementById('dontPublish').value.trim());
+                }
+
+                // Append images
+                for (let i = 0; i < imageFiles.length; i++) {
+                    formData.append('images', imageFiles[i]);
+                }
+
+                const res = await fetch(`${API_BASE}/api/stories`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!res.ok) throw new Error('Submission failed');
+
+                document.getElementById('submitSuccess').classList.remove('hidden');
+                this.reset();
+                toggleSubmissionType(); // reset to default
+                // Clear file selection display
+                selectedFilesDiv.textContent = '';
+                imagePermissionGroup.classList.add('hidden');
+                imagePermissionCheckbox.checked = false;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (err) {
+                document.getElementById('submitError').textContent = 'We couldn\'t submit your story right now. Please try again.';
+                document.getElementById('submitError').style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Submit Your Story';
+            }
+        });
+
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

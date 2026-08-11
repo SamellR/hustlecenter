@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About HustleCenter | Local Opportunity & Trusted Services</title>
+    <meta name="description" content="Learn why HustleCenter was created, our mission to create opportunity, and how we're building a trusted marketplace starting in Polokwane.">
+    <link rel="canonical" href="https://hustlecenter.co.za/about.html">
+    <meta property="og:title" content="About HustleCenter | Local Opportunity & Trusted Services">
+    <meta property="og:description" content="Discover why HustleCenter exists and how we're building a trusted marketplace starting in Polokwane.">
+    <meta property="og:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
+    <meta property="og:url" content="https://hustlecenter.co.za/about.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About HustleCenter">
+    <meta name="twitter:description" content="A trusted marketplace starting in Polokwane. Learn about our mission and story.">
+    <meta name="twitter:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .container { max-width:900px; margin:0 auto; padding:0 24px; width:100%; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.3; }
+        h1 { font-size:clamp(2rem, 5vw, 3rem); margin-bottom:16px; }
+        h2 { font-size:2rem; margin:48px 0 20px; }
+        h3 { font-size:1.5rem; margin-bottom:12px; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:inline-block; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:14px 32px; border-radius:50px; border:none; font-size:1rem;
+            cursor:pointer; transition:all 0.25s; text-align:center; font-family:var(--font-body);
+            margin:8px;
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary); font-weight:600;
+            padding:12px 28px; border-radius:50px; border:2px solid var(--border-light);
+            transition:all 0.25s; font-size:1rem; cursor:pointer; font-family:var(--font-body); text-align:center;
+            margin:8px;
+        }
+        .btn-outline:hover { border-color:var(--accent); background:rgba(212,163,115,0.08); }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .main-nav a.active { color:var(--accent); font-weight:600; }
+        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Hero */
+        .hero { padding:80px 0 60px; text-align:center; background:linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%); }
+        .hero h1 { margin-bottom:16px; }
+        .hero-sub { font-size:1.2rem; color:var(--text-muted); max-width:650px; margin:0 auto 16px; }
+        .mission-line { font-style:italic; color:var(--text-muted); font-size:1.1rem; margin:12px 0 24px; }
+        .hero-cta { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:24px; }
+
+        /* Section styling */
+        .section { padding:40px 0; }
+        .section-alt { background:var(--card-bg); }
+        .content-block { max-width:750px; margin:0 auto; }
+        .content-block p { margin-bottom:20px; color:var(--text-muted); font-size:1.05rem; line-height:1.7; }
+        .mission-quote { text-align:center; font-size:1.8rem; font-family:var(--font-heading); font-weight:700; color:var(--primary); margin:32px 0; line-height:1.4; }
+        .mission-quote .gold { color:var(--accent); }
+
+        /* Learn Build Grow cards */
+        .lbd-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:24px; margin:32px 0; }
+        .lbd-card { background:var(--card-bg); padding:32px 24px; border-radius:var(--radius-md); box-shadow:var(--shadow); text-align:center; transition:transform 0.2s; }
+        .lbd-card:hover { transform:translateY(-4px); }
+        .lbd-card h3 { font-size:1.4rem; margin-bottom:8px; }
+        .lbd-card p { color:var(--text-muted); }
+
+        /* Invitation buttons */
+        .cta-row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:24px; }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:64px; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .hero { padding:60px 0 40px; }
+            .hero-sub { font-size:1rem; }
+            .content-block p { font-size:1rem; }
+            .mission-quote { font-size:1.5rem; }
+            h2 { font-size:1.8rem; margin:36px 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="list-your-service.html">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="blog.html">Blog</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1>About <span class="gold">HustleCenter</span></h1>
+                <p class="hero-sub">A place to discover people, skills, businesses and opportunities.</p>
+                <p class="hero-sub">HustleCenter is a trusted marketplace designed to help customers discover entrepreneurs and skilled professionals, while giving local people more opportunities to be seen, connect and grow.</p>
+                <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+                <div class="hero-cta">
+                    <a href="browse.html" class="btn-primary">Browse Services</a>
+                    <a href="list-your-service.html" class="btn-outline">List Your Service</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why We Started -->
+        <section class="section">
+            <div class="container content-block">
+                <h2>Why We Started <span class="gold">HustleCenter</span></h2>
+                <p>There are people with skills, businesses, ideas and talents that deserve to be seen.</p>
+                <p>But sometimes the places available to advertise are limited. A social media group can only reach so many people. Word of mouth can only travel so far. And customers can struggle to know who they can trust.</p>
+                <p>HustleCenter was created to bring people into one place where entrepreneurs can be discovered, customers can find services, and people can connect around opportunity.</p>
+                <p>Because people's talent isn't limited simply because their opportunities to be seen are.</p>
+            </div>
+        </section>
+
+        <!-- Founder's Story -->
+        <section class="section section-alt">
+            <div class="container content-block">
+                <h2>The Story Behind <span class="gold">HustleCenter</span></h2>
+                <p>HustleCenter started with a simple idea: create a safer and easier place where entrepreneurs, skilled people and customers can find each other, connect and do business with greater confidence.</p>
+                <p>But the idea became bigger than just a marketplace.</p>
+                <p>I saw people who wanted to be seen but didn't always have enough places to go and get noticed. They had skills. They had talent. They had things they could offer. What was limited wasn't their ability — it was their access to opportunity.</p>
+                <p>I wanted HustleCenter to help change that.</p>
+                <p>We're starting in Polokwane because I believe our community can find a way forward by bringing more of these people together. When entrepreneurs, skilled professionals, customers and communities connect, new possibilities can appear.</p>
+                <p>HustleCenter is also meant to be a place where people can learn, talk, ask questions and share experiences about business and growth.</p>
+                <p>I'm building HustleCenter while I'm learning too. I don't have everything figured out, and I don't expect the platform to be perfect from day one.</p>
+                <p>What matters is that we start, learn from real people, improve and keep moving forward.</p>
+                <p>I believe people shouldn't give up on something simply because someone else doesn't like it or doesn't want to be part of it. There are other people who may be looking for exactly what you're building.</p>
+                <p>HustleCenter is my attempt to create a place where those people can find each other.</p>
+            </div>
+        </section>
+
+        <!-- Polokwane Beginning -->
+        <section class="section">
+            <div class="container content-block">
+                <h2>Starting Here. <span class="gold">Growing Where We Can</span>.</h2>
+                <p>HustleCenter is starting in Polokwane, Limpopo.</p>
+                <p>We believe Polokwane has people with skills, businesses, ideas and ambitions that deserve more opportunities to be discovered.</p>
+                <p>Our goal is not to pretend we can change everything overnight.</p>
+                <p>We're starting where we are, learning as we go and building something useful for the people around us.</p>
+                <p>When the time and opportunity are right, HustleCenter can expand beyond Polokwane and into other communities across South Africa.</p>
+                <p>Start small. Learn. Build. Grow.</p>
+            </div>
+        </section>
+
+        <!-- More Than a Marketplace -->
+        <section class="section section-alt">
+            <div class="container content-block">
+                <h2>More Than a <span class="gold">Marketplace</span></h2>
+                <p>HustleCenter isn't only about finding a plumber, cleaner, barber, electrician or another professional.</p>
+                <p>We want to help create a place where people can discover opportunities, learn from each other, ask questions, share experiences and build relationships.</p>
+                <p>A marketplace can connect a customer with a service provider.</p>
+                <p>A community can create something bigger.</p>
+                <p>That's the direction we're working toward.</p>
+            </div>
+        </section>
+
+        <!-- Mission -->
+        <section class="section">
+            <div class="container content-block">
+                <h2>The <span class="gold">Mission</span></h2>
+                <div class="mission-quote">The enemy is poverty.<br>The mission is <span class="gold">opportunity</span>.</div>
+                <p>We believe opportunity grows when people help each other build instead of trying to hold each other back.</p>
+                <p>Everyone has weaknesses. Everyone has something to learn. And sometimes the opportunity someone needs is simply the opportunity to be seen.</p>
+                <p>When people help each other grow, they can create opportunities for people who may not yet know where to go or what to do next.</p>
+                <p>HustleCenter wants to contribute to that kind of environment.</p>
+            </div>
+        </section>
+
+        <!-- Learn. Build. Grow. -->
+        <section class="section section-alt">
+            <div class="container">
+                <h2 style="text-align:center;">Learn. Build. <span class="gold">Grow</span>.</h2>
+                <div class="lbd-grid">
+                    <div class="lbd-card">
+                        <h3>Learn</h3>
+                        <p>Learn from people, experiences, mistakes and practical knowledge.</p>
+                    </div>
+                    <div class="lbd-card">
+                        <h3>Build</h3>
+                        <p>Build your skills, business, reputation, relationships and opportunities.</p>
+                    </div>
+                    <div class="lbd-card">
+                        <h3>Grow</h3>
+                        <p>Grow alongside the people and communities around you.</p>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-top:24px;">
+                    <a href="blog.html" class="btn-outline">Visit the Blog</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust -->
+        <section class="section">
+            <div class="container content-block">
+                <h2>Every Connection Starts With <span class="gold">Trust</span>.</h2>
+                <p>HustleCenter is built around a simple belief:</p>
+                <p>Every connection starts with trust.</p>
+                <p>We manually review marketplace listings before publication and maintain Trust & Safety processes designed to reduce risk and respond to problems.</p>
+                <p>But HustleCenter cannot guarantee that every transaction, service, person or business relationship will be successful.</p>
+                <p>Our goal is to make discovering and connecting with people easier while giving users useful information and clear safety guidance.</p>
+                <div style="text-align:center; margin-top:24px;">
+                    <a href="trust.html" class="btn-outline">Learn About Trust & Safety</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- We're Building This Together -->
+        <section class="section section-alt">
+            <div class="container content-block">
+                <h2>We're Building This <span class="gold">Together</span></h2>
+                <p>HustleCenter is still growing.</p>
+                <p>We're learning from entrepreneurs, customers and the community as we build.</p>
+                <p>That means we won't pretend to have every answer today.</p>
+                <p>We'll listen. We'll test. We'll improve.</p>
+                <p>Launch → Learn → Improve.</p>
+                <p>The goal is to build something that becomes more useful, more trusted and more valuable to the communities it serves.</p>
+            </div>
+        </section>
+
+        <!-- Invitation -->
+        <section class="section">
+            <div class="container" style="text-align:center;">
+                <h2>Be Part of <span class="gold">HustleCenter</span></h2>
+                <p style="max-width:600px; margin:0 auto 24px; color:var(--text-muted);">If you have a skill, a business, an idea, a question, a story or simply a desire to see your community move forward, there's a place for you here.</p>
+                <p style="color:var(--text-muted); margin-bottom:24px;">Find a service. List your work. Share what you've learned. Discover someone you can work with.</p>
+                <p style="color:var(--text-muted); margin-bottom:24px;">Let's build opportunity together.</p>
+                <div class="cta-row">
+                    <a href="browse.html" class="btn-primary">Browse Services</a>
+                    <a href="list-your-service.html" class="btn-outline">List Your Service</a>
+                    <a href="blog.html" class="btn-outline">Visit the Blog</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust</h4>
+                <ul>
+                    <li><a href="trust.html">Trust & Safety</a></li>
+                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    <li><a href="report.html">Report a Problem</a></li>
+                    <li><a href="appeals.html">Appeals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                    <li><a href="popia.html">POPIA Notice</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

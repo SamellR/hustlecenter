@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Profile – HustleCenter</title>
+    <meta name="description" content="View provider details, services, and contact information on HustleCenter.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; }
+        a { color:var(--accent); text-decoration:none; }
+        .container { max-width:800px; margin:0 auto; padding:0 24px; }
+        h1, h2 { font-family:var(--font-heading); font-weight:700; }
+        h1 { font-size:2.5rem; margin-bottom:8px; }
+        h2 { font-size:1.5rem; margin:32px 0 16px; }
+        .gold { color:var(--accent); }
+
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; }
+        .logo-mark .gold { color:var(--accent); }
+        .nav-links a { margin-left:20px; font-weight:500; color:var(--text-dark); }
+        .nav-links a:hover { color:var(--accent); }
+
+        .section { padding:40px 0; }
+        .profile-card { background:var(--card-bg); border-radius:var(--radius-md); padding:40px; box-shadow:var(--shadow); }
+        .profile-header { display:flex; gap:24px; align-items:center; margin-bottom:32px; flex-wrap:wrap; }
+        .profile-img { width:120px; height:120px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; color:#fff; font-size:3rem; flex-shrink:0; }
+        .profile-img img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+        .profile-info h1 { font-size:2rem; margin-bottom:4px; }
+        .profile-info .category-badge { display:inline-block; background:var(--primary); color:#fff; padding:4px 14px; border-radius:20px; font-size:0.8rem; font-weight:600; margin-bottom:8px; }
+        .profile-info p { color:var(--text-muted); }
+        .detail-row { display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--border-light); flex-wrap:wrap; gap:8px; }
+        .detail-row span:first-child { font-weight:600; color:var(--primary); }
+        .detail-row span:last-child { color:var(--text-muted); text-align:right; }
+        .btn-connect {
+            display:block; width:100%; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:16px; border-radius:50px; border:none; font-size:1rem; cursor:pointer; margin-top:32px;
+            transition:all 0.25s; font-family:var(--font-body); text-align:center;
+        }
+        .btn-connect:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .disclaimer { background:#fff9f0; border-left:4px solid var(--accent); padding:20px; margin-top:24px; border-radius:8px; color:var(--text-muted); font-size:0.9rem; }
+        .loading, .error, .empty { text-align:center; padding:60px 0; color:var(--text-muted); }
+
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:80px; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        @media (max-width: 768px) {
+            .nav-links { display:none; }
+            .profile-card { padding:24px; }
+            .profile-header { flex-direction:column; text-align:center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="nav-links">
+                <a href="browse.html">Browse Services</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="list-your-service.html">List Your Service</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container" id="profileContainer">
+                <div class="loading">Loading profile…</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>HustleCenter</h4>
+                <p style="font-size:0.9rem; opacity:0.7;">Every connection starts with trust.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="browse.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; 2026 HustleCenter. All rights reserved. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+
+        function getSlugFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('slug');
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        async function loadProfile() {
+            const container = document.getElementById('profileContainer');
+            const slug = getSlugFromURL();
+
+            if (!slug) {
+                container.innerHTML = '<div class="error">No provider specified. <a href="browse.html">Browse services →</a></div>';
+                return;
+            }
+
+            try {
+                // Fetch all approved listings and find by slug (or use a dedicated endpoint when available)
+                const res = await fetch(`${API_BASE}/api/listings/approved`);
+                if (!res.ok) throw new Error('Failed to load');
+                const listings = await res.json();
+                const provider = listings.find(l => (l.slug || l.id) === slug);
+
+                if (!provider) {
+                    container.innerHTML = '<div class="empty">Provider not found. <a href="browse.html">Browse services →</a></div>';
+                    return;
+                }
+
+                const imgHTML = provider.image
+                    ? `<img src="${provider.image}" alt="${escapeHtml(provider.title)}">`
+                    : provider.title.charAt(0).toUpperCase();
+
+                container.innerHTML = `
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-img">${imgHTML}</div>
+                            <div class="profile-info">
+                                <span class="category-badge">${escapeHtml(provider.category)}</span>
+                                <h1>${escapeHtml(provider.title)}</h1>
+                                <p>📍 ${escapeHtml(provider.location || 'Polokwane')}</p>
+                            </div>
+                        </div>
+
+                        <h2>About</h2>
+                        <div class="detail-row"><span>Description</span><span>${escapeHtml(provider.description)}</span></div>
+                        ${provider.services ? `<div class="detail-row"><span>Services offered</span><span>${escapeHtml(provider.services)}</span></div>` : ''}
+                        <div class="detail-row"><span>Pricing</span><span>${escapeHtml(provider.price)}</span></div>
+                        <div class="detail-row"><span>Service area</span><span>${escapeHtml(provider.location || 'Polokwane')}</span></div>
+                        ${provider.operatingHours ? `<div class="detail-row"><span>Operating hours</span><span>${escapeHtml(provider.operatingHours)}</span></div>` : ''}
+                        <div class="detail-row"><span>Preferred contact</span><span>${escapeHtml(provider.preferredContact || 'Contact via request')}</span></div>
+
+                        <a href="mailto:help@hustlecenter.co.za?subject=Request%20for%20${encodeURIComponent(provider.title)}" class="btn-connect">Request / Connect</a>
+
+                        <div class="disclaimer">
+                            HustleCenter reviews listings before publication. A published listing does not constitute a guarantee or endorsement of the provider's work.
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                container.innerHTML = '<div class="error">Unable to load profile. Please try again later.</div>';
+            }
+        }
+
+        loadProfile();
+    </script>
+</body>
+</html>

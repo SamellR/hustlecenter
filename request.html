@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Service – HustleCenter</title>
+    <meta name="description" content="Submit a service request to a provider on HustleCenter.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .container { max-width:640px; margin:0 auto; padding:0 24px; width:100%; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
+        h1 { font-size:2.2rem; margin-bottom:8px; text-align:center; }
+        h2 { font-size:1.5rem; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:block; width:100%; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:16px; border-radius:50px; border:none; font-size:1rem; cursor:pointer;
+            transition:all 0.25s; text-align:center; font-family:var(--font-body);
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-primary:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Page content */
+        .section { padding:60px 0; flex:1; }
+        .form-card { background:var(--card-bg); padding:40px 32px; border-radius:var(--radius-md); box-shadow:var(--shadow); }
+        .provider-info { text-align:center; margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--border-light); }
+        .provider-info h3 { font-family:var(--font-body); font-weight:600; margin-bottom:4px; }
+        .provider-info p { color:var(--text-muted); font-size:0.9rem; }
+        .no-provider, .login-prompt { text-align:center; padding:60px 0; }
+        .form-group { margin-bottom:24px; }
+        .form-group label { display:block; font-weight:600; margin-bottom:6px; }
+        .form-group input, .form-group textarea, .form-group .custom-select {
+            width:100%; padding:14px 16px; border:2px solid var(--border-light); border-radius:var(--radius-sm);
+            font-family:var(--font-body); font-size:1rem; background:var(--bg); transition:border 0.2s; color:var(--text-dark);
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group .custom-select:focus-within { outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(212,163,115,0.15); }
+        .form-group textarea { resize:vertical; min-height:100px; }
+        .form-group small { color:var(--text-muted); font-size:0.85rem; }
+        .field-error { color:#dc2626; font-size:0.85rem; margin-top:4px; display:none; }
+
+        /* Custom select */
+        .custom-select { position:relative; cursor:pointer; }
+        .custom-select select { appearance:none; -webkit-appearance:none; width:100%; background:transparent; border:none; font-family:var(--font-body); font-size:1rem; color:var(--text-dark); padding:14px 16px; cursor:pointer; }
+        .custom-select select:focus { outline:none; }
+        .custom-select::after { content:'▾'; position:absolute; right:16px; top:50%; transform:translateY(-50%); pointer-events:none; color:var(--text-muted); font-size:1rem; }
+
+        /* Trust notice – calm info card */
+        .trust-notice { background:#F0F7FF; border:1px solid #B8D4F0; border-radius:var(--radius-sm); padding:20px; margin:24px 0; }
+        .trust-notice p { color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin:0; }
+
+        .success-msg { background:#dcfce7; color:#166534; padding:20px; border-radius:var(--radius-sm); text-align:center; font-weight:500; margin-top:20px; }
+        .error-msg { background:#fee2e2; color:#991b1b; padding:20px; border-radius:var(--radius-sm); text-align:center; font-weight:500; margin-top:20px; }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .form-card { padding:24px; }
+            .section { padding:40px 0; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="list-your-service.html">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container" id="pageContent">
+            <!-- Content rendered by JS -->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog — Coming Soon</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+
+        // Simple auth check – token stored after login
+        function isLoggedIn() {
+            const token = localStorage.getItem('hustlecenter_token');
+            return !!token;
+        }
+
+        function getAuthHeaders() {
+            const token = localStorage.getItem('hustlecenter_token');
+            if (!token) return {};
+            return { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' };
+        }
+
+        function getSlugFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('slug') || params.get('provider');
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        async function loadPage() {
+            const container = document.getElementById('pageContent');
+            const slug = getSlugFromURL();
+
+            // No provider specified
+            if (!slug) {
+                container.innerHTML = `
+                    <h1>Request <span class="gold">a Service</span></h1>
+                    <p style="text-align:center; color:var(--text-muted); margin-bottom:32px;">Tell us what service you need and we'll help connect you with a suitable provider.</p>
+                    <div class="no-provider">
+                        <h3>No provider specified.</h3>
+                        <p>Browse available services to find a provider first.</p>
+                        <p><a href="browse.html">Browse Services →</a></p>
+                    </div>`;
+                return;
+            }
+
+            // Check if user is logged in
+            if (!isLoggedIn()) {
+                container.innerHTML = `
+                    <h1>Request <span class="gold">a Service</span></h1>
+                    <p style="text-align:center; color:var(--text-muted); margin-bottom:32px;">Tell us what service you need and we'll help connect you with a suitable provider.</p>
+                    <div class="login-prompt">
+                        <h3>Please log in to continue</h3>
+                        <p>You need a HustleCenter account to submit a request. It only takes a moment.</p>
+                        <a href="login.html?redirect=request.html?provider=${encodeURIComponent(slug)}" class="btn-primary">Log In</a>
+                        <p style="margin-top:12px;"><a href="signup.html?redirect=request.html?provider=${encodeURIComponent(slug)}">Create an account</a></p>
+                        <p style="margin-top:12px;"><a href="browse.html">← Browse Services</a></p>
+                    </div>`;
+                return;
+            }
+
+            // Try to fetch the provider
+            let provider = null;
+            let fetchError = false;
+            try {
+                const res = await fetch(`${API_BASE}/api/listings/${slug}`);
+                if (res.ok) {
+                    provider = await res.json();
+                } else if (res.status === 404) {
+                    provider = null;
+                } else {
+                    fetchError = true;
+                }
+            } catch (err) {
+                fetchError = true;
+            }
+
+            // Provider not found or API error
+            if (fetchError || (!provider && slug)) {
+                container.innerHTML = `
+                    <h1>Request <span class="gold">a Service</span></h1>
+                    <p style="text-align:center; color:var(--text-muted); margin-bottom:32px;">Tell us what service you need and we'll help connect you with a suitable provider.</p>
+                    <div class="provider-error" style="text-align:center; padding:60px 0;">
+                        <h3>${fetchError ? 'Unable to load provider information.' : 'Provider not found.'}</h3>
+                        <p><a href="browse.html">Browse services →</a></p>
+                        ${fetchError ? '<p style="margin-top:16px;"><button class="btn-outline" onclick="loadPage()">Try Again</button></p>' : ''}
+                    </div>`;
+                return;
+            }
+
+            // Provider found – render form
+            container.innerHTML = `
+                <h1>Request <span class="gold">a Service</span></h1>
+                <p style="text-align:center; color:var(--text-muted); margin-bottom:32px;">Tell us what service you need and we'll help connect you with a suitable provider.</p>
+                <div class="form-card">
+                    <div class="provider-info">
+                        <h3>${escapeHtml(provider.businessName || 'Selected Provider')}</h3>
+                        <p>${escapeHtml(provider.category || '')} · ${escapeHtml(provider.serviceArea || 'Polokwane')}</p>
+                    </div>
+                    <form id="requestForm" novalidate>
+                        <input type="hidden" id="providerId" value="${provider._id}">
+                        <input type="hidden" id="providerSlug" value="${slug}">
+                        <div class="form-group">
+                            <label for="customerName">Your name *</label>
+                            <input type="text" id="customerName" placeholder="Your full name" required>
+                            <div class="field-error" id="nameError">Please enter your name.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">Phone number *</label>
+                            <input type="tel" id="customerPhone" placeholder="+27 82 123 4567" required>
+                            <div class="field-error" id="phoneError">Please enter a valid phone number.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">Email (optional)</label>
+                            <input type="email" id="customerEmail" placeholder="you@example.com">
+                            <div class="field-error" id="emailError">Please enter a valid email address.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceNeeded">Service required *</label>
+                            <input type="text" id="serviceNeeded" placeholder="e.g. Plumbing repair, haircut, cleaning" required>
+                            <div class="field-error" id="serviceError">Please describe the service you need.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message (optional)</label>
+                            <textarea id="message" placeholder="Tell us briefly what you need and any important details."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredContact">Preferred contact method *</label>
+                            <div class="custom-select">
+                                <select id="preferredContact" required>
+                                    <option value="">Select a method</option>
+                                    <option value="Phone">Phone</option>
+                                    <option value="WhatsApp">WhatsApp</option>
+                                    <option value="Email">Email</option>
+                                </select>
+                            </div>
+                            <div class="field-error" id="contactError">Please select a preferred contact method.</div>
+                        </div>
+                        <div class="trust-notice">
+                            <p>HustleCenter facilitates connections between customers and providers. We do not guarantee a provider's work, availability, pricing, or transaction. Confirm all details directly with the provider.</p>
+                        </div>
+                        <button type="submit" class="btn-primary" id="submitBtn">Submit Request</button>
+                        <div id="submitSuccess" class="success-msg" style="display:none;"></div>
+                        <div id="submitError" class="error-msg" style="display:none;"></div>
+                    </form>
+                </div>`;
+
+            // Form validation & submission
+            const form = document.getElementById('requestForm');
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                let valid = true;
+
+                document.querySelectorAll('.field-error').forEach(el => el.style.display = 'none');
+                document.getElementById('submitError').style.display = 'none';
+                document.getElementById('submitSuccess').style.display = 'none';
+
+                const name = document.getElementById('customerName').value.trim();
+                const phone = document.getElementById('customerPhone').value.trim();
+                const email = document.getElementById('customerEmail').value.trim();
+                const service = document.getElementById('serviceNeeded').value.trim();
+                const contact = document.getElementById('preferredContact').value;
+                const message = document.getElementById('message').value.trim();
+                const providerId = document.getElementById('providerId').value;
+
+                if (!name) { document.getElementById('nameError').style.display = 'block'; valid = false; }
+                if (!phone || phone.length < 10) { document.getElementById('phoneError').style.display = 'block'; valid = false; }
+                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('emailError').style.display = 'block'; valid = false; }
+                if (!service) { document.getElementById('serviceError').style.display = 'block'; valid = false; }
+                if (!contact) { document.getElementById('contactError').style.display = 'block'; valid = false; }
+                if (!providerId) {
+                    document.getElementById('submitError').textContent = 'Provider information is missing. Please go back and try again.';
+                    document.getElementById('submitError').style.display = 'block';
+                    valid = false;
+                }
+
+                if (!valid) return;
+
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = true;
+                btn.textContent = 'Submitting…';
+
+                try {
+                    const res = await fetch(`${API_BASE}/api/requests`, {
+                        method: 'POST',
+                        headers: getAuthHeaders(),
+                        body: JSON.stringify({
+                            providerId,
+                            customerName: name,
+                            customerPhone: phone,
+                            customerEmail: email,
+                            serviceRequested: service,
+                            message,
+                            preferredContactMethod: contact
+                        })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Request failed');
+
+                    // Success
+                    document.getElementById('submitSuccess').innerHTML = `
+                        <p>Request submitted successfully.</p>
+                        <p>Your request has been sent to <strong>${escapeHtml(provider.businessName)}</strong>.</p>
+                        <p><a href="dashboard.html">View My Requests</a></p>
+                    `;
+                    document.getElementById('submitSuccess').style.display = 'block';
+                    form.reset();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } catch (err) {
+                    document.getElementById('submitError').textContent = err.message || 'We couldn\'t submit your request. Please try again.';
+                    document.getElementById('submitError').style.display = 'block';
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Submit Request';
+                }
+            });
+        }
+
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Mobile menu
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+
+        loadPage();
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – HustleCenter</title>
+    <meta name="description" content="HustleCenter entrepreneur dashboard. Manage your listings and view requests.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:var(--accent); text-decoration:none; }
+        .container { max-width:700px; margin:0 auto; padding:80px 24px; flex:1; }
+        .card { background:var(--card-bg); padding:40px 32px; border-radius:12px; box-shadow:0 8px 30px rgba(15,23,42,0.08); text-align:center; }
+        h1 { font-family:var(--font-heading); font-size:2rem; margin-bottom:8px; }
+        .gold { color:var(--accent); }
+        p { color:var(--text-muted); margin-bottom:24px; }
+        .btn-primary {
+            display:inline-block; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:14px 32px; border-radius:50px; border:none; font-size:1rem; cursor:pointer; transition:0.25s;
+        }
+        .btn-primary:hover { background:#C8925A; transform:translateY(-2px); }
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding:40px 0; text-align:center; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="card">
+            <h1>Hustle<span class="gold">Center</span> Dashboard</h1>
+            <p>The entrepreneur dashboard is coming soon. You'll be able to manage your listings, view connection requests, and update your profile from here. For now, if you need to check on your listing status or make changes, please <a href="contact.html">contact us</a>.</p>
+            <a href="index.html" class="btn-primary">Back to Home</a>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <p>&copy; 2026 HustleCenter. Every connection starts with trust.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appeals – HustleCenter</title>
+    <meta name="description" content="Appeal a moderation decision about your HustleCenter listing or account.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --accent-hover: #C8925A;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+            --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .container { max-width:640px; margin:0 auto; padding:0 24px; width:100%; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
+        h1 { font-size:2.2rem; margin-bottom:8px; text-align:center; }
+        h2 { font-size:1.5rem; }
+        .gold { color:var(--accent); }
+        .btn-primary {
+            display:block; width:100%; background:var(--accent); color:var(--primary); font-weight:600;
+            padding:16px; border-radius:50px; border:none; font-size:1rem; cursor:pointer;
+            transition:all 0.25s; text-align:center; font-family:var(--font-body);
+        }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+        .btn-primary:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+        /* Header */
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+        .main-nav { display:flex; gap:24px; align-items:center; }
+        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
+        .main-nav a:hover { color:var(--accent); }
+        .main-nav a.active { color:var(--accent); font-weight:600; }
+        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
+        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+
+        /* Page content */
+        .section { padding:60px 0; flex:1; }
+        .form-card { background:var(--card-bg); padding:40px 32px; border-radius:var(--radius-md); box-shadow:var(--shadow); }
+        .mission-line { font-style:italic; color:var(--text-muted); margin-top:8px; font-size:1rem; text-align:center; }
+        .form-group { margin-bottom:24px; }
+        .form-group label { display:block; font-weight:600; margin-bottom:6px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width:100%; padding:14px 16px; border:2px solid var(--border-light); border-radius:var(--radius-sm);
+            font-family:var(--font-body); font-size:1rem; background:var(--bg); transition:border 0.2s; color:var(--text-dark);
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(212,163,115,0.15); }
+        .form-group textarea { resize:vertical; min-height:120px; }
+        .form-group small { color:var(--text-muted); font-size:0.85rem; margin-top:4px; display:block; }
+        .field-error { color:#dc2626; font-size:0.85rem; margin-top:4px; display:none; }
+        .login-prompt { text-align:center; padding:60px 0; }
+        .success-msg { background:#dcfce7; color:#166534; padding:20px; border-radius:var(--radius-sm); text-align:center; font-weight:500; margin-top:20px; }
+        .error-msg { background:#fee2e2; color:#991b1b; padding:20px; border-radius:var(--radius-sm); text-align:center; font-weight:500; margin-top:20px; }
+
+        /* Footer */
+        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
+        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
+        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+
+        /* Back to Top */
+        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
+        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
+        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+        @media (max-width: 768px) {
+            .main-nav { display:none; }
+            .hamburger { display:flex; }
+            .form-card { padding:24px; }
+            .section { padding:40px 0; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="browse.html">Browse Services</a>
+                <a href="categories.html">Categories</a>
+                <a href="list-your-service.html">List Your Service</a>
+                <a href="trust.html">Trust & Safety</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="blog.html">Blog</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container" id="pageContent">
+            <!-- Content rendered by JS -->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Marketplace</h4>
+                <ul>
+                    <li><a href="browse.html">Browse Services</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="list-your-service.html">List Your Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Trust</h4>
+                <ul>
+                    <li><a href="trust.html">Trust & Safety</a></li>
+                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    <li><a href="report.html">Report a Problem</a></li>
+                    <li><a href="appeals.html">Appeals</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="paia.html">PAIA Manual</a></li>
+                    <li><a href="popia.html">POPIA Notice</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Every connection starts with trust. &copy; 2026 HustleCenter. Built with care in South Africa. 🇿🇦</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <button id="backToTopBtn">Back to Top ↑</button>
+    </div>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+
+        // Auth helpers
+        function isLoggedIn() {
+            return !!localStorage.getItem('hustlecenter_token');
+        }
+        function getAccountType() {
+            return localStorage.getItem('hustlecenter_account_type');
+        }
+        function getAuthHeaders() {
+            const token = localStorage.getItem('hustlecenter_token');
+            if (!token) return { 'Content-Type': 'application/json' };
+            return { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' };
+        }
+
+        function renderPage() {
+            const container = document.getElementById('pageContent');
+
+            if (!isLoggedIn()) {
+                container.innerHTML = `
+                    <h1><span class="gold">Appeals</span></h1>
+                    <p style="text-align:center; color:var(--text-muted); margin-bottom:8px;">If your listing was rejected or your account was restricted and you believe there's been a mistake, you can submit an appeal here.</p>
+                    <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+                    <div class="login-prompt">
+                        <h3>Log in to submit an appeal</h3>
+                        <a href="login.html?redirect=appeals.html" class="btn-primary" style="margin-bottom:12px;">Log In</a>
+                        <p><a href="signup.html">Create Account</a></p>
+                    </div>`;
+                return;
+            }
+
+            if (getAccountType() !== 'entrepreneur') {
+                container.innerHTML = `
+                    <h1><span class="gold">Appeals</span></h1>
+                    <p style="text-align:center; color:var(--text-muted); margin-bottom:8px;">If your listing was rejected or your account was restricted and you believe there's been a mistake, you can submit an appeal here.</p>
+                    <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+                    <div class="login-prompt">
+                        <h3>Appeals are for entrepreneur accounts.</h3>
+                        <p>You're logged in with a customer account.</p>
+                        <a href="browse.html" class="btn-outline" style="display:inline-block;">← Browse Services</a>
+                    </div>`;
+                return;
+            }
+
+            // Entrepreneur – show appeal form
+            container.innerHTML = `
+                <h1><span class="gold">Appeals</span></h1>
+                <p style="text-align:center; color:var(--text-muted); margin-bottom:8px;">If your listing was rejected or your account was restricted and you believe there's been a mistake, you can submit an appeal here.</p>
+                <p class="mission-line">The enemy is poverty. The mission is <span class="gold">opportunity</span>.</p>
+
+                <div class="form-card" style="margin-top:32px;">
+                    <form id="appealForm" novalidate>
+                        <div class="form-group">
+                            <label for="appealName">Your full name</label>
+                            <input type="text" id="appealName" placeholder="Your full name" required>
+                            <div class="field-error" id="nameError">Please enter your name.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="appealContact">Phone or email</label>
+                            <input type="text" id="appealContact" placeholder="How can we reach you?" required>
+                            <small>We'll only use this to follow up about your appeal.</small>
+                            <div class="field-error" id="contactError">Please provide a valid phone number or email address.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="appealListing">Listing or business name</label>
+                            <input type="text" id="appealListing" placeholder="The listing this appeal is about.">
+                            <small>Leave blank if this appeal is about an account restriction.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="appealReason">Why should this decision be reviewed? *</label>
+                            <textarea id="appealReason" placeholder="Explain why you believe the decision should be reconsidered." required></textarea>
+                            <div class="field-error" id="reasonError">Please explain why you're appealing.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="appealAdditional">Additional information (optional)</label>
+                            <textarea id="appealAdditional" placeholder="If there is anything else you believe HustleCenter should consider, you can include it here."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" id="submitBtn">Submit Appeal</button>
+                        <div id="submitSuccess" class="success-msg hidden">
+                            <strong>Appeal submitted</strong>
+                            <p>Your appeal has been submitted to HustleCenter for review. We will consider the information provided and take appropriate action where necessary.</p>
+                        </div>
+                        <div id="submitError" class="error-msg hidden"></div>
+                    </form>
+                </div>`;
+
+            // Form submission
+            const form = document.getElementById('appealForm');
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                let valid = true;
+
+                document.querySelectorAll('.field-error').forEach(el => el.style.display = 'none');
+                document.getElementById('submitError').style.display = 'none';
+                document.getElementById('submitSuccess').classList.add('hidden');
+
+                const name = document.getElementById('appealName').value.trim();
+                const contact = document.getElementById('appealContact').value.trim();
+                const listing = document.getElementById('appealListing').value.trim();
+                const reason = document.getElementById('appealReason').value.trim();
+                const additional = document.getElementById('appealAdditional').value.trim();
+
+                if (!name) { document.getElementById('nameError').style.display = 'block'; valid = false; }
+                if (!contact) { document.getElementById('contactError').style.display = 'block'; valid = false; }
+                if (!reason) { document.getElementById('reasonError').style.display = 'block'; valid = false; }
+
+                if (!valid) return;
+
+                const btn = document.getElementById('submitBtn');
+                btn.disabled = true;
+                btn.textContent = 'Submitting…';
+
+                try {
+                    const res = await fetch(`${API_BASE}/api/appeals`, {
+                        method: 'POST',
+                        headers: getAuthHeaders(),
+                        body: JSON.stringify({
+                            name,
+                            contact,
+                            listing,
+                            reason,
+                            additional
+                        })
+                    });
+
+                    if (!res.ok) throw new Error('Appeal submission failed');
+
+                    document.getElementById('submitSuccess').classList.remove('hidden');
+                    form.reset();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } catch (err) {
+                    document.getElementById('submitError').textContent = 'We couldn\'t submit your appeal right now. Please try again.';
+                    document.getElementById('submitError').style.display = 'block';
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Submit Appeal';
+                }
+            });
+        }
+
+        document.getElementById('backToTopBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const hamburger = document.getElementById('hamburgerBtn');
+        const nav = document.getElementById('mainNav');
+        hamburger.addEventListener('click', () => {
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
+                nav.style.flexDirection = 'column';
+                nav.style.position = 'absolute';
+                nav.style.top = '72px';
+                nav.style.left = '0';
+                nav.style.width = '100%';
+                nav.style.background = '#fff';
+                nav.style.padding = '16px 24px';
+                nav.style.gap = '16px';
+                nav.style.borderBottom = '1px solid var(--border-light)';
+            }
+        });
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) nav.style.display = 'none';
+            });
+        });
+
+        renderPage();
+    </script>
+</body>
+</html>
