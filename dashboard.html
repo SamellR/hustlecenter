@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard – HustleCenter</title>
-    <meta name="description" content="HustleCenter entrepreneur dashboard. Manage your listings and view requests.">
+    <title>Entrepreneur Dashboard – HustleCenter</title>
+    <meta name="description" content="Manage your HustleCenter listing, view customer requests, and update your account.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -16,40 +16,375 @@
         :root {
             --primary: #0F172A;
             --accent: #D4A373;
+            --accent-hover: #C8925A;
             --bg: #F8FAFC;
             --card-bg: #FFFFFF;
             --text-dark: #0F172A;
             --text-muted: #475569;
             --border-light: #E2E8F0;
+            --shadow: 0 8px 30px rgba(15,23,42,0.08);
             --font-heading: 'Playfair Display', Georgia, serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; }
         a { color:var(--accent); text-decoration:none; }
-        .container { max-width:700px; margin:0 auto; padding:80px 24px; flex:1; }
-        .card { background:var(--card-bg); padding:40px 32px; border-radius:12px; box-shadow:0 8px 30px rgba(15,23,42,0.08); text-align:center; }
-        h1 { font-family:var(--font-heading); font-size:2rem; margin-bottom:8px; }
+        a:hover { text-decoration:underline; }
+        .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
+        h1 { font-size:2rem; margin-bottom:8px; }
+        h2 { font-size:1.5rem; margin-bottom:16px; }
         .gold { color:var(--accent); }
-        p { color:var(--text-muted); margin-bottom:24px; }
         .btn-primary {
             display:inline-block; background:var(--accent); color:var(--primary); font-weight:600;
-            padding:14px 32px; border-radius:50px; border:none; font-size:1rem; cursor:pointer; transition:0.25s;
+            padding:12px 28px; border-radius:50px; border:none; font-size:0.95rem; cursor:pointer;
+            transition:all 0.25s; text-align:center; font-family:var(--font-body);
         }
-        .btn-primary:hover { background:#C8925A; transform:translateY(-2px); }
-        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding:40px 0; text-align:center; }
+        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary); font-weight:600;
+            padding:10px 24px; border-radius:50px; border:2px solid var(--border-light);
+            transition:all 0.25s; font-size:0.95rem; cursor:pointer; font-family:var(--font-body);
+        }
+        .btn-outline:hover { border-color:var(--accent); background:rgba(212,163,115,0.08); }
+        .btn-danger {
+            display:inline-block; background:transparent; color:#dc2626; font-weight:600;
+            padding:10px 24px; border-radius:50px; border:2px solid #dc2626; cursor:pointer;
+        }
+        .btn-danger:hover { background:#fee2e2; }
+
+        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; }
+        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
+        .logo-mark .gold { color:var(--accent); }
+
+        .section { padding:40px 0; }
+        .card { background:var(--card-bg); padding:24px; border-radius:var(--radius-md); box-shadow:var(--shadow); margin-bottom:24px; }
+        .card h2 { margin-bottom:12px; }
+        .detail-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border-light); }
+        .detail-row span:first-child { font-weight:600; }
+        .detail-row span:last-child { color:var(--text-muted); }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:24px; }
+        .stat-card { background:var(--card-bg); padding:20px; border-radius:var(--radius-md); box-shadow:var(--shadow); text-align:center; }
+        .stat-num { font-family:var(--font-heading); font-size:2rem; color:var(--accent); }
+        .stat-label { font-size:0.9rem; color:var(--text-muted); }
+        .status-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.8rem; font-weight:600; }
+        .status-pending { background:#fff7e6; color:#b45309; }
+        .status-approved { background:#dcfce7; color:#166534; }
+        .status-rejected { background:#fee2e2; color:#991b1b; }
+        .status-suspended { background:#f3f4f6; color:#374151; }
+        .hidden { display:none; }
+        .form-group { margin-bottom:20px; }
+        .form-group label { display:block; font-weight:600; margin-bottom:6px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width:100%; padding:12px 16px; border:2px solid var(--border-light); border-radius:var(--radius-sm);
+            font-family:var(--font-body); font-size:1rem; background:var(--bg);
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(212,163,115,0.15);
+        }
+        .error-msg { background:#fee2e2; color:#991b1b; padding:16px; border-radius:var(--radius-sm); margin-bottom:20px; }
+        .success-msg { background:#dcfce7; color:#166534; padding:16px; border-radius:var(--radius-sm); margin-bottom:20px; }
+        .loading { text-align:center; padding:60px 0; color:var(--text-muted); }
+        .spinner { width:40px; height:40px; border:4px solid rgba(212,163,115,0.2); border-top-color:var(--accent); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 20px; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        @media (max-width: 768px) { .grid { grid-template-columns:1fr; } }
     </style>
 </head>
 <body>
-    <main class="container">
-        <div class="card">
-            <h1>Hustle<span class="gold">Center</span> Dashboard</h1>
-            <p>The entrepreneur dashboard is coming soon. You'll be able to manage your listings, view connection requests, and update your profile from here. For now, if you need to check on your listing status or make changes, please <a href="contact.html">contact us</a>.</p>
-            <a href="index.html" class="btn-primary">Back to Home</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span> Dashboard</a>
+            <button id="logoutBtn" class="btn-danger">Log Out</button>
+        </div>
+    </header>
+
+    <main class="container section" id="dashboardContent">
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading your dashboard…</p>
         </div>
     </main>
-    <footer class="site-footer">
-        <p>&copy; 2026 HustleCenter. Every connection starts with trust.</p>
-    </footer>
+
+    <script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+        let currentUser = null;
+        let myListings = [];
+        let myRequests = [];
+
+        // Check auth
+        function isLoggedIn() {
+            return !!localStorage.getItem('hustlecenter_token');
+        }
+        function getAccountType() {
+            return localStorage.getItem('hustlecenter_account_type');
+        }
+        function getAuthHeaders(includeContentType = true) {
+            const headers = {};
+            const token = localStorage.getItem('hustlecenter_token');
+            if (token) headers['Authorization'] = 'Bearer ' + token;
+            if (includeContentType) headers['Content-Type'] = 'application/json';
+            return headers;
+        }
+
+        if (!isLoggedIn()) {
+            window.location.href = 'login.html?redirect=dashboard.html';
+        } else if (getAccountType() !== 'entrepreneur') {
+            window.location.href = 'customer-dashboard.html';
+        } else {
+            loadDashboard();
+        }
+
+        async function loadDashboard() {
+            try {
+                const [userRes, listingsRes, requestsRes] = await Promise.all([
+                    fetch(`${API_BASE}/api/auth/me`, { headers: getAuthHeaders(false) }),
+                    fetch(`${API_BASE}/api/listings/my-listings`, { headers: getAuthHeaders(false) }),
+                    fetch(`${API_BASE}/api/requests/my-listing-requests`, { headers: getAuthHeaders(false) })
+                ]);
+
+                if (!userRes.ok || !listingsRes.ok || !requestsRes.ok) {
+                    throw new Error('Failed to load dashboard data');
+                }
+
+                currentUser = await userRes.json();
+                myListings = await listingsRes.json();
+                myRequests = await requestsRes.json();
+
+                renderDashboard();
+            } catch (err) {
+                document.getElementById('dashboardContent').innerHTML = `
+                    <div class="error-msg">Unable to load your dashboard. Please try again later.</div>
+                    <button class="btn-outline" onclick="loadDashboard()">Retry</button>
+                `;
+            }
+        }
+
+        function renderDashboard() {
+            const container = document.getElementById('dashboardContent');
+            const listing = myListings.length > 0 ? myListings[0] : null;
+            const requestCount = myRequests.length;
+
+            let listingHTML = '';
+            if (listing) {
+                const statusClass = listing.status === 'approved' ? 'approved' : listing.status === 'pending' ? 'pending' : listing.status === 'rejected' ? 'rejected' : 'suspended';
+                listingHTML = `
+                    <div class="card">
+                        <h2>My Listing</h2>
+                        <div class="detail-row"><span>Business Name</span><span>${escapeHtml(listing.businessName)}</span></div>
+                        <div class="detail-row"><span>Status</span><span><span class="status-badge status-${statusClass}">${listing.status}</span></span></div>
+                        <div class="detail-row"><span>Category</span><span>${escapeHtml(listing.category || '—')}</span></div>
+                        <div class="detail-row"><span>Created</span><span>${new Date(listing.createdAt).toLocaleDateString()}</span></div>
+                        ${listing.profileImage ? `<div class="detail-row"><span>Image</span><span><img src="${listing.profileImage}" alt="Listing image" style="max-width:80px; border-radius:8px;"></span></div>` : ''}
+                        <div style="margin-top:16px;">
+                            <a href="provider.html?slug=${listing.slug}" class="btn-outline">View Listing</a>
+                            <button class="btn-primary" onclick="openEditListing('${listing.id}')">Edit Listing</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                listingHTML = `
+                    <div class="card">
+                        <h2>My Listing</h2>
+                        <p>You haven't submitted a listing yet.</p>
+                        <a href="list-your-service.html" class="btn-primary">List Your Service</a>
+                    </div>
+                `;
+            }
+
+            let requestsHTML = '';
+            if (myRequests.length > 0) {
+                requestsHTML = '<div class="card"><h2>Customer Requests</h2>';
+                myRequests.forEach(req => {
+                    requestsHTML += `
+                        <div class="detail-row">
+                            <span>${escapeHtml(req.customerName)}</span>
+                            <span>${escapeHtml(req.serviceRequested)}</span>
+                            <span>${new Date(req.createdAt).toLocaleDateString()}</span>
+                            <span>${escapeHtml(req.status)}</span>
+                        </div>
+                        ${req.message ? `<p style="margin:4px 0 0 20px; color:var(--text-muted);">Message: ${escapeHtml(req.message)}</p>` : ''}
+                    `;
+                });
+                requestsHTML += '</div>';
+            } else {
+                requestsHTML = '<div class="card"><h2>Customer Requests</h2><p>No requests yet.</p></div>';
+            }
+
+            const overviewHTML = `
+                <div class="grid">
+                    <div class="stat-card">
+                        <div class="stat-num">${escapeHtml(currentUser.username)}</div>
+                        <div class="stat-label">Your Name</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">${listing ? listing.status : 'No listing'}</div>
+                        <div class="stat-label">Listing Status</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">${listing ? escapeHtml(listing.category || '—') : '—'}</div>
+                        <div class="stat-label">Service Category</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">${requestCount}</div>
+                        <div class="stat-label">Customer Requests</div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = `
+                <h1>Entrepreneur <span class="gold">Dashboard</span></h1>
+                <p style="color:var(--text-muted); margin-bottom:32px;">Manage your HustleCenter presence, view requests, and update your account.</p>
+                ${overviewHTML}
+                ${listingHTML}
+                ${requestsHTML}
+                <div class="card">
+                    <h2>Account</h2>
+                    <div class="detail-row"><span>Username</span><span>${escapeHtml(currentUser.username)}</span></div>
+                    <div class="detail-row"><span>Email</span><span>${escapeHtml(currentUser.email)}</span></div>
+                    <button class="btn-outline" onclick="openEditAccount()">Edit Account Info</button>
+                    <button class="btn-outline" onclick="openChangePassword()">Change Password</button>
+                </div>
+                <div class="card">
+                    <h2>Help & Trust & Safety</h2>
+                    <p style="margin-bottom:16px;">Review our guidelines and contact support if needed.</p>
+                    <a href="trust.html" class="btn-outline">Trust & Safety</a>
+                    <a href="community-guidelines.html" class="btn-outline">Community Guidelines</a>
+                    <a href="report.html" class="btn-outline">Report a Problem</a>
+                    <a href="contact.html" class="btn-outline">Contact</a>
+                </div>
+            `;
+
+            // Attach logout
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+        }
+
+        function logout() {
+            localStorage.removeItem('hustlecenter_token');
+            localStorage.removeItem('hustlecenter_account_type');
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        // Edit Listing Modal (simplified inline prompt approach)
+        function openEditListing(listingId) {
+            // Fetch full listing details using authenticated endpoint (to be added)
+            fetch(`${API_BASE}/api/listings/my/${listingId}`, { headers: getAuthHeaders(false) })
+                .then(res => {
+                    if (!res.ok) throw new Error('Failed to load listing');
+                    return res.json();
+                })
+                .then(listing => {
+                    const modal = document.createElement('div');
+                    modal.style.position = 'fixed';
+                    modal.style.top = '0';
+                    modal.style.left = '0';
+                    modal.style.width = '100%';
+                    modal.style.height = '100%';
+                    modal.style.background = 'rgba(0,0,0,0.5)';
+                    modal.style.display = 'flex';
+                    modal.style.justifyContent = 'center';
+                    modal.style.alignItems = 'center';
+                    modal.style.zIndex = '1000';
+                    modal.innerHTML = `
+                        <div style="background:white; padding:32px; border-radius:12px; max-width:600px; width:90%; max-height:90vh; overflow-y:auto;">
+                            <h2>Edit Listing</h2>
+                            <form id="editListingForm" enctype="multipart/form-data">
+                                <div class="form-group"><label>Business Name</label><input type="text" name="businessName" value="${escapeHtml(listing.businessName)}" required></div>
+                                <div class="form-group"><label>Contact Name</label><input type="text" name="contactName" value="${escapeHtml(listing.contactName)}" required></div>
+                                <div class="form-group"><label>Email</label><input type="email" name="email" value="${escapeHtml(listing.email)}" required></div>
+                                <div class="form-group"><label>Phone</label><input type="text" name="phone" value="${escapeHtml(listing.phone)}" required></div>
+                                <div class="form-group"><label>Preferred Contact</label>
+                                    <select name="preferredContactMethod" required>
+                                        <option value="Phone" ${listing.preferredContactMethod === 'Phone' ? 'selected' : ''}>Phone</option>
+                                        <option value="WhatsApp" ${listing.preferredContactMethod === 'WhatsApp' ? 'selected' : ''}>WhatsApp</option>
+                                        <option value="Email" ${listing.preferredContactMethod === 'Email' ? 'selected' : ''}>Email</option>
+                                    </select>
+                                </div>
+                                <div class="form-group"><label>Category</label><input type="text" name="category" value="${escapeHtml(listing.category)}" required></div>
+                                <div class="form-group"><label>Services</label><textarea name="services" required>${escapeHtml(listing.services)}</textarea></div>
+                                <div class="form-group"><label>Description</label><textarea name="description" required>${escapeHtml(listing.description)}</textarea></div>
+                                <div class="form-group"><label>Pricing</label><input type="text" name="pricing" value="${escapeHtml(listing.pricing)}" required></div>
+                                <div class="form-group"><label>Service Area</label><input type="text" name="serviceArea" value="${escapeHtml(listing.serviceArea)}" required></div>
+                                <div class="form-group"><label>Operating Hours</label><input type="text" name="operatingHours" value="${escapeHtml(listing.operatingHours || '')}"></div>
+                                <div class="form-group"><label>Update Photos (optional)</label><input type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple></div>
+                                <button type="submit" class="btn-primary">Save Changes</button>
+                                <button type="button" class="btn-outline" onclick="this.closest('div[style]').remove()">Cancel</button>
+                            </form>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+
+                    document.getElementById('editListingForm').addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        try {
+                            const res = await fetch(`${API_BASE}/api/listings/${listingId}`, {
+                                method: 'PUT',
+                                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('hustlecenter_token') },
+                                body: formData
+                            });
+                            const data = await res.json();
+                            if (!res.ok) throw new Error(data.error || 'Update failed');
+                            modal.remove();
+                            loadDashboard();
+                        } catch (err) {
+                            alert(err.message);
+                        }
+                    });
+                })
+                .catch(err => alert('Could not load listing for editing.'));
+        }
+
+        function openEditAccount() {
+            const newUsername = prompt('Enter new username:', currentUser.username);
+            if (!newUsername || newUsername.trim() === currentUser.username) return;
+            const newEmail = prompt('Enter new email:', currentUser.email);
+            if (!newEmail) return;
+
+            fetch(`${API_BASE}/api/auth/me`, {
+                method: 'PUT',
+                headers: getAuthHeaders(),
+                body: JSON.stringify({ username: newUsername.trim(), email: newEmail.trim() })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) alert(data.error);
+                else {
+                    alert('Account updated');
+                    loadDashboard();
+                }
+            })
+            .catch(() => alert('Failed to update account'));
+        }
+
+        function openChangePassword() {
+            const currentPassword = prompt('Enter current password:');
+            if (!currentPassword) return;
+            const newPassword = prompt('Enter new password (minimum 8 characters):');
+            if (!newPassword || newPassword.length < 8) {
+                alert('Password must be at least 8 characters');
+                return;
+            }
+            fetch(`${API_BASE}/api/auth/me/password`, {
+                method: 'PUT',
+                headers: getAuthHeaders(),
+                body: JSON.stringify({ currentPassword, newPassword })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) alert(data.error);
+                else alert('Password updated');
+            })
+            .catch(() => alert('Failed to update password'));
+        }
+    </script>
 </body>
 </html>
