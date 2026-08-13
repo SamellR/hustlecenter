@@ -287,7 +287,10 @@
                     return;
                 }
 
-                // Successful login – route to correct dashboard
+                // Successful login – store token and account type
+                localStorage.setItem('hustlecenter_token', data.token);
+                localStorage.setItem('hustlecenter_account_type', data.accountType);
+
                 const accountType = data.accountType;
                 const target = accountType === 'entrepreneur' ? 'dashboard.html' : 'customer-dashboard.html';
                 // Preserve redirect if safe (internal only)
