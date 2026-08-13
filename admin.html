@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard – HustleCenter</title>
-    <meta name="description" content="HustleCenter admin dashboard. Manage listings, requests, and accounts.">
+    <meta name="description" content="HustleCenter admin dashboard. Manage listings, requests, accounts, reports, appeals, stories, and articles.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; }
         a { color:var(--accent); text-decoration:none; }
-        .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+        .container { max-width:1200px; margin:0 auto; padding:0 24px; }
         h1, h2 { font-family:var(--font-heading); font-weight:700; }
         h1 { font-size:2rem; margin-bottom:24px; }
         h2 { font-size:1.4rem; margin:24px 0 16px; }
@@ -59,8 +59,8 @@
 
         .btn-sm { padding:5px 12px; border-radius:16px; font-size:0.75rem; font-weight:600; border:none; cursor:pointer; }
         .btn-approve { background:#D4A373; color:#0F172A; }
-        .btn-reject { background:#dc2626; color:#fff; margin-left:4px; }
-        .btn-delete { background:#dc2626; color:#fff; margin-left:4px; }
+        .btn-reject, .btn-delete { background:#dc2626; color:#fff; margin-left:4px; }
+        .btn-view { background:#E2E8F0; color:#0F172A; margin-left:4px; }
 
         .stats-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:16px; margin-bottom:32px; }
         .stat-card { background:var(--card-bg); padding:20px; border-radius:var(--radius-md); box-shadow:0 8px 30px rgba(15,23,42,0.05); text-align:center; }
@@ -104,9 +104,13 @@
 
                 <!-- Tabs -->
                 <div class="tabs">
-                    <button class="tab active" data-tab="listings">Pending Listings</button>
+                    <button class="tab active" data-tab="listings">Listings</button>
                     <button class="tab" data-tab="requests">Requests</button>
                     <button class="tab" data-tab="accounts">Accounts</button>
+                    <button class="tab" data-tab="reports">Reports</button>
+                    <button class="tab" data-tab="appeals">Appeals</button>
+                    <button class="tab" data-tab="stories">Stories</button>
+                    <button class="tab" data-tab="articles">Articles</button>
                 </div>
                 <div id="statusMsg"></div>
                 <div class="table-wrapper" id="tabContent">Loading...</div>
@@ -131,7 +135,7 @@
             this.disabled = true;
             this.textContent = 'Checking...';
             try {
-                const res = await fetch(`${API_BASE}/api/admin/listings/pending`, {
+                const res = await fetch(`${API_BASE}/api/admin/stats`, {
                     headers: { 'x-admin-key': adminKey }
                 });
                 if (!res.ok) throw new Error('Invalid key');
@@ -175,9 +179,13 @@
             document.getElementById('statusMsg').innerHTML = '';
             const content = document.getElementById('tabContent');
             switch(tab) {
-                case 'listings': loadPendingListings(content); break;
+                case 'listings': loadListings(content); break;
                 case 'requests': loadRequests(content); break;
                 case 'accounts': loadAccounts(content); break;
+                case 'reports': loadReports(content); break;
+                case 'appeals': loadAppeals(content); break;
+                case 'stories': loadStories(content); break;
+                case 'articles': loadArticles(content); break;
             }
         }
 
@@ -187,49 +195,60 @@
 
         async function loadStats() {
             try {
-                const [pendingRes, allListingsRes, requestsRes, usersRes] = await Promise.all([
-                    fetch(`${API_BASE}/api/admin/listings/pending`, { headers: authHeaders() }),
-                    fetch(`${API_BASE}/api/admin/listings`, { headers: authHeaders() }),
-                    fetch(`${API_BASE}/api/admin/requests`, { headers: authHeaders() }),
-                    fetch(`${API_BASE}/api/admin/users`, { headers: authHeaders() })
-                ]);
-                const pending = await pendingRes.json();
-                const allListings = await allListingsRes.json();
-                const requests = await requestsRes.json();
-                const users = await usersRes.json();
-                const approved = allListings.filter(l => l.status === 'approved');
-                document.getElementById('statsRow').innerHTML = `
-                    <div class="stat-card"><div class="stat-num">${pending.length}</div><div class="stat-label">Pending</div></div>
-                    <div class="stat-card"><div class="stat-num">${approved.length}</div><div class="stat-label">Approved</div></div>
-                    <div class="stat-card"><div class="stat-num">${requests.length}</div><div class="stat-label">Requests</div></div>
-                    <div class="stat-card"><div class="stat-num">${users.length}</div><div class="stat-label">Accounts</div></div>
-                `;
+                const res = await fetch(`${API_BASE}/api/admin/stats`, { headers: authHeaders() });
+                const data = await res.json();
+                const stats = [
+                    ['Total Users', data.totalUsers],
+                    ['Entrepreneurs', data.totalEntrepreneurs],
+                    ['Total Listings', data.totalListings],
+                    ['Pending', data.pendingListings],
+                    ['Approved', data.approvedListings],
+                    ['Rejected', data.rejectedListings],
+                    ['Requests', data.totalRequests],
+                    ['New Reports', data.newReports],
+                    ['Pending Appeals', data.pendingAppeals],
+                    ['Submitted Stories', data.submittedStories],
+                ];
+                document.getElementById('statsRow').innerHTML = stats.map(([label, num]) => `
+                    <div class="stat-card"><div class="stat-num">${num}</div><div class="stat-label">${label}</div></div>
+                `).join('');
             } catch (err) {
                 document.getElementById('statsRow').innerHTML = '<p style="color:var(--text-muted);">Unable to load stats.</p>';
             }
         }
 
-        async function loadPendingListings(container) {
+        async function loadListings(container) {
             try {
-                const res = await fetch(`${API_BASE}/api/admin/listings/pending`, { headers: authHeaders() });
-                const data = await res.json();
-                if (data.length === 0) {
-                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No pending listings.</p>';
+                const [pendingRes, allRes] = await Promise.all([
+                    fetch(`${API_BASE}/api/admin/listings/pending`, { headers: authHeaders() }),
+                    fetch(`${API_BASE}/api/admin/listings`, { headers: authHeaders() })
+                ]);
+                const pending = await pendingRes.json();
+                const all = await allRes.json();
+                const listings = [...pending, ...all.filter(l => l.status !== 'pending')]; // combine unique
+
+                if (listings.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No listings.</p>';
                     return;
                 }
-                let html = '<table><tr><th>Business</th><th>Category</th><th>Location</th><th>Date</th><th>Action</th></tr>';
-                data.forEach(l => {
+                let html = '<table><tr><th>Business</th><th>Category</th><th>Location</th><th>Status</th><th>Date</th><th>Action</th></tr>';
+                listings.forEach(l => {
+                    const statusClass = l.status === 'approved' ? 'approved' : l.status === 'pending' ? 'pending' : l.status === 'rejected' ? 'rejected' : 'suspended';
                     html += `<tr>
-                        <td>${l.businessName}</td><td>${l.category}</td><td>${l.location}</td>
+                        <td>${l.businessName}</td><td>${l.category}</td><td>${l.serviceArea}</td>
+                        <td><span class="status-badge status-${statusClass}">${l.status}</span></td>
                         <td>${new Date(l.createdAt).toLocaleDateString()}</td>
                         <td>
-                            <button class="btn-sm btn-approve" data-id="${l.id}">Approve</button>
-                            <button class="btn-sm btn-reject" data-id="${l.id}">Reject</button>
+                            <button class="btn-sm btn-view" data-id="${l._id}">View</button>
+                            ${l.status === 'pending' ? `<button class="btn-sm btn-approve" data-id="${l._id}">Approve</button><button class="btn-sm btn-reject" data-id="${l._id}">Reject</button>` : ''}
+                            ${l.status === 'approved' ? `<button class="btn-sm btn-reject" data-id="${l._id}">Suspend</button>` : ''}
                         </td>
                     </tr>`;
                 });
                 html += '</table>';
                 container.innerHTML = html;
+
+                container.querySelectorAll('.btn-view').forEach(b => b.addEventListener('click', () => viewListing(b.dataset.id)));
                 container.querySelectorAll('.btn-approve').forEach(b => b.addEventListener('click', () => approveListing(b.dataset.id)));
                 container.querySelectorAll('.btn-reject').forEach(b => b.addEventListener('click', () => rejectListing(b.dataset.id)));
             } catch (err) {
@@ -237,19 +256,38 @@
             }
         }
 
+        async function viewListing(id) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/listings/${id}`, { headers: authHeaders() });
+                const listing = await res.json();
+                if (!res.ok) throw new Error(listing.error || 'Failed');
+                const details = `
+                    <p><strong>Business:</strong> ${listing.businessName}</p>
+                    <p><strong>Description:</strong> ${listing.description}</p>
+                    <p><strong>Contact:</strong> ${listing.contactName} / ${listing.phone} / ${listing.email}</p>
+                    <p><strong>Location:</strong> ${listing.serviceArea}</p>
+                    <p><strong>Status:</strong> ${listing.status}</p>
+                    ${listing.profileImage ? `<img src="${listing.profileImage}" alt="Profile" style="max-width:100px;">` : ''}
+                `;
+                alert(details);
+            } catch (err) {
+                alert(err.message);
+            }
+        }
+
         async function approveListing(id) {
             if (!confirm('Approve this listing?')) return;
             await fetch(`${API_BASE}/api/admin/listings/${id}/approve`, { method: 'PUT', headers: authHeaders() });
             showStatus('✅ Listing approved!', 'success');
-            loadPendingListings(document.getElementById('tabContent'));
+            loadListings(document.getElementById('tabContent'));
             loadStats();
         }
 
         async function rejectListing(id) {
-            if (!confirm('Reject this listing?')) return;
+            if (!confirm('Reject/suspend this listing?')) return;
             await fetch(`${API_BASE}/api/admin/listings/${id}/reject`, { method: 'PUT', headers: authHeaders() });
-            showStatus('Listing rejected.', 'success');
-            loadPendingListings(document.getElementById('tabContent'));
+            showStatus('Listing rejected/suspended.', 'success');
+            loadListings(document.getElementById('tabContent'));
             loadStats();
         }
 
@@ -258,20 +296,40 @@
                 const res = await fetch(`${API_BASE}/api/admin/requests`, { headers: authHeaders() });
                 const data = await res.json();
                 if (data.length === 0) {
-                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No requests yet.</p>';
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No requests.</p>';
                     return;
                 }
-                let html = '<table><tr><th>Customer</th><th>Provider</th><th>Service</th><th>Message</th><th>Date</th></tr>';
+                let html = '<table><tr><th>Customer</th><th>Provider</th><th>Service</th><th>Message</th><th>Status</th><th>Date</th><th>Action</th></tr>';
                 data.forEach(r => {
                     html += `<tr>
-                        <td>${r.customerPhone}</td><td>${r.entrepreneurName}</td><td>${r.serviceId}</td>
-                        <td>${r.message || '—'}</td><td>${new Date(r.createdAt).toLocaleString()}</td>
+                        <td>${r.customerPhone}</td><td>${r.listing ? r.listing.businessName : ''}</td><td>${r.serviceRequested}</td>
+                        <td>${r.message || '—'}</td><td>${r.status}</td><td>${new Date(r.createdAt).toLocaleString()}</td>
+                        <td><button class="btn-sm btn-view" data-id="${r._id}">Update Status</button></td>
                     </tr>`;
                 });
                 html += '</table>';
                 container.innerHTML = html;
+                container.querySelectorAll('.btn-view').forEach(b => b.addEventListener('click', () => updateRequestStatus(b.dataset.id, r.status)));
             } catch (err) {
                 container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading requests.</p>';
+            }
+        }
+
+        async function updateRequestStatus(id, currentStatus) {
+            const statuses = ['new', 'viewed', 'contacted', 'completed', 'cancelled', 'closed'];
+            const status = prompt(`Current status: ${currentStatus}. Enter new status:\n${statuses.join(', ')}`, currentStatus);
+            if (!status) return;
+            const res = await fetch(`${API_BASE}/api/admin/requests/${id}`, {
+                method: 'PUT',
+                headers: authHeaders(),
+                body: JSON.stringify({ status })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                showStatus('Request updated', 'success');
+                loadRequests(document.getElementById('tabContent'));
+            } else {
+                showStatus(data.error || 'Update failed', 'error');
             }
         }
 
@@ -280,18 +338,15 @@
                 const res = await fetch(`${API_BASE}/api/admin/users`, { headers: authHeaders() });
                 const data = await res.json();
                 if (data.length === 0) {
-                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No accounts found.</p>';
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No accounts.</p>';
                     return;
                 }
-                let html = '<table><tr><th>Username</th><th>Email</th><th>Role</th><th>Verified</th><th>Status</th><th>Date</th><th>Action</th></tr>';
+                let html = '<table><tr><th>Username</th><th>Email</th><th>Role</th><th>Verified</th><th>Consent</th><th>Status</th><th>Date</th><th>Action</th></tr>';
                 data.forEach(u => {
-                    const role = u.roles && u.roles.length > 0 ? u.roles.join(', ') : 'customer';
+                    const consent = u.consent && (u.consent.termsAccepted || u.consent.privacyAccepted) ? 'Yes' : 'No';
                     html += `<tr>
-                        <td>${u.username}</td>
-                        <td>${u.email}</td>
-                        <td>${role}</td>
-                        <td>${u.verified ? 'Yes' : 'No'}</td>
-                        <td>${u.status || 'active'}</td>
+                        <td>${u.username}</td><td>${u.email}</td><td>${u.roles.join(', ')}</td>
+                        <td>${u.verified ? 'Yes' : 'No'}</td><td>${consent}</td><td>${u.status}</td>
                         <td>${new Date(u.createdAt).toLocaleDateString()}</td>
                         <td><button class="btn-sm btn-delete" data-id="${u._id}">Delete</button></td>
                     </tr>`;
@@ -306,17 +361,229 @@
 
         async function deleteUser(id) {
             if (!confirm('Delete this account and all associated data?')) return;
-            try {
-                const res = await fetch(`${API_BASE}/api/admin/users/${id}`, {
-                    method: 'DELETE',
-                    headers: authHeaders()
-                });
-                if (!res.ok) throw new Error('Delete failed');
+            const res = await fetch(`${API_BASE}/api/admin/users/${id}`, { method: 'DELETE', headers: authHeaders() });
+            if (res.ok) {
                 showStatus('Account deleted.', 'success');
                 loadAccounts(document.getElementById('tabContent'));
                 loadStats();
-            } catch (err) {
+            } else {
                 showStatus('Failed to delete account.', 'error');
+            }
+        }
+
+        async function loadReports(container) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/reports`, { headers: authHeaders() });
+                const data = await res.json();
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No reports.</p>';
+                    return;
+                }
+                let html = '<table><tr><th>Type</th><th>Explanation</th><th>Status</th><th>Admin Notes</th><th>Date</th><th>Action</th></tr>';
+                data.forEach(r => {
+                    html += `<tr>
+                        <td>${r.problemType}</td><td>${r.explanation.substring(0, 50)}…</td><td>${r.status}</td>
+                        <td>${r.adminNotes || '—'}</td><td>${new Date(r.createdAt).toLocaleDateString()}</td>
+                        <td><button class="btn-sm btn-view" data-id="${r._id}">Update</button></td>
+                    </tr>`;
+                });
+                html += '</table>';
+                container.innerHTML = html;
+                container.querySelectorAll('.btn-view').forEach(b => b.addEventListener('click', () => updateReport(b.dataset.id, r.status, r.adminNotes)));
+            } catch (err) {
+                container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading reports.</p>';
+            }
+        }
+
+        async function updateReport(id, currentStatus, currentNotes) {
+            const status = prompt(`Enter status:\n${['submitted', 'under-review', 'resolved', 'closed'].join(', ')}`, currentStatus);
+            if (!status) return;
+            const notes = prompt('Admin notes:', currentNotes || '');
+            const res = await fetch(`${API_BASE}/api/admin/reports/${id}`, {
+                method: 'PUT',
+                headers: authHeaders(),
+                body: JSON.stringify({ status, adminNotes: notes })
+            });
+            if (res.ok) {
+                showStatus('Report updated', 'success');
+                loadReports(document.getElementById('tabContent'));
+            } else {
+                const data = await res.json();
+                showStatus(data.error || 'Failed', 'error');
+            }
+        }
+
+        async function loadAppeals(container) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/appeals`, { headers: authHeaders() });
+                const data = await res.json();
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No appeals.</p>';
+                    return;
+                }
+                let html = '<table><tr><th>Name</th><th>Reason</th><th>Status</th><th>Admin Notes</th><th>Date</th><th>Action</th></tr>';
+                data.forEach(a => {
+                    html += `<tr>
+                        <td>${a.name}</td><td>${a.reason.substring(0, 50)}…</td><td>${a.status}</td>
+                        <td>${a.adminNotes || '—'}</td><td>${new Date(a.createdAt).toLocaleDateString()}</td>
+                        <td><button class="btn-sm btn-view" data-id="${a._id}">Update</button></td>
+                    </tr>`;
+                });
+                html += '</table>';
+                container.innerHTML = html;
+                container.querySelectorAll('.btn-view').forEach(b => b.addEventListener('click', () => updateAppeal(b.dataset.id, a.status, a.adminNotes)));
+            } catch (err) {
+                container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading appeals.</p>';
+            }
+        }
+
+        async function updateAppeal(id, currentStatus, currentNotes) {
+            const status = prompt(`Enter status:\n${['submitted', 'under-review', 'approved', 'declined', 'closed'].join(', ')}`, currentStatus);
+            if (!status) return;
+            const notes = prompt('Admin notes:', currentNotes || '');
+            const res = await fetch(`${API_BASE}/api/admin/appeals/${id}`, {
+                method: 'PUT',
+                headers: authHeaders(),
+                body: JSON.stringify({ status, adminNotes: notes })
+            });
+            if (res.ok) {
+                showStatus('Appeal updated', 'success');
+                loadAppeals(document.getElementById('tabContent'));
+            } else {
+                const data = await res.json();
+                showStatus(data.error || 'Failed', 'error');
+            }
+        }
+
+        async function loadStories(container) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/stories`, { headers: authHeaders() });
+                const data = await res.json();
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No stories.</p>';
+                    return;
+                }
+                let html = '<table><tr><th>Title</th><th>Type</th><th>Status</th><th>Date</th><th>Action</th></tr>';
+                data.forEach(s => {
+                    html += `<tr>
+                        <td>${s.title}</td><td>${s.submissionType}</td><td>${s.status}</td>
+                        <td>${new Date(s.createdAt).toLocaleDateString()}</td>
+                        <td>
+                            <button class="btn-sm btn-view" data-id="${s._id}">Update</button>
+                            ${s.status !== 'approved' ? `<button class="btn-sm btn-approve" data-id="${s._id}">Approve & Publish</button>` : ''}
+                            ${s.status !== 'rejected' ? `<button class="btn-sm btn-reject" data-id="${s._id}">Reject</button>` : ''}
+                        </td>
+                    </tr>`;
+                });
+                html += '</table>';
+                container.innerHTML = html;
+                container.querySelectorAll('.btn-view').forEach(b => b.addEventListener('click', () => updateStory(b.dataset.id, s.status, s.adminNotes)));
+                container.querySelectorAll('.btn-approve').forEach(b => b.addEventListener('click', () => approveStory(b.dataset.id)));
+                container.querySelectorAll('.btn-reject').forEach(b => b.addEventListener('click', () => rejectStory(b.dataset.id)));
+            } catch (err) {
+                container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading stories.</p>';
+            }
+        }
+
+        async function updateStory(id, currentStatus, currentNotes) {
+            const status = prompt(`Enter status:\n${['submitted', 'under-review', 'approved', 'rejected', 'published'].join(', ')}`, currentStatus);
+            if (!status) return;
+            const notes = prompt('Admin notes:', currentNotes || '');
+            const res = await fetch(`${API_BASE}/api/admin/stories/${id}`, {
+                method: 'PUT',
+                headers: authHeaders(),
+                body: JSON.stringify({ status, adminNotes: notes })
+            });
+            if (res.ok) {
+                showStatus('Story updated', 'success');
+                loadStories(document.getElementById('tabContent'));
+            } else {
+                const data = await res.json();
+                showStatus(data.error || 'Failed', 'error');
+            }
+        }
+
+        async function approveStory(id) {
+            if (!confirm('Approve and publish as article?')) return;
+            const res = await fetch(`${API_BASE}/api/admin/stories/${id}/approve`, { method: 'PUT', headers: authHeaders() });
+            const data = await res.json();
+            if (res.ok) {
+                showStatus('Story approved and published.', 'success');
+                loadStories(document.getElementById('tabContent'));
+                loadStats();
+            } else {
+                showStatus(data.error || 'Failed', 'error');
+            }
+        }
+
+        async function rejectStory(id) {
+            if (!confirm('Reject this story?')) return;
+            const res = await fetch(`${API_BASE}/api/admin/stories/${id}/reject`, { method: 'PUT', headers: authHeaders() });
+            if (res.ok) {
+                showStatus('Story rejected.', 'success');
+                loadStories(document.getElementById('tabContent'));
+            } else {
+                showStatus('Failed', 'error');
+            }
+        }
+
+        async function loadArticles(container) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/articles`, { headers: authHeaders() });
+                if (!res.ok) throw new Error('Endpoint missing');
+                const data = await res.json();
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No articles.</p>';
+                    return;
+                }
+                let html = '<table><tr><th>Title</th><th>Status</th><th>Date</th><th>Action</th></tr>';
+                data.forEach(article => {
+                    html += `<tr>
+                        <td>${article.title}</td><td>${article.status}</td>
+                        <td>${article.publishedAt ? new Date(article.publishedAt).toLocaleDateString() : '—'}</td>
+                        <td>
+                            <button class="btn-sm btn-view" data-id="${article._id}">Edit</button>
+                            <button class="btn-sm btn-delete" data-id="${article._id}">Delete</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</table>';
+                container.innerHTML = html;
+                container.querySelectorAll('.btn-view').forEach(b => b.addEventListener('click', () => editArticle(b.dataset.id)));
+                container.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', () => deleteArticle(b.dataset.id)));
+            } catch (err) {
+                container.innerHTML = '<p style="color:#dc2626; text-align:center;">Articles endpoint not available.</p>';
+            }
+        }
+
+        async function editArticle(id) {
+            // Very simple: prompt for title/content (not a full editor)
+            const title = prompt('New title:');
+            if (!title) return;
+            const content = prompt('New content (HTML allowed):');
+            if (!content) return;
+            const res = await fetch(`${API_BASE}/api/admin/articles/${id}`, {
+                method: 'PUT',
+                headers: authHeaders(),
+                body: JSON.stringify({ title, content })
+            });
+            if (res.ok) {
+                showStatus('Article updated', 'success');
+                loadArticles(document.getElementById('tabContent'));
+            } else {
+                const data = await res.json();
+                showStatus(data.error || 'Failed', 'error');
+            }
+        }
+
+        async function deleteArticle(id) {
+            if (!confirm('Delete this article?')) return;
+            const res = await fetch(`${API_BASE}/api/admin/articles/${id}`, { method: 'DELETE', headers: authHeaders() });
+            if (res.ok) {
+                showStatus('Article deleted', 'success');
+                loadArticles(document.getElementById('tabContent'));
+            } else {
+                showStatus('Failed', 'error');
             }
         }
     </script>
