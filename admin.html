@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard – HustleCenter</title>
-    <meta name="description" content="HustleCenter admin dashboard. Manage listings, requests, and categories.">
+    <meta name="description" content="HustleCenter admin dashboard. Manage listings, requests, and accounts.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
@@ -106,6 +106,7 @@
                 <div class="tabs">
                     <button class="tab active" data-tab="listings">Pending Listings</button>
                     <button class="tab" data-tab="requests">Requests</button>
+                    <button class="tab" data-tab="accounts">Accounts</button>
                 </div>
                 <div id="statusMsg"></div>
                 <div class="table-wrapper" id="tabContent">Loading...</div>
@@ -117,7 +118,6 @@
         const API_BASE = 'https://hustlecenter-api.onrender.com';
         let adminKey = sessionStorage.getItem('adminKey') || '';
 
-        // Show dashboard if already logged in
         if (adminKey) {
             showDashboard();
             switchTab('listings');
@@ -177,6 +177,7 @@
             switch(tab) {
                 case 'listings': loadPendingListings(content); break;
                 case 'requests': loadRequests(content); break;
+                case 'accounts': loadAccounts(content); break;
             }
         }
 
@@ -186,19 +187,22 @@
 
         async function loadStats() {
             try {
-                const [pendingRes, approvedRes, requestsRes] = await Promise.all([
+                const [pendingRes, allListingsRes, requestsRes, usersRes] = await Promise.all([
                     fetch(`${API_BASE}/api/admin/listings/pending`, { headers: authHeaders() }),
                     fetch(`${API_BASE}/api/admin/listings`, { headers: authHeaders() }),
-                    fetch(`${API_BASE}/api/admin/requests`, { headers: authHeaders() })
+                    fetch(`${API_BASE}/api/admin/requests`, { headers: authHeaders() }),
+                    fetch(`${API_BASE}/api/admin/users`, { headers: authHeaders() })
                 ]);
                 const pending = await pendingRes.json();
-                const allListings = await approvedRes.json();
+                const allListings = await allListingsRes.json();
                 const requests = await requestsRes.json();
+                const users = await usersRes.json();
                 const approved = allListings.filter(l => l.status === 'approved');
                 document.getElementById('statsRow').innerHTML = `
                     <div class="stat-card"><div class="stat-num">${pending.length}</div><div class="stat-label">Pending</div></div>
                     <div class="stat-card"><div class="stat-num">${approved.length}</div><div class="stat-label">Approved</div></div>
                     <div class="stat-card"><div class="stat-num">${requests.length}</div><div class="stat-label">Requests</div></div>
+                    <div class="stat-card"><div class="stat-num">${users.length}</div><div class="stat-label">Accounts</div></div>
                 `;
             } catch (err) {
                 document.getElementById('statsRow').innerHTML = '<p style="color:var(--text-muted);">Unable to load stats.</p>';
@@ -268,6 +272,51 @@
                 container.innerHTML = html;
             } catch (err) {
                 container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading requests.</p>';
+            }
+        }
+
+        async function loadAccounts(container) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/users`, { headers: authHeaders() });
+                const data = await res.json();
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No accounts found.</p>';
+                    return;
+                }
+                let html = '<table><tr><th>Username</th><th>Email</th><th>Role</th><th>Verified</th><th>Status</th><th>Date</th><th>Action</th></tr>';
+                data.forEach(u => {
+                    const role = u.roles && u.roles.length > 0 ? u.roles.join(', ') : 'customer';
+                    html += `<tr>
+                        <td>${u.username}</td>
+                        <td>${u.email}</td>
+                        <td>${role}</td>
+                        <td>${u.verified ? 'Yes' : 'No'}</td>
+                        <td>${u.status || 'active'}</td>
+                        <td>${new Date(u.createdAt).toLocaleDateString()}</td>
+                        <td><button class="btn-sm btn-delete" data-id="${u._id}">Delete</button></td>
+                    </tr>`;
+                });
+                html += '</table>';
+                container.innerHTML = html;
+                container.querySelectorAll('.btn-delete').forEach(b => b.addEventListener('click', () => deleteUser(b.dataset.id)));
+            } catch (err) {
+                container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading accounts.</p>';
+            }
+        }
+
+        async function deleteUser(id) {
+            if (!confirm('Delete this account and all associated data?')) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/users/${id}`, {
+                    method: 'DELETE',
+                    headers: authHeaders()
+                });
+                if (!res.ok) throw new Error('Delete failed');
+                showStatus('Account deleted.', 'success');
+                loadAccounts(document.getElementById('tabContent'));
+                loadStats();
+            } catch (err) {
+                showStatus('Failed to delete account.', 'error');
             }
         }
     </script>
