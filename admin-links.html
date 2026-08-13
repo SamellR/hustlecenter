@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Quick Links – HustleCenter</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #D4A373;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --border-light: #E2E8F0;
+            --text-muted: #475569;
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--bg); color:var(--primary); line-height:1.6; }
+        .container { max-width:800px; margin:0 auto; padding:40px 24px; }
+        h1 { font-family:var(--font-heading); font-size:2rem; margin-bottom:8px; }
+        h2 { font-family:var(--font-heading); font-size:1.3rem; margin-top:32px; margin-bottom:12px; color:var(--accent); }
+        .card { background:var(--card-bg); border-radius:12px; box-shadow:0 8px 30px rgba(15,23,42,0.08); padding:24px; margin-bottom:16px; }
+        ul { list-style:none; }
+        li { padding:6px 0; border-bottom:1px solid var(--border-light); }
+        a { color:var(--primary); text-decoration:none; font-weight:500; }
+        a:hover { color:var(--accent); }
+        .note { font-size:0.85rem; color:var(--text-muted); }
+        .admin-only { color:#dc2626; font-size:0.8rem; font-weight:600; }
+        .back-link { display:inline-block; margin-top:24px; padding:10px 24px; border:2px solid var(--border-light); border-radius:50px; background:transparent; cursor:pointer; font-weight:600; }
+        .back-link:hover { border-color:var(--accent); color:var(--accent); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin <span style="color:var(--accent);">Quick Links</span></h1>
+        <p class="note">Private page for HustleCenter administrators. No public indexing.</p>
+
+        <h2>Admin Dashboard</h2>
+        <div class="card">
+            <ul>
+                <li><a href="admin.html">Admin Login / Dashboard</a> <span class="admin-only">ADMIN KEY REQUIRED</span></li>
+                <li><a href="admin.html#listings">Pending Listings</a></li>
+                <li><a href="admin.html#requests">Requests</a></li>
+                <li><a href="admin.html#accounts">Accounts</a></li>
+                <li><a href="admin.html#reports">Reports</a></li>
+                <li><a href="admin.html#appeals">Appeals</a></li>
+                <li><a href="admin.html#stories">Stories</a></li>
+                <li><a href="admin.html#articles">Articles</a></li>
+            </ul>
+        </div>
+
+        <h2>Public Pages</h2>
+        <div class="card">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse Services</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="list-your-service.html">List Your Service</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="submit-story.html">Submit Story</a></li>
+                <li><a href="article.html?slug=starting-small-business">Article Example</a></li>
+            </ul>
+        </div>
+
+        <h2>Account / Auth</h2>
+        <div class="card">
+            <ul>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="forgot-password.html">Forgot Password</a></li>
+                <li><a href="reset-password.html">Reset Password</a></li>
+                <li><a href="verify-email.html">Verify Email</a></li>
+                <li><a href="customer-dashboard.html">Customer Dashboard</a></li>
+                <li><a href="dashboard.html">Entrepreneur Dashboard</a></li>
+            </ul>
+        </div>
+
+        <h2>Trust & Support</h2>
+        <div class="card">
+            <ul>
+                <li><a href="trust.html">Trust & Safety</a></li>
+                <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                <li><a href="report.html">Report a Problem</a></li>
+                <li><a href="appeals.html">Appeals</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="help.html">Help Center</a></li>
+            </ul>
+        </div>
+
+        <h2>Legal / Info</h2>
+        <div class="card">
+            <ul>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
+                <li><a href="paia.html">PAIA Manual</a></li>
+                <li><a href="popia.html">POPIA Notice</a></li>
+                <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                <li><a href="partners.html">Partners</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="founder.html">Founder</a></li>
+            </ul>
+        </div>
+
+        <h2>Admin Actions Reference</h2>
+        <div class="card">
+            <ul>
+                <li><span class="note">Approve/Reject Listing – button appears in Listings tab</span></li>
+                <li><span class="note">Update Request Status – button in Requests tab</span></li>
+                <li><span class="note">Delete User – button in Accounts tab</span></li>
+                <li><span class="note">Update Report/Appeal/Story – button in respective tab</span></li>
+                <li><span class="note">Create/Edit/Delete Article – Articles tab</span></li>
+            </ul>
+        </div>
+
+        <a href="admin.html" class="back-link">← Back to Admin Login</a>
+    </div>
+</body>
+  </html>
