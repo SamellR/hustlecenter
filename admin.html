@@ -57,10 +57,10 @@
         th, td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border-light); }
         th { background:var(--bg); font-weight:600; }
 
-        .btn-sm { padding:5px 12px; border-radius:16px; font-size:0.75rem; font-weight:600; border:none; cursor:pointer; }
+        .btn-sm { padding:5px 12px; border-radius:16px; font-size:0.75rem; font-weight:600; border:none; cursor:pointer; margin-left:4px; }
         .btn-approve { background:#D4A373; color:#0F172A; }
-        .btn-reject, .btn-delete { background:#dc2626; color:#fff; margin-left:4px; }
-        .btn-view { background:#E2E8F0; color:#0F172A; margin-left:4px; }
+        .btn-reject, .btn-delete { background:#dc2626; color:#fff; }
+        .btn-view { background:#E2E8F0; color:#0F172A; }
 
         .stats-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:16px; margin-bottom:32px; }
         .stat-card { background:var(--card-bg); padding:20px; border-radius:var(--radius-md); box-shadow:0 8px 30px rgba(15,23,42,0.05); text-align:center; }
@@ -70,6 +70,9 @@
         .status-msg { padding:10px; margin:10px 0; border-radius:8px; }
         .status-success { background:#dcfce7; color:#166534; }
         .status-error { background:#fee2e2; color:#991b1b; }
+
+        .section-title { font-size:1.2rem; margin-bottom:8px; color:var(--accent); }
+        .subsection { margin-bottom:24px; }
 
         @media (max-width: 768px) {
             .login-box { margin:40px auto; }
@@ -93,11 +96,10 @@
                 <input type="password" id="adminKeyInput" placeholder="Admin key" value="">
                 <button id="loginBtn">Login</button>
                 <p id="loginError" style="color:#dc2626; margin-top:8px; font-size:0.9rem;"></p>
+                <p style="margin-top:16px; font-size:0.85rem;">
+                    <a href="admin-links.html">View Admin Quick Links</a>
+                </p>
             </div>
-
-            <p style="margin-top:16px; font-size:0.85rem;">
-    <a href="admin-links.html">View Admin Quick Links</a>
-            </p>
 
             <!-- Dashboard -->
             <div id="dashboard" class="dashboard">
@@ -205,10 +207,11 @@
                     ['Total Users', data.totalUsers],
                     ['Entrepreneurs', data.totalEntrepreneurs],
                     ['Total Listings', data.totalListings],
-                    ['Pending', data.pendingListings],
-                    ['Approved', data.approvedListings],
-                    ['Rejected', data.rejectedListings],
-                    ['Requests', data.totalRequests],
+                    ['Pending Listings', data.pendingListings],
+                    ['Approved Listings', data.approvedListings],
+                    ['Rejected Listings', data.rejectedListings],
+                    ['Total Requests', data.totalRequests],
+                    ['Pending Requests', data.pendingRequests],
                     ['New Reports', data.newReports],
                     ['Pending Appeals', data.pendingAppeals],
                     ['Submitted Stories', data.submittedStories],
@@ -229,7 +232,7 @@
                 ]);
                 const pending = await pendingRes.json();
                 const all = await allRes.json();
-                const listings = [...pending, ...all.filter(l => l.status !== 'pending')]; // combine unique
+                const listings = [...pending, ...all.filter(l => l.status !== 'pending')];
 
                 if (listings.length === 0) {
                     container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No listings.</p>';
@@ -297,43 +300,89 @@
 
         async function loadRequests(container) {
             try {
-                const res = await fetch(`${API_BASE}/api/admin/requests`, { headers: authHeaders() });
-                const data = await res.json();
-                if (data.length === 0) {
-                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">No requests.</p>';
-                    return;
+                const [pendingRes, allRes] = await Promise.all([
+                    fetch(`${API_BASE}/api/admin/requests/pending`, { headers: authHeaders() }),
+                    fetch(`${API_BASE}/api/admin/requests`, { headers: authHeaders() })
+                ]);
+                const pending = await pendingRes.json();
+                const all = await allRes.json();
+
+                let html = '';
+
+                // Pending requests section
+                html += '<div class="subsection"><div class="section-title">Pending Approval</div>';
+                if (pending.length === 0) {
+                    html += '<p style="text-align:center; color:var(--text-muted); padding:20px;">No pending requests.</p>';
+                } else {
+                    html += '<table><tr><th>Customer</th><th>Provider</th><th>Service</th><th>Date</th><th>Action</th></tr>';
+                    pending.forEach(r => {
+                        html += `<tr>
+                            <td>${r.customerName || r.customerPhone}</td>
+                            <td>${r.listing ? r.listing.businessName : ''}</td>
+                            <td>${r.serviceRequested}</td>
+                            <td>${new Date(r.createdAt).toLocaleDateString()}</td>
+                            <td>
+                                <button class="btn-sm btn-approve" data-id="${r._id}">Approve</button>
+                                <button class="btn-sm btn-reject" data-id="${r._id}">Reject</button>
+                            </td>
+                        </tr>`;
+                    });
+                    html += '</table>';
                 }
-                let html = '<table><tr><th>Customer</th><th>Provider</th><th>Service</th><th>Message</th><th>Status</th><th>Date</th><th>Action</th></tr>';
-                data.forEach(r => {
-                    html += `<tr>
-                        <td>${r.customerPhone}</td><td>${r.listing ? r.listing.businessName : ''}</td><td>${r.serviceRequested}</td>
-                        <td>${r.message || '—'}</td><td>${r.status}</td><td>${new Date(r.createdAt).toLocaleString()}</td>
-                        <td><button class="btn-sm btn-view" data-id="${r._id}">Update Status</button></td>
-                    </tr>`;
-                });
-                html += '</table>';
+                html += '</div>';
+
+                // All requests section
+                html += '<div class="subsection"><div class="section-title">All Requests</div>';
+                const nonPending = all.filter(r => r.status !== 'pending');
+                if (nonPending.length === 0) {
+                    html += '<p style="text-align:center; color:var(--text-muted); padding:20px;">No non-pending requests.</p>';
+                } else {
+                    html += '<table><tr><th>Customer</th><th>Provider</th><th>Service</th><th>Status</th><th>Date</th></tr>';
+                    nonPending.forEach(r => {
+                        html += `<tr>
+                            <td>${r.customerName || r.customerPhone}</td>
+                            <td>${r.listing ? r.listing.businessName : ''}</td>
+                            <td>${r.serviceRequested}</td>
+                            <td>${r.status}</td>
+                            <td>${new Date(r.createdAt).toLocaleDateString()}</td>
+                        </tr>`;
+                    });
+                    html += '</table>';
+                }
+                html += '</div>';
+
                 container.innerHTML = html;
-                container.querySelectorAll('.btn-view').forEach(b => b.addEventListener('click', () => updateRequestStatus(b.dataset.id, r.status)));
+
+                container.querySelectorAll('.btn-approve').forEach(b => b.addEventListener('click', () => approveRequest(b.dataset.id)));
+                container.querySelectorAll('.btn-reject').forEach(b => b.addEventListener('click', () => rejectRequest(b.dataset.id)));
             } catch (err) {
                 container.innerHTML = '<p style="color:#dc2626; text-align:center;">Error loading requests.</p>';
             }
         }
 
-        async function updateRequestStatus(id, currentStatus) {
-            const statuses = ['new', 'viewed', 'contacted', 'completed', 'cancelled', 'closed'];
-            const status = prompt(`Current status: ${currentStatus}. Enter new status:\n${statuses.join(', ')}`, currentStatus);
-            if (!status) return;
-            const res = await fetch(`${API_BASE}/api/admin/requests/${id}`, {
-                method: 'PUT',
-                headers: authHeaders(),
-                body: JSON.stringify({ status })
-            });
-            const data = await res.json();
+        async function approveRequest(id) {
+            if (!confirm('Approve this request? It will become visible to the entrepreneur.')) return;
+            const res = await fetch(`${API_BASE}/api/admin/requests/${id}/approve`, { method: 'PUT', headers: authHeaders() });
             if (res.ok) {
-                showStatus('Request updated', 'success');
+                showStatus('Request approved', 'success');
                 loadRequests(document.getElementById('tabContent'));
+                loadStats();
             } else {
-                showStatus(data.error || 'Update failed', 'error');
+                const data = await res.json();
+                showStatus(data.error || 'Failed', 'error');
+            }
+        }
+
+        async function rejectRequest(id) {
+            if (!confirm('Reject this request?')) return;
+            const res = await fetch(`${API_BASE}/api/admin/requests/${id}/reject`, { method: 'PUT', headers: authHeaders() });
+            if (res.ok) {
+                showStatus('Request rejected', 'success');
+                loadRequests(document.getElementById('tabContent'));
+                loadStats();
+            } else {
+                const data = await res.json();
+                showStatus(data.error || 'Failed', 'error');
             }
         }
 
@@ -561,7 +610,6 @@
         }
 
         async function editArticle(id) {
-            // Very simple: prompt for title/content (not a full editor)
             const title = prompt('New title:');
             if (!title) return;
             const content = prompt('New content (HTML allowed):');

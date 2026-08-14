@@ -58,7 +58,7 @@
         .btn-connect {
             display:block; width:100%; background:var(--accent); color:var(--primary); font-weight:600;
             padding:16px; border-radius:50px; border:none; font-size:1rem; cursor:pointer; margin-top:32px;
-            transition:all 0.25s; font-family:var(--font-body); text-align:center;
+            transition:all 0.25s; font-family:var(--font-body); text-align:center; text-decoration:none;
         }
         .btn-connect:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
         .disclaimer { background:#fff9f0; border-left:4px solid var(--accent); padding:20px; margin-top:24px; border-radius:8px; color:var(--text-muted); font-size:0.9rem; }
@@ -159,7 +159,6 @@
             }
 
             try {
-                // Fetch all approved listings and find by slug (or use a dedicated endpoint when available)
                 const res = await fetch(`${API_BASE}/api/listings/approved`);
                 if (!res.ok) throw new Error('Failed to load');
                 const listings = await res.json();
@@ -173,6 +172,8 @@
                 const imgHTML = provider.image
                     ? `<img src="${provider.image}" alt="${escapeHtml(provider.title)}">`
                     : provider.title.charAt(0).toUpperCase();
+
+                const requestLink = `request.html?provider=${encodeURIComponent(provider.slug || provider.id)}`;
 
                 container.innerHTML = `
                     <div class="profile-card">
@@ -193,7 +194,7 @@
                         ${provider.operatingHours ? `<div class="detail-row"><span>Operating hours</span><span>${escapeHtml(provider.operatingHours)}</span></div>` : ''}
                         <div class="detail-row"><span>Preferred contact</span><span>${escapeHtml(provider.preferredContact || 'Contact via request')}</span></div>
 
-                        <a href="mailto:help@hustlecenter.co.za?subject=Request%20for%20${encodeURIComponent(provider.title)}" class="btn-connect">Request / Connect</a>
+                        <a href="${requestLink}" class="btn-connect">Request / Connect</a>
 
                         <div class="disclaimer">
                             HustleCenter reviews listings before publication. A published listing does not constitute a guarantee or endorsement of the provider's work.
