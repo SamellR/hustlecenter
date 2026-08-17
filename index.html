@@ -1,1154 +1,567 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HustleCenter – Find Local Professionals in Polokwane</title>
-    <meta name="description"
-        content="HustleCenter connects you with reviewed local professionals in Polokwane. Browse services, compare providers, and connect directly.">
-    <meta property="og:title" content="HustleCenter – Find Local Professionals in Polokwane">
-    <meta property="og:description"
-        content="Browse reviewed local services in Polokwane. Discover professionals, compare, and connect.">
-    <meta property="og:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
-    <meta property="og:url" content="https://hustlecenter.co.za">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HustleCenter – Find Local Professionals in Polokwane">
-    <meta name="twitter:description" content="Browse reviewed local services. Every connection starts with trust.">
-    <meta name="twitter:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
+    <title>HustleCenter – Join the Waitlist</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Favicon and Apple touch icons -->
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <!-- Open Graph / WhatsApp & social preview -->
+    <meta property="og:title" content="HustleCenter – Polokwane's Vetted Local Services Marketplace">
+    <meta property="og:description" content="Find trusted, vetted local services in Polokwane. Plumbers, electricians, cleaners, beauty, and more. Join the waitlist for early access.">
+    <meta property="og:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
+    <meta property="og:url" content="https://hustlecenter.co.za">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HustleCenter – Polokwane's Local Services Marketplace">
+    <meta name="twitter:description" content="Vetted local services in Polokwane. Join the waitlist.">
+    <meta name="twitter:image" content="https://hustlecenter.co.za/whatsapp-preview.png">
     <style>
         :root {
             --primary: #0F172A;
             --accent: #D4A373;
-            --accent-hover: #C8925A;
             --bg: #F8FAFC;
-            --card-bg: #FFFFFF;
             --text-dark: #0F172A;
             --text-muted: #475569;
-            --border-light: #E2E8F0;
-            --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
-            --shadow-hover: 0 16px 48px rgba(15, 23, 42, 0.15);
             --font-heading: 'Playfair Display', Georgia, serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --radius-sm: 8px;
             --radius-md: 12px;
         }
-
-        :focus-visible {
-            outline: 2px solid #D4A373;
-            outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.25);
-        }
-
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible,
-        select:focus-visible,
-        textarea:focus-visible {
-            outline: 2px solid #D4A373;
-            outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.25);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            scrollbar-width: auto;
-            -ms-overflow-style: auto;
-        }
-
-        html::-webkit-scrollbar {
-            display: block;
-            width: 10px;
-            height: 10px;
-        }
-
-        html::-webkit-scrollbar-thumb {
-            background: #C8925A;
-            border-radius: 6px;
-        }
-
-        html::-webkit-scrollbar-track {
-            background: #E2E8F0;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: var(--font-body);
-            background: var(--bg);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-            padding-top: 72px;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-        }
-
-        h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 20px;
-        }
-
-        h3 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-        }
-
-        .gold {
-            color: var(--accent);
-        }
-
-        .btn-primary {
-            display: inline-block;
-            background: #D4A373;
-            color: #0F172A;
-            font-weight: 600;
-            padding: 14px 32px;
-            border-radius: 50px;
-            border: none;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-align: center;
-            font-family: var(--font-body);
-            box-shadow: none;
-        }
-
-        .btn-primary:hover {
-            background: #C8925A;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(212, 163, 115, 0.35);
-        }
-
-        .btn-outline {
-            display: inline-block;
-            background: transparent;
-            color: var(--primary);
-            font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 50px;
-            border: 2px solid var(--border-light);
-            transition: all 0.25s ease;
-            font-size: 1rem;
-            cursor: pointer;
-            font-family: var(--font-body);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent);
-            background: rgba(212, 163, 115, 0.08);
-        }
-
-        .btn-outline-white {
-            border-color: rgba(255, 255, 255, 0.3);
-            color: #fff;
-        }
-
-        .btn-outline-white:hover {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* Announcement Bar */
-        .announcement-bar {
             background: var(--primary);
             color: #fff;
-            padding: 12px 0;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .announcement-bar a {
-            color: var(--accent);
-            font-weight: 600;
-            margin-left: 4px;
-        }
-
-        .announcement-bar a:hover {
-            text-decoration: underline;
-        }
-
-        /* Header */
-        .site-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-light);
-            padding: 16px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-        }
-
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: nowrap;
-            max-width: 100%;
-            min-width: 0;
-        }
-
-        .logo-mark {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            white-space: nowrap;
-        }
-
-        .logo-mark .gold {
-            color: var(--accent);
-        }
-
-        .main-nav {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-        }
-
-        .main-nav a {
-            font-weight: 500;
-            color: var(--text-dark);
-            font-size: 0.9rem;
-            position: relative;
-            transition: color 0.2s;
-            white-space: nowrap;
-        }
-
-        .main-nav a:hover {
-            color: var(--accent);
-        }
-
-        .main-nav a.active {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .main-nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .main-nav {
-                gap: 16px;
-            }
-
-            .main-nav a {
-                font-size: 0.85rem;
-            }
-
-            .auth-buttons {
-                gap: 6px;
-            }
-
-            .auth-buttons a {
-                padding: 8px 16px;
-                font-size: 0.8rem;
-            }
-
-            .header-inner {
-                gap: 12px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-nav {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: var(--bg);
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-                gap: 8px;
-                z-index: 99;
-                padding-top: 72px;
-                padding-bottom: 16px;
-                overflow-y: hidden;
-            }
-
-            .main-nav.open {
-                display: flex;
-            }
-
-            .main-nav.open .desktop-hidden {
-                display: block;
-            }
-
-            .main-nav.open .menu-divider {
-                width: 80%;
-                max-width: 340px;
-                border-top: 1px solid var(--border-light);
-                margin: 4px 0;
-            }
-
-            .main-nav a {
-                font-size: 1.1rem;
-            }
-
-            .mobile-auth-divider {
-                width: 80%;
-                max-width: 340px;
-                border-top: 1px solid var(--border-light);
-                margin: 4px 0;
-            }
-
-            .main-nav.open .menu-group {
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                width: 80%;
-                max-width: 340px;
-            }
-
-            .main-nav.open .group-1 a {
-                background: #D4A373;
-                color: #0F172A;
-                border: none;
-                padding: 12px 16px;
-                border-radius: 50px;
-                text-align: center;
-                font-weight: 600;
-            }
-
-            .main-nav.open .group-2 a {
-                background: transparent;
-                color: #0F172A;
-                border: 2px solid #D4A373;
-                padding: 10px 16px;
-                border-radius: 50px;
-                text-align: center;
-                font-weight: 600;
-            }
-
-            .main-nav.open .group-3 a {
-                background: #0F172A;
-                color: #FFFFFF;
-                border: none;
-                padding: 12px 16px;
-                border-radius: 50px;
-                text-align: center;
-                font-weight: 600;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .main-nav.open .menu-group {
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                width: 80%;
-                max-width: 340px;
-            }
-
-            .main-nav.open .menu-divider {
-                width: 80%;
-                max-width: 340px;
-                border-top: 1px solid var(--border-light);
-                margin: 4px 0;
-            }
-
-            .main-nav.open .group-1 a {
-                background: #D4A373;
-                color: #0F172A;
-                border: none;
-                padding: 12px 16px;
-                border-radius: 50px;
-                text-align: center;
-                font-weight: 600;
-            }
-
-            .main-nav.open .group-2 a {
-                background: transparent;
-                color: #0F172A;
-                border: 2px solid #D4A373;
-                padding: 10px 16px;
-                border-radius: 50px;
-                text-align: center;
-                font-weight: 600;
-            }
-
-            .main-nav.open .group-3 a {
-                background: #0F172A;
-                color: #FFFFFF;
-                border: none;
-                padding: 12px 16px;
-                border-radius: 50px;
-                text-align: center;
-                font-weight: 600;
-            }
-
-            .main-nav.open .mobile-auth-divider {
-                width: 80%;
-                max-width: 300px;
-                border-top: 1px solid var(--border-light);
-                margin: 8px 0;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .main-nav.open {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: var(--bg);
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-                gap: 8px;
-                z-index: 99;
-                padding-top: 72px;
-                padding-bottom: 16px;
-                overflow-y: hidden;
-            }
-
-            .main-nav.open .desktop-hidden {
-                display: block;
-            }
-
-            .main-nav.open .mobile-auth-divider {
-                width: 80%;
-                max-width: 300px;
-                border-top: 1px solid var(--border-light);
-                margin: 8px 0;
-            }
-
-            .desktop-hidden {
-                display: none;
-            }
-        }
-
-        .menu-group {
-            display: contents;
-        }
-
-        .desktop-visible {
-            display: block;
-        }
-
-        .desktop-hidden {
-            display: none;
-        }
-
-        .mobile-auth-link {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-auth-link {
-                display: block;
-                text-align: center;
-                font-weight: 600;
-            }
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .auth-buttons a {
-            font-weight: 600;
-            font-size: 0.8rem;
-            padding: 8px 16px;
-            white-space: nowrap;
-        }
-
-        .hamburger {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            padding: 8px;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 48px 24px;
             position: relative;
-            z-index: 1000;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
-
-        .hamburger span {
-            display: block;
-            width: 28px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 2px;
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
         }
-
-        /* Hero */
-        .hero {
-            padding: 80px 0 60px;
-            background: linear-gradient(135deg, #F8FAFC 0%, #EEF4FF 50%, #FFF6EC 100%);
-            text-align: center;
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            animation: floatUp 6s infinite ease-in-out;
+        }
+        .particle:nth-child(1) { background: var(--accent); left: 5%; animation-delay: 0s; }
+        .particle:nth-child(2) { background: #fff; left: 18%; animation-delay: 0.8s; opacity: 0.6; width: 3px; height: 3px; }
+        .particle:nth-child(3) { background: var(--accent); left: 30%; animation-delay: 1.6s; width: 5px; height: 5px; }
+        .particle:nth-child(4) { background: #fff; left: 45%; animation-delay: 2.4s; opacity: 0.4; width: 3px; height: 3px; }
+        .particle:nth-child(5) { background: var(--accent); left: 60%; animation-delay: 3.2s; }
+        .particle:nth-child(6) { background: #fff; left: 75%; animation-delay: 4s; opacity: 0.7; width: 3px; height: 3px; }
+        .particle:nth-child(7) { background: var(--accent); left: 88%; animation-delay: 4.8s; width: 5px; height: 5px; }
+        .particle:nth-child(8) { background: #fff; left: 95%; animation-delay: 5.4s; opacity: 0.5; width: 3px; height: 3px; }
+        @keyframes floatUp {
+            0% { bottom: -10px; opacity: 0; transform: translateX(0); }
+            20% { opacity: 0.8; }
+            50% { opacity: 1; transform: translateX(15px); }
+            80% { opacity: 0.4; }
+            100% { bottom: 105%; opacity: 0; transform: translateX(-10px); }
+        }
+        .content {
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero-inner {
-            max-width: 800px;
-            margin: 0 auto;
+            z-index: 2;
             width: 100%;
-            padding-left: 24px;
-            padding-right: 24px;
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
         }
-
-        .hero-inner h1 {
-            margin-bottom: 16px;
+        .logo-mark {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
         }
-
-        .hero-sub {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 600px;
+        .logo-mark .gold { color: var(--accent); }
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+        .spinner {
+            width: 48px; height: 48px;
+            border: 4px solid rgba(212, 163, 115, 0.15);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
             margin: 0 auto 32px;
         }
-
-        .hero-cta {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px;
-            padding-left: 24px;
-            padding-right: 24px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .hero-cta a {
-            flex: 1;
-            min-width: 200px;
-            max-width: 100%;
-        }
-
-        /* Sections */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-light {
-            background: var(--card-bg);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 48px;
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .hero-headline {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+            line-height: 1.3;
             position: relative;
+            display: inline-block;
         }
-
-        .section-title:after {
+        .hero-headline::after {
             content: '';
             display: block;
             width: 60px;
             height: 3px;
             background: var(--accent);
-            margin: 16px auto 0;
+            margin: 12px auto 0;
         }
-
-        /* How it works */
-        .how-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 32px;
+        .hero-sub {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            max-width: 520px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.8);
         }
-
-        .step-card {
-            text-align: center;
-            padding: 24px;
-            background: var(--card-bg);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow);
-            transition: transform 0.2s;
+        .hero-sub strong { color: var(--accent); font-weight: 600; }
+        .how-strip {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin: 48px 0 40px;
+            flex-wrap: wrap;
         }
-
-        .step-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .step-num {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            color: var(--accent);
+        .how-step { text-align: center; color: var(--accent); font-size: 0.95rem; }
+        .how-step .step-num {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
             margin-bottom: 8px;
-        }
-
-        /* Trust */
-        .trust-section {
-            background: var(--primary);
-            color: #fff;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .trust-section h2 {
-            color: #fff;
-        }
-
-        .trust-section .gold {
             color: var(--accent);
+            font-family: var(--font-heading);
         }
-
-        /* Categories */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        .pricing-mini {
+            display: flex;
+            justify-content: center;
             gap: 16px;
+            margin: 40px 0 48px;
+            flex-wrap: wrap;
         }
-
-        .cat-card {
-            background: var(--card-bg);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-md);
-            padding: 24px 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .cat-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-
-        .cat-card h4 {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        /* CTA Cards */
-        .cta-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-        }
-
-        .cta-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-md);
-            padding: 40px 32px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .cta-card h3 {
-            margin-bottom: 12px;
-        }
-
-        .cta-card p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        /* Partner */
-        .partner-section {
-            text-align: center;
-            padding: 60px 0;
-            background: var(--card-bg);
-        }
-
-        /* Mission */
-        .mission-section {
-            padding: 60px 0;
-            text-align: center;
-            background: var(--bg);
-        }
-
-        .mission-section p {
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* Footer */
-        .back-to-top-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 30px;
-            height: 34px;
-            border: 0.5px solid #D4A373;
-            border-radius: 4px;
-            background: transparent;
-            color: #D4A373;
-            display: none;
-            line-height: 34px;
-            text-align: center;
-            font-size: 18px;
-            cursor: pointer;
-            z-index: 999;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            transition: bottom 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .back-to-top-float.footer-visible {
-            bottom: 90px;
-        }
-
-        #scrollProgressBar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: var(--accent);
-            z-index: 1000;
-            transition: width 0.1s linear;
-        }
-
-        .site-footer {
-            background: var(--primary);
-            color: rgba(255, 255, 255, 0.8);
-            padding-top: 64px;
-            margin-top: 0;
-        }
-
-        .footer-inner {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 40px;
-            padding-bottom: 48px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .footer-col h4 {
+        .price-pill {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,163,115,0.2);
+            border-radius: 40px;
+            padding: 12px 24px;
             color: #fff;
-            font-family: var(--font-body);
+        }
+        .price-pill strong { color: var(--accent); font-size: 1.2rem; }
+        .pricing-note { font-size: 0.9rem; opacity: 0.6; margin: 0 0 40px 0; }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: var(--primary);
             font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 12px;
+            border: none;
             font-size: 1rem;
-            margin-bottom: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
         }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
+        .btn-primary:hover { background: #C8925A; }
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 48px 0 40px;
+            flex-wrap: wrap;
+            align-items: center;
         }
-
-        .footer-col a {
-            color: rgba(255, 255, 255, 0.7);
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .footer-col a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            padding: 20px 0;
+        .social-link { transition: opacity 0.2s; display: inline-flex; align-items: center; justify-content: center; }
+        .social-link:hover { opacity: 0.7; }
+        .social-link svg { width: 32px; height: 32px; fill: #fff; }
+        .social-link.mail-icon svg { fill: none; stroke: #fff; stroke-width: 2; }
+        .footer-note {
             font-size: 0.85rem;
-            opacity: 0.5;
+            opacity: 0.7;
+            margin: 48px auto 0;
+            color: #fff;
             text-align: center;
+            line-height: 2;
         }
+        .footer-note a { color: var(--accent); text-decoration: none; font-weight: 500; }
 
-        @media (max-width: 768px) {
-            .logo-mark {
-                font-size: 1.5rem;
-            }
+        /* ---------- MODAL STYLES ---------- */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(6px); z-index: 999; justify-content: center; align-items: center; padding: 24px; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: #fff; max-width: 560px; width: 100%; padding: 32px; border-radius: var(--radius-md); box-shadow: 0 16px 48px rgba(15,23,42,0.15); position: relative; max-height: 90vh; overflow-y: auto; color: #0F172A; }
+        .modal-close { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 2rem; line-height: 1; color: #475569; cursor: pointer; z-index: 10; }
+        .modal-close:hover { color: #0F172A; }
+        .modal-box h2 { margin-bottom: 8px; margin-right: 40px; font-family: var(--font-heading); }
+        .modal-sub { color: #475569; margin-bottom: 24px; font-size: 0.95rem; }
+        .modal-footnote { margin-top: 24px; font-size: 0.85rem; color: #475569; text-align: center; border-top: 1px solid #E2E8F0; padding-top: 16px; }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; color: #0F172A; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 2px solid #E2E8F0; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1rem; background: #F8FAFC; transition: border 0.2s; color: #0F172A; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.15); }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .btn-block { display: block; width: 100%; }
+        .consent-group label { font-weight: 400; font-size: 0.85rem; display: flex; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
+        .consent-group input[type="checkbox"] { width: auto; margin-top: 3px; }
+        .success-msg { color: var(--accent); }
 
-            .main-nav {
-                display: none;
-            }
-
-            .auth-buttons {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-                flex-shrink: 0;
-                margin-left: auto;
-            }
-
-            .header-inner {
-                gap: 8px;
-            }
-
-            .cta-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                padding: 60px 0 50px;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn-primary,
-            .btn-outline {
-                width: 100%;
-                max-width: 400px;
-            }
-
-            html,
-            body {
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-
-            html::-webkit-scrollbar,
-            body::-webkit-scrollbar {
-                display: none;
-            }
-        }
+        /* Legal section styling */
+        .legal-section { text-align: left; max-width: 700px; margin: 0 auto; padding: 2rem 0; }
+        .legal-section h3 { font-family: var(--font-body); font-weight: 600; font-size: 1rem; color: var(--accent); margin-bottom: 12px; margin-top: 24px; }
+        .legal-section h3:first-child { margin-top: 0; }
+        .legal-section p { margin-bottom: 8px; font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.8); }
+        .legal-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 24px 0; }
     </style>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0F172A">
 </head>
-
 <body>
-    <!-- Announcement Bar -->
-    <div class="announcement-bar">
-        <div class="container">
-            🎉 Now live in Polokwane! <a href="list-your-service.html">List your service FREE during our launch
-                period.</a>
+    <div class="particles">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+    <div class="content">
+        <div class="logo-mark">Hustle<span class="gold">Center</span></div>
+        <div class="tagline">Vetted. Secure. Local.</div>
+        <div class="spinner"></div>
+
+        <h1 class="hero-headline">Polokwane's trusted marketplace is almost here</h1>
+        <p class="hero-sub">
+            We've moved our listings to the official marketplace. If you already sent your details via WhatsApp, please complete your listing below to go live. New entrepreneurs – grab one of the remaining free spots!
+        </p>
+
+        <div class="how-strip">
+            <div class="how-step"><span class="step-num">①</span> List your service</div>
+            <div class="how-step"><span class="step-num">②</span> We vet</div>
+            <div class="how-step"><span class="step-num">③</span> Go live</div>
+        </div>
+
+        <div class="pricing-mini">
+            <div class="price-pill"><strong>R65</strong> / 1 mo</div>
+            <div class="price-pill"><strong>R120</strong> / 2 mo</div>
+            <div class="price-pill"><strong>R165</strong> / 3 mo</div>
+            <div class="price-pill"><strong>R200</strong> / 4 mo</div>
+        </div>
+        <p class="pricing-note">Free Basic: name, category & phone (no image). Paid plans include photos & Verified badge.</p>
+
+        <button class="btn-primary" onclick="openEntrepreneurModal()">List your service</button>
+
+        <div style="text-align:center; margin-top:48px; margin-bottom:40px;">
+            <h3 style="font-family:var(--font-heading); font-size:1.3rem; color:#fff; margin-bottom:16px;">Connect with us</h3>
+            <div class="social-row" style="margin:0; justify-content:center; gap:24px;">
+                <a href="https://www.instagram.com/HustleCentersa" class="social-link" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/HustleCentersa" class="social-link" target="_blank" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="mailto:help@hustlecenter.co.za" class="social-link mail-icon" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- LEGAL SECTIONS -->
+        <div class="legal-section" id="legal">
+            <h3>Disclaimer</h3>
+            <!-- 🔽 CHANGE 1: Updated to include customer ID + selfie verification -->
+            <p>HustleCenter is a marketplace connecting customers and independent service providers. We verify entrepreneur identities and customer identities (phone, ID, and selfie), but we are not a party to any transaction. HustleCenter is not liable for the quality of work, disputes, or any damages arising from services rendered. Use at your own discretion. In case of fraud or crime, we will cooperate with SAPS upon receipt of a valid CAS number or court order.</p>
+
+            <hr class="legal-divider">
+
+            <h3>Terms of Service</h3>
+            <p>By using HustleCenter, you agree to communicate respectfully and use the platform for lawful purposes only. We reserve the right to remove any listing or block any user at our sole discretion.</p>
+            <p><strong>For entrepreneurs:</strong> By listing your service, you agree that your business name, service details, and provided photo will be publicly displayed on HustleCenter. You are responsible for the accuracy of your listing. Listing fees are non‑refundable once your service goes live.</p>
+            <!-- 🔽 CHANGE 2: Added customer ID/selfie requirement -->
+            <p><strong>For customers:</strong> By requesting a service, you agree to provide accurate identification (ID and selfie) for verification. HustleCenter facilitates introductions only. We do not guarantee availability, pricing, or outcomes. Always confirm details directly with the service provider.</p>
+
+            <hr class="legal-divider">
+
+            <h3>Privacy Policy</h3>
+            <p><strong>1. Who we are</strong><br>HustleCenter operates www.hustlecenter.co.za. Our Information Officer can be reached at help@hustlecenter.co.za.</p>
+            <!-- 🔽 CHANGE 3: Added ID Photo and Selfie to customer data collection -->
+            <p><strong>2. What we collect</strong><br>
+            <strong>Entrepreneurs:</strong> Name, ID Number, ID Photo, Selfie, Proof of Address, Bank Details, Service Info.<br>
+            <strong>Customers:</strong> Name, Phone Number, Email, ID Photo, Selfie, Service Requested.<br>
+            <strong>Website:</strong> IP Address, Device Info (for security).</p>
+            <p><strong>3. Why we collect it</strong><br>To verify identities, prevent fraud, connect customers to entrepreneurs, and comply with POPIA.</p>
+            <p><strong>4. How we protect it</strong><br>ID documents are deleted after 90 days. Request logs are kept for 2 years for dispute resolution. We use OTP, ID, and selfie verification to ensure all users are real and accountable.</p>
+            <p><strong>5. Your rights</strong><br>You may request access to, correction, or deletion of your personal information. Email help@hustlecenter.co.za. We respond within 30 days.</p>
+            <p><strong>6. Dispute &amp; SAPS cooperation</strong><br>If a crime is reported, HustleCenter will cooperate with SAPS and provide logged information as required by law (with a valid CAS number or court order).</p>
+
+            <hr class="legal-divider">
+
+            <h3>PAIA Manual</h3>
+            <p><strong>1. Contact details</strong><br>
+            Information Officer: The HustleCenter Information Officer<br>
+            Email: help@hustlecenter.co.za<br>
+            Address: Polokwane, South Africa</p>
+            <p><strong>2. Purpose</strong><br>This manual explains how to request information in terms of PAIA Act 2 of 2000 and POPIA.</p>
+            <p><strong>3. Information we hold</strong><br>Customer Data, Entrepreneur Data, Business Records, Communications.</p>
+            <p><strong>4. How to request your information</strong><br>
+            1. Complete Form C from the SA Information Regulator website.<br>
+            2. Email to: help@hustlecenter.co.za<br>
+            3. We respond within 30 days.</p>
+            <p><strong>5. Fees</strong><br>No fee for your own personal information.</p>
+        </div>
+
+        <div class="footer-note">
+            <p style="margin-top:12px; font-size:0.85rem; opacity:0.7; margin-bottom:16px;">
+                <i class="ph ph-map-pin"></i> Polokwane, South Africa<br>
+                <i class="ph ph-envelope"></i> help@hustlecenter.co.za
+            </p>
+            <p style="margin-top:8px; font-size:0.85rem; opacity:0.8;">
+                <a href="#legal" style="color:var(--accent);">Privacy Policy</a> &nbsp;|&nbsp;
+                <a href="#legal" style="color:var(--accent);">PAIA Manual</a> &nbsp;|&nbsp;
+                <a href="#legal" style="color:var(--accent);">Terms of Service</a>
+            </p>
+            <p style="margin-top:12px; font-size:0.85rem; opacity:0.7;">&copy; 2026 HustleCenter. Built with care in South&nbsp;Africa.&nbsp;🇿🇦 &nbsp;|&nbsp; v1.0.0</p>
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo-mark">Hustle<span class="gold">Center</span></a>
-            <nav class="main-nav" id="mainNav">
-                <div class="menu-group group-1">
-                    <a href="browse.html">Browse Services</a>
-                    <a href="categories.html">Categories</a>
-                    <a href="list-your-service.html">List Your Service</a>
-                </div>
-                <div class="menu-divider"></div>
-                <div class="menu-group group-2">
-                    <a href="contact.html" class="desktop-visible">Contact</a>
-                    <a href="trust.html" class="desktop-hidden">Trust & Safety</a>
-                    <a href="about.html" class="desktop-hidden">About</a>
-                    <a href="blog.html" class="desktop-hidden">Blog</a>
-                </div>
-                <div class="mobile-auth-divider desktop-hidden"></div>
-                <div class="menu-group group-3">
-                    <a href="login.html" class="mobile-auth-link desktop-hidden">Log In</a>
-                    <a href="signup.html" class="mobile-auth-link desktop-hidden">Sign Up</a>
-                </div>
-            </nav>
+    <!-- ENTREPRENEUR LISTING FLOW MODAL -->
+    <div class="modal-overlay" id="entrepreneurModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeEntrepreneurModal">&times;</button>
 
-            <div class="auth-buttons">
-                <a href="login.html" class="btn-outline">Log In</a>
-                <a href="signup.html" class="btn-primary">Sign Up</a>
+            <div class="step-content" id="step-signup">
+                <h2>Create your account</h2>
+                <p class="modal-sub">First, create your entrepreneur account. All fields are required.</p>
+                <form id="signupForm" novalidate>
+                    <div class="form-group"><label for="signupName">Full name *</label><input type="text" id="signupName" maxlength="100" placeholder="e.g. Thabo Mokoena" required></div>
+                    <div class="form-group"><label for="signupEmail">Email *</label><input type="email" id="signupEmail" maxlength="150" placeholder="yourname@gmail.com" required></div>
+                    <div class="form-group"><label for="signupPhone">Phone *</label><input type="tel" id="signupPhone" maxlength="20" placeholder="+27 82 123 4567" required></div>
+                    <div class="form-group"><label for="signupPassword">Password *</label><input type="password" id="signupPassword" maxlength="100" required></div>
+                    <button type="submit" class="btn-primary btn-block">Sign Up</button>
+                </form>
+                <p class="modal-footnote" id="signupError" style="color:#dc2626;"></p>
             </div>
-
-            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </header>
-
-    <main>
-        <!-- Hero -->
-        <section class="hero">
-            <div class="hero-inner">
-                <h1>Find trusted local professionals in <span class="gold">Polokwane</span></h1>
-                <p class="hero-sub">HustleCenter helps you discover local service providers in Polokwane. Browse
-                    services, explore providers, and connect directly.</p>
-                <div class="hero-cta">
-                    <a href="browse.html" class="btn-primary">Browse Services</a>
-                    <a href="list-your-service.html" class="btn-outline">List Your Service</a>
-                </div>
+            <div class="step-content" id="step-otp" style="display:none;">
+                <h2>Verify your phone</h2>
+                <p class="modal-sub">Enter the 6‑digit OTP we sent to your email.</p>
+                <form id="otpForm" novalidate>
+                    <div class="form-group"><label for="otpCode">OTP Code *</label><input type="text" id="otpCode" placeholder="123456" maxlength="6" required></div>
+                    <button type="submit" class="btn-primary btn-block">Verify OTP</button>
+                </form>
+                <p class="modal-footnote" id="otpError" style="color:#dc2626;"></p>
             </div>
-        </section>
-
-        <!-- How It Works -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">How HustleCenter <span class="gold">works</span></h2>
-                <div class="how-grid">
-                    <div class="step-card">
-                        <div class="step-num">1</div>
-                        <h3>Entrepreneurs list their service</h3>
-                        <p>Submit your service and tell customers what you offer.</p>
+            <div class="step-content" id="step-id" style="display:none;">
+                <h2>Upload your ID</h2>
+                <p class="modal-sub">Please upload a clear photo of your ID or driver's license.</p>
+                <form id="idForm" novalidate>
+                    <div class="form-group"><label for="idFile">ID Document *</label><input type="file" id="idFile" accept="image/*" required></div>
+                    <button type="submit" class="btn-primary btn-block">Upload ID</button>
+                </form>
+                <p class="modal-footnote" id="idError" style="color:#dc2626;"></p>
+            </div>
+            <div class="step-content" id="step-selfie" style="display:none;">
+                <h2>Upload a selfie</h2>
+                <p class="modal-sub">Take a clear selfie so we can verify it's really you.</p>
+                <form id="selfieForm" novalidate>
+                    <div class="form-group"><label for="selfieFile">Selfie *</label><input type="file" id="selfieFile" accept="image/*" required></div>
+                    <button type="submit" class="btn-primary btn-block">Upload Selfie</button>
+                </form>
+                <p class="modal-footnote" id="selfieError" style="color:#dc2626;"></p>
+            </div>
+            <div class="step-content" id="step-listing" style="display:none;">
+                <h2>Create your listing</h2>
+                <p class="modal-sub">Now tell us about your service. We'll review and publish it.</p>
+                <form id="listingFormModal" novalidate>
+                    <div class="form-group"><label for="listBusinessName">Business name *</label><input type="text" id="listBusinessName" maxlength="100" placeholder="e.g. Thabo's Plumbing" required></div>
+                    <div class="form-group"><label for="listCategory">Category *</label>
+                        <select id="listCategory" required>
+                            <option value="">Select a category</option>
+                            <option>Automotive</option><option>Barber</option><option>Beauty</option><option>Braces</option><option>Cleaning</option><option>Eye Lash</option><option>Fashion</option><option>Food</option><option>Hair Salon</option><option>Supplies</option><option>Home & Garden</option><option>Logistics</option><option>Makeup</option><option>Nail</option><option>Reseller</option><option>Shuttle & Transport</option><option>Other</option>
+                        </select>
                     </div>
-                    <div class="step-card">
-                        <div class="step-num">2</div>
-                        <h3>Our team reviews the listing</h3>
-                        <p>Every listing is reviewed before it goes live — helping keep the marketplace genuine.</p>
+                    <div class="form-group"><label for="listDescription">Description *</label><textarea id="listDescription" maxlength="1000" rows="3" placeholder="Describe your service..." required></textarea></div>
+                    <div class="form-grid-2">
+                        <div class="form-group"><label for="listPrice">Price (R) *</label><input type="text" id="listPrice" maxlength="100" placeholder="e.g. 150" required></div>
+                        <div class="form-group"><label for="listLocation">Location *</label><input type="text" id="listLocation" maxlength="100" placeholder="e.g. Seshego" required></div>
                     </div>
-                    <div class="step-card">
-                        <div class="step-num">3</div>
-                        <h3>Customers discover you</h3>
-                        <p>People in Polokwane browse services and find providers that fit their needs.</p>
+                    <div class="form-group"><label for="listPhotos">Upload up to 3 photos *</label><input type="file" id="listPhotos" accept="image/*" multiple required></div>
+                    <div class="form-group consent-group">
+                        <label><input type="checkbox" name="consent_id" required> I consent to HustleCenter collecting and verifying my ID documents in terms of POPIA. I confirm all information is true.</label>
+                        <label><input type="checkbox" name="consent_tos" required> I agree to the HustleCenter <a href="privacy-policy.html" target="_blank">Privacy Policy</a> and <a href="#legal">Terms of Service</a>.</label>
                     </div>
-                    <div class="step-card">
-                        <div class="step-num">4</div>
-                        <h3>Connect directly</h3>
-                        <p>Customers contact you through your preferred method — phone, WhatsApp, or email.</p>
-                    </div>
-                </div>
+                    <button type="submit" class="btn-primary btn-block">Submit for Review</button>
+                </form>
+                <p class="modal-footnote" id="listingError" style="color:#dc2626;"></p>
             </div>
-        </section>
-
-        <!-- Trust -->
-        <section class="trust-section">
-            <div class="container">
-                <h2>Every connection starts with <span class="gold">trust</span></h2>
-                <p style="max-width:700px; margin:0 auto; opacity:0.9;">We review every listing before publication to
-                    help keep the marketplace genuine. While we aim to provide reliable information, customers should
-                    still evaluate providers before hiring them.</p>
-                <p style="margin-top:24px;"><a href="trust.html" class="btn-outline-white">Learn about Trust &
-                        Safety</a></p>
-            </div>
-        </section>
-
-        <!-- Categories -->
-        <section class="section section-light">
-            <div class="container">
-                <h2 class="section-title">Explore services in <span class="gold">Polokwane</span></h2>
-                <div class="categories-grid">
-                    <a href="browse.html?category=Automotive" class="cat-card">
-                        <h4>🔧 Automotive</h4>
-                    </a>
-                    <a href="browse.html?category=Barber" class="cat-card">
-                        <h4>💈 Barber</h4>
-                    </a>
-                    <a href="browse.html?category=Beauty" class="cat-card">
-                        <h4>💄 Beauty</h4>
-                    </a>
-                    <a href="browse.html?category=Cleaning" class="cat-card">
-                        <h4>🧹 Cleaning</h4>
-                    </a>
-                    <a href="browse.html?category=Hair+Salon" class="cat-card">
-                        <h4>💇 Hair Salon</h4>
-                    </a>
-                    <a href="browse.html?category=Home+%26+Garden" class="cat-card">
-                        <h4>🏡 Home & Garden</h4>
-                    </a>
-                    <a href="browse.html?category=Food" class="cat-card">
-                        <h4>🍲 Food</h4>
-                    </a>
-                    <a href="browse.html?category=Logistics" class="cat-card">
-                        <h4>🚚 Logistics</h4>
-                    </a>
-                    <a href="browse.html?category=Shuttle+%26+Transport" class="cat-card">
-                        <h4>🚐 Shuttle & Transport</h4>
-                    </a>
-                    <a href="browse.html?category=Other+Services" class="cat-card">
-                        <h4>📦 Other Services</h4>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dual CTA -->
-        <section class="section">
-            <div class="container">
-                <div class="cta-cards">
-                    <div class="cta-card">
-                        <h3>Are you a <span class="gold">professional</span>?</h3>
-                        <p>List your service for free during launch and reach customers in Polokwane.</p>
-                        <a href="list-your-service.html" class="btn-primary">List Your Service</a>
-                    </div>
-                    <div class="cta-card">
-                        <h3>Need a <span class="gold">service</span>?</h3>
-                        <p>Browse local providers and find a professional who fits your needs.</p>
-                        <a href="browse.html" class="btn-primary">Browse Services</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Partner -->
-        <section class="partner-section">
-            <div class="container">
-                <h2 class="section-title">Partner <span class="gold">with us</span></h2>
-                <p style="color:var(--text-muted); max-width:600px; margin:0 auto 24px;">HustleCenter is growing in
-                    Polokwane. We welcome mentors, community partners, businesses, and people who want to help
-                    strengthen the local service economy.</p>
-                <a href="partners.html" class="btn-outline">Contact us about partnering</a>
-            </div>
-        </section>
-
-        <!-- Mission -->
-        <section class="mission-section">
-            <div class="container">
-                <h2 class="section-title">Our <span class="gold">Mission</span></h2>
-                <p>We believe every local entrepreneur deserves the opportunity to be discovered, and every customer
-                    deserves a simple way to find local services with confidence.</p>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <div class="footer-col">
-                <h4>Discover</h4>
-                <ul>
-                    <li><a href="browse.html">Browse Services</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="how-it-works.html">How It Works</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="partners.html">Partners</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Trust</h4>
-                <ul>
-                    <li><a href="trust.html">Trust & Safety</a></li>
-                    <li><a href="community-guidelines.html">Community Guidelines</a></li>
-                    <li><a href="report.html">Report a Problem</a></li>
-                    <li><a href="appeals.html">Appeals</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="disclaimer.html">Disclaimer</a></li>
-                    <li><a href="paia.html">PAIA Manual</a></li>
-                    <li><a href="popia.html">POPIA Notice</a></li>
-                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
-                </ul>
+            <div class="step-content" id="step-done" style="display:none;">
+                <h2>Verification Submitted!</h2>
+                <p class="success-msg">Your profile and listing will be reviewed by our team. Once approved, you'll appear in the marketplace.</p>
+                <button class="btn-primary btn-block" onclick="closeEntrepreneurModalFn()">Close</button>
             </div>
         </div>
-        <div class="footer-bottom container">
-            <p>&copy; 2026 HustleCenter. All rights reserved. 🇿🇦</p>
-        </div>
-    </footer>
-
-    <div id="scrollProgressBar"></div>
-
-    <button id="backToTopBtn" class="back-to-top-float" aria-label="Back to top">↑</button>
+    </div>
 
     <script>
-        // Mobile menu toggle
-        const hamburger = document.getElementById('hamburgerBtn');
-        const nav = document.getElementById('mainNav');
-        hamburger.addEventListener('click', () => {
-            const isOpen = nav.classList.toggle('open');
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-            document.documentElement.style.overflow = isOpen ? 'hidden' : '';
-            const progress = document.getElementById('scrollProgressBar');
-            if (progress) progress.style.display = isOpen ? 'none' : '';
-            const backToTop = document.getElementById('backToTopBtn');
-            if (backToTop) backToTop.style.display = isOpen ? 'none' : '';
-        });
-        // Close mobile nav on link click
-        document.querySelectorAll('#mainNav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('open');
-                document.body.style.overflow = '';
-                document.documentElement.style.overflow = '';
-                const progress = document.getElementById('scrollProgressBar');
-                if (progress) progress.style.display = '';
-                const backToTop = document.getElementById('backToTopBtn');
-                if (backToTop) backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-            });
-        });
-    </script>
+        const API_BASE = 'https://hustlecenter-api.onrender.com';
+        var currentToken = null;
+        var entrepreneurModal = document.getElementById('entrepreneurModal');
+        var closeEntrepreneurBtn = document.getElementById('closeEntrepreneurModal');
 
-    <script>
-        const backToTopBtn = document.getElementById('backToTopBtn');
+        function showStep(stepId) {
+            document.querySelectorAll('#entrepreneurModal .step-content').forEach(el => el.style.display = 'none');
+            document.getElementById(stepId).style.display = 'block';
+        }
 
-        const scrollProgressBar = document.getElementById('scrollProgressBar');
+        function openEntrepreneurModal() {
+            entrepreneurModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            showStep('step-signup');
+            document.getElementById('otpForm').reset();
+            document.getElementById('idForm').reset();
+            document.getElementById('selfieForm').reset();
+            document.getElementById('listingFormModal').reset();
+            currentToken = null;
+        }
 
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgressBar.style.width = scrollPercent + '%';
+        function closeEntrepreneurModalFn() {
+            entrepreneurModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeEntrepreneurBtn.addEventListener('click', closeEntrepreneurModalFn);
+        entrepreneurModal.addEventListener('click', function (e) {
+            if (e.target === entrepreneurModal) closeEntrepreneurModalFn();
         });
 
-        window.addEventListener('scroll', () => {
-            const footer = document.querySelector('.site-footer');
-            const footerRect = footer.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            if (window.scrollY > 300) {
-                backToTopBtn.style.display = 'block';
-            } else {
-                backToTopBtn.style.display = 'none';
-            }
-
-            if (footerRect.bottom <= windowHeight) {
-                backToTopBtn.classList.add('footer-visible');
-            } else {
-                backToTopBtn.classList.remove('footer-visible');
+        document.getElementById('signupForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const phone = document.getElementById('signupPhone').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            try {
+                const res = await fetch(`${API_BASE}/api/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, password })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Signup failed');
+                document.getElementById('otpForm').dataset.userId = data.userId;
+                showStep('step-otp');
+            } catch (err) {
+                document.getElementById('signupError').textContent = err.message;
             }
         });
 
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.getElementById('otpForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const userId = this.dataset.userId;
+            const otp = document.getElementById('otpCode').value.trim();
+            try {
+                const res = await fetch(`${API_BASE}/api/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, otp })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Invalid OTP');
+                currentToken = data.token;
+                localStorage.setItem('entrepreneurToken', currentToken);
+                showStep('step-id');
+            } catch (err) {
+                document.getElementById('otpError').textContent = err.message;
+            }
+        });
+
+        document.getElementById('idForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const file = document.getElementById('idFile').files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('idDoc', file);
+            try {
+                const res = await fetch(`${API_BASE}/api/upload-id`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Upload failed');
+                showStep('step-selfie');
+            } catch (err) {
+                document.getElementById('idError').textContent = err.message;
+            }
+        });
+
+        document.getElementById('selfieForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const file = document.getElementById('selfieFile').files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('selfie', file);
+            try {
+                const res = await fetch(`${API_BASE}/api/upload-selfie`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Upload failed');
+                showStep('step-listing');
+            } catch (err) {
+                document.getElementById('selfieError').textContent = err.message;
+            }
+        });
+
+        document.getElementById('listingFormModal').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const businessName = document.getElementById('listBusinessName').value.trim();
+            const category = document.getElementById('listCategory').value;
+            const description = document.getElementById('listDescription').value.trim();
+            const price = document.getElementById('listPrice').value.trim();
+            const location = document.getElementById('listLocation').value.trim();
+            const photos = document.getElementById('listPhotos').files;
+            if (!businessName || !category || !description || !price || !location || photos.length === 0) {
+                document.getElementById('listingError').textContent = 'All fields required';
+                return;
+            }
+            const formData = new FormData();
+            formData.append('businessName', businessName);
+            formData.append('category', category);
+            formData.append('description', description);
+            formData.append('price', price);
+            formData.append('location', location);
+            for (let i = 0; i < photos.length; i++) {
+                formData.append('photos', photos[i]);
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/listings`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + currentToken },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Listing submission failed');
+                showStep('step-done');
+            } catch (err) {
+                document.getElementById('listingError').textContent = err.message;
+            }
         });
     </script>
-
-    <script src="pwa.js"></script>
 </body>
-
-    </html>
+                </html>
