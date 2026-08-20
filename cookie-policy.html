@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <meta name="description" content="HustleCenter Cookie Policy. How we use cookies on our website.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -23,40 +26,160 @@
             --font-heading: 'Playfair Display', Georgia, serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.7; }
-        a { color:var(--accent); text-decoration:none; }
-        .container { max-width:800px; margin:0 auto; padding:0 24px; }
-        h1 { font-family:var(--font-heading); font-size:2.5rem; margin-bottom:8px; text-align:center; }
-        h2 { font-family:var(--font-heading); font-size:1.5rem; margin:40px 0 16px; }
-        .gold { color:var(--accent); }
 
-        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
-        .header-inner { display:flex; justify-content:space-between; align-items:center; }
-        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; }
-        .logo-mark .gold { color:var(--accent); }
-        .nav-links a { margin-left:20px; font-weight:500; color:var(--text-dark); }
-        .nav-links a:hover { color:var(--accent); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        .section { padding:80px 0; }
-        p { color:var(--text-muted); margin-bottom:16px; }
-        ul { margin-bottom:16px; padding-left:24px; color:var(--text-muted); }
-        ul li { margin-bottom:8px; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
 
-        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
-        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
-        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
-        .footer-col ul li { margin-bottom:10px; }
-        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
-        .footer-col a:hover { color:var(--accent); }
-        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin: 40px 0 16px;
+        }
+
+        .gold {
+            color: var(--accent);
+        }
+
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-mark {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-mark .gold {
+            color: var(--accent);
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        ul {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            color: var(--text-muted);
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .site-footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 64px;
+            margin-top: 0;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding: 20px 0;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            text-align: center;
+        }
 
         @media (max-width: 768px) {
-            .nav-links { display:none; }
-            .section { padding:60px 0; }
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0F172A">
 </head>
+
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -76,13 +199,17 @@
                 <p style="text-align:center; color:var(--text-muted);">Last updated: August 2026</p>
 
                 <h2>1. What are cookies?</h2>
-                <p>Cookies are small text files placed on your device when you visit a website. They are widely used to make websites work more efficiently and to provide information to the site owners.</p>
+                <p>Cookies are small text files placed on your device when you visit a website. They are widely used to
+                    make websites work more efficiently and to provide information to the site owners.</p>
 
                 <h2>2. How we use cookies</h2>
-                <p>HustleCenter uses only essential cookies necessary for the website to function properly. These may include:</p>
+                <p>HustleCenter uses only essential cookies necessary for the website to function properly. These may
+                    include:</p>
                 <ul>
-                    <li><strong>Session cookies:</strong> To remember your progress as you navigate the site (e.g., form submissions, browsing state).</li>
-                    <li><strong>Security cookies:</strong> To help protect the website and its users from malicious activity.</li>
+                    <li><strong>Session cookies:</strong> To remember your progress as you navigate the site (e.g., form
+                        submissions, browsing state).</li>
+                    <li><strong>Security cookies:</strong> To help protect the website and its users from malicious
+                        activity.</li>
                 </ul>
 
                 <h2>3. We do NOT use</h2>
@@ -93,13 +220,17 @@
                 </ul>
 
                 <h2>4. Managing cookies</h2>
-                <p>Most web browsers allow you to control cookies through their settings. You can usually find these settings in the "Options" or "Preferences" menu of your browser. You can choose to block all cookies, but this may affect how our website functions.</p>
+                <p>Most web browsers allow you to control cookies through their settings. You can usually find these
+                    settings in the "Options" or "Preferences" menu of your browser. You can choose to block all
+                    cookies, but this may affect how our website functions.</p>
 
                 <h2>5. Changes to this policy</h2>
-                <p>We may update this Cookie Policy from time to time. Changes will be posted on this page with an updated date.</p>
+                <p>We may update this Cookie Policy from time to time. Changes will be posted on this page with an
+                    updated date.</p>
 
                 <h2>6. Contact</h2>
-                <p>For questions about this policy, contact us at <a href="mailto:help@hustlecenter.co.za">help@hustlecenter.co.za</a>.</p>
+                <p>For questions about this policy, contact us at <a
+                        href="mailto:help@hustlecenter.co.za">help@hustlecenter.co.za</a>.</p>
             </div>
         </section>
     </main>
@@ -140,5 +271,7 @@
             <p>&copy; 2026 HustleCenter. All rights reserved. Built with care in South Africa. 🇿🇦</p>
         </div>
     </footer>
+    <script src="pwa.js"></script>
 </body>
+
 </html>

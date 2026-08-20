@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partner with HustleCenter | Local Economic Growth</title>
-    <meta name="description" content="Partner with HustleCenter to support local entrepreneurship, community growth and a trusted services marketplace starting in Polokwane.">
+    <meta name="description"
+        content="Partner with HustleCenter to support local entrepreneurship, community growth and a trusted services marketplace starting in Polokwane.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -22,75 +26,315 @@
             --text-dark: #0F172A;
             --text-muted: #475569;
             --border-light: #E2E8F0;
-            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
             --font-heading: 'Playfair Display', Georgia, serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --radius-sm: 8px;
             --radius-md: 12px;
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; min-height:100vh; display:flex; flex-direction:column; }
-        a { color:var(--accent); text-decoration:none; }
-        a:hover { text-decoration:underline; }
-        .container { max-width:900px; margin:0 auto; padding:0 24px; width:100%; }
-        h1, h2, h3 { font-family:var(--font-heading); font-weight:700; line-height:1.2; }
-        h1 { font-size:2.2rem; margin-bottom:16px; text-align:center; }
-        h2 { font-size:1.6rem; margin-bottom:12px; }
-        .gold { color:var(--accent); }
-        .btn-primary {
-            display:inline-block; background:var(--accent); color:var(--primary); font-weight:600;
-            padding:14px 32px; border-radius:50px; border:none; font-size:1rem;
-            cursor:pointer; transition:all 0.25s; text-align:center; font-family:var(--font-body);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .btn-primary:hover { background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,163,115,0.35); }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+
+        .gold {
+            color: var(--accent);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-align: center;
+            font-family: var(--font-body);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 163, 115, 0.35);
+        }
 
         /* Header */
-        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
-        .header-inner { display:flex; justify-content:space-between; align-items:center; }
-        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; color:var(--primary); }
-        .logo-mark .gold { color:var(--accent); }
-        .main-nav { display:flex; gap:24px; align-items:center; }
-        .main-nav a { font-weight:500; color:var(--text-dark); font-size:0.95rem; position:relative; transition:color 0.2s; }
-        .main-nav a:hover { color:var(--accent); }
-        .main-nav a.active { color:var(--accent); font-weight:600; }
-        .main-nav a.active::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:2px; background:var(--accent); border-radius:2px; }
-        .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
-        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; }
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-mark {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-mark .gold {
+            color: var(--accent);
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .main-nav a {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .main-nav a:hover {
+            color: var(--accent);
+        }
+
+        .main-nav a.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .main-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
 
         /* Page content */
-        .section { padding:60px 0; flex:1; }
-        .hero { text-align:center; margin-bottom:40px; }
-        .hero p { color:var(--text-muted); max-width:600px; margin:0 auto 16px; }
-        .partnership-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; margin-bottom:40px; }
-        .partner-card { background:var(--card-bg); padding:28px 24px; border-radius:var(--radius-md); box-shadow:var(--shadow); transition:transform 0.2s; }
-        .partner-card:hover { transform:translateY(-2px); }
-        .partner-card h2 { font-size:1.3rem; margin-bottom:8px; }
-        .partner-card p { color:var(--text-muted); font-size:0.95rem; }
-        .cta-section { text-align:center; }
+        .section {
+            padding: 60px 0;
+            flex: 1;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 16px;
+        }
+
+        .partnership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .partner-card {
+            background: var(--card-bg);
+            padding: 28px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .partner-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .partner-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .cta-section {
+            text-align: center;
+        }
 
         /* Footer */
-        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:64px; }
-        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
-        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
-        .footer-col ul li { margin-bottom:10px; }
-        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
-        .footer-col a:hover { color:var(--accent); }
-        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+        .site-footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 64px;
+            margin-top: 64px;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding: 20px 0;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            text-align: center;
+        }
 
         /* Back to Top */
-        .back-to-top { text-align:center; padding:20px 0; background:var(--bg); }
-        .back-to-top button { background:none; border:2px solid var(--border-light); border-radius:50px; padding:8px 24px; cursor:pointer; font-family:var(--font-body); font-size:0.9rem; color:var(--text-muted); transition:0.2s; }
-        .back-to-top button:hover { border-color:var(--accent); color:var(--primary); }
-        @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+        .back-to-top {
+            text-align: center;
+            padding: 20px 0;
+            background: var(--bg);
+        }
+
+        .back-to-top button {
+            background: none;
+            border: 2px solid var(--border-light);
+            border-radius: 50px;
+            padding: 8px 24px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .back-to-top button:hover {
+            border-color: var(--accent);
+            color: var(--primary);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
 
         @media (max-width: 768px) {
-            .main-nav { display:none; }
-            .hamburger { display:flex; }
-            .section { padding:40px 0; }
-            .partnership-grid { grid-template-columns:1fr; }
+            .main-nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .partnership-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0F172A">
 </head>
+
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -117,25 +361,30 @@
             <div class="hero">
                 <h1>Partner <span class="gold">with us</span></h1>
                 <p>We're looking for partners who believe in local economic growth.</p>
-                <p>HustleCenter is starting in Polokwane and growing. We welcome people and organisations who want to help build a trusted services marketplace for South Africa.</p>
+                <p>HustleCenter is starting in Polokwane and growing. We welcome people and organisations who want to
+                    help build a trusted services marketplace for South Africa.</p>
             </div>
 
             <div class="partnership-grid">
                 <div class="partner-card">
                     <h2>Mentors</h2>
-                    <p>People with experience in marketplaces, local business, technology, or payments who can guide HustleCenter's growth.</p>
+                    <p>People with experience in marketplaces, local business, technology, or payments who can guide
+                        HustleCenter's growth.</p>
                 </div>
                 <div class="partner-card">
                     <h2>Entrepreneurs</h2>
-                    <p>Service providers who want to join early, provide feedback, and help shape the platform for their industries.</p>
+                    <p>Service providers who want to join early, provide feedback, and help shape the platform for their
+                        industries.</p>
                 </div>
                 <div class="partner-card">
                     <h2>Community partners</h2>
-                    <p>Organisations, community leaders, and groups that can help spread the word and connect us with local service providers.</p>
+                    <p>Organisations, community leaders, and groups that can help spread the word and connect us with
+                        local service providers.</p>
                 </div>
                 <div class="partner-card">
                     <h2>Businesses</h2>
-                    <p>Companies that want to support local entrepreneurship or reach customers through the marketplace.</p>
+                    <p>Companies that want to support local entrepreneurship or reach customers through the marketplace.
+                    </p>
                 </div>
                 <div class="partner-card">
                     <h2>Technology partners</h2>
@@ -144,7 +393,8 @@
             </div>
 
             <div class="cta-section">
-                <p style="color:var(--text-muted); margin-bottom:20px;">If any of these sound like you, we'd love to hear from you.</p>
+                <p style="color:var(--text-muted); margin-bottom:20px;">If any of these sound like you, we'd love to
+                    hear from you.</p>
                 <a href="mailto:partners@hustlecenter.co.za" class="btn-primary">Contact us about partnering</a>
             </div>
         </div>
@@ -227,5 +477,7 @@
             });
         });
     </script>
+    <script src="pwa.js"></script>
 </body>
+
 </html>

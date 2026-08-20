@@ -941,136 +941,30 @@
     </header>
 
     <main>
-        <!-- Hero -->
-        <section class="hero">
-            <div class="hero-inner">
-                <h1>Find trusted local professionals in <span class="gold">Polokwane</span></h1>
-                <p class="hero-sub">HustleCenter helps you discover local service providers in Polokwane. Browse
-                    services, explore providers, and connect directly.</p>
-                <div class="hero-cta">
-                    <a href="browse.html" class="btn-primary">Browse Services</a>
-                    <a href="list-your-service.html" class="btn-outline">List Your Service</a>
+        <section class="search-section">
+        <div class="container">
+            <h1>Find local services in <span class="gold">Polokwane</span></h1>
+            <p style="color:var(--text-muted); margin-bottom:16px;">Discover local providers and explore services available in Polokwane.</p>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="What service are you looking for?" aria-label="Search services">
+            </div>
+            <div class="category-area">
+                <div class="category-pills" id="categoryPills"></div>
+                <button class="toggle-cats-btn" id="toggleCatsBtn">Show all categories</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="results-section">
+        <div class="container">
+            <div id="resultsContainer">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading services…</p>
                 </div>
             </div>
-        </section>
-
-        <!-- How It Works -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">How HustleCenter <span class="gold">works</span></h2>
-                <div class="how-grid">
-                    <div class="step-card">
-                        <div class="step-num">1</div>
-                        <h3>Entrepreneurs list their service</h3>
-                        <p>Submit your service and tell customers what you offer.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-num">2</div>
-                        <h3>Our team reviews the listing</h3>
-                        <p>Every listing is reviewed before it goes live — helping keep the marketplace genuine.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-num">3</div>
-                        <h3>Customers discover you</h3>
-                        <p>People in Polokwane browse services and find providers that fit their needs.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-num">4</div>
-                        <h3>Connect directly</h3>
-                        <p>Customers contact you through your preferred method — phone, WhatsApp, or email.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Trust -->
-        <section class="trust-section">
-            <div class="container">
-                <h2>Every connection starts with <span class="gold">trust</span></h2>
-                <p style="max-width:700px; margin:0 auto; opacity:0.9;">We review every listing before publication to
-                    help keep the marketplace genuine. While we aim to provide reliable information, customers should
-                    still evaluate providers before hiring them.</p>
-                <p style="margin-top:24px;"><a href="trust.html" class="btn-outline-white">Learn about Trust &
-                        Safety</a></p>
-            </div>
-        </section>
-
-        <!-- Categories -->
-        <section class="section section-light">
-            <div class="container">
-                <h2 class="section-title">Explore services in <span class="gold">Polokwane</span></h2>
-                <div class="categories-grid">
-                    <a href="browse.html?category=Automotive" class="cat-card">
-                        <h4>🔧 Automotive</h4>
-                    </a>
-                    <a href="browse.html?category=Barber" class="cat-card">
-                        <h4>💈 Barber</h4>
-                    </a>
-                    <a href="browse.html?category=Beauty" class="cat-card">
-                        <h4>💄 Beauty</h4>
-                    </a>
-                    <a href="browse.html?category=Cleaning" class="cat-card">
-                        <h4>🧹 Cleaning</h4>
-                    </a>
-                    <a href="browse.html?category=Hair+Salon" class="cat-card">
-                        <h4>💇 Hair Salon</h4>
-                    </a>
-                    <a href="browse.html?category=Home+%26+Garden" class="cat-card">
-                        <h4>🏡 Home & Garden</h4>
-                    </a>
-                    <a href="browse.html?category=Food" class="cat-card">
-                        <h4>🍲 Food</h4>
-                    </a>
-                    <a href="browse.html?category=Logistics" class="cat-card">
-                        <h4>🚚 Logistics</h4>
-                    </a>
-                    <a href="browse.html?category=Shuttle+%26+Transport" class="cat-card">
-                        <h4>🚐 Shuttle & Transport</h4>
-                    </a>
-                    <a href="browse.html?category=Other+Services" class="cat-card">
-                        <h4>📦 Other Services</h4>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dual CTA -->
-        <section class="section">
-            <div class="container">
-                <div class="cta-cards">
-                    <div class="cta-card">
-                        <h3>Are you a <span class="gold">professional</span>?</h3>
-                        <p>List your service for free during launch and reach customers in Polokwane.</p>
-                        <a href="list-your-service.html" class="btn-primary">List Your Service</a>
-                    </div>
-                    <div class="cta-card">
-                        <h3>Need a <span class="gold">service</span>?</h3>
-                        <p>Browse local providers and find a professional who fits your needs.</p>
-                        <a href="browse.html" class="btn-primary">Browse Services</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Partner -->
-        <section class="partner-section">
-            <div class="container">
-                <h2 class="section-title">Partner <span class="gold">with us</span></h2>
-                <p style="color:var(--text-muted); max-width:600px; margin:0 auto 24px;">HustleCenter is growing in
-                    Polokwane. We welcome mentors, community partners, businesses, and people who want to help
-                    strengthen the local service economy.</p>
-                <a href="partners.html" class="btn-outline">Contact us about partnering</a>
-            </div>
-        </section>
-
-        <!-- Mission -->
-        <section class="mission-section">
-            <div class="container">
-                <h2 class="section-title">Our <span class="gold">Mission</span></h2>
-                <p>We believe every local entrepreneur deserves the opportunity to be discovered, and every customer
-                    deserves a simple way to find local services with confidence.</p>
-            </div>
-        </section>
+        </div>
+    </section>
     </main>
 
     <!-- Footer -->
@@ -1185,6 +1079,148 @@
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+    </script>
+    
+    <script>
+    
+    const resultsContainer = document.getElementById('resultsContainer');
+        let allServices = [];
+        let currentCategory = '';
+        let currentSearch = '';
+        let categoriesExpanded = false;
+
+        const categoryList = [
+            'All', 'Automotive', 'Barber', 'Beauty', 'Braces', 'Cleaning',
+            'Eye Lash', 'Fashion', 'Food', 'Hair Salon', 'Supplies',
+            'Home & Garden', 'Logistics', 'Makeup', 'Nail', 'Reseller',
+            'Shuttle & Transport', 'Other Services'
+        ];
+
+        function renderPills() {
+            const container = document.getElementById('categoryPills');
+            container.innerHTML = categoryList.map((cat, idx) => {
+                const isHidden = !categoriesExpanded && idx > 9 && cat !== 'All';
+                const activeClass = (cat === 'All' && !currentCategory) || cat === currentCategory ? ' active' : '';
+                const hiddenClass = isHidden ? ' hidden-pill' : '';
+                return `<button class="pill${activeClass}${hiddenClass}" data-category="${cat}">${cat}</button>`;
+            }).join('');
+            document.getElementById('toggleCatsBtn').textContent = categoriesExpanded ? 'Show fewer' : 'Show all categories';
+            document.querySelectorAll('#categoryPills .pill').forEach(pill => {
+                pill.addEventListener('click', function() {
+                    const cat = this.dataset.category;
+                    currentCategory = cat === 'All' ? '' : cat;
+                    updateActivePill();
+                    render();
+                });
+            });
+        }
+
+        function updateActivePill() {
+            document.querySelectorAll('#categoryPills .pill').forEach(p => {
+                const cat = p.dataset.category;
+                p.classList.toggle('active', (cat === 'All' && !currentCategory) || cat === currentCategory);
+            });
+        }
+
+        document.getElementById('toggleCatsBtn').addEventListener('click', () => {
+            categoriesExpanded = !categoriesExpanded;
+            renderPills();
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('category')) {
+            currentCategory = decodeURIComponent(params.get('category'));
+        }
+
+        async function loadServices() {
+            try {
+                const res = await fetch(`${API_BASE}/api/listings/approved`);
+                if (!res.ok) throw new Error('API failed');
+                const data = await res.json();
+                allServices = data;
+                render();
+            } catch (err) {
+                showErrorState();
+            }
+        }
+
+        function render() {
+            let filtered = allServices;
+            if (currentCategory) {
+                filtered = filtered.filter(s => s.category && s.category.toLowerCase() === currentCategory.toLowerCase());
+            }
+            if (currentSearch.trim()) {
+                const q = currentSearch.toLowerCase();
+                filtered = filtered.filter(s => 
+                    (s.businessName && s.businessName.toLowerCase().includes(q)) ||
+                    (s.description && s.description.toLowerCase().includes(q)) ||
+                    (s.category && s.category.toLowerCase().includes(q)) ||
+                    (s.services && s.services.toLowerCase().includes(q))
+                );
+            }
+
+            if (filtered.length === 0) {
+                showEmptyState();
+                return;
+            }
+
+            let html = '<div class="services-grid">';
+            filtered.forEach(service => {
+                const slug = service.slug || service._id;
+                html += `
+                    <a href="provider.html?slug=${slug}" class="service-card">
+                        <div class="card-img">${escapeHtml(service.businessName || '?').charAt(0).toUpperCase()}</div>
+                        <div class="card-body">
+                            <h3>${escapeHtml(service.businessName)}</h3>
+                            <div class="card-meta">📍 ${escapeHtml(service.serviceArea || 'Polokwane')}</div>
+                            <p>${escapeHtml( (service.description || '').substring(0, 100) )}…</p>
+                        </div>
+                    </a>`;
+            });
+            html += '</div>';
+            html += '<div class="trust-note">Listings are reviewed before publication. HustleCenter provides information to help you make an informed choice. Always confirm service details directly with the provider.</div>';
+            resultsContainer.innerHTML = html;
+        }
+
+        function showEmptyState() {
+            resultsContainer.innerHTML = `
+                <div class="empty-state">
+                    <h3>No services found</h3>
+                    <p>Try another category or search term.</p>
+                    <button class="btn-outline" onclick="resetFilters()" style="margin-top:16px;">View All Services</button>
+                </div>`;
+        }
+
+        function showErrorState() {
+            resultsContainer.innerHTML = `
+                <div class="error-state">
+                    <h3>We couldn't load services</h3>
+                    <p>Something went wrong while loading the marketplace. Please try again.</p>
+                    <button class="btn-outline" onclick="retryLoad()" style="margin-top:16px;">Try Again</button>
+                </div>`;
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            currentSearch = '';
+            currentCategory = '';
+            updateActivePill();
+            render();
+        }
+
+        function retryLoad() {
+            resultsContainer.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading services…</p></div>';
+            loadServices();
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        renderPills();
+        if (currentCategory) updateActivePill();
+        loadServices();
     </script>
 
     <script src="pwa.js"></script>

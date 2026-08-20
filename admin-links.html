@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,22 +17,98 @@
             --font-body: 'Inter', sans-serif;
             --font-heading: 'Playfair Display', serif;
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font-body); background:var(--bg); color:var(--primary); line-height:1.6; }
-        .container { max-width:800px; margin:0 auto; padding:40px 24px; }
-        h1 { font-family:var(--font-heading); font-size:2rem; margin-bottom:8px; }
-        h2 { font-family:var(--font-heading); font-size:1.3rem; margin-top:32px; margin-bottom:12px; color:var(--accent); }
-        .card { background:var(--card-bg); border-radius:12px; box-shadow:0 8px 30px rgba(15,23,42,0.08); padding:24px; margin-bottom:16px; }
-        ul { list-style:none; }
-        li { padding:6px 0; border-bottom:1px solid var(--border-light); }
-        a { color:var(--primary); text-decoration:none; font-weight:500; }
-        a:hover { color:var(--accent); }
-        .note { font-size:0.85rem; color:var(--text-muted); }
-        .admin-only { color:#dc2626; font-size:0.8rem; font-weight:600; }
-        .back-link { display:inline-block; margin-top:24px; padding:10px 24px; border:2px solid var(--border-light); border-radius:50px; background:transparent; cursor:pointer; font-weight:600; }
-        .back-link:hover { border-color:var(--accent); color:var(--accent); }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        .note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .admin-only {
+            color: #dc2626;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 10px 24px;
+            border: 2px solid var(--border-light);
+            border-radius: 50px;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0F172A">
 </head>
+
 <body>
     <div class="container">
         <h1>Admin <span style="color:var(--accent);">Quick Links</span></h1>
@@ -40,7 +117,8 @@
         <h2>Admin Dashboard</h2>
         <div class="card">
             <ul>
-                <li><a href="admin.html">Admin Login / Dashboard</a> <span class="admin-only">ADMIN KEY REQUIRED</span></li>
+                <li><a href="admin.html">Admin Login / Dashboard</a> <span class="admin-only">ADMIN KEY REQUIRED</span>
+                </li>
                 <li><a href="admin.html#listings">Pending Listings</a></li>
                 <li><a href="admin.html#requests">Requests</a></li>
                 <li><a href="admin.html#accounts">Accounts</a></li>
@@ -117,5 +195,7 @@
 
         <a href="admin.html" class="back-link">← Back to Admin Login</a>
     </div>
+    <script src="pwa.js"></script>
 </body>
-  </html>
+
+</html>

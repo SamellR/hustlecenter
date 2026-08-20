@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Founder's Story – HustleCenter</title>
-    <meta name="description" content="The story behind HustleCenter. How a local Polokwane marketplace was built from the ground up.">
+    <meta name="description"
+        content="The story behind HustleCenter. How a local Polokwane marketplace was built from the ground up.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -23,38 +27,150 @@
             --font-heading: 'Playfair Display', Georgia, serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.7; }
-        a { color:var(--accent); text-decoration:none; }
-        .container { max-width:800px; margin:0 auto; padding:0 24px; }
-        h1 { font-family:var(--font-heading); font-size:2.5rem; margin-bottom:16px; text-align:center; }
-        h2 { font-family:var(--font-heading); font-size:1.5rem; margin:40px 0 16px; }
-        .gold { color:var(--accent); }
 
-        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
-        .header-inner { display:flex; justify-content:space-between; align-items:center; }
-        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; }
-        .logo-mark .gold { color:var(--accent); }
-        .nav-links a { margin-left:20px; font-weight:500; color:var(--text-dark); }
-        .nav-links a:hover { color:var(--accent); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        .section { padding:80px 0; }
-        p { color:var(--text-muted); margin-bottom:16px; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
 
-        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:80px; }
-        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
-        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
-        .footer-col ul li { margin-bottom:10px; }
-        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
-        .footer-col a:hover { color:var(--accent); }
-        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin: 40px 0 16px;
+        }
+
+        .gold {
+            color: var(--accent);
+        }
+
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-mark {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-mark .gold {
+            color: var(--accent);
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .site-footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 64px;
+            margin-top: 80px;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding: 20px 0;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            text-align: center;
+        }
 
         @media (max-width: 768px) {
-            .nav-links { display:none; }
-            .section { padding:60px 0; }
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0F172A">
 </head>
+
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -71,26 +187,48 @@
         <section class="section">
             <div class="container">
                 <h1>The HustleCenter <span class="gold">Story</span></h1>
-                <p style="text-align:center; color:var(--text-muted);">Every connection starts with trust — and every journey starts somewhere.</p>
+                <p style="text-align:center; color:var(--text-muted);">Every connection starts with trust — and every
+                    journey starts somewhere.</p>
 
                 <h2>How it started</h2>
-                <p>HustleCenter began with a simple observation: in Polokwane, finding someone to fix your pipes, do your hair, or take professional photos shouldn't be a gamble. People were asking for recommendations in WhatsApp groups and on social media, hoping someone they trusted had a contact. Entrepreneurs were posting their services everywhere, trying to get noticed, but struggling to stand out.</p>
-                <p>There had to be a better way — a place where people could discover local services with more confidence, and where hard-working entrepreneurs could showcase what they do.</p>
+                <p>HustleCenter began with a simple observation: in Polokwane, finding someone to fix your pipes, do
+                    your hair, or take professional photos shouldn't be a gamble. People were asking for recommendations
+                    in WhatsApp groups and on social media, hoping someone they trusted had a contact. Entrepreneurs
+                    were posting their services everywhere, trying to get noticed, but struggling to stand out.</p>
+                <p>There had to be a better way — a place where people could discover local services with more
+                    confidence, and where hard-working entrepreneurs could showcase what they do.</p>
 
                 <h2>The first steps</h2>
-                <p>Building a marketplace from scratch isn't easy. The founder approached approximately 70 entrepreneurs across different categories — plumbers, electricians, hairdressers, cleaners, photographers, and more. The pitch was simple: "We're building a trusted local marketplace. Would you like to be part of it?"</p>
-                <p>More than 23 entrepreneurs said yes. They agreed to give HustleCenter a chance — to be among the first to list their services, provide feedback, and help shape what the platform could become. Those first 23 listings represent something real: a community of people willing to try something new because they believe in the idea.</p>
+                <p>Building a marketplace from scratch isn't easy. The founder approached approximately 70 entrepreneurs
+                    across different categories — plumbers, electricians, hairdressers, cleaners, photographers, and
+                    more. The pitch was simple: "We're building a trusted local marketplace. Would you like to be part
+                    of it?"</p>
+                <p>More than 23 entrepreneurs said yes. They agreed to give HustleCenter a chance — to be among the
+                    first to list their services, provide feedback, and help shape what the platform could become. Those
+                    first 23 listings represent something real: a community of people willing to try something new
+                    because they believe in the idea.</p>
 
                 <h2>Learning while building</h2>
-                <p>The founder isn't a seasoned tech executive or a venture-backed startup. HustleCenter is being built by someone learning as they go — writing code, making mistakes, fixing them, and trying again. Every page you see on this website was built step by step, with a lot of late nights and a steep learning curve.</p>
-                <p>That's not a weakness. It's part of the story. HustleCenter wasn't handed a massive budget or a team of developers. It was built from the ground up by someone who saw a problem in their community and decided to try to solve it — even without knowing everything in advance.</p>
+                <p>The founder isn't a seasoned tech executive or a venture-backed startup. HustleCenter is being built
+                    by someone learning as they go — writing code, making mistakes, fixing them, and trying again. Every
+                    page you see on this website was built step by step, with a lot of late nights and a steep learning
+                    curve.</p>
+                <p>That's not a weakness. It's part of the story. HustleCenter wasn't handed a massive budget or a team
+                    of developers. It was built from the ground up by someone who saw a problem in their community and
+                    decided to try to solve it — even without knowing everything in advance.</p>
 
                 <h2>The uncertainty is real</h2>
-                <p>Launching a marketplace involves risk. There's no guarantee that enough customers will show up. There's no guarantee that the first entrepreneurs will stay. There's no guarantee that the business will succeed. Those are honest truths.</p>
-                <p>But the alternative — never trying — guarantees that nothing changes. HustleCenter exists because someone decided to try anyway.</p>
+                <p>Launching a marketplace involves risk. There's no guarantee that enough customers will show up.
+                    There's no guarantee that the first entrepreneurs will stay. There's no guarantee that the business
+                    will succeed. Those are honest truths.</p>
+                <p>But the alternative — never trying — guarantees that nothing changes. HustleCenter exists because
+                    someone decided to try anyway.</p>
 
                 <h2>Where we're going</h2>
-                <p>HustleCenter is starting in Polokwane, but the vision is bigger. The goal is to grow city by city, helping connect people and professionals across South Africa. To become a place where discovery feels safe, where entrepreneurs are proud to list their services, and where every connection starts with trust.</p>
+                <p>HustleCenter is starting in Polokwane, but the vision is bigger. The goal is to grow city by city,
+                    helping connect people and professionals across South Africa. To become a place where discovery
+                    feels safe, where entrepreneurs are proud to list their services, and where every connection starts
+                    with trust.</p>
                 <p>This is just the beginning.</p>
             </div>
         </section>
@@ -132,5 +270,7 @@
             <p>&copy; 2026 HustleCenter. All rights reserved. Built with care in South Africa. 🇿🇦</p>
         </div>
     </footer>
+    <script src="pwa.js"></script>
 </body>
+
 </html>

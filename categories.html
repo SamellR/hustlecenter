@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Categories – HustleCenter Polokwane</title>
-    <meta name="description" content="Browse all service categories on HustleCenter. Find plumbers, electricians, cleaners, beauty experts, and more in Polokwane.">
+    <meta name="description"
+        content="Browse all service categories on HustleCenter. Find plumbers, electricians, cleaners, beauty experts, and more in Polokwane.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -22,47 +26,184 @@
             --text-dark: #0F172A;
             --text-muted: #475569;
             --border-light: #E2E8F0;
-            --shadow: 0 8px 30px rgba(15,23,42,0.08);
+            --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
             --font-heading: 'Playfair Display', Georgia, serif;
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --radius-md: 12px;
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; }
-        a { color:var(--primary); text-decoration:none; }
-        .container { max-width:1200px; margin:0 auto; padding:0 24px; }
-        h1 { font-family:var(--font-heading); font-size:2.5rem; margin-bottom:8px; text-align:center; }
-        .gold { color:var(--accent); }
 
-        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
-        .header-inner { display:flex; justify-content:space-between; align-items:center; }
-        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; }
-        .logo-mark .gold { color:var(--accent); }
-        .nav-links a { margin-left:20px; font-weight:500; color:var(--text-dark); }
-        .nav-links a:hover { color:var(--accent); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        .section { padding:80px 0; }
-        .categories-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:20px; margin-top:40px; }
-        .cat-card { background:var(--card-bg); border:2px solid var(--border-light); border-radius:var(--radius-md); padding:32px 20px; text-align:center; transition:0.2s; cursor:pointer; }
-        .cat-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:var(--shadow); }
-        .cat-card .icon { font-size:2rem; margin-bottom:12px; }
-        .cat-card h3 { font-family:var(--font-body); font-weight:600; font-size:1.1rem; margin-bottom:4px; }
-        .cat-card p { color:var(--text-muted); font-size:0.85rem; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:80px; }
-        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
-        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
-        .footer-col ul li { margin-bottom:10px; }
-        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
-        .footer-col a:hover { color:var(--accent); }
-        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .gold {
+            color: var(--accent);
+        }
+
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-mark {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-mark .gold {
+            color: var(--accent);
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .cat-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 32px 20px;
+            text-align: center;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .cat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .cat-card .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .cat-card h3 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .cat-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .site-footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 64px;
+            margin-top: 80px;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding: 20px 0;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            text-align: center;
+        }
 
         @media (max-width: 768px) {
-            .nav-links { display:none; }
-            .section { padding:60px 0; }
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0F172A">
 </head>
+
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -79,7 +220,8 @@
         <section class="section">
             <div class="container">
                 <h1>All Service <span class="gold">Categories</span></h1>
-                <p style="text-align:center; color:var(--text-muted); margin-bottom:16px;">Browse services by category and discover local providers in Polokwane.</p>
+                <p style="text-align:center; color:var(--text-muted); margin-bottom:16px;">Browse services by category
+                    and discover local providers in Polokwane.</p>
                 <div class="categories-grid">
                     <a href="browse.html?category=Automotive" class="cat-card">
                         <div class="icon">🔧</div>
@@ -207,5 +349,7 @@
             <p>&copy; 2026 HustleCenter. All rights reserved. Built with care in South Africa. 🇿🇦</p>
         </div>
     </footer>
+    <script src="pwa.js"></script>
 </body>
+
 </html>

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help & FAQ – HustleCenter</title>
-    <meta name="description" content="Frequently asked questions about HustleCenter. How to browse services, list your business, and connect with providers.">
+    <meta name="description"
+        content="Frequently asked questions about HustleCenter. How to browse services, list your business, and connect with providers.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -25,40 +29,164 @@
             --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --radius-md: 12px;
         }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font-body); background:var(--bg); color:var(--text-dark); line-height:1.6; }
-        a { color:var(--accent); text-decoration:none; }
-        .container { max-width:800px; margin:0 auto; padding:0 24px; }
-        h1 { font-family:var(--font-heading); font-size:2.5rem; margin-bottom:8px; text-align:center; }
-        h2 { font-family:var(--font-heading); font-size:1.5rem; margin:40px 0 16px; }
-        .gold { color:var(--accent); }
 
-        .site-header { background:#fff; border-bottom:1px solid var(--border-light); padding:16px 0; position:sticky; top:0; z-index:100; }
-        .header-inner { display:flex; justify-content:space-between; align-items:center; }
-        .logo-mark { font-family:var(--font-heading); font-size:1.8rem; font-weight:700; }
-        .logo-mark .gold { color:var(--accent); }
-        .nav-links a { margin-left:20px; font-weight:500; color:var(--text-dark); }
-        .nav-links a:hover { color:var(--accent); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        .section { padding:80px 0; }
-        .faq-item { background:var(--card-bg); border-radius:var(--radius-md); padding:24px; margin-bottom:16px; box-shadow:0 4px 16px rgba(15,23,42,0.04); }
-        .faq-item h3 { font-family:var(--font-body); font-weight:600; font-size:1.1rem; margin-bottom:8px; }
-        .faq-item p { color:var(--text-muted); }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-        .site-footer { background:var(--primary); color:rgba(255,255,255,0.8); padding-top:64px; margin-top:0; }
-        .footer-inner { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); }
-        .footer-col h4 { color:#fff; font-family:var(--font-body); font-weight:600; font-size:1rem; margin-bottom:16px; }
-        .footer-col ul li { margin-bottom:10px; }
-        .footer-col a { color:rgba(255,255,255,0.7); transition:0.2s; font-size:0.9rem; }
-        .footer-col a:hover { color:var(--accent); }
-        .footer-bottom { padding:20px 0; font-size:0.85rem; opacity:0.5; text-align:center; }
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin: 40px 0 16px;
+        }
+
+        .gold {
+            color: var(--accent);
+        }
+
+        .site-header {
+            background: #fff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-mark {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-mark .gold {
+            color: var(--accent);
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+        }
+
+        .faq-item h3 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+        }
+
+        .site-footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 64px;
+            margin-top: 0;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding: 20px 0;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            text-align: center;
+        }
 
         @media (max-width: 768px) {
-            .nav-links { display:none; }
-            .section { padding:60px 0; }
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0F172A">
 </head>
+
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -75,13 +203,15 @@
         <section class="section">
             <div class="container">
                 <h1>Help & <span class="gold">FAQ</span></h1>
-                <p style="text-align:center; color:var(--text-muted); margin-bottom:40px;">Answers to common questions about using HustleCenter.</p>
+                <p style="text-align:center; color:var(--text-muted); margin-bottom:40px;">Answers to common questions
+                    about using HustleCenter.</p>
 
                 <h2>For <span class="gold">Customers</span></h2>
 
                 <div class="faq-item">
                     <h3>How do I find a service provider?</h3>
-                    <p>Visit our <a href="browse.html">Browse Services</a> page. You can search by keyword or filter by category to find the right professional for your needs.</p>
+                    <p>Visit our <a href="browse.html">Browse Services</a> page. You can search by keyword or filter by
+                        category to find the right professional for your needs.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Is it free to use HustleCenter as a customer?</h3>
@@ -89,53 +219,68 @@
                 </div>
                 <div class="faq-item">
                     <h3>How do I contact a provider?</h3>
-                    <p>When you find a provider you're interested in, you can submit a request through their profile page. You'll be asked to provide your name, phone number, and what service you need.</p>
+                    <p>When you find a provider you're interested in, you can submit a request through their profile
+                        page. You'll be asked to provide your name, phone number, and what service you need.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Does HustleCenter guarantee the quality of work?</h3>
-                    <p>No. HustleCenter facilitates introductions between customers and service providers. We review listings before publication, but we do not guarantee the quality, safety, or outcome of any service. Always confirm details directly with the provider before work begins.</p>
+                    <p>No. HustleCenter facilitates introductions between customers and service providers. We review
+                        listings before publication, but we do not guarantee the quality, safety, or outcome of any
+                        service. Always confirm details directly with the provider before work begins.</p>
                 </div>
                 <div class="faq-item">
                     <h3>What should I do if I have a problem with a provider?</h3>
-                    <p>If you experience an issue, please contact us at <a href="mailto:help@hustlecenter.co.za">help@hustlecenter.co.za</a>. While we are not a party to your agreement with the provider, we take reports seriously and may remove providers who violate our terms.</p>
+                    <p>If you experience an issue, please contact us at <a
+                            href="mailto:help@hustlecenter.co.za">help@hustlecenter.co.za</a>. While we are not a party
+                        to your agreement with the provider, we take reports seriously and may remove providers who
+                        violate our terms.</p>
                 </div>
 
                 <h2>For <span class="gold">Entrepreneurs</span></h2>
 
                 <div class="faq-item">
                     <h3>How do I list my service?</h3>
-                    <p>Visit our <a href="list-your-service.html">List Your Service</a> page and complete the form. It's free during our launch period.</p>
+                    <p>Visit our <a href="list-your-service.html">List Your Service</a> page and complete the form. It's
+                        free during our launch period.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How long does it take for my listing to appear?</h3>
-                    <p>Every listing is reviewed by our team before publication. We typically review submissions within 1–2 business days. You'll be notified once your listing is approved.</p>
+                    <p>Every listing is reviewed by our team before publication. We typically review submissions within
+                        1–2 business days. You'll be notified once your listing is approved.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Can I edit my listing after it's published?</h3>
-                    <p>Yes. Contact us at <a href="mailto:help@hustlecenter.co.za">help@hustlecenter.co.za</a> with the changes you'd like to make, and we'll update your listing.</p>
+                    <p>Yes. Contact us at <a href="mailto:help@hustlecenter.co.za">help@hustlecenter.co.za</a> with the
+                        changes you'd like to make, and we'll update your listing.</p>
                 </div>
                 <div class="faq-item">
                     <h3>What if my listing is rejected?</h3>
-                    <p>If your listing is rejected, we'll let you know why. Common reasons include incomplete information, inappropriate content, or listings that don't match our categories. You can correct the issue and resubmit.</p>
+                    <p>If your listing is rejected, we'll let you know why. Common reasons include incomplete
+                        information, inappropriate content, or listings that don't match our categories. You can correct
+                        the issue and resubmit.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How do customers contact me?</h3>
-                    <p>Customers can submit a request through your profile page. You'll receive their details including name, phone number, and what service they need.</p>
+                    <p>Customers can submit a request through your profile page. You'll receive their details including
+                        name, phone number, and what service they need.</p>
                 </div>
 
                 <h2>General <span class="gold">Questions</span></h2>
 
                 <div class="faq-item">
                     <h3>Where is HustleCenter available?</h3>
-                    <p>HustleCenter is currently available in Polokwane, Limpopo, South Africa. We plan to expand to other cities over time.</p>
+                    <p>HustleCenter is currently available in Polokwane, Limpopo, South Africa. We plan to expand to
+                        other cities over time.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How can I contact HustleCenter?</h3>
-                    <p>You can reach us at <a href="mailto:help@hustlecenter.co.za">help@hustlecenter.co.za</a> or visit our <a href="contact.html">Contact page</a> for more options.</p>
+                    <p>You can reach us at <a href="mailto:help@hustlecenter.co.za">help@hustlecenter.co.za</a> or visit
+                        our <a href="contact.html">Contact page</a> for more options.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Is my personal information safe?</h3>
-                    <p>We take privacy seriously. Read our <a href="privacy.html">Privacy Policy</a> to understand what information we collect and how we protect it.</p>
+                    <p>We take privacy seriously. Read our <a href="privacy.html">Privacy Policy</a> to understand what
+                        information we collect and how we protect it.</p>
                 </div>
             </div>
         </section>
@@ -177,5 +322,7 @@
             <p>&copy; 2026 HustleCenter. All rights reserved. Built with care in South Africa. 🇿🇦</p>
         </div>
     </footer>
+    <script src="pwa.js"></script>
 </body>
+
 </html>
